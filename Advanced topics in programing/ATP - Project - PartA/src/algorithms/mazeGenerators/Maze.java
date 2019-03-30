@@ -1,4 +1,7 @@
 package algorithms.mazeGenerators;
+
+
+
 /**
  * This class represent a maze as 2 dimensions int array.
  * Contains the maze methods

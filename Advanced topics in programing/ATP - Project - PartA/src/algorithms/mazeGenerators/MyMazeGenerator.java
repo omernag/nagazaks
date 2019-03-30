@@ -47,7 +47,9 @@ public class MyMazeGenerator extends AMazeGenerator {
         while (!walls.isEmpty()) {
             rand = (int) (Math.random() * walls.size());
             curr_Pos = walls.get(rand);
-            TryPath(curr_Pos);
+            if(primMaze.getValue(curr_Pos)==1) {
+                TryPath(curr_Pos);
+            }
             walls.remove(rand);
         }
         Position entry = primMaze.Get_random_Frame();
