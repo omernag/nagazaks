@@ -30,4 +30,14 @@ public abstract class AMazeGenerator implements IMazeGenerator{
         long f_time = System.currentTimeMillis();
         return f_time - s_time;
     }
+
+    protected boolean areBothPaths(Maze maze,Position x, Position y){
+        if (maze.isInMaze(x) && maze.isInMaze(y)) {
+            if (maze.getValue(x) == 0 && maze.getValue(y) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
