@@ -60,15 +60,18 @@ public class MyMazeGenerator extends AMazeGenerator {
                 primMaze.setStartPosition(entry);
                 primMaze.setGoalPosition(exit);
                 ready = true;
-            } else {
+            }
+            else {
                 if (primMaze.getValue(entry) == 0) {
                     primMaze.setStartPosition(entry);
-                } else
+                }
+                else {
                     entry = primMaze.Get_random_Frame();
-
+                }
                 if (primMaze.getValue(exit) == 0) {
                     primMaze.setGoalPosition(exit);
-                } else{
+                }
+                else{
                     exit = primMaze.Get_random_Frame();
 
                 }

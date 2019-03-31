@@ -9,7 +9,7 @@ public abstract class AState {
     private Object state;
     private AState prevS;
     private double cost;
-    private boolean visit=false;
+
 
     public Object getState() {
         return state;
@@ -29,7 +29,7 @@ public abstract class AState {
         this.state = o.state;
         this.prevS = o.prevS;
         this.cost = o.cost;
-        this.visit = o.visit;
+
 
     }
 
@@ -60,16 +60,22 @@ public abstract class AState {
     }
 
 
-    public boolean isVisited() {
-        return visit;
-    }
+
 
     @Override
     public String toString() {
         return state.toString();
     }
 
-    public void visit() {
-        visit=true;
+
+    /////////
+    public void visit(){};
+    public void done(){};
+    public boolean isVisited() {
+        return false;
     }
+    public boolean isDone() {
+        return false;
+    }
+
 }

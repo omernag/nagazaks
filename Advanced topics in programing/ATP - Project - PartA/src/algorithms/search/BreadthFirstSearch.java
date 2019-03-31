@@ -18,6 +18,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
 
     Queue<AState> openList;
 
+
     /**
      * Constructor for BFS
      */
@@ -25,6 +26,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         openList = new Queue<>();
         lStates = new ArrayList<>();
         algorithmName = "BreadthFirstSearch";
+
     }
 
     /**
@@ -43,24 +45,20 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         while(!openList.isEmpty()){
             visitedNodes++;
             AState curr = openList.dequeue();
+
+            curr.done();
             lStates = domain.getAllPossibleStates(curr);
 
             if(curr.getState().equals(domain.getGoalState().getState()))
                 return createSolution(curr,sol,domain);
 
-                /*while(!curr.getState().equals(domain.getStartState().getState())) {
-                    sol.solPath.add(curr);
-                    curr = curr.getPrevS();
-                }
-                sol.solPath.add(curr);
-                return sol;*/
-
-
             for(int i = 0 ; i < lStates.size(); i++){
-                if(!lStates.get(i).isVisited()){
-                    lStates.get(i).visit();
-                    lStates.get(i).setPrevS(curr);
-                    openList.enqueue(lStates.get(i));
+                if(!lStates.get(i).isDone()) {
+                    if (!lStates.get(i).isVisited()) {
+                        lStates.get(i).visit();
+                        lStates.get(i).setPrevS(curr);
+                        openList.enqueue(lStates.get(i));
+                    }
                 }
             }
         }

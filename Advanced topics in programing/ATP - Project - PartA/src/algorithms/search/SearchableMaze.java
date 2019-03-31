@@ -10,6 +10,8 @@ public class SearchableMaze implements ISearchable {
     private AState startState;
     private AState goalState;
     private HashMap<Position,ArrayList<AState>> m_dMaze;
+    private int[][] doneTable;
+    private MazeState[][] m_dMazeMap;
 
     /**
      * This method generates a maze
@@ -17,8 +19,10 @@ public class SearchableMaze implements ISearchable {
      * @return Maze
      */////////
     public SearchableMaze(Maze maze) {
-        startState = new MazeState(maze.getStartPosition());
-        goalState = new MazeState(maze.getGoalPosition());
+        createMazeMap(maze);
+        doneTable = new int[maze.getLines()][maze.getColumns()];////////////
+        startState = getMazeMapState(maze.getStartPosition());
+        goalState = getMazeMapState(maze.getGoalPosition());
         m_dMaze = new HashMap<>();
         for (int i = 0 ; i < maze.getLines() ; i++){
             for (int j = 0 ; j < maze.getColumns() ; j++){
@@ -31,10 +35,47 @@ public class SearchableMaze implements ISearchable {
                 }
             }
         }
+
     }
+
+
 
     private void addNeighbors(Maze maze, ArrayList<AState> allNeighbors, Position pos) {
 
+        Position[] dir = createDirections(pos, maze);
+
+        for(int i = 0 ; i < 8 ; i++){
+            if (maze.isInMaze(dir[i]) && maze.getValue(dir[i]) == 0) {
+                allNeighbors.add(getMazeMapState(dir[i]));
+            }
+        }
+
+        for(int i = 1 ; i < 6 ; i+=2){
+            if (allNeighbors.contains(getMazeMapState(dir[i]))){
+                if(!allNeighbors.contains(getMazeMapState(dir[i-1])) && !allNeighbors.contains(getMazeMapState(dir[i+1]))){
+                    allNeighbors.remove(getMazeMapState(dir[i]));
+                }
+            }
+        }
+
+        if (allNeighbors.contains(getMazeMapState(dir[7]))){
+            if(!allNeighbors.contains(getMazeMapState(dir[6])) && !allNeighbors.contains(getMazeMapState(dir[0]))){
+                allNeighbors.remove(getMazeMapState(dir[7]));
+            }
+        }
+
+        ///cost?
+        /*for(int i = 0 ; i < 8 ; i++){
+            if (allNeighbors.contains(getMazeMapState(dir[i]))) {
+                if (i % 2 == 0) {
+                    getMazeMapState(dir[i]).setCost(10);
+                } else getMazeMapState(dir[i]).setCost(15);
+            }
+        }*/
+    }
+
+    private Position[] createDirections(Position pos, Maze maze) {
+        Position[] dir = new Position[8];
         Position UL = maze.getPositionAt(pos.getLine()-1,pos.getColumn() - 1);
         Position U = maze.getPositionAt(pos.getLine()-1,pos.getColumn());
         Position L = maze.getPositionAt(pos.getLine(),pos.getColumn() - 1);
@@ -43,67 +84,35 @@ public class SearchableMaze implements ISearchable {
         Position DR = maze.getPositionAt(pos.getLine()+1,pos.getColumn() + 1);
         Position R = maze.getPositionAt(pos.getLine(),pos.getColumn() + 1);
         Position UR = maze.getPositionAt(pos.getLine()-1,pos.getColumn() + 1);
-
-        if (maze.isInMaze(U) && maze.getValue(U) == 0) {
-            allNeighbors.add(new MazeState(U));
-        }
-
-        if (maze.isInMaze(R) && maze.getValue(R) == 0) {
-            if (maze.isInMaze(UR) && maze.getValue(UR) == 0) {
-                if (allNeighbors.contains(U))
-                    allNeighbors.add(new MazeState(UR));
-            }
-            allNeighbors.add(new MazeState(R));
-        }
-
-        if (maze.isInMaze(D) && maze.getValue(D) == 0) {
-            if (maze.isInMaze(DR) && maze.getValue(DR) == 0) {
-                if (allNeighbors.contains(R))
-                allNeighbors.add(new MazeState(DR));
-            }
-            allNeighbors.add(new MazeState(D));
-        }
-
-        if (maze.isInMaze(L) && maze.getValue(L) == 0) {
-            if (maze.isInMaze(DL) && maze.getValue(DL) == 0) {
-                if (allNeighbors.contains(D) || allNeighbors.contains(L))
-                    allNeighbors.add(new MazeState(DL));
-            }
-            allNeighbors.add(new MazeState(L));
-        }
+        dir[0]=U;
+        dir[1]=UR;
+        dir[2]=R;
+        dir[3]=DR;
+        dir[4]=D;
+        dir[5]=DL;
+        dir[6]=L;
+        dir[7]=UL;
+        return dir;
 
 
-        if (maze.isInMaze(UL) && maze.getValue(UL) == 0) {
-            if(allNeighbors.contains(U) || allNeighbors.contains(L))
-                allNeighbors.add(new MazeState(UL));
-        }
-
-
-
-
-
-
-
-
-        /*Position currPos;
-
-        for (int i = pos.getState().getLine()-1 ; i <= maze.getLines()+1 ; i++) {
-            for (int j = pos.getState().getColumn() - 1; j <= maze.getColumns() + 1; j++) {
-                if(i != pos.getState().getLine() || j != maze.getColumns()) {
-                    currPos = maze.getPositionAt(i, j);
-
-                    if (maze.isInMaze(currPos) && maze.getValue(currPos) == 0) {
-                        if(maze.getValue(maze.getPositionAt(i-1,j))==0 || maze.getValue(maze.getPositionAt(i,j-1))==0 || ){
-
-                        }
-                        allNeighbors.add(new MazeState(currPos));
-                    }
-                }
-            }
-        }*/
     }
 
+    public MazeState getMazeMapState(Position pos){
+        if(pos.getColumn()>=0 && pos.getLine()>=0 && pos.getLine()<m_dMazeMap.length && pos.getColumn()<m_dMazeMap[0].length) {
+            return m_dMazeMap[pos.getLine()][pos.getColumn()];
+        }
+        else return null;
+    }
 
+    public void createMazeMap(Maze maze){
+        m_dMazeMap = new MazeState[maze.getLines()][maze.getColumns()];
+        for (int i = 0 ; i < maze.getLines() ; i++) {
+            for (int j = 0; j < maze.getColumns(); j++) {
+                Position pos = new Position(i, j);
+                m_dMazeMap[i][j]=new MazeState(pos);
+            }
+        }
+    }
 
     /**
      * This method generates a maze
@@ -130,5 +139,21 @@ public class SearchableMaze implements ISearchable {
     @Override
     public AState getGoalState() {
         return goalState;
+    }
+
+    public void setDone(MazeState st){
+        doneTable[st.getState().getLine()][st.getState().getColumn()] = 1;
+    }
+
+    public void setVisit(MazeState st){
+        doneTable[st.getState().getLine()][st.getState().getColumn()] = 1;
+    }
+
+    public int getDone(MazeState st){
+        return doneTable[st.getState().getLine()][st.getState().getColumn()];
+    }
+
+    public int getVisit(MazeState st){
+        return doneTable[st.getState().getLine()][st.getState().getColumn()];
     }
 }

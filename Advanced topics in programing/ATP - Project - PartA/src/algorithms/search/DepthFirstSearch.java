@@ -44,17 +44,8 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
                 return createSolution(curr,sol,domain);
             }
 
-
-               /* while(!curr.getState().equals(domain.getStartState().getState())) {
-                    sol.solPath.add(curr);
-                    curr = curr.getPrevS();
-                }
-                sol.solPath.add(curr);
-                return sol;*/
-
-
             lStates = domain.getAllPossibleStates(curr);
-            for(int i = 0 ; i < lStates.size(); i++){
+            for(int i = lStates.size()-1 ; i >=0; i--){
                 if(!lStates.get(i).isVisited()) {
                     lStates.get(i).setPrevS(curr);
                     currPath.push(lStates.get(i));

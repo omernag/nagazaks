@@ -5,6 +5,9 @@ import algorithms.mazeGenerators.Position;
 public class MazeState extends AState {
 
     private Position state;
+    private boolean visit=false;
+    private boolean done=false;
+
 
     public MazeState(Position state) {
         this.state = state;
@@ -27,7 +30,23 @@ public class MazeState extends AState {
 
     public MazeState(MazeState other) {
         this.state = other.state;
+        this.visit = other.visit;
+        this.done = other.done;
+        super.setCost(other.getCost());
+        super.setPrevS(other.getPrevS());
 
+    }
+
+    @Override
+    public boolean isVisited() {
+
+        return visit;
+    }
+
+    @Override
+    public boolean isDone() {
+
+        return done;
     }
 
     public Position getState() {
@@ -42,4 +61,17 @@ public class MazeState extends AState {
     public String toString() {
         return state.toString();
     }
+
+    @Override
+    public void visit() {
+
+        visit=true;
+    }
+
+    @Override
+    public void done() {
+    done=true;
+    }
+
+
 }
