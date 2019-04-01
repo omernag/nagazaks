@@ -9,14 +9,14 @@ public class SearchableMaze implements ISearchable {
 
     private AState startState;
     private AState goalState;
-    private HashMap<Position,ArrayList<AState>> m_dMaze;
+    private HashMap<String,ArrayList<AState>> m_dMaze;
     private int[][] doneTable;
     private MazeState[][] m_dMazeMap;
 
     /**
      * This method generates a maze
      *
-     * @return Maze
+     *  Maze
      */////////
     public SearchableMaze(Maze maze) {
         createMazeMap(maze);
@@ -31,7 +31,7 @@ public class SearchableMaze implements ISearchable {
                     pos.setValue(0);
                     ArrayList<AState> allNeighbors = new ArrayList<>();
                     addNeighbors(maze, allNeighbors, pos);
-                    m_dMaze.put(pos, allNeighbors);
+                    m_dMaze.put(pos.toString(), allNeighbors);
                 }
             }
         }
@@ -97,14 +97,14 @@ public class SearchableMaze implements ISearchable {
 
     }
 
-    public MazeState getMazeMapState(Position pos){
+    private MazeState getMazeMapState(Position pos){
         if(pos.getColumn()>=0 && pos.getLine()>=0 && pos.getLine()<m_dMazeMap.length && pos.getColumn()<m_dMazeMap[0].length) {
             return m_dMazeMap[pos.getLine()][pos.getColumn()];
         }
         else return null;
     }
 
-    public void createMazeMap(Maze maze){
+    private void createMazeMap(Maze maze){
         m_dMazeMap = new MazeState[maze.getLines()][maze.getColumns()];
         for (int i = 0 ; i < maze.getLines() ; i++) {
             for (int j = 0; j < maze.getColumns(); j++) {
@@ -123,12 +123,13 @@ public class SearchableMaze implements ISearchable {
     @Override
     public ArrayList<AState> getAllPossibleStates(AState s) {
         Position curr = (Position)s.getState();
-        for (Position tmp : m_dMaze.keySet()) {
-            if(tmp.equals(curr)){
-                return m_dMaze.get(tmp);
-            }
-        }
-        return null;
+        //for (Position tmp : m_dMaze.keySet()) {
+            //if(tmp.equals(curr)){
+             //   return m_dMaze.get(tmp);
+            //}
+       // }
+        //return null;
+        return m_dMaze.get(curr.toString());
     }
 
     @Override

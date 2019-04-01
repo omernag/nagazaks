@@ -11,7 +11,7 @@ public class RunSearchOnMaze {
     public static void main(String[] args) throws InterruptedException {
         IMazeGenerator mg = new MyMazeGenerator();
 
-        Maze maze = mg.generate(200, 200);
+        Maze maze = mg.generate(1000, 1000);
 
         //maze.print();
         System.out.println(maze.getStartPosition());
@@ -19,7 +19,8 @@ public class RunSearchOnMaze {
 
         SearchableMaze searchableMaze = new SearchableMaze(maze);
 
-        //solveProblem(searchableMaze, new BreadthFirstSearch());
+        //
+        // solveProblem(searchableMaze, new BreadthFirstSearch());
         solveProblem(searchableMaze, new DepthFirstSearch());
         //solveProblem(searchableMaze, new BestFirstSearch());
     }
