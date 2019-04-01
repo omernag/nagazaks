@@ -14,15 +14,15 @@ public class RunSearchOnMaze {
         Maze maze = mg.generate(1000, 1000);
 
         //maze.print();
-        System.out.println(maze.getStartPosition());
-        System.out.println(maze.getGoalPosition());
+        //System.out.println(maze.getStartPosition());
+        //System.out.println(maze.getGoalPosition());
 
         SearchableMaze searchableMaze = new SearchableMaze(maze);
 
         //
-        // solveProblem(searchableMaze, new BreadthFirstSearch());
-        solveProblem(searchableMaze, new DepthFirstSearch());
-        //solveProblem(searchableMaze, new BestFirstSearch());
+        //solveProblem(searchableMaze, new BreadthFirstSearch());
+        //solveProblem(searchableMaze, new DepthFirstSearch());
+        solveProblem(searchableMaze, new BestFirstSearch());
     }
     private static void solveProblem(ISearchable domain, ISearchingAlgorithm searcher) throws InterruptedException {
         //Solve a searching problem with a searcher

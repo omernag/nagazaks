@@ -23,5 +23,6 @@ public class BestFirstSearch extends BreadthFirstSearch {
     public BestFirstSearch() {
         openList = new PriorityQueue<>();
         lStates = new ArrayList<>();
+
     }
 }
