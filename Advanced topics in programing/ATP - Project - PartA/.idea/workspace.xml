@@ -2,24 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f1a9c61-8191-460f-bb5d-3a03ed037724" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/JUnit/JUnit/JUnitTestingBestFirstSearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/mazeGenerators/Maze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/mazeGenerators/Maze.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/ASearchingAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/ASearchingAlgorithm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/AState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/AState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/BestFirstSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/BestFirstSearch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/BreadthFirstSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/BreadthFirstSearch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/DepthFirstSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/DepthFirstSearch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/MazeState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/MazeState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/SearchableMaze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartA/algorithms/search/SearchableMaze.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartA/test/RunSearchOnMaze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartA/test/RunSearchOnMaze.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms/search/ASearchingAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/search/ASearchingAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms/search/AState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/search/AState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms/search/BestFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/search/BestFirstSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms/search/BreadthFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/search/BreadthFirstSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ATP - Project - PartA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ATP - Project - PartA.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/algorithms/search/DepthFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/search/DepthFirstSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms/search/MazeState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/search/MazeState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms/search/SearchableMaze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/search/SearchableMaze.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/RunSearchOnMaze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/RunSearchOnMaze.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,133 +33,47 @@
     <favorites_list name="ATP - Project - PartA" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/RunSearchOnMaze.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/algorithms/search/DepthFirstSearch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="691">
-              <caret line="60" selection-start-line="60" selection-end-line="60" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/algorithms/search/BestFirstSearch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/algorithms/search/BreadthFirstSearch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;class#BreadthFirstSearch#0" />
-                <element signature="docComment;method#BreadthFirstSearch#0;class#BreadthFirstSearch#0" />
-                <element signature="docComment;method#solve#0;class#BreadthFirstSearch#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/PriorityQueue.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="652" selection-start-line="652" selection-end-line="652" />
-              <folding>
-                <element signature="e#12158#12159#0" expanded="true" />
-                <element signature="e#12189#12190#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/algorithms/search/SearchableMaze.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6">
-              <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/algorithms/search/MazeState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-              <folding>
-                <element signature="e#245#246#0" expanded="true" />
-                <element signature="e#279#280#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/algorithms/search/AState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="49" column="5" selection-start-line="47" selection-start-column="4" selection-end-line="49" selection-end-column="5" />
-              <folding>
-                <element signature="e#600#601#0" expanded="true" />
-                <element signature="e#634#635#0" expanded="true" />
-                <element signature="e#736#737#0" expanded="true" />
-                <element signature="e#760#761#0" expanded="true" />
-                <element signature="e#832#833#0" expanded="true" />
-                <element signature="e#1256#1257#0" expanded="true" />
-                <element signature="e#1384#1385#0" expanded="true" />
-                <element signature="e#1442#1443#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/algorithms/search/ASearchingAlgorithm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-              <folding>
-                <element signature="docComment;method#solve#0;class#ASearchingAlgorithm#0" />
-                <element signature="docComment;method#getName#0;class#ASearchingAlgorithm#0" />
-                <element signature="docComment;method#getNumberOfNodesEvaluated#0;class#ASearchingAlgorithm#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/algorithms/search/BestFirstSearch.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="306">
+                  <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/JUnit/JUnit/JUnitTestingBestFirstSearch.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="272">
+                  <caret line="16" selection-start-line="16" selection-end-line="16" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -203,11 +104,13 @@
         <option value="$PROJECT_DIR$/src/algorithms/search/SearchableMaze.java" />
         <option value="$PROJECT_DIR$/src/algorithms/search/AState.java" />
         <option value="$PROJECT_DIR$/src/algorithms/search/ASearchingAlgorithm.java" />
-        <option value="$PROJECT_DIR$/src/algorithms/search/DepthFirstSearch.java" />
         <option value="$PROJECT_DIR$/src/algorithms/search/MazeState.java" />
         <option value="$PROJECT_DIR$/src/test/RunSearchOnMaze.java" />
         <option value="$PROJECT_DIR$/src/algorithms/search/BreadthFirstSearch.java" />
         <option value="$PROJECT_DIR$/src/algorithms/search/BestFirstSearch.java" />
+        <option value="$PROJECT_DIR$/src/algorithms/search/DepthFirstSearch.java" />
+        <option value="$PROJECT_DIR$/src/JUnit/algorithms/search/BestFirstSearchTest.java" />
+        <option value="$PROJECT_DIR$/src/JUnit/JUnit/JUnitTestingBestFirstSearch.java" />
       </list>
     </option>
   </component>
@@ -231,12 +134,32 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ATP - Project - PartA" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ATP - Project - PartA" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="ATP - Project - PartA" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ATP - Project - PartA" type="616d4139:PackageViewModuleNode" />
+              <item name="algorithms" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="ATP - Project - PartA" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ATP - Project - PartA" type="616d4139:PackageViewModuleNode" />
+              <item name="JUnit" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -252,6 +175,12 @@
             <path>
               <item name="ATP - Project - PartA" type="b2602c69:ProjectViewProjectNode" />
               <item name="ATP - Project - PartA" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATP - Project - PartA" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATP - Project - PartA" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -259,20 +188,6 @@
               <item name="ATP - Project - PartA" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="algorithms" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATP - Project - PartA" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ATP - Project - PartA" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="algorithms" type="462c0819:PsiDirectoryNode" />
-              <item name="mazeGenerators" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATP - Project - PartA" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ATP - Project - PartA" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="algorithms" type="462c0819:PsiDirectoryNode" />
-              <item name="search" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ATP - Project - PartA" type="b2602c69:ProjectViewProjectNode" />
@@ -287,18 +202,31 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="true" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554229774650" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554231534122" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/JUnit" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="algorithms.search" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="algorithms.search" />
     </key>
@@ -376,7 +304,7 @@
       <workItem from="1554021746878" duration="419000" />
       <workItem from="1554022220674" duration="19703000" />
       <workItem from="1554127803791" duration="3892000" />
-      <workItem from="1554220810720" duration="8204000" />
+      <workItem from="1554220810720" duration="9825000" />
     </task>
     <task id="LOCAL-00001" summary="all project file added">
       <created>1553944689390</created>
@@ -427,11 +355,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554223276729</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="venomar amen">
+      <created>1554229858497</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1554229858497</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="116713000" />
+    <option name="totallyTimeSpent" value="118334000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -451,16 +386,16 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Favorites" order="3" sideWeight="0.17924528" side_tool="true" weight="0.18791947" />
       <window_info id="Image Layers" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.8207547" visible="true" weight="0.13486141" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.8207547" visible="true" weight="0.13486141" />
       <window_info id="Structure" order="6" sideWeight="0.17924528" side_tool="true" weight="0.18791947" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.4968017" weight="0.32827735" />
-      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.49413645" weight="0.32827735" />
+      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.4936034" visible="true" weight="0.32827735" />
       <window_info anchor="bottom" id="Database Changes" order="3" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.5161074" side_tool="true" weight="0.39943343" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Find" order="6" />
-      <window_info active="true" anchor="bottom" id="Run" order="7" sideWeight="0.51865673" side_tool="true" visible="true" weight="0.39869988" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.5063966" side_tool="true" visible="true" weight="0.32827735" />
       <window_info anchor="bottom" id="Debug" order="8" sideWeight="0.48134327" weight="0.39869988" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49520257" weight="0.32827735" />
@@ -776,13 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/algorithms/search/SearchableMaze.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/algorithms/search/MazeState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -790,16 +718,6 @@
           <folding>
             <element signature="e#245#246#0" expanded="true" />
             <element signature="e#279#280#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/algorithms/search/DepthFirstSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="691">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -838,7 +756,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/algorithms/search/BreadthFirstSearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
+        <state relative-caret-position="-244">
           <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -849,10 +767,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/algorithms/search/DepthFirstSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JUnit/algorithms/search/BestFirstSearchTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="11" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/algorithms/search/SearchableMaze.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JUnit/JUnit/JUnitTestingBestFirstSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/algorithms/search/BestFirstSearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+        <state relative-caret-position="306">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
