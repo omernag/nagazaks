@@ -2,6 +2,7 @@ package algorithms.search;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
 
@@ -17,15 +18,51 @@ import java.util.PriorityQueue;
 public class BestFirstSearch extends BreadthFirstSearch {
 
     PriorityQueue<AState> openList;
+    AState curr;
 
     /**
      * Constructor for BestFS
      */
     public BestFirstSearch() {
-        openList = new PriorityQueue<>();
+        algorithmName = "BestFirstSearch";
+
         lStates = new ArrayList<>();
         Comparator<AState> byCost = (o1, o2) -> o1.compareTo(o2);
-        Comparator<? super AState> comparator = byCost;
-
+        openList = new PriorityQueue<>(byCost);
+        openList.comparator();
     }
+
+    @Override
+    public Solution solve(ISearchable domain) {
+        Solution sol = new Solution();
+        lVisitedStates = new HashMap<>();
+
+        openList.add(domain.getStartState());
+        domain.getStartState().visit();
+
+        while(!openList.isEmpty()){
+            visitedNodes++;
+
+            curr = openList.poll();
+
+            //curr.done();
+            lStates = domain.getAllPossibleStates(curr);
+
+            if(curr.getState().equals(domain.getGoalState().getState()))
+                return createSolution(curr, sol, domain);
+
+
+            for(int i = 0 ; i < lStates.size(); i++) {
+                if (!lVisitedStates.containsKey((lStates.get(i).toString()))) {
+                    lVisitedStates.put(lStates.get(i).toString(),1);
+                    lStates.get(i).setPrevS(curr);
+                    lStates.get(i).setCost(curr.getStateCost(lStates.get(i)));
+                    openList.add(lStates.get(i));
+                }
+            }
+        }
+
+        return sol;
+    }
+
 }

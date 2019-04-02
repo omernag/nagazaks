@@ -45,6 +45,10 @@ public abstract class AState {
         return cost;
     }
 
+    public double getStateCost(AState st){
+        return 0;
+    }
+
     public void setCost(double cost) {
         this.cost = cost;
     }

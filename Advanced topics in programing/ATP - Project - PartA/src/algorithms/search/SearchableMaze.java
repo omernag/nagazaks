@@ -123,12 +123,6 @@ public class SearchableMaze implements ISearchable {
     @Override
     public ArrayList<AState> getAllPossibleStates(AState s) {
         Position curr = (Position)s.getState();
-        //for (Position tmp : m_dMaze.keySet()) {
-            //if(tmp.equals(curr)){
-             //   return m_dMaze.get(tmp);
-            //}
-       // }
-        //return null;
         return m_dMaze.get(curr.toString());
     }
 

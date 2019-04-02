@@ -1,8 +1,6 @@
 package algorithms.search;
 
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Stack;
+import java.util.*;
 
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
 
@@ -11,6 +9,7 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
     protected PriorityQueue<AState> openList;
     protected Stack<AState> currPath;
     protected int visitedNodes;
+    protected HashMap<String,Integer> lVisitedStates;
 
 
 
@@ -32,6 +31,10 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
         }
         sol.solPath.add(curr);
         return sol;
+    }
+
+    protected void cleanVisites(ISearchable domain) {
+
     }
 
     /**

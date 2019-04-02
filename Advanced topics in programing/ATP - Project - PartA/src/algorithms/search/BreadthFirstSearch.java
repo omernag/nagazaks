@@ -2,9 +2,7 @@ package algorithms.search;
 
 import sun.misc.Queue;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.PriorityQueue;
+import java.util.*;
 
 
 /**
@@ -16,16 +14,20 @@ import java.util.PriorityQueue;
  */
 public class BreadthFirstSearch extends ASearchingAlgorithm {
 
-    Queue<AState> openList;
-
+    PriorityQueue<AState> openList;
+    AState curr;
 
     /**
      * Constructor for BFS
      */
     public BreadthFirstSearch() {
-        openList = new Queue<>();
+        openList = new PriorityQueue<>();
         lStates = new ArrayList<>();
         algorithmName = "BreadthFirstSearch";
+
+        Comparator<AState> byCost = (o1, o2) -> o1.compareTo(o2);
+        openList = new PriorityQueue<>(byCost);
+        openList.comparator();
 
     }
 
@@ -36,33 +38,37 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
      * @return Solution
      */
     @Override
-    public Solution solve(ISearchable domain) throws InterruptedException {
+    public Solution solve(ISearchable domain) {
         Solution sol = new Solution();
-        //sol.solPath.add(domain.getStartState());
-        openList.enqueue(domain.getStartState());
+        lVisitedStates = new HashMap<>();
+
+        openList.add(domain.getStartState());
         domain.getStartState().visit();
 
         while(!openList.isEmpty()){
             visitedNodes++;
-            AState curr = openList.dequeue();
 
-            curr.done();
+            curr = openList.poll();
+
+            //curr.done();
             lStates = domain.getAllPossibleStates(curr);
 
             if(curr.getState().equals(domain.getGoalState().getState()))
-                return createSolution(curr,sol,domain);
+                return createSolution(curr, sol, domain);
 
-            for(int i = 0 ; i < lStates.size(); i++){
-                if(!lStates.get(i).isDone()) {
-                    if (!lStates.get(i).isVisited()) {
-                        lStates.get(i).visit();
-                        lStates.get(i).setPrevS(curr);
-                        openList.enqueue(lStates.get(i));
-                    }
+
+            for(int i = 0 ; i < lStates.size(); i++) {
+                if (!lVisitedStates.containsKey((lStates.get(i).toString()))) {
+                    lVisitedStates.put(lStates.get(i).toString(),1);
+                    lStates.get(i).setPrevS(curr);
+                    lStates.get(i).setCost(0);
+                    openList.add(lStates.get(i));
                 }
             }
         }
 
         return sol;
     }
+
+
 }

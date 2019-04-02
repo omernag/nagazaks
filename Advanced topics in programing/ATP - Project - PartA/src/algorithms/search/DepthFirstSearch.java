@@ -1,6 +1,7 @@
 package algorithms.search;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
@@ -33,12 +34,13 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
     @Override
     public Solution solve(ISearchable domain) {
         Solution sol = new Solution();
+        lVisitedStates = new HashMap<>();
 
         currPath.push(domain.getStartState());
 
         while(!currPath.isEmpty()){
             AState curr = popStack();
-            curr.visit();
+            lVisitedStates.put(curr.toString(),1);
 
             if(curr.getState().equals(domain.getGoalState().getState())) {
                 return createSolution(curr,sol,domain);
@@ -46,7 +48,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
             lStates = domain.getAllPossibleStates(curr);
             for(int i = lStates.size()-1 ; i >=0; i--){
-                if(!lStates.get(i).isVisited()) {
+                if(!lVisitedStates.containsKey((lStates.get(i).toString()))) {
                     lStates.get(i).setPrevS(curr);
                     currPath.push(lStates.get(i));
                 }
@@ -56,38 +58,5 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
         return null;
     }
-
-    /*public Solution solve(ISearchable domain) {
-        Solution sol = new Solution();
-        sol = reqSolve(domain, domain.getStartState() ,sol,0);
-        return sol;
-    }*/
-
-
-
-    /*public Solution reqSolve(ISearchable domain, AState curr, Solution sol,int visitedNodes) {
-
-        if(curr.getState().equals(domain.getGoalState().getState())) {
-            createSolution(curr,sol,domain);
-        }
-
-        curr.visit();
-        lStates = domain.getAllPossibleStates(curr);
-        for (AState st: lStates
-             ) {
-            if(!st.isVisited()) {
-                st.setPrevS(curr);
-                return reqSolve(domain,st,sol,visitedNodes++);
-            }
-        }
-        /*for(int i = 0 ; i < lStates.size(); i++){
-            if(!lStates.get(i).isVisited()) {
-                lStates.get(i).setPrevS(curr);
-                return reqSolve(domain,lStates.get(i),sol,visitedNodes++);
-            }
-        }
-        //return reqSolve(domain,curr,sol,visitedNodes++);
-        return null;
-    }*/
 
 }

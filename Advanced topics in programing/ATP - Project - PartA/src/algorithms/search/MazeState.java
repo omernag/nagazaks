@@ -22,6 +22,13 @@ public class MazeState extends AState {
         return state.equals(mazeState.state);
     }
 
+    public double getStateCost(AState st){
+        if(((state.getRowIndex() == ((MazeState)st).getState().getRowIndex()+1)||(state.getRowIndex() == ((MazeState)st).getState().getRowIndex()-1)) &&
+                ((state.getColumnIndex() == ((MazeState)st).getState().getColumnIndex()+1)||(state.getColumnIndex() == ((MazeState)st).getState().getColumnIndex()-1))){
+            return 5;
+        }
+        else return 10;
+    }
 
     public MazeState(Position state, int cost) {
         this.state = state;
