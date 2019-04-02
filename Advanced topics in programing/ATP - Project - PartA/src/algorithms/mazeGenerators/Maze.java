@@ -60,7 +60,7 @@ public class Maze {
 
     /**
      * Setter for the start position.
-     * @param  startPosition
+     * @param  startPosition i,j of beginning
      */
     public void setStartPosition(Position startPosition) {
         this.startPosition = startPosition;
@@ -103,21 +103,19 @@ public class Maze {
     /**
      * This method checks if a position is on one of the maze corners.
      *
-     * @param position
+     * @param position i,j of corner
      * @return True if position is a corner of the maze, else false.
      */
-    public boolean isCorner (Position position){
-        if (position.getColumn()==0 || position.getColumn()==getColumns()-1){
-            if(position.getLine()==0 || position.getLine()==getLines()-1){
-                return true;
-            }
+    private boolean isCorner (Position position){
+        if (position.getColumnIndex()==0 || position.getColumnIndex()==getColumns()-1){
+            return (position.getRowIndex()==0 || position.getRowIndex()==getLines()-1);
         }
         return false;
     }
 
     /**
      * Getter for the goal position.
-     * @return goalPosition
+     * @return goalPosition goal i,j
      */
     public Position getGoalPosition() {
         return goalPosition;
@@ -125,7 +123,7 @@ public class Maze {
 
     /**
      * Setter for the goal position.
-     * @param  endPosition
+     * @param  endPosition goal i,j
      */
     public void setGoalPosition(Position endPosition) {
         this.goalPosition = endPosition;
@@ -133,27 +131,27 @@ public class Maze {
 
     /**
      * This method returns if a position is a wall or path.
-     * @param pointer
+     * @param pointer i,j
      * @return 1 or zero
      */
     public int getValue(Position pointer){
-        return struct[pointer.getLine()][pointer.getColumn()];
+        return struct[pointer.getRowIndex()][pointer.getColumnIndex()];
     }
 
     /**
      * This method sets a wall on a given position.
-     * @param position
+     * @param position i, j
      */
     public void setWall(Position position) {
-        this.struct[position.getLine()][position.getColumn()] = 1;
+        this.struct[position.getRowIndex()][position.getColumnIndex()] = 1;
     }
 
     /**
      * This method sets a path on a given position.
-     * @param position
+     * @param position i, j
      */
     public void setPath(Position position) {
-        this.struct[position.getLine()][position.getColumn()] = 0;
+        this.struct[position.getRowIndex()][position.getColumnIndex()] = 0;
         position.setValue(0);
     }
 
@@ -189,27 +187,21 @@ public class Maze {
 
     /**
      * This method return if a position is in the maze.
-     * @param position
+     * @param position i , j
      * @return True if is inside, false otherwise
      */
     public boolean isInMaze(Position position) {
-        if(position.getLine()>=0 &&position.getLine()<getLines() && position.getColumn() >=0 && position.getColumn() <getColumns() ){
-            return true;
-        }
-        return false;
+        return (position.getRowIndex()>=0 &&position.getRowIndex()<getLines() && position.getColumnIndex() >=0 && position.getColumnIndex() <getColumns() );
     }
 
     /**
      * This method return if a position is on the frame of the maze.
-     * @param position
+     * @param position i,j
      *
      * @return True if is inside, false otherwise
      */
     public boolean is_Farme(Position position) {
-        if(position.getLine()==0 ||position.getLine()==getLines()-1 || position.getColumn() ==0 | position.getColumn() ==getColumns()-1 ){
-            return true;
-        }
-        return false;
+        return (position.getRowIndex()==0 ||position.getRowIndex()==getLines()-1 || position.getColumnIndex() ==0 | position.getColumnIndex() ==getColumns()-1 );
     }
 
     /**
@@ -218,10 +210,36 @@ public class Maze {
     public void print(){
         for (int i = 0; i < s_lines; i++) {
             for (int j = 0; j < s_columns; j++) {
+            if(i==startPosition.getRowIndex() && j==startPosition.getColumnIndex()){
+                   System.out.print("S");
+            }
+            else if(i==goalPosition.getRowIndex() && j==goalPosition.getColumnIndex()){
+                System.out.print("E");
+            }
+            else {
                 System.out.print(struct[i][j]);
+            }
                 System.out.print(",");
             }
             System.out.println();
         }
     }
+
+    /*public void print () {
+        for (int i = 0; i < struct.length; i++) {
+            for (int j = 0; j < struct[i].length; j++) {
+                if (i == startPosition.getRowIndex() && j == startPosition.getColumnIndex()) {//startPosition
+                    System.out.print(" " + "\u001B[44m" + " ");
+                } else if (i == goalPosition.getRowIndex() && j == goalPosition.getColumnIndex()) {//goalPosition
+                    System.out.print(" " + "\u001B[44m" + " ");
+                } else if (struct[i][j] == 1) System.out.print(" " + "\u001B[45m" + " ");
+                else System.out.print(" " + "\u001B[107m" + " ");
+            }
+            System.out.println(" " + "\u001B[107m");
+        }
+
+    }*/
+
+
+
 }//end of Maze

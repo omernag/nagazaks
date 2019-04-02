@@ -11,9 +11,9 @@ public class RunSearchOnMaze {
     public static void main(String[] args) throws InterruptedException {
         IMazeGenerator mg = new MyMazeGenerator();
 
-        Maze maze = mg.generate(1000, 1000);
+        Maze maze = mg.generate(100, 100);
 
-        //maze.print();
+        maze.print();
         //System.out.println(maze.getStartPosition());
         //System.out.println(maze.getGoalPosition());
 
@@ -22,7 +22,7 @@ public class RunSearchOnMaze {
         //
         //solveProblem(searchableMaze, new BreadthFirstSearch());
         //solveProblem(searchableMaze, new DepthFirstSearch());
-        solveProblem(searchableMaze, new BestFirstSearch());
+        //solveProblem(searchableMaze, new BestFirstSearch());
     }
     private static void solveProblem(ISearchable domain, ISearchingAlgorithm searcher) throws InterruptedException {
         //Solve a searching problem with a searcher

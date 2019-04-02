@@ -39,7 +39,7 @@ public class Position {
      * Getter for the line param of the position.
      * @return line
      */
-    public int getLine() {
+    public int getRowIndex() {
         return line;
     }
 
@@ -54,7 +54,7 @@ public class Position {
      * Getter for the columns param of the position.
      * @return column
      */
-    public int getColumn() {
+    public int getColumnIndex() {
         return column;
     }
 

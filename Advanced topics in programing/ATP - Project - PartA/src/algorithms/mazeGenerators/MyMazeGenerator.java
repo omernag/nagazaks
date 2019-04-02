@@ -85,10 +85,10 @@ public class MyMazeGenerator extends AMazeGenerator {
     private boolean TryPath(Position curr_Pos) {
 
         boolean path ; // false --> if there are paths on 2 sides of him and this position needs to remain a wall.
-        Position up = new Position(curr_Pos.getLine() - 1, curr_Pos.getColumn());
-        Position left = new Position(curr_Pos.getLine(), curr_Pos.getColumn() - 1);
-        Position down = new Position(curr_Pos.getLine() + 1, curr_Pos.getColumn());
-        Position right = new Position(curr_Pos.getLine(), curr_Pos.getColumn() + 1);
+        Position up = new Position(curr_Pos.getRowIndex() - 1, curr_Pos.getColumnIndex());
+        Position left = new Position(curr_Pos.getRowIndex(), curr_Pos.getColumnIndex() - 1);
+        Position down = new Position(curr_Pos.getRowIndex() + 1, curr_Pos.getColumnIndex());
+        Position right = new Position(curr_Pos.getRowIndex(), curr_Pos.getColumnIndex() + 1);
 
         path = !areBothPaths(primMaze,up,down);
         if(path)
@@ -112,10 +112,10 @@ public class MyMazeGenerator extends AMazeGenerator {
     }
 
     private void addNeighborsToWalls(Position curr_Pos) {
-        tryAddWall(new Position(curr_Pos.getLine() - 1, curr_Pos.getColumn()));//up
-        tryAddWall(new Position(curr_Pos.getLine(), curr_Pos.getColumn() - 1));//left
-        tryAddWall(new Position(curr_Pos.getLine() + 1, curr_Pos.getColumn()));//down
-        tryAddWall(new Position(curr_Pos.getLine(), curr_Pos.getColumn() + 1));//right
+        tryAddWall(new Position(curr_Pos.getRowIndex() - 1, curr_Pos.getColumnIndex()));//up
+        tryAddWall(new Position(curr_Pos.getRowIndex(), curr_Pos.getColumnIndex() - 1));//left
+        tryAddWall(new Position(curr_Pos.getRowIndex() + 1, curr_Pos.getColumnIndex()));//down
+        tryAddWall(new Position(curr_Pos.getRowIndex(), curr_Pos.getColumnIndex() + 1));//right
     }
 
     private boolean tryAddWall(Position curr_Pos) {

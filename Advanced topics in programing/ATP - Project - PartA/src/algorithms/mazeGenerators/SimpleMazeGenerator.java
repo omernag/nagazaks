@@ -29,16 +29,16 @@ public class SimpleMazeGenerator extends AMazeGenerator {
             moved = false;
             int rand = (int) (Math.random() * 4);
             if(rand==0){
-                tmp = new Position(pointer.getLine() -1 , pointer.getColumn());
+                tmp = new Position(pointer.getRowIndex() -1 , pointer.getColumnIndex());
             }
             else if(rand==1){
-                tmp = new Position(pointer.getLine() , pointer.getColumn()-1);
+                tmp = new Position(pointer.getRowIndex() , pointer.getColumnIndex()-1);
 
             }else if(rand==2 ){
-                tmp = new Position(pointer.getLine()+1 , pointer.getColumn());
+                tmp = new Position(pointer.getRowIndex()+1 , pointer.getColumnIndex());
             }
             else{
-                tmp = new Position(pointer.getLine() , pointer.getColumn()+1);
+                tmp = new Position(pointer.getRowIndex() , pointer.getColumnIndex()+1);
             }
             if(simpleMaze.isInMaze(tmp) && (!simpleMaze.is_Farme(pointer)|| !simpleMaze.is_Farme(tmp))){
                 pointer = tmp;

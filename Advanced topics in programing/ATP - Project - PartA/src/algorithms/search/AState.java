@@ -1,6 +1,6 @@
 package algorithms.search;
 
-import algorithms.mazeGenerators.Position;
+
 
 import java.util.Objects;
 
@@ -69,8 +69,8 @@ public abstract class AState {
 
 
     /////////
-    public void visit(){};
-    public void done(){};
+    public void visit(){}
+    public void done(){}
     public boolean isVisited() {
         return false;
     }
@@ -78,4 +78,13 @@ public abstract class AState {
         return false;
     }
 
+    public int compareTo(AState o2) {
+        if(this.cost-o2.cost>0){
+            return 1;
+        }
+        else if(this.cost-o2.cost<0){
+            return -1;
+        }
+        return 0;
+    }
 }

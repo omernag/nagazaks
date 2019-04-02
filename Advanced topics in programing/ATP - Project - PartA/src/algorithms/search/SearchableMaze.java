@@ -76,14 +76,14 @@ public class SearchableMaze implements ISearchable {
 
     private Position[] createDirections(Position pos, Maze maze) {
         Position[] dir = new Position[8];
-        Position UL = maze.getPositionAt(pos.getLine()-1,pos.getColumn() - 1);
-        Position U = maze.getPositionAt(pos.getLine()-1,pos.getColumn());
-        Position L = maze.getPositionAt(pos.getLine(),pos.getColumn() - 1);
-        Position DL = maze.getPositionAt(pos.getLine()+1,pos.getColumn() - 1);
-        Position D = maze.getPositionAt(pos.getLine()+1,pos.getColumn());
-        Position DR = maze.getPositionAt(pos.getLine()+1,pos.getColumn() + 1);
-        Position R = maze.getPositionAt(pos.getLine(),pos.getColumn() + 1);
-        Position UR = maze.getPositionAt(pos.getLine()-1,pos.getColumn() + 1);
+        Position UL = maze.getPositionAt(pos.getRowIndex()-1,pos.getColumnIndex() - 1);
+        Position U = maze.getPositionAt(pos.getRowIndex()-1,pos.getColumnIndex());
+        Position L = maze.getPositionAt(pos.getRowIndex(),pos.getColumnIndex() - 1);
+        Position DL = maze.getPositionAt(pos.getRowIndex()+1,pos.getColumnIndex() - 1);
+        Position D = maze.getPositionAt(pos.getRowIndex()+1,pos.getColumnIndex());
+        Position DR = maze.getPositionAt(pos.getRowIndex()+1,pos.getColumnIndex() + 1);
+        Position R = maze.getPositionAt(pos.getRowIndex(),pos.getColumnIndex() + 1);
+        Position UR = maze.getPositionAt(pos.getRowIndex()-1,pos.getColumnIndex() + 1);
         dir[0]=U;
         dir[1]=UR;
         dir[2]=R;
@@ -98,8 +98,8 @@ public class SearchableMaze implements ISearchable {
     }
 
     private MazeState getMazeMapState(Position pos){
-        if(pos.getColumn()>=0 && pos.getLine()>=0 && pos.getLine()<m_dMazeMap.length && pos.getColumn()<m_dMazeMap[0].length) {
-            return m_dMazeMap[pos.getLine()][pos.getColumn()];
+        if(pos.getColumnIndex()>=0 && pos.getRowIndex()>=0 && pos.getRowIndex()<m_dMazeMap.length && pos.getColumnIndex()<m_dMazeMap[0].length) {
+            return m_dMazeMap[pos.getRowIndex()][pos.getColumnIndex()];
         }
         else return null;
     }
@@ -143,18 +143,18 @@ public class SearchableMaze implements ISearchable {
     }
 
     public void setDone(MazeState st){
-        doneTable[st.getState().getLine()][st.getState().getColumn()] = 1;
+        doneTable[st.getState().getRowIndex()][st.getState().getColumnIndex()] = 1;
     }
 
     public void setVisit(MazeState st){
-        doneTable[st.getState().getLine()][st.getState().getColumn()] = 1;
+        doneTable[st.getState().getRowIndex()][st.getState().getColumnIndex()] = 1;
     }
 
     public int getDone(MazeState st){
-        return doneTable[st.getState().getLine()][st.getState().getColumn()];
+        return doneTable[st.getState().getRowIndex()][st.getState().getColumnIndex()];
     }
 
     public int getVisit(MazeState st){
-        return doneTable[st.getState().getLine()][st.getState().getColumn()];
+        return doneTable[st.getState().getRowIndex()][st.getState().getColumnIndex()];
     }
 }
