@@ -17,7 +17,7 @@ import java.util.PriorityQueue;
  */
 public class BestFirstSearch extends BreadthFirstSearch {
 
-    PriorityQueue<AState> openList;
+    private PriorityQueue<AState> openList;
     AState curr;
 
     /**
@@ -30,6 +30,9 @@ public class BestFirstSearch extends BreadthFirstSearch {
         Comparator<AState> byCost = (o1, o2) -> o1.compareTo(o2);
         openList = new PriorityQueue<>(byCost);
         openList.comparator();
+
+
+
     }
 
     @Override
@@ -41,9 +44,7 @@ public class BestFirstSearch extends BreadthFirstSearch {
         domain.getStartState().visit();
 
         while(!openList.isEmpty()){
-            visitedNodes++;
-
-            curr = openList.poll();
+            curr = popOpenList();
 
             //curr.done();
             lStates = domain.getAllPossibleStates(curr);
@@ -56,7 +57,12 @@ public class BestFirstSearch extends BreadthFirstSearch {
                 if (!lVisitedStates.containsKey((lStates.get(i).toString()))) {
                     lVisitedStates.put(lStates.get(i).toString(),1);
                     lStates.get(i).setPrevS(curr);
-                    lStates.get(i).setCost(curr.getStateCost(lStates.get(i)));
+                    lStates.get(i).setCost(curr.getCost() + curr.getStateCost(lStates.get(i)));
+                    openList.add(lStates.get(i));
+                }
+                else if( lVisitedStates.containsKey((lStates.get(i).toString())) &&  lStates.get(i).getCost()> (curr.getCost() + curr.getStateCost(lStates.get(i)))){
+                   lStates.get(i).setPrevS(curr);
+                    lStates.get(i).setCost(curr.getCost() + curr.getStateCost(lStates.get(i)));
                     openList.add(lStates.get(i));
                 }
             }
@@ -65,4 +71,8 @@ public class BestFirstSearch extends BreadthFirstSearch {
         return sol;
     }
 
+    protected AState popOpenList(){
+        visitedNodes++;
+        return openList.poll();
+    }
 }

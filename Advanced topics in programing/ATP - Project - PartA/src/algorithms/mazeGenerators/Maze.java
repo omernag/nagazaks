@@ -224,8 +224,8 @@ public class Maze {
             System.out.println();
         }
     }
-
-    /*public void print () {
+/*
+    public void print () {
         for (int i = 0; i < struct.length; i++) {
             for (int j = 0; j < struct[i].length; j++) {
                 if (i == startPosition.getRowIndex() && j == startPosition.getColumnIndex()) {//startPosition
@@ -238,8 +238,8 @@ public class Maze {
             System.out.println(" " + "\u001B[107m");
         }
 
-    }*/
-
+    }
+*/
 
 
 }//end of Maze

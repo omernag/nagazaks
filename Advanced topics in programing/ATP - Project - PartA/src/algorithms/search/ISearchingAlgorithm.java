@@ -17,7 +17,7 @@ public interface ISearchingAlgorithm {
      * @param
      * @return Maze
      */////////////////////////
-    Solution solve(ISearchable domain) throws InterruptedException;
+    Solution solve(ISearchable domain);
 
     /**
      * This method computes the time needed to generate a maze

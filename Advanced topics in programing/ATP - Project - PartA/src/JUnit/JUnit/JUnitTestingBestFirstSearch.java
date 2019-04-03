@@ -1,4 +1,4 @@
-package JUnit;
+/*package JUnit;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,4 +16,4 @@ class JUnitTestingBestFirstSearch {
     void name() {
     }
 
-}
+}*/

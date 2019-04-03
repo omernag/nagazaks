@@ -2,7 +2,6 @@ package algorithms.search;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.PriorityQueue;
 import java.util.Stack;
 
 /**
@@ -14,6 +13,8 @@ import java.util.Stack;
  */
 public class DepthFirstSearch extends ASearchingAlgorithm {
 
+    private Stack<AState> currPath;
+
     /**
      * Constructor for DFS
      */
@@ -22,6 +23,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         lStates = new ArrayList<>();
         algorithmName = "DepthFirstSearch";
     }
+
 
 
 
@@ -35,6 +37,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
     public Solution solve(ISearchable domain) {
         Solution sol = new Solution();
         lVisitedStates = new HashMap<>();
+        lAddedToNeighbors = new HashMap<>();
 
         currPath.push(domain.getStartState());
 
@@ -48,9 +51,10 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
             lStates = domain.getAllPossibleStates(curr);
             for(int i = lStates.size()-1 ; i >=0; i--){
-                if(!lVisitedStates.containsKey((lStates.get(i).toString()))) {
+                if(!lVisitedStates.containsKey((lStates.get(i).toString())) && !lAddedToNeighbors.containsKey((lStates.get(i).toString()))) {
                     lStates.get(i).setPrevS(curr);
                     currPath.push(lStates.get(i));
+                    lAddedToNeighbors.put(lStates.get(i).toString(),1);
                 }
             }
 
@@ -59,4 +63,10 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         return sol;
     }
 
+
+    protected AState popStack(){
+        visitedNodes++;
+        AState pop = currPath.pop();
+        return pop;
+    }
 }

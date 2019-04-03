@@ -14,7 +14,7 @@ import java.util.*;
  */
 public class BreadthFirstSearch extends ASearchingAlgorithm {
 
-    PriorityQueue<AState> openList;
+    private PriorityQueue<AState> openList;
     AState curr;
 
     /**
@@ -46,9 +46,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         domain.getStartState().visit();
 
         while(!openList.isEmpty()){
-            visitedNodes++;
-
-            curr = openList.poll();
+            curr = popOpenList();
 
             //curr.done();
             lStates = domain.getAllPossibleStates(curr);
@@ -70,5 +68,9 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         return sol;
     }
 
+    protected AState popOpenList(){
+        visitedNodes++;
+        return openList.poll();
+    }
 
 }
