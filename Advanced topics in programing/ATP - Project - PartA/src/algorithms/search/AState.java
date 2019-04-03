@@ -1,9 +1,13 @@
 package algorithms.search;
 
-
-
 import java.util.Objects;
 
+/**
+ * This class represent an abstract class for a state in the problem
+ *
+ * @author  Asaf Zaks, Omer Nagar
+ *
+ */
 public abstract class AState {
 
     private Object state;

@@ -1,38 +1,30 @@
 package algorithms.search;
 
-
-import algorithms.mazeGenerators.Maze;
-
 /**
- * This class represent a interface for maze generators
+ * This class represent an interface for searching algorithms
  *
  * @author  Asaf Zaks, Omer Nagar
  *
- *///////////////////////////
+ */
 public interface ISearchingAlgorithm {
 
     /**
-     * This method generates a maze
-     * @param
-     * @param
-     * @return Maze
-     */////////////////////////
+     * This method solve a given problem
+     * @param domain a problem that implements the ISearchable interface
+     * @return a list as solution
+     */
     Solution solve(ISearchable domain);
 
     /**
-     * This method computes the time needed to generate a maze
-     * @param
-     * @param
-     * @return time in long
-     *//////////////////////
+     * This method returns the name of the searching algorithm
+     * @return name as string
+     */
     String getName();
 
     /**
-     * This method computes the time needed to generate a maze
-
-     * @return time in long
-     *//////////////////////
+     * This method return the number of visited states during the search
+     * @return number of states as int
+     */
     int getNumberOfNodesEvaluated();
-
 
 }

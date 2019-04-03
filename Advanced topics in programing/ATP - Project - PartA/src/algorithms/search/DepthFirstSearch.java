@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Stack;
 
 /**
- * This class represent a solve of a Searchable problem according to the BFS algorithm
+ * This class represent a solve of a Searchable problem according to the DFS algorithm
  * In our case the problem is a maze
  *
  * @author  Asaf Zaks, Omer Nagar
@@ -23,9 +23,6 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         lStates = new ArrayList<>();
         algorithmName = "DepthFirstSearch";
     }
-
-
-
 
     /**
      * This method solves a searchable problem according to the DFS algorithm
@@ -57,14 +54,16 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
                     lAddedToNeighbors.put(lStates.get(i).toString(),1);
                 }
             }
-
         }
-
         return sol;
     }
 
-
-    protected AState popStack(){
+    /**
+     * This method return the next state to exit the stack
+     * and add 1 to the visited nodes param
+     * @return the next state to exit the stack
+     */
+    private AState popStack(){
         visitedNodes++;
         AState pop = currPath.pop();
         return pop;

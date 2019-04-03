@@ -1,7 +1,5 @@
 package algorithms.search;
 
-import sun.misc.Queue;
-
 import java.util.*;
 
 
@@ -19,6 +17,8 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
 
     /**
      * Constructor for BFS
+     * and generates a comparator by the cost param
+     * in this class all cost are default
      */
     public BreadthFirstSearch() {
         openList = new PriorityQueue<>();
@@ -47,13 +47,10 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
 
         while(!openList.isEmpty()){
             curr = popOpenList();
-
-            //curr.done();
             lStates = domain.getAllPossibleStates(curr);
 
             if(curr.getState().equals(domain.getGoalState().getState()))
                 return createSolution(curr, sol, domain);
-
 
             for(int i = 0 ; i < lStates.size(); i++) {
                 if (!lVisitedStates.containsKey((lStates.get(i).toString()))) {
@@ -63,14 +60,17 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                     openList.add(lStates.get(i));
                 }
             }
-        }
-
+        }//end of while
         return sol;
     }
 
+    /**
+     * This method return the next state to exit the queue
+     * and add 1 to the visited nodes param
+     * @return the next state to exit the queue
+     */
     protected AState popOpenList(){
         visitedNodes++;
         return openList.poll();
     }
-
 }
