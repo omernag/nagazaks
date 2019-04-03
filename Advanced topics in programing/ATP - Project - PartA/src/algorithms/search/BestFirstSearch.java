@@ -17,8 +17,7 @@ import java.util.PriorityQueue;
  */
 public class BestFirstSearch extends BreadthFirstSearch {
 
-    private PriorityQueue<AState> openList;
-    AState curr;
+
 
     /**
      * Constructor for BestFS
@@ -71,8 +70,5 @@ public class BestFirstSearch extends BreadthFirstSearch {
         return sol;
     }
 
-    protected AState popOpenList(){
-        visitedNodes++;
-        return openList.poll();
-    }
+
 }

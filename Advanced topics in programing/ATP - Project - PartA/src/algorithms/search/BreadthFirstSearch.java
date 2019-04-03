@@ -14,8 +14,8 @@ import java.util.*;
  */
 public class BreadthFirstSearch extends ASearchingAlgorithm {
 
-    private PriorityQueue<AState> openList;
-    AState curr;
+    protected PriorityQueue<AState> openList;
+    protected AState curr;
 
     /**
      * Constructor for BFS
