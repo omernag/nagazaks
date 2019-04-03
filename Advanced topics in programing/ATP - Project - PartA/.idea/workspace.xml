@@ -6,9 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f1a9c61-8191-460f-bb5d-3a03ed037724" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/RunSearchOnMaze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/RunSearchOnMaze.java" afterDir="false" />
-    </list>
+    <list default="true" id="8f1a9c61-8191-460f-bb5d-3a03ed037724" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -312,7 +310,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554299979442" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554300287881" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/JUnit" />
@@ -409,7 +407,7 @@
       <workItem from="1554022220674" duration="19703000" />
       <workItem from="1554127803791" duration="3892000" />
       <workItem from="1554220810720" duration="9825000" />
-      <workItem from="1554283746746" duration="11231000" />
+      <workItem from="1554283746746" duration="11566000" />
     </task>
     <task id="LOCAL-00001" summary="all project file added">
       <created>1553944689390</created>
@@ -471,7 +469,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129565000" />
+    <option name="totallyTimeSpent" value="129900000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
