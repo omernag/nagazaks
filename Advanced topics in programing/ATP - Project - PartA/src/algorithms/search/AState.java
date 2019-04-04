@@ -14,49 +14,66 @@ public abstract class AState {
     private AState prevS;
     private double cost;
 
-
-    public Object getState() {
-        return state;
-    }
-
-    public void setState(Object state) {
-        this.state = state;
-    }
-
+    /**
+     * This is a constructor for AState
+     */
     public AState() {
         state=null;
         prevS=null;
 
     }
 
-    public AState(AState o) {
-        this.state = o.state;
-        this.prevS = o.prevS;
-        this.cost = o.cost;
-
-
+    /**
+     * This is a getter for state
+     * @return state as object
+     */
+    public Object getState() {
+        return state;
     }
 
+    /**
+     * This is a getter for prev state
+     * @return previous AState
+     */
     public AState getPrevS() {
         return prevS;
     }
 
+    /**
+     * This is a setter for prev state
+     * @param prevS previous AState
+     */
     public void setPrevS(AState prevS) {
         this.prevS = prevS;
     }
 
+    /**
+     * This is a getter for cost of state
+     * @return cost as double
+     */
     public double getCost() {
         return cost;
     }
 
-    public double getStateCost(AState st){
-        return 0;
-    }
-
+    /**
+     * This is a setter for cost of state
+     * @param cost of AState
+     */
     public void setCost(double cost) {
         this.cost = cost;
     }
 
+    /**
+     * This is a abstract getter for cost of a state
+     * @return cost as double
+     */
+    public abstract double getStateCost(AState st);
+
+    /**
+     * This method override equals
+     * @param o other state
+     * @return true if equal
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,25 +84,20 @@ public abstract class AState {
                 Objects.equals(prevS, aState.prevS);
     }
 
-
-
-
+    /**
+     * This method override to string
+     * @return string
+     */
     @Override
     public String toString() {
         return state.toString();
     }
 
-
-    /////////
-    public void visit(){}
-    public void done(){}
-    public boolean isVisited() {
-        return false;
-    }
-    public boolean isDone() {
-        return false;
-    }
-
+    /**
+     * This method override compare to
+     * @param o2 other state
+     * @return int
+     */
     public int compareTo(AState o2) {
         if(this.cost-o2.cost>0){
             return 1;

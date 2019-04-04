@@ -43,7 +43,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         lVisitedStates = new HashMap<>();
 
         openList.add(domain.getStartState());
-        domain.getStartState().visit();
+        lVisitedStates.put(domain.getStartState().toString(),1);
 
         while(!openList.isEmpty()){
             curr = popOpenList();
