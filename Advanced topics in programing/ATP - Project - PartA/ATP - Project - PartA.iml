@@ -8,7 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" scope="TEST">
+    <orderEntry type="module-library">
       <library name="JUnit5.3">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/junit-jupiter-api-5.5.0-M1.jar!/" />
@@ -20,7 +20,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
+    <orderEntry type="module-library">
       <library name="JUnit5.3">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/junit-jupiter-api-5.5.0-M1.jar!/" />
