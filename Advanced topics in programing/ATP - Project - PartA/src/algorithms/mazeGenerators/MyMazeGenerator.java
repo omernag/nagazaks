@@ -36,7 +36,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         primMaze.setAllWalls();
         int s_line = (int) (Math.random() * lines);
         int s_column = (int) (Math.random() * columns);
-        Position curr_Pos = new Position(s_line, s_column);
+        Position curr_Pos = new Position(s_line, s_column, primMaze.getValueByInt(s_line,s_column));
         primMaze.setPath(curr_Pos);
         walls.add(curr_Pos);
 
@@ -62,19 +62,17 @@ public class MyMazeGenerator extends AMazeGenerator {
                 ready = true;
             }
             else {
-                if (primMaze.getValue(entry) == 0) {
-                    primMaze.setStartPosition(entry);
+                if (entry.equals(exit)) {
+                    entry = primMaze.Get_random_Frame();
+                    exit = primMaze.Get_random_Frame();
                 }
-                else {
+                if(primMaze.getValue(entry) == 1){
                     entry = primMaze.Get_random_Frame();
                 }
-                if (primMaze.getValue(exit) == 0) {
-                    primMaze.setGoalPosition(exit);
-                }
-                else{
+                if(primMaze.getValue(exit) == 1){
                     exit = primMaze.Get_random_Frame();
-
                 }
+
             }
         }
 

@@ -31,7 +31,15 @@ public class Maze {
     }
 
     public Position getPositionAt(int line,int column){
-        return new Position(line,column);
+        if(!isInMaze(new Position(line,column))){
+            return new Position(line,column);
+        }
+        else
+        {
+            return new Position(line,column,struct[line][column]);
+        }
+
+
     }
 
     /**
@@ -64,32 +72,17 @@ public class Maze {
      */
     public void setStartPosition(Position startPosition) {
         this.startPosition = startPosition;
-        setPath(startPosition);
+        //setPath(startPosition);
     }
 
     /**
-     * This method return a random position on the frame of the maze.
-     * @return Position
+     * Setter for the goal position.
+     * @param  endPosition goal i,j
      */
-    public Position Get_random_Frame() {
-        Position start_p = new Position(0,0);
-        while(isCorner(start_p)) {
-            int rand = (int) (Math.random() * 4);
-            if (rand == 0) { //upper wall
-                start_p = new Position(0, (int) (Math.random() * getColumns()));
-            }
-            else if (rand == 1) { //left wall
-                start_p = new Position((int) (Math.random() * getLines()), 0);
-            }
-            else if (rand == 2) { //bottom wall
-                start_p = new Position(getLines() - 1, (int) (Math.random() * getColumns()));
-            }
-            else { //right wall
-                start_p = new Position((int) (Math.random() * getLines()), getColumns() - 1);
-            }
-        }//while
-        return start_p;
+    public void setGoalPosition(Position endPosition) {
+        this.goalPosition = endPosition;
     }
+
 
     /**
      * This method sets a random position on the frame of the maze as the start position.
@@ -98,6 +91,37 @@ public class Maze {
         Position start_p = Get_random_Frame();
 
         setStartPosition(start_p);
+    }
+
+
+
+    /**
+     * This method return a random position on the frame of the maze.
+     * @return Position
+     */
+    public Position Get_random_Frame() {
+        Position start_p = new Position(0,0);
+        int location;
+        while(isCorner(start_p)) {
+            int rand = (int) (Math.random() * 4);
+            if (rand == 0) { //upper wall
+                location =  (int) (Math.random() * getColumns());
+                start_p = new Position(0,location,struct[0][location]);
+            }
+            else if (rand == 1) { //left wall
+                location =(int) (Math.random() * getLines());
+                start_p = new Position(location, 0,struct[location][0]);
+            }
+            else if (rand == 2) { //bottom wall
+                location =(int) (Math.random() * getColumns());
+                start_p = new Position(getLines() - 1, location,struct[getLines()-1][location]);
+            }
+            else { //right wall
+                location =(int) (Math.random() * getLines());
+                start_p = new Position(location, getColumns() - 1,struct[location][getColumns()-1]);
+            }
+        }//while
+        return start_p;
     }
 
     /**
@@ -121,13 +145,6 @@ public class Maze {
         return goalPosition;
     }
 
-    /**
-     * Setter for the goal position.
-     * @param  endPosition goal i,j
-     */
-    public void setGoalPosition(Position endPosition) {
-        this.goalPosition = endPosition;
-    }
 
     /**
      * This method returns if a position is a wall or path.
@@ -136,6 +153,15 @@ public class Maze {
      */
     public int getValue(Position pointer){
         return struct[pointer.getRowIndex()][pointer.getColumnIndex()];
+    }
+
+    /**
+     * This method returns if a position is a wall or path.
+     * @param  i,j
+     * @return 1 or zero
+     */
+    public int getValueByInt(int i, int j){
+        return struct[i][j];
     }
 
     /**

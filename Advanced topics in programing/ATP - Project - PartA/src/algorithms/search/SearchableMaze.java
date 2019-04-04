@@ -26,7 +26,7 @@ public class SearchableMaze implements ISearchable {
         m_dMaze = new HashMap<>();
         for (int i = 0 ; i < maze.getLines() ; i++){
             for (int j = 0 ; j < maze.getColumns() ; j++){
-                Position pos = new Position(i,j);
+                Position pos = new Position(i,j,maze.getValueByInt(i,j));
                 if(maze.getValue(pos)==0) {
                     pos.setValue(0);
                     ArrayList<AState> allNeighbors = new ArrayList<>();
@@ -108,7 +108,7 @@ public class SearchableMaze implements ISearchable {
         m_dMazeMap = new MazeState[maze.getLines()][maze.getColumns()];
         for (int i = 0 ; i < maze.getLines() ; i++) {
             for (int j = 0; j < maze.getColumns(); j++) {
-                Position pos = new Position(i, j);
+                Position pos = new Position(i, j,maze.getValueByInt(i,j));
                 m_dMazeMap[i][j]=new MazeState(pos);
             }
         }
