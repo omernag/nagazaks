@@ -15,7 +15,6 @@ public class SearchableMaze implements ISearchable {
     private AState startState;
     private AState goalState;
     private HashMap<String, ArrayList<AState>> m_dMaze;
-    private int[][] doneTable;
     private MazeState[][] m_dMazeMap;
 
     /**
@@ -23,7 +22,6 @@ public class SearchableMaze implements ISearchable {
      */
     public SearchableMaze(Maze maze) {
         createMazeMap(maze);
-        doneTable = new int[maze.getLines()][maze.getColumns()];////////////
         startState = getMazeMapState(maze.getStartPosition());
         goalState = getMazeMapState(maze.getGoalPosition());
         m_dMaze = new HashMap<>();
@@ -41,28 +39,32 @@ public class SearchableMaze implements ISearchable {
     }
 
     /**
-     * This method generates a maze
-     *
-     * @return Maze
+     * This method creates a maze map from a given map from maze states
+     * @param maze given maze
      */
-    @Override
-    public AState getStartState() {
-        return startState;
+    private void createMazeMap(Maze maze) {
+        m_dMazeMap = new MazeState[maze.getLines()][maze.getColumns()];
+        for (int i = 0; i < maze.getLines(); i++) {
+            for (int j = 0; j < maze.getColumns(); j++) {
+                Position pos = new Position(i, j, maze.getValueByInt(i, j));
+                m_dMazeMap[i][j] = new MazeState(pos);
+            }
+        }
+    }
+
+    /**
+     * This method pulls a maze state in the given position
+     * @param pos current position
+     * @return maze state
+     */
+    private MazeState getMazeMapState(Position pos) {
+        if (pos.getColumnIndex() >= 0 && pos.getRowIndex() >= 0 && pos.getRowIndex() < m_dMazeMap.length && pos.getColumnIndex() < m_dMazeMap[0].length) {
+            return m_dMazeMap[pos.getRowIndex()][pos.getColumnIndex()];
+        } else return null;
     }
 
     /**
      * This method generates a maze
-     *
-     * @return Maze
-     */
-    @Override
-    public AState getGoalState() {
-        return goalState;
-    }
-
-    /**
-     * This method generates a maze
-     *
      * @param allNeighbors list of neighbors
      * @param maze         given maze
      * @param pos          curr position in maze
@@ -95,7 +97,6 @@ public class SearchableMaze implements ISearchable {
 
     /**
      * This method creates an array of Positions that are around the curr position
-     *
      * @param maze given maze
      * @param pos  curr position in maze
      */
@@ -120,32 +121,34 @@ public class SearchableMaze implements ISearchable {
         return dir;
     }
 
-    private MazeState getMazeMapState(Position pos) {
-        if (pos.getColumnIndex() >= 0 && pos.getRowIndex() >= 0 && pos.getRowIndex() < m_dMazeMap.length && pos.getColumnIndex() < m_dMazeMap[0].length) {
-            return m_dMazeMap[pos.getRowIndex()][pos.getColumnIndex()];
-        } else return null;
-    }
-
-    private void createMazeMap(Maze maze) {
-        m_dMazeMap = new MazeState[maze.getLines()][maze.getColumns()];
-        for (int i = 0; i < maze.getLines(); i++) {
-            for (int j = 0; j < maze.getColumns(); j++) {
-                Position pos = new Position(i, j, maze.getValueByInt(i, j));
-                m_dMazeMap[i][j] = new MazeState(pos);
-            }
-        }
-    }
-
     /**
-     * This method generates a maze
+     * This method return all the neighbor states from a given maze state
      *
-     * @param s gives state
-     * @return Maze
+     * @param s gives maze state
+     * @return list of states
      */
     @Override
     public ArrayList<AState> getAllPossibleStates(AState s) {
         Position curr = (Position) s.getState();
         return m_dMaze.get(curr.toString());
+    }
+
+    /**
+     * This is a getter for start maze state
+     * @return start state
+     */
+    @Override
+    public AState getStartState() {
+        return startState;
+    }
+
+    /**
+     * This is a getter for goal maze state
+     * @return goal state
+     */
+    @Override
+    public AState getGoalState() {
+        return goalState;
     }
 
 }
