@@ -16,9 +16,11 @@ namespace assignment2
       
         static void Main(string[] args)
         {
-			
-		}
-                
+            Assignment2 ass = new Assignment2();
+            ass.Index("C:\\Users\\USER\\Desktop\\Employees_data.csv", "C:\\Users\\USER\\Desktop\\data.txt");
+
+        }
+
 
     }
 }
