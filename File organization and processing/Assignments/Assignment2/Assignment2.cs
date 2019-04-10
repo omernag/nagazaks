@@ -16,7 +16,7 @@ namespace assignment2
 
             String[] cols = reader.ReadLine().Split(',');
             String[] line;
-            int numOfLines = 0;
+            int numOfLines = 0;  //num of data lines (without headers)
             string[][] table = new string[cols.Length - 1][];
 
             while (!reader.EndOfStream)
@@ -50,7 +50,7 @@ namespace assignment2
             {
 
                 int numOfVars = 1;
-                String var = table[i][1];
+                String var = table[i][1];    // can cause out of array
                 List<string> vars = new List<string>();
                 vars.Add(var);
                 for (int j = 1; j < table[0].Length; j++)
@@ -66,12 +66,12 @@ namespace assignment2
 
 
 
-                for (int j = 0; j < vars.Count; j++)
+                for (int j = 0; j < vars.Count; j++)   //sumOfLineExmple: {name,omer,1,0,0,0,1,1,0}
                 {
-                    sumOfLine[0] = table[i][0];
-                    sumOfLine[1] = vars[j];
+                    sumOfLine[0] = table[i][0];   //column header
+                    sumOfLine[1] = vars[j];       //current distinct var
                     int place = 2;
-                    for (int z = 0; z < table[0].Length; z++)
+                    for (int z = 0; z < table[0].Length; z++) //z - line number in the origin DB
                     {
                         if (table[i][z].Equals(vars[j]))
                         {
@@ -100,7 +100,50 @@ namespace assignment2
 
         public List<string> SelectVectors(XmlDocument xmlDoc, string vectorFilePath)
         {
-			throw new NotImplementedException();
+            List<string> result = new List<string>();
+            XmlNodeList xmlNodesList;
+            string s_element;
+            string s_value;
+            StreamReader reader = new StreamReader(vectorFilePath);
+            string line;
+            string[] lineAsArray;
+
+            if ((xmlNodesList= xmlDoc.SelectNodes("DB_EX2_QUERY/Logical_Operation/Query_Elements/Element")) != null) { }
+            
+            else if((xmlNodesList = xmlDoc.SelectNodes("DB_EX2_QUERY/Query_Elements/Element")) != null) { }
+           
+            else
+            {
+                reader = new StreamReader(vectorFilePath);
+                while ((line = reader.ReadLine()) != null)
+                {
+                    
+                        result.Add(line);
+                    
+                }
+                reader.Close();
+                return result;
+            }
+            foreach (XmlNode element in xmlNodesList)
+            {
+                foreach (XmlNode value in element.ChildNodes)
+                {
+                    s_element = element.InnerText;
+                    s_value = element.InnerText;
+                    reader = new StreamReader(vectorFilePath);
+                    while((line= reader.ReadLine()) != null)
+                    {
+                        lineAsArray = line.Split();
+                        if(lineAsArray[0]==s_element && lineAsArray[1] == s_value)
+                        {
+                            result.Add(line);
+                        }
+                    }
+                    reader.Close();
+
+                }
+            }
+            return result;
         }
 
 
