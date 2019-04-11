@@ -108,9 +108,9 @@ namespace assignment2
             string line;
             string[] lineAsArray;
 
-            if ((xmlNodesList= xmlDoc.SelectNodes("DB_EX2_QUERY/Logical_Operation/Query_Elements/Element")) != null) { }
+            if ((xmlNodesList= xmlDoc.SelectNodes("DB_EX2_QUERY/Logical_Operation/Query_Elements/Element")).Count>0 ) { }
             
-            else if((xmlNodesList = xmlDoc.SelectNodes("DB_EX2_QUERY/Query_Elements/Element")) != null) { }
+            else if((xmlNodesList = xmlDoc.SelectNodes("DB_EX2_QUERY/Query_Elements/Element")).Count > 0) { }
            
             else
             {
@@ -128,12 +128,12 @@ namespace assignment2
             {
                 foreach (XmlNode value in element.ChildNodes)
                 {
-                    s_element = element.InnerText;
-                    s_value = element.InnerText;
+                    s_element = element.Attributes["column_Name"].Value;
+                    s_value = value.InnerText;
                     reader = new StreamReader(vectorFilePath);
                     while((line= reader.ReadLine()) != null)
                     {
-                        lineAsArray = line.Split();
+                        lineAsArray = line.Split(',');
                         if(lineAsArray[0]==s_element && lineAsArray[1] == s_value)
                         {
                             result.Add(line);

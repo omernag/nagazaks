@@ -4,3 +4,10 @@ C:\Users\user\Desktop\hwBsisi\Assignment2\assignment2\assignment2\bin\Debug\assi
 C:\Users\user\Desktop\hwBsisi\Assignment2\assignment2\assignment2\bin\Debug\assignment2.pdb
 C:\Users\user\Desktop\hwBsisi\Assignment2\assignment2\assignment2\obj\Debug\assignment2.exe
 C:\Users\user\Desktop\hwBsisi\Assignment2\assignment2\assignment2\obj\Debug\assignment2.pdb
+C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignments\Assignment2\bin\Debug\assignment2.exe.config
+C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignments\Assignment2\bin\Debug\assignment2.exe
+C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignments\Assignment2\bin\Debug\assignment2.pdb
+C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.csprojAssemblyReference.cache
+C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.csproj.CoreCompileInputs.cache
+C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.exe
+C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.pdb
