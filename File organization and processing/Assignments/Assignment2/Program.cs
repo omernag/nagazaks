@@ -25,6 +25,8 @@ namespace assignment2
             {
                 Console.WriteLine(s);
             }
+            string ans = ass.CreateOutputVector(xml, ss);
+            Console.WriteLine(ans);
             Console.ReadLine();
             }
 

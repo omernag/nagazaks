@@ -71,7 +71,7 @@ namespace assignment2
                     sumOfLine[0] = table[i][0];   //column header
                     sumOfLine[1] = vars[j];       //current distinct var
                     int place = 2;
-                    for (int z = 0; z < table[0].Length; z++) //z - line number in the origin DB
+                    for (int z = 1; z < table[0].Length; z++) //z - line number in the origin DB
                     {
                         if (table[i][z].Equals(vars[j]))
                         {
@@ -107,6 +107,7 @@ namespace assignment2
             StreamReader reader = new StreamReader(vectorFilePath);
             string line;
             string[] lineAsArray;
+            string[] tmplineAsArray;
 
             if ((xmlNodesList= xmlDoc.SelectNodes("DB_EX2_QUERY/Logical_Operation/Query_Elements/Element")).Count>0 ) { }
             
@@ -124,23 +125,55 @@ namespace assignment2
                 reader.Close();
                 return result;
             }
+            string r_line;
             foreach (XmlNode element in xmlNodesList)
             {
-                foreach (XmlNode value in element.ChildNodes)
-                {
-                    s_element = element.Attributes["column_Name"].Value;
-                    s_value = value.InnerText;
+                s_element = element.Attributes["column_Name"].Value;
+                s_value = element.InnerText;
+                if (element.ChildNodes.Count > 1)
+                {                    
+                    r_line = "" + s_element + "," + s_value + ",";
                     reader = new StreamReader(vectorFilePath);
-                    while((line= reader.ReadLine()) != null)
+                    line = reader.ReadLine();
+                    lineAsArray = line.Split(',');
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        tmplineAsArray = line.Split(',');
+                        if (tmplineAsArray[0] == s_element)
+                        {
+                            for (int i = 2; i < lineAsArray.Length; i++)
+                            {
+                                if (tmplineAsArray[i] == "1")
+                                {
+                                    lineAsArray[i] = "1";
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 2; i < lineAsArray.Length; i++)
+                    {
+                        r_line = r_line + lineAsArray[i];
+                        if (i != lineAsArray.Length - 1)
+                        {
+                            r_line = r_line + ",";
+                        }
+
+                    }
+                    result.Add(r_line);
+                    reader.Close();
+                }
+                else
+                {
+                    reader = new StreamReader(vectorFilePath);
+                    while ((line = reader.ReadLine()) != null)
                     {
                         lineAsArray = line.Split(',');
-                        if(lineAsArray[0]==s_element && lineAsArray[1] == s_value)
+                        if (lineAsArray[0] == s_element && lineAsArray[1] == s_value)
                         {
                             result.Add(line);
                         }
                     }
                     reader.Close();
-
                 }
             }
             return result;
@@ -149,7 +182,79 @@ namespace assignment2
 
         public string CreateOutputVector(XmlDocument xmlDoc, List<string> vectors)
         {
-            throw new NotImplementedException();
+            
+            XmlNodeList xmlNodesList;
+            string line = "";
+            string[] lineAsArray = null;
+            string[] tmplineAsArray;
+            XmlNode op;
+            if (vectors.Count > 0) {
+                if ((op = xmlDoc.SelectSingleNode("DB_EX2_QUERY/Logical_Operation"))!=null) {
+                    xmlNodesList = xmlDoc.SelectNodes("DB_EX2_QUERY/Query_Elements/Element");
+                    if (op.InnerText == "AND")
+                    {
+                        lineAsArray = vectors[0].Split(',');
+                        for (int i = 1; i < vectors.Count; i++)
+                        {
+                            tmplineAsArray = vectors[i].Split(',');
+                            for (int j = 2; j < lineAsArray.Length; j++)
+                            {
+                                if (tmplineAsArray[j] == "0")
+                                {
+                                    lineAsArray[j] = "0";
+                                }
+                            }
+                        }
+                    }
+                    else if (op.InnerText == "OR")
+                    {
+                        lineAsArray = vectors[0].Split(',');
+                        for (int i = 1; i < vectors.Count; i++)
+                        {
+                            tmplineAsArray = vectors[i].Split(',');
+                            for (int j = 2; j < lineAsArray.Length; j++)
+                            {
+                                if (tmplineAsArray[j] == "1")
+                                {
+                                    lineAsArray[j] = "1";
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 2; i < lineAsArray.Length; i++)
+                    {
+                        line = line + lineAsArray[i];
+                        if (i != lineAsArray.Length - 1)
+                        {
+                            line = line + ",";
+                        }
+
+                    }
+
+                }
+
+      
+                else if ((xmlNodesList = xmlDoc.SelectNodes("DB_EX2_QUERY/Query_Elements/Element")).Count == 1)
+                {
+                    if (vectors.Count == 1)
+                    {
+                        lineAsArray = vectors[0].Split(',');
+                        for (int i = 2; i < lineAsArray.Length; i++)
+                        {
+                            line = line + lineAsArray[i];
+                            if (i != lineAsArray.Length - 1)
+                            {
+                                line = line + ",";
+                            }
+
+                        }
+                        
+                    }
+                }
+
+            }
+
+            return line;
         }
 
         public List<string> SelectRecords(string DBFilePath, string outputVector)
