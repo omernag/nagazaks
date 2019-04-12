@@ -11,3 +11,10 @@ C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignment
 C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.exe
 C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.pdb
 C:\Users\onagar\Desktop\bgu\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.csprojAssemblyReference.cache
+C:\Users\USER\Documents\GitHub\nagazaks\File organization and processing\Assignments\Assignment2\bin\Debug\assignment2.exe.config
+C:\Users\USER\Documents\GitHub\nagazaks\File organization and processing\Assignments\Assignment2\bin\Debug\assignment2.exe
+C:\Users\USER\Documents\GitHub\nagazaks\File organization and processing\Assignments\Assignment2\bin\Debug\assignment2.pdb
+C:\Users\USER\Documents\GitHub\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.csprojAssemblyReference.cache
+C:\Users\USER\Documents\GitHub\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\GitHub\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.exe
+C:\Users\USER\Documents\GitHub\nagazaks\File organization and processing\Assignments\Assignment2\obj\Debug\assignment2.pdb

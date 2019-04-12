@@ -25,13 +25,15 @@ namespace assignment2
                 numOfLines++;
             }
 
+            reader.Close();
+
             for (int i = 0; i < cols.Length - 1; i++)
             {
                 table[i] = new string[numOfLines + 1];
             }
 
             int rows = 0;
-            reader.Close();
+            
             reader = new StreamReader(DBFilePath);
             while (!reader.EndOfStream)
             {
@@ -43,8 +45,9 @@ namespace assignment2
                 }
                 rows++;
             }
+            reader.Close();
             String[] sumOfLine = new string[numOfLines + 3];
-
+       
             StreamWriter destFile = new StreamWriter(vectorFilePath);
             for (int i = 0; i < table.Length; i++)
             {
@@ -93,8 +96,9 @@ namespace assignment2
 
 
             }
+            
             destFile.Close();
-            reader.Close();
+           
 
         }
 
@@ -104,7 +108,7 @@ namespace assignment2
             XmlNodeList xmlNodesList;
             string s_element;
             string s_value;
-            StreamReader reader = new StreamReader(vectorFilePath);
+            StreamReader reader;// = new StreamReader(vectorFilePath);
             string line;
             string[] lineAsArray;
             string[] tmplineAsArray;
@@ -176,6 +180,7 @@ namespace assignment2
                     reader.Close();
                 }
             }
+            //reader.Close();
             return result;
         }
 
@@ -279,6 +284,7 @@ namespace assignment2
                 
 
             }
+            reader.Close();
             return result;
         }
 
