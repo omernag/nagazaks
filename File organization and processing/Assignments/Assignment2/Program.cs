@@ -16,6 +16,7 @@ namespace assignment2
       
         static void Main(string[] args)
         {
+            List<string> result = new List<string>();
             Assignment2 ass = new Assignment2();
             ass.Index("C:\\Users\\onagar\\Desktop\\bgu\\nagazaks\\File organization and processing\\Assignments\\Assignment2\\Employees_data.csv", "C:\\Users\\onagar\\Desktop\\New folder\\data.txt");
             XmlDocument xml = new XmlDocument();
@@ -27,8 +28,16 @@ namespace assignment2
             }
             string ans = ass.CreateOutputVector(xml, ss);
             Console.WriteLine(ans);
-            Console.ReadLine();
+            result = ass.SelectRecords("C:\\Users\\onagar\\Desktop\\bgu\\nagazaks\\File organization and processing\\Assignments\\Assignment2\\Employees_data.csv", ans);
+            foreach(string u in result)
+            {
+                Console.WriteLine(u);
+
             }
+            Console.ReadLine();
+
+        }
+
 
 
     }

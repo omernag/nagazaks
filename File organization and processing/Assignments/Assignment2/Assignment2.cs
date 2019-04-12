@@ -259,7 +259,27 @@ namespace assignment2
 
         public List<string> SelectRecords(string DBFilePath, string outputVector)
         {
-			throw new NotImplementedException();
+            string id;
+            List<string> result = new List<string>();
+            StreamReader reader = new StreamReader(DBFilePath);
+            String line = reader.ReadLine();
+            String [] lineAsArray;
+            String[] s_vector = outputVector.Split(','); ;
+            
+            for (int bit = 0; bit< s_vector.Length;bit++) {
+                line = reader.ReadLine();
+                lineAsArray = line.Split(',');
+                id = lineAsArray[0];
+                if (s_vector[bit] == "1")
+                {
+                    
+                    result.Add(id);
+                }
+                
+                
+
+            }
+            return result;
         }
 
     }
