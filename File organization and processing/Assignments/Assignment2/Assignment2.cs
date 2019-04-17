@@ -146,7 +146,7 @@ namespace assignment2
                     r_line = "";
                     reader = new StreamReader(vectorFilePath);
                     line = reader.ReadLine();
-                    lineAsArray = line.Split(',');
+                    while((lineAsArray = line.Split(','))[0] != s_element) { line = reader.ReadLine(); }
                     bitAsArray = lineAsArray[2].ToCharArray();
                     while ((line = reader.ReadLine()) != null && line != ",,,,,,,,,")
                     {
