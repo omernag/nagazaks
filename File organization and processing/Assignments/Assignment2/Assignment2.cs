@@ -16,12 +16,13 @@ namespace assignment2
 
             String[] cols = reader.ReadLine().Split(',');
             String[] line;
+            string currline;
             int numOfLines = 0;  //num of data lines (without headers)
             string[][] table = new string[cols.Length - 1][];
 
-            while (!reader.EndOfStream)
+            while ((currline=reader.ReadLine()) != null && currline != ",,,,,,,,,")
+
             {
-                reader.ReadLine();
                 numOfLines++;
             }
 
@@ -35,10 +36,10 @@ namespace assignment2
             int rows = 0;
             
             reader = new StreamReader(DBFilePath);
-            while (!reader.EndOfStream)
+            while ((currline = reader.ReadLine()) != null && currline != ",,,,,,,,,")
             {
 
-                line = reader.ReadLine().Split(',');
+                line = currline.Split(',');
                 for (int i = 0; i < line.Length - 1; i++)
                 {
                     table[i][rows] = line[i + 1];
@@ -87,7 +88,7 @@ namespace assignment2
                     for (int z = 0; z < place; z++)
                     {
                         destFile.Write(sumOfLine[z]);
-                        if (z != place - 1)
+                        if (z == 0||z==1)
                             destFile.Write(",");
                     }
                     destFile.WriteLine("");
@@ -112,69 +113,80 @@ namespace assignment2
             string line;
             string[] lineAsArray;
             string[] tmplineAsArray;
-
-            if ((xmlNodesList= xmlDoc.SelectNodes("DB_EX2_QUERY/Logical_Operation/Query_Elements/Element")).Count>0 ) { }
-            
-            else if((xmlNodesList = xmlDoc.SelectNodes("DB_EX2_QUERY/Query_Elements/Element")).Count > 0) { }
+            char[] bitAsArray;
+            char[] tmpBitAsArray;
+            string r_line;
+           if((xmlNodesList = xmlDoc.SelectNodes("DB_EX2_QUERY/Query_Elements/Element")).Count > 0) { }
            
             else
             {
                 reader = new StreamReader(vectorFilePath);
-                while ((line = reader.ReadLine()) != null)
+                while ((line = reader.ReadLine()) != null && line != ",,,,,,,,," )
                 {
                     
-                        result.Add(line);
-                    
+                    lineAsArray = line.Split(',');
+                    result.Add(lineAsArray[2]);                    
                 }
                 reader.Close();
                 return result;
             }
-            string r_line;
+
+            List<string> values;
             foreach (XmlNode element in xmlNodesList)
             {
                 s_element = element.Attributes["column_Name"].Value;
                 s_value = element.InnerText;
                 if (element.ChildNodes.Count > 1)
-                {                    
-                    r_line = "" + s_element + "," + s_value + ",";
+                {
+                    values = new List<string>();
+                    foreach (XmlNode value in element.ChildNodes) {
+                        values.Add(value.InnerText);
+                    }
+                    
+                    r_line = "";
                     reader = new StreamReader(vectorFilePath);
                     line = reader.ReadLine();
                     lineAsArray = line.Split(',');
-                    while ((line = reader.ReadLine()) != null)
+                    bitAsArray = lineAsArray[2].ToCharArray();
+                    while ((line = reader.ReadLine()) != null && line != ",,,,,,,,,")
                     {
                         tmplineAsArray = line.Split(',');
-                        if (tmplineAsArray[0] == s_element)
+                        tmpBitAsArray = tmplineAsArray[2].ToCharArray();
+                        if (tmplineAsArray[0] == s_element && values.Contains(tmplineAsArray[1]))
                         {
-                            for (int i = 2; i < lineAsArray.Length; i++)
+                            for (int i = 0; i < bitAsArray.Length; i++)
                             {
-                                if (tmplineAsArray[i] == "1")
+                                if (tmpBitAsArray[i] == '1')
                                 {
-                                    lineAsArray[i] = "1";
+                                    bitAsArray[i] = '1';
                                 }
                             }
                         }
                     }
-                    for (int i = 2; i < lineAsArray.Length; i++)
+                    for (int i = 0; i < bitAsArray.Length; i++)
                     {
-                        r_line = r_line + lineAsArray[i];
-                        if (i != lineAsArray.Length - 1)
-                        {
-                            r_line = r_line + ",";
-                        }
-
+                        r_line = r_line+ bitAsArray[i];
+                        
                     }
                     result.Add(r_line);
                     reader.Close();
                 }
                 else
                 {
+                    r_line = "";
                     reader = new StreamReader(vectorFilePath);
-                    while ((line = reader.ReadLine()) != null)
+                    while ((line = reader.ReadLine()) != null && line != ",,,,,,,,,")
                     {
                         lineAsArray = line.Split(',');
-                        if (lineAsArray[0] == s_element && lineAsArray[1] == s_value)
+                        bitAsArray = lineAsArray[2].ToCharArray();
+                        if (lineAsArray[0] == s_element && lineAsArray[1]==s_value)
                         {
-                            result.Add(line);
+                            for (int i = 0; i < bitAsArray.Length; i++)
+                            {
+                                r_line = r_line + bitAsArray[i];
+
+                            }
+                            result.Add(r_line);
                         }
                     }
                     reader.Close();
@@ -190,49 +202,45 @@ namespace assignment2
             
             XmlNodeList xmlNodesList;
             string line = "";
-            string[] lineAsArray = null;
-            string[] tmplineAsArray;
+            char[] lineAsArray = null;
+            char[] tmplineAsArray;
             XmlNode op;
             if (vectors.Count > 0) {
                 if ((op = xmlDoc.SelectSingleNode("DB_EX2_QUERY/Logical_Operation"))!=null) {
                     xmlNodesList = xmlDoc.SelectNodes("DB_EX2_QUERY/Query_Elements/Element");
                     if (op.InnerText == "AND")
                     {
-                        lineAsArray = vectors[0].Split(',');
-                        for (int i = 1; i < vectors.Count; i++)
+                        lineAsArray = vectors[0].ToCharArray();
+                        for (int i = 0; i < vectors.Count; i++)
                         {
-                            tmplineAsArray = vectors[i].Split(',');
-                            for (int j = 2; j < lineAsArray.Length; j++)
+                            tmplineAsArray = vectors[i].ToCharArray();
+                            for (int j = 0; j < lineAsArray.Length; j++)
                             {
-                                if (tmplineAsArray[j] == "0")
+                                if (tmplineAsArray[j] == '0')
                                 {
-                                    lineAsArray[j] = "0";
+                                    lineAsArray[j] = '0';
                                 }
                             }
                         }
                     }
                     else if (op.InnerText == "OR")
                     {
-                        lineAsArray = vectors[0].Split(',');
-                        for (int i = 1; i < vectors.Count; i++)
+                        lineAsArray = vectors[0].ToCharArray();
+                        for (int i = 0; i < vectors.Count; i++)
                         {
-                            tmplineAsArray = vectors[i].Split(',');
-                            for (int j = 2; j < lineAsArray.Length; j++)
+                            tmplineAsArray = vectors[i].ToCharArray();
+                            for (int j = 0; j < lineAsArray.Length; j++)
                             {
-                                if (tmplineAsArray[j] == "1")
+                                if (tmplineAsArray[j] == '1')
                                 {
-                                    lineAsArray[j] = "1";
+                                    lineAsArray[j] = '1';
                                 }
                             }
                         }
                     }
-                    for (int i = 2; i < lineAsArray.Length; i++)
+                    for (int i = 0; i < lineAsArray.Length; i++)
                     {
                         line = line + lineAsArray[i];
-                        if (i != lineAsArray.Length - 1)
-                        {
-                            line = line + ",";
-                        }
 
                     }
 
@@ -243,17 +251,29 @@ namespace assignment2
                 {
                     if (vectors.Count == 1)
                     {
-                        lineAsArray = vectors[0].Split(',');
-                        for (int i = 2; i < lineAsArray.Length; i++)
-                        {
-                            line = line + lineAsArray[i];
-                            if (i != lineAsArray.Length - 1)
-                            {
-                                line = line + ",";
-                            }
+                        line = vectors[0];
+                                             
+                    }
+                }
 
+                else
+                {
+                    lineAsArray = vectors[0].ToCharArray();
+                    for (int i = 1; i < vectors.Count; i++)
+                    {
+                        tmplineAsArray = vectors[i].ToCharArray();
+                        for (int j = 0; j < lineAsArray.Length; j++)
+                        {
+                            if (tmplineAsArray[j] == '1')
+                            {
+                                lineAsArray[j] = '1';
+                            }
                         }
-                        
+                    }
+                    for (int i = 0; i < lineAsArray.Length; i++)
+                    {
+                        line = line + lineAsArray[i];
+
                     }
                 }
 
@@ -269,13 +289,13 @@ namespace assignment2
             StreamReader reader = new StreamReader(DBFilePath);
             String line = reader.ReadLine();
             String [] lineAsArray;
-            String[] s_vector = outputVector.Split(','); ;
+            char[] s_vector = outputVector.ToCharArray();
             
             for (int bit = 0; bit< s_vector.Length;bit++) {
                 line = reader.ReadLine();
                 lineAsArray = line.Split(',');
                 id = lineAsArray[0];
-                if (s_vector[bit] == "1")
+                if (s_vector[bit] == '1')
                 {
                     
                     result.Add(id);
