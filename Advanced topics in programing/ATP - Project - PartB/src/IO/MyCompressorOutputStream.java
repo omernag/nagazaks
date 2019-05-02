@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class MyCompressorOutputStream extends OutputStream {
 
     private OutputStream out;
-    private byte[] shrinkedMaze;
+
 
     public MyCompressorOutputStream(OutputStream other) {
         out = other;
@@ -63,6 +63,12 @@ public class MyCompressorOutputStream extends OutputStream {
         for(int i = 0 ; i < 6 ; i ++){
             file.write( mazeInArray[i]);
         }
+        //out.write();
+
+
+
+
+        
         //file.write(mazeInArray);
 
         //for (int j = 6; j < shrinkedMaze.length; j++) {

@@ -2,9 +2,7 @@ package test;
 
 import IO.MyCompressorOutputStream;
 import IO.MyDecompressorInputStream;
-import algorithms.mazeGenerators.AMazeGenerator;
-import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
+import algorithms.mazeGenerators.*;
 
 import java.io.*;
 import java.util.Arrays;
@@ -43,4 +41,45 @@ public class RunCompressDecompressMaze {
         boolean areMazesEquals = Arrays.equals(loadedMaze.toByteArray(),maze.toByteArray());
         System.out.println(String.format("Mazes equal: %s",areMazesEquals)); //maze should be equal to loadedMaze
     }
+
+/***
+        public static void main(String[] args) {
+
+            Maze m1 = testMazeGenerator(new MyMazeGenerator());
+            byte[] a1 = m1.toByteArray();
+            for(byte b : a1){
+             System.out.print(b);
+            }
+
+            System.out.println();
+
+            Maze m2 = new Maze(a1);
+
+            byte[] a2 = m2.toByteArray();
+
+            for(byte b : a2){
+                System.out.print(b);
+            }
+            System.out.println();
+
+        }
+
+        private static Maze testMazeGenerator(IMazeGenerator mazeGenerator) {
+
+            Maze maze = mazeGenerator.generate(15, 12);
+
+            // prints the maze
+            maze.print();
+
+            // get the maze entrance
+            Position startPosition = maze.getStartPosition();
+
+            // print the position
+            System.out.println(String.format("Start Position: %s", startPosition)); // format "{row,column}"
+
+            // prints the maze exit position
+            System.out.println(String.format("Goal Position: %s", maze.getGoalPosition()));
+            return maze;
+        }
+        ***/
 }

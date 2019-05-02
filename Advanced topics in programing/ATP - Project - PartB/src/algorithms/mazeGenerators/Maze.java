@@ -18,6 +18,8 @@ public class Maze {
     private int s_columns;
     private Position startPosition;
     private Position goalPosition;
+    private byte[] toByte;
+    private int sp;
 
     /**
      * constructor for a generic maze
@@ -30,36 +32,31 @@ public class Maze {
         struct = new int[lines][columns];
         startPosition = new Position(0,0);
         goalPosition = new Position(0,0);
+        sp=0;
     }
 
 
     public Maze(byte[] savedMazeBytes) {
+        sp=0;
+        toByte = savedMazeBytes;
 
-        int rowsNum = savedMazeBytes[0];
-        int columnsNum = savedMazeBytes[1];
+        s_lines=charArrToIntField();
+        s_columns=charArrToIntField();
+        int sr =charArrToIntField();
+        int sc =charArrToIntField();
+        int er=charArrToIntField();
+        int ec=charArrToIntField();
+        startPosition = new Position(sr, sc);
+        goalPosition = new Position(er, ec);
 
-        int startR = savedMazeBytes[2];
-        int startC = savedMazeBytes[3];
+        struct = new int[s_lines][s_columns];
 
-        int goalR = savedMazeBytes[4];
-        int goalC = savedMazeBytes[5];
-
-        int[][] mazeStruct = new int[rowsNum][columnsNum];
-
-
-        int place=6;
-        for (int i = 0 ; i < mazeStruct.length; i++){
-            for (int j = 0 ; j < mazeStruct[0].length; j++) {
-                mazeStruct[i][j] = savedMazeBytes[place];
-                place++;
+        for (int i = 0; i < s_lines; i++) {
+            for (int j = 0; j <s_columns; j++) {
+                struct[i][j] = toByte[sp];
+                sp++;
             }
         }
-
-        s_lines = rowsNum;
-        s_columns = columnsNum;
-        struct = mazeStruct;
-        startPosition = new Position(startR,startC);
-        goalPosition = new Position(goalR,goalC);
 
     }
 
@@ -284,28 +281,45 @@ public class Maze {
         }
     }
 
+    private void DataOfMazeToByteArray(int size){ //have to stay private
+        int i =4;
+        byte digit =0;
+       while(size>0){
+            digit = (byte)(size%10);
+            size = size/10;
+            toByte[sp+i]=digit;
+            i--;
+       }
+       sp =sp+5;
+    }
+
     public byte[] toByteArray() {//not commpresed
 
-        ArrayList<Byte> mazeInArray = new ArrayList<>();
+        sp=0;
+        toByte  = new byte[(s_lines*s_columns)+30];
+        DataOfMazeToByteArray(s_lines);
+        DataOfMazeToByteArray(s_columns);
+        DataOfMazeToByteArray(startPosition.getRowIndex());
+        DataOfMazeToByteArray(startPosition.getColumnIndex());
+        DataOfMazeToByteArray(goalPosition.getRowIndex());
+        DataOfMazeToByteArray(goalPosition.getColumnIndex());
+
         for (int i = 0 ; i < struct.length; i++) {
             for (int j = 0; j < struct[0].length; j++) {
-                mazeInArray.add((byte) struct[i][j]);
+                toByte[sp] = (byte)(struct[i][j]);
+                sp++;
             }
         }
-
-        byte[] toByte  = new byte[mazeInArray.size()+6];
-        toByte[0] = (byte) s_lines;
-        toByte[1] = (byte) s_columns;
-        toByte[2] = (byte) startPosition.getRowIndex();
-        toByte[3] = (byte) startPosition.getColumnIndex();
-        toByte[4] = (byte) goalPosition.getRowIndex();;
-        toByte[5] = (byte) goalPosition.getColumnIndex();
-
-        for (int j = 6; j < toByte.length; j++) {
-            toByte[j] = mazeInArray.get(j-6);
-        }
-
         return toByte;
+    }
+
+    private int charArrToIntField(){ //have to stay private
+        String s ="";
+        for(int i =0;i<5;i++){
+            s = s + toByte[sp];
+            sp++;
+        }
+        return Integer.parseInt(s);
     }
 
 
