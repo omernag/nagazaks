@@ -1,6 +1,8 @@
 package IO;
 
-import org.jetbrains.annotations.NotNull;
+
+
+import com.sun.istack.internal.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +11,6 @@ import java.util.ArrayList;
 public class MyDecompressorInputStream extends InputStream {
 
     private InputStream in;
-    private byte[] savedMazeBytes;
 
     public MyDecompressorInputStream(InputStream other) {
         in=other;
@@ -34,6 +35,23 @@ public class MyDecompressorInputStream extends InputStream {
         return 0;
     }
 
+//    private void fixByteLimit(ArrayList<Byte> order ,int num){
+//        if(num<=255){
+//            order.add((byte) num);
+//        }
+//        else {
+//            int sum = num;
+//
+//            while (sum >= 255) {
+//                order.add((byte) 255);
+//                order.add((byte) '~');
+//                sum -= 255;
+//            }
+//            order.add((byte) sum);
+//        }
+//
+//    }
+
     /**
      * Reads some number of bytes from the input stream and stores them into
      * the buffer array <code>b</code>. The number of bytes actually read is
@@ -57,7 +75,7 @@ public class MyDecompressorInputStream extends InputStream {
      * <p> The <code>read(b)</code> method for class <code>InputStream</code>
      * has the same effect as: <pre><code> read(b, 0, b.length) </code></pre>
      *
-     * @param unShrinkedMaze the buffer into which the data is read.
+     * @param deCompMaze the buffer into which the data is read.
      * @return the total number of bytes read into the buffer, or
      * <code>-1</code> if there is no more data because the end of
      * the stream has been reached.
@@ -68,60 +86,40 @@ public class MyDecompressorInputStream extends InputStream {
      * @see InputStream#read(byte[], int, int)
      */
     @Override
-    public int read(@NotNull byte[] unShrinkedMaze) throws IOException {
-/*
-        savedMazeBytes=new byte[unShrinkedMaze.length];
-        for(int)
-        ArrayList<Byte> mazeDeComp = new ArrayList<>();
-        //makes a list from the byte array
-        for (int i = 6; i < savedMazeBytes.length-1; i++) {
-            int amountZ = savedMazeBytes[i];
-            while(amountZ>0){
-                mazeDeComp.add((byte) 0);
-                amountZ--;
+    public int read(@NotNull byte[] deCompMaze) throws IOException {
+        byte[] order = new byte[deCompMaze.length];
+        in.read(order);
+
+        ArrayList<Byte> runDecode = new ArrayList<>();
+        boolean oneTurn = false;
+        for(int place = 0; place<order.length ; place++) {
+            if (order[place] == '}') {
+                int sum = 255;
+                while(order[place]!='}'){
+                    sum+=order[place+2];
+                    place+=2;
+                }
+                runDecode.add((byte) sum);
+
             }
-            int amountO = savedMazeBytes[i+1];
-            while(amountO>0){
-                mazeDeComp.add((byte) 1);
-                amountO--;
+            else {
+                int currNum = order[place];
+                if (currNum == 255) {
+                    while (order[place + 1] == '~') {
+                        currNum += order[place + 2];
+                        place += 2;
+                    }
+                }
+
+                for (int count = 0; count < currNum; count++) {
+                    if(!oneTurn){
+                        runDecode.add((byte) 0);
+                    }
+                    else runDecode.add((byte) 1);
+                }
+                oneTurn=!oneTurn;
             }
         }
-
-        for (int i = 0 ; i < 6; i++) {
-            unShrinkedMaze[i] = mazeInArray[i];
-        }
-
-        for (int i = 6 ; i < unShrinkedMaze.length; i++) {
-            unShrinkedMaze[i] = mazeDeComp.get(i-6);
-        }
-
         return 0;
-    }*/
-return
-        0;
+    }
 }
-}
-
-/*
-ArrayList<Integer> mazeDeComp = new ArrayList<>();
-        //makes a list from the byte array
-        for (int i = 6; i < savedMazeBytes.length-1; i++) {
-            int amountZ = savedMazeBytes[i];
-            while(amountZ>0){
-                mazeDeComp.add( 0);
-                amountZ--;
-            }
-            int amountO = savedMazeBytes[i+1];
-            while(amountO>0){
-                mazeDeComp.add(1);
-                amountO--;
-            }
-        }
-        int place = 0 ;
-        for (int i = 0 ; i < mazeStruct.length; i++){
-            for (int j = 0 ; j < mazeStruct[0].length; j++) {
-                mazeStruct[i][j] = mazeDeComp.get(place);
-                place++;
-            }
-        }
-*/

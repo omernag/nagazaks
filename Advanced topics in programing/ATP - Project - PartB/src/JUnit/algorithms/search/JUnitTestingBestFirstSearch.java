@@ -1,3 +1,4 @@
+/*
 package algorithms.search;
 import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.mazeGenerators.Maze;
@@ -24,4 +25,4 @@ class JUnitTestingBestFirstSearch {
 
     }
 
-}
+}*/
