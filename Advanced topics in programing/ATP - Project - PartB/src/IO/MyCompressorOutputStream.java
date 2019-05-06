@@ -2,58 +2,79 @@ package IO;
 
 import com.sun.istack.internal.NotNull;
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 
 
 public class MyCompressorOutputStream extends OutputStream {
 
     private OutputStream out;
+    private HashMap<String,Integer> table;
 
-
-    public MyCompressorOutputStream(OutputStream other) {
+    public MyCompressorOutputStream(OutputStream other)
+    {
         out = other;
+        table = new HashMap<>();
+        for(int i = 0 ; i < 127; i++){
+            table.put(""+(char)i,i);
+        }
     }
 
-    /**
-     * Writes the specified byte to this output stream. The general
-     * contract for <code>write</code> is that one byte is written
-     * to the output stream. The byte to be written is the eight
-     * low-order bits of the argument <code>b</code>. The 24
-     * high-order bits of <code>b</code> are ignored.
-     * <p>
-     * Subclasses of <code>OutputStream</code> must provide an
-     * implementation for this method.
-     *
-     * @param b the <code>byte</code>.
-     * @throws IOException if an I/O error occurs. In particular,
-     *                     an <code>IOException</code> may be thrown if the
-     *                     output stream has been closed.
-     */
+
     @Override
     public void write(int b) throws IOException {
 
     }
 
-    private byte[] stringToByte(String from){
-        byte[] to = new byte[from.length()];
-        for(int j = 0 ; j < from.length(); j++){
-            to[j] = (byte) from.charAt(j);
-        }
-        return to;
-    }
 
-    private String byteToString(byte[] from){
-        String to = "";
-        for(int j = 0 ; j < from.length; j++){
-            to += from[j];
-        }
-        return to;
-    }
 
     @Override
-    public void write(@NotNull byte[] mazeInArray) throws IOException {
+    public void write(@NotNull byte[] bArray) throws IOException {
 
-        int size = mazeInArray.length+2;
+        Byte[] inputArr = toSingleByte(bArray);
+        int spotInTable = 128;
+        String curr = inputArr[0].toString();
+        String next;
+        ArrayList<String> output=new ArrayList<>();
+        int index=1;
+        while(curr!=inputArr[inputArr.length-1].toString()){
+            next=inputArr[index].toString();
+            index++;
+            if(table.containsValue(""+curr+next)){
+                curr=curr+next;
+            }
+            else{
+                output.add(""+table.get(next));
+                table.put(curr+next,spotInTable);
+                curr=next;
+                spotInTable++;
+            }
+        }
+
+        ArrayList<Byte> toByte = new ArrayList<>();
+        //Byte[] ans = new Byte[output.length()];
+        for(int i = 0 ; i < output.size();i++){
+            index = Integer.parseInt(output.get(i));
+            fixByteLimit(toByte,index);
+            /*if(index>255){
+                while(index>255){
+                    toByte.add((byte) 255);
+                    toByte.add((byte) '~');
+                    index-=255;
+                }
+                toByte.add((byte) index);
+            }
+            else{
+                toByte.add((byte) index);
+            }*/
+        }
+
+        //writing to output using out
+        for(int i = 0 ;  i < toByte.size(); i++){
+            out.write(toByte.get(i));
+        }
+
+    }
+       /* int size = mazeInArray.length+2;
 
         byte[] allMaze = new byte[size];
         allMaze[0] = (byte) ('^');
@@ -63,11 +84,15 @@ public class MyCompressorOutputStream extends OutputStream {
         allMaze[allMaze.length-1] = (byte)('|');
 
         byte[][] table = new byte[size][size];
+        LinkedList<byte[]> tablel = new LinkedList<>();
+        //HashMap<Integer,byte[]> table = new HashMap<>();
         table[0]=allMaze;
+        //table.put(0,allMaze);
         int spot = 1;
 
         for(int i = 0 ; i < allMaze.length-1; i++){
             byte[] rotation = copyArray(table[i]);
+            //byte[] rotation = copyArray(table.get(i));
             byte tmp = rotation[rotation.length-1];
             byte hold;
             byte prev = rotation[0];
@@ -79,10 +104,12 @@ public class MyCompressorOutputStream extends OutputStream {
             }
             rotation[0]=tmp;
             table[spot] = rotation;
+            //table.put(spot,rotation);
             spot++;
         }
 
         selectionSort(table);
+        //selectionSort(table.values());
 
         byte[] toComp = new byte[table.length];
         for(int i = 0 ;  i < toComp.length; i++){
@@ -130,7 +157,56 @@ public class MyCompressorOutputStream extends OutputStream {
             out.write(order.get(i));
         }
     }
+*/
 
+
+    private Byte[] toSingleByte(byte[] bytesArr){//move to maze with omer
+        ArrayList<Byte> shrinked = new ArrayList<>();
+        Byte[] toShrink =  new Byte[8];
+        for(int i=30 ; i < bytesArr.length;i++){
+            if(i+7<bytesArr.length){
+                Byte[] last=new Byte[8];
+                int zeroes = 8-(bytesArr.length-i);
+                int place=0;
+                while(place < zeroes){
+                    last[place]=0;
+                    place++;
+
+                }
+                while( i < bytesArr.length){
+                    last[place]=bytesArr[i];
+                    place++;
+                    i++;
+                }
+                double sum=0;
+                for (int j = 0 ; j < 8 ; j++){
+                    sum+=last[j]*Math.pow(2,j);
+                }
+                shrinked.add((byte) sum);
+            }
+            else{
+                int place=0;
+                while(i<i+8){
+                    toShrink[place]=bytesArr[i];
+                    place++;
+                    i++;
+                }
+                double sum=0;
+                for (int j = 0 ; j < 8 ; j++){
+                    sum+=toShrink[j]*Math.pow(2,j);
+                }
+                shrinked.add((byte) sum);
+            }
+        }
+        Byte[] result = new Byte[shrinked.size()+30];
+        for (int j = 0 ; j < result.length ; j++){
+            if(j<30){
+                result[j]=bytesArr[j];
+            }
+            else result[j]=shrinked.get(j-30);
+        }
+        return result;
+    }
 
     private void fixByteLimit(ArrayList<Byte> order ,int num){
         if(num<=255){
@@ -148,6 +224,23 @@ public class MyCompressorOutputStream extends OutputStream {
         }
 
     }
+
+    private byte[] stringToByte(String from){
+        byte[] to = new byte[from.length()];
+        for(int j = 0 ; j < from.length(); j++){
+            to[j] = (byte) from.charAt(j);
+        }
+        return to;
+    }
+
+    private String byteToString(byte[] from){
+        String to = "";
+        for(int j = 0 ; j < from.length; j++){
+            to += from[j];
+        }
+        return to;
+    }
+
 
 
     private byte[] copyArray(byte[] bytes) {
