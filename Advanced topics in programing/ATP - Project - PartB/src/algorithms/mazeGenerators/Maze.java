@@ -60,6 +60,16 @@ public class Maze {
 
     }
 
+    /*public int getSizeOfMaze(){
+        int totalSize = 0 ;
+        totalSize += s_lines*s_columns*4;
+        totalSize+= 10*4;
+
+        toByte;
+        sp;
+        return totalSize;
+    }*/
+
     public Position getPositionAt(int line,int column){
         if(!isInMaze(new Position(line,column))){
             return new Position(line,column);

@@ -7,119 +7,96 @@ import com.sun.istack.internal.NotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MyDecompressorInputStream extends InputStream {
 
     private InputStream in;
+    private HashMap<Integer,String> table;
+    private HashMap<String,Integer> tableS;
 
     public MyDecompressorInputStream(InputStream other) {
+
         in=other;
+        table = new HashMap<>();
+        for(int i = 0 ; i < 127; i++){
+            table.put(i,""+(char)i);
+        }
+        tableS = new HashMap<>();
+        for(int i = 0 ; i < 127; i++){
+            tableS.put(""+(char)i,i);
+        }
     }
 
-    /**
-     * Reads the next byte of data from the input stream. The value byte is
-     * returned as an <code>int</code> in the range <code>0</code> to
-     * <code>255</code>. If no byte is available because the end of the stream
-     * has been reached, the value <code>-1</code> is returned. This method
-     * blocks until input data is available, the end of the stream is detected,
-     * or an exception is thrown.
-     *
-     * <p> A subclass must provide an implementation of this method.
-     *
-     * @return the next byte of data, or <code>-1</code> if the end of the
-     * stream is reached.
-     * @throws IOException if an I/O error occurs.
-     */
     @Override
     public int read() throws IOException {
         return 0;
     }
 
-//    private void fixByteLimit(ArrayList<Byte> order ,int num){
-//        if(num<=255){
-//            order.add((byte) num);
-//        }
-//        else {
-//            int sum = num;
-//
-//            while (sum >= 255) {
-//                order.add((byte) 255);
-//                order.add((byte) '~');
-//                sum -= 255;
-//            }
-//            order.add((byte) sum);
-//        }
-//
-//    }
-
-    /**
-     * Reads some number of bytes from the input stream and stores them into
-     * the buffer array <code>b</code>. The number of bytes actually read is
-     * returned as an integer.  This method blocks until input data is
-     * available, end of file is detected, or an exception is thrown.
-     *
-     * <p> If the length of <code>b</code> is zero, then no bytes are read and
-     * <code>0</code> is returned; otherwise, there is an attempt to read at
-     * least one byte. If no byte is available because the stream is at the
-     * end of the file, the value <code>-1</code> is returned; otherwise, at
-     * least one byte is read and stored into <code>b</code>.
-     *
-     * <p> The first byte read is stored into element <code>b[0]</code>, the
-     * next one into <code>b[1]</code>, and so on. The number of bytes read is,
-     * at most, equal to the length of <code>b</code>. Let <i>k</i> be the
-     * number of bytes actually read; these bytes will be stored in elements
-     * <code>b[0]</code> through <code>b[</code><i>k</i><code>-1]</code>,
-     * leaving elements <code>b[</code><i>k</i><code>]</code> through
-     * <code>b[b.length-1]</code> unaffected.
-     *
-     * <p> The <code>read(b)</code> method for class <code>InputStream</code>
-     * has the same effect as: <pre><code> read(b, 0, b.length) </code></pre>
-     *
-     * @param deCompMaze the buffer into which the data is read.
-     * @return the total number of bytes read into the buffer, or
-     * <code>-1</code> if there is no more data because the end of
-     * the stream has been reached.
-     * @throws IOException          If the first byte cannot be read for any reason
-     *                              other than the end of the file, if the input stream has been closed, or
-     *                              if some other I/O error occurs.
-     * @throws NullPointerException if <code>b</code> is <code>null</code>.
-     * @see InputStream#read(byte[], int, int)
-     */
     @Override
     public int read(@NotNull byte[] deCompMaze) throws IOException {
-        byte[] order = new byte[deCompMaze.length];
-        in.read(order);
 
-        ArrayList<Byte> runDecode = new ArrayList<>();
-        boolean oneTurn = false;
-        for(int place = 0; place<order.length ; place++) {
-            if (order[place] == '}') {
-                int sum = 255;
-                while(order[place]!='}'){
-                    sum+=order[place+2];
-                    place+=2;
-                }
-                runDecode.add((byte) sum);
+        int size = in.read();
+        byte[] inputStream = new byte[size];
+        in.read(inputStream);
 
+
+        ArrayList<String> toOpen = new ArrayList<>();
+        for(int i = 0 ; i < inputStream.length ;i+=2){
+            toOpen.add(combineToOneByte(inputStream[i],inputStream[i+1]));
+        }
+
+        int spotInTable = 128;
+        String curr = toOpen.get(0);
+        String next;
+        ArrayList<Integer> intList=new ArrayList<>();
+        int index=1;
+        while(index<(toOpen.size())){
+            next=toOpen.get(index);
+            index++;
+            if(table.containsKey(""+curr+next)){
+                curr=curr+next;
             }
-            else {
-                int currNum = order[place];
-                if (currNum == 255) {
-                    while (order[place + 1] == '~') {
-                        currNum += order[place + 2];
-                        place += 2;
+            else{
+                if(Integer.parseInt(curr)>127){
+                    intList.add(tableS.get(Integer.parseInt(curr)));
+                    if(Integer.parseInt(next)>127){
+                        String halfNext = ""+table.get(Integer.parseInt(next));
+                        for(int i = 1; i < halfNext.length(); i++){
+                            String first = halfNext.substring(0,i);
+                            String second = halfNext.substring(i);
+                            if(table.containsKey(Integer.parseInt(first)) && table.containsKey(Integer.parseInt(second))){
+                                halfNext = first;
+                                break;
+                            }
+                        }
+                        table.put(spotInTable,curr+halfNext);
+                        tableS.put(curr+next,spotInTable);
                     }
+                    else{
+                        table.put(spotInTable,curr+next);
+                        tableS.put(curr+next,spotInTable);
+                    }
+                }
+                else{
+                    intList.add(Integer.valueOf(table.get(Integer.valueOf(curr))));
+                    table.put(spotInTable,curr+next);
+                    tableS.put(curr+next,spotInTable);
                 }
 
-                for (int count = 0; count < currNum; count++) {
-                    if(!oneTurn){
-                        runDecode.add((byte) 0);
-                    }
-                    else runDecode.add((byte) 1);
-                }
-                oneTurn=!oneTurn;
+                curr=next;
+                spotInTable++;
             }
         }
+
         return 0;
     }
+
+    private String combineToOneByte(byte times, byte left){
+        int first= (times*255) ;
+        int second = left & 0xff;
+        int whole= first+second ;
+        return ""+whole;
+    }
+
 }
