@@ -14,7 +14,7 @@ public class MyCompressorOutputStream extends OutputStream {
     {
         out = other;
         table = new HashMap<>();
-        for(int i = 0 ; i < 127; i++){
+        for(int i = 0 ; i < 255; i++){
             table.put(""+(char)i,i);
         }
     }
@@ -36,7 +36,7 @@ public class MyCompressorOutputStream extends OutputStream {
             inputS+=inputArr[i];
         }
 
-        int spotInTable = 128;
+        int spotInTable = 256;
         String curr = ""+inputArr[0];
         String next;
         ArrayList<String> output=new ArrayList<>();
