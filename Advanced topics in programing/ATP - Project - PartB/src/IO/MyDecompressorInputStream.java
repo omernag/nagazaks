@@ -34,7 +34,7 @@ public class MyDecompressorInputStream extends InputStream {
     }
 
     @Override
-    public int read(@NotNull byte[] deCompMaze) throws IOException {
+    public int read(byte[] deCompMaze) throws IOException {
 
         int size = in.read();
         byte[] inputStream = new byte[size];
@@ -43,89 +43,87 @@ public class MyDecompressorInputStream extends InputStream {
 
         ArrayList<String> toOpen = new ArrayList<>();
         for (int i = 0; i < inputStream.length; i += 2) {
-            if (i == 0) {
-                toOpen.add(combineToOneByte(inputStream[i], inputStream[i + 1]));
-            }
             toOpen.add(combineToOneByte(inputStream[i], inputStream[i + 1]));
         }
 
+
+        String translation;
         int spotInTable = 256;
         String curr = toOpen.get(0);
         String next;
-        ArrayList<Integer> intList = new ArrayList<>();
+        String S;
+        String C = "0";
+
+        translation=table.get(Integer.parseInt(curr));
         int index = 1;
         while (index < (toOpen.size())) {
             next = toOpen.get(index);
             index++;
-            if (table.containsKey("" + curr + "," + next)) {
-                curr = curr + next;
+            if(!table.containsKey(Integer.parseInt(next))){
+                S = table.get(Integer.parseInt(curr));
+                S = S + C;
             }
-            else {
-                if (Integer.parseInt(curr) > 255 && Integer.parseInt(next) > 255) {
-                    String[] toSplit = (table.get(Integer.parseInt(curr)).split(","));
-                    for (int i = 0; i < toSplit.length; i++) {
-                        intList.add(Integer.parseInt((toSplit[i])));//48,48 problem
-                    }
-
-                    String halfNext = getFirstPart(next);//??reqursive?
-                    table.put(spotInTable, table.get(Integer.parseInt(curr)) + "," + halfNext);
-                    tableS.put(table.get(curr) + "," + halfNext, spotInTable);
-                }
-                else if(Integer.parseInt(curr) > 255){
-                    String[] toSplit = (table.get(Integer.parseInt(curr)).split(","));
-                    for (int i = 0; i < toSplit.length; i++) {
-                        intList.add(Integer.parseInt((toSplit[i])));//48,48 problem
-                    }
-                    table.put(spotInTable, table.get(Integer.parseInt(curr)) + "," + next);
-                    tableS.put(table.get(curr) + "," + next, spotInTable);
-                }
-                else if(Integer.parseInt(next) > 255){
-                    intList.add(Integer.valueOf(curr));
-                    table.put(spotInTable, curr + "," + table.get(Integer.parseInt(next)));
-                    tableS.put(curr + "," + table.get(next), spotInTable);
-                }
-                else{
-                    intList.add(Integer.valueOf(curr));
-                    table.put(spotInTable, curr + "," + next);
-                    tableS.put(curr + "," + next, spotInTable);
-                }
-                curr = next;
-                spotInTable++;
-                ///////////////////////////////
-                /*if (Integer.parseInt(curr) > 255) {
-                    String[] toSplit = (table.get(Integer.parseInt(curr)).split(","));
-                    for (int i = 0; i < toSplit.length; i++) {
-                        intList.add(Integer.parseInt((toSplit[i])));//48,48 problem
-                    }
-                } else {
-                    intList.add(Integer.valueOf(curr));
-                }
-
-                if (Integer.parseInt(next) > 255) {
-                    String halfNext = getFirstPart(next);
-                    table.put(spotInTable, curr + "," + halfNext);
-                    tableS.put(curr + "," + next, spotInTable);
-                }
-                else {
-                    table.put(spotInTable, curr + "," + next);
-                    tableS.put(curr + "," + next, spotInTable);
-                }*/
-
-                //////////////////////////////////////
+            else{
+                S = table.get(Integer.parseInt(next));
             }
+
+            translation+=S;
+            C = ""+S.charAt(0);
+            table.put(spotInTable,table.get(Integer.parseInt(curr))+C);
+            tableS.put(curr+C,spotInTable);
+            curr=next;
+            spotInTable++;
         }
 
-        ArrayList<Integer> intListBasic = new ArrayList<>();
-        for (int i = 0; i < intList.size(); i++) {
-            intListBasic.add(tableS.get(intList.get(i)));
+        ArrayList<Integer> list = new ArrayList<>();
+        String[] finalS = translation.substring(30).split("~");
+        for (int i = 0; i < 30+finalS.length; i ++) {
+            if(i<30) {
+                list.add(Integer.parseInt("" + translation.charAt(i)));
+            }
+            else{
+                list.add(Integer.parseInt(finalS[i-30]));
+            }
         }
-
+        deCompMaze=toEightByte(list);
 
         return 0;
     }
 
+
+    private byte[] toEightByte(ArrayList<Integer> list){
+        byte[] toEight = new byte[30+(list.size()-30)*8];
+        int place=0;
+        for(int i=0 ; i < list.size();i++){
+            if(i<30){
+                toEight[place]=list.get(i).byteValue();
+                place++;
+            }
+            else{
+                String binaryRep = Integer.toBinaryString(list.get(i));
+                String binary8 = "";
+                if(binaryRep.length()<8){
+                    int miss = 8-binaryRep.length();
+                    for(int k = 0 ; k < miss;k++){
+                        binary8+=0;
+                    }
+                    for(int k = miss ; k < 8;k++){
+                        binary8+=binaryRep.charAt(k-miss);
+                    }
+                }
+                for(int j = 0 ; j < binary8.length();j++){
+                    toEight[place] = (byte) Integer.parseInt(""+binary8.charAt(j));
+                    place++;
+                }
+            }
+        }
+        return toEight;
+    }
+
+
+
     private String getFirstPart(String next){
-        String halfNext = "" + table.get(Integer.parseInt(next));
+        String halfNext = next;
         int firstPartSpot = 0;
         while (firstPartSpot < halfNext.length()) {
             if (halfNext.charAt(firstPartSpot) == ',') {
@@ -134,10 +132,11 @@ public class MyDecompressorInputStream extends InputStream {
             firstPartSpot++;
         }
         halfNext = halfNext.substring(0, firstPartSpot);
-        if(Integer.parseInt(halfNext)>255){
+        return halfNext;
+        /*if(Integer.parseInt(halfNext)>255){
             return getFirstPart(halfNext);
         }
-        else return halfNext;
+        else return halfNext;*/
     }
 
     private String combineToOneByte(byte times, byte left){

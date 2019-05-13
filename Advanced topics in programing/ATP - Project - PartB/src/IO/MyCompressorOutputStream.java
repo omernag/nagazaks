@@ -26,14 +26,18 @@ public class MyCompressorOutputStream extends OutputStream {
     }
 
 
-
     @Override
     public void write(@NotNull byte[] bArray) throws IOException {
 
         int[] inputArr = toSingleByte(bArray);
         String inputS="";
         for(int i = 0 ; i < inputArr.length; i++){
-            inputS+=inputArr[i];
+            if (i > 29) {
+                inputS+=inputArr[i]+"~";
+            }
+            else {
+                inputS += inputArr[i];
+            }
         }
 
         int spotInTable = 256;
@@ -54,6 +58,7 @@ public class MyCompressorOutputStream extends OutputStream {
                 spotInTable++;
             }
         }
+        output.add(""+table.get(curr));
 
         byte[] toByte = new byte[output.size()*2];
         for(int i = 0 ; i < output.size();i++){
@@ -160,18 +165,3 @@ public class MyCompressorOutputStream extends OutputStream {
         return left.length - right.length;
     }
 }
-
-
-/* int currNum = toComp[0] ;
-        int numCount=1;
-        for(int place = 1 ; place<toComp.length ; place++){
-            if(toComp[place]!=currNum){
-                order.add((byte) currNum);
-                order.add((byte) numCount);
-                currNum=toComp[place];
-                numCount=1;
-            }
-            else{
-                numCount++;
-            }
-        }*/
