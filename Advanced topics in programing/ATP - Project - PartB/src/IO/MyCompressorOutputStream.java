@@ -14,7 +14,7 @@ public class MyCompressorOutputStream extends OutputStream {
     {
         out = other;
         table = new HashMap<>();
-        for(int i = 0 ; i < 127; i++){
+        for(int i = 0 ; i < 255; i++){
             table.put(""+(char)i,i);
         }
     }
@@ -25,18 +25,19 @@ public class MyCompressorOutputStream extends OutputStream {
 
     }
 
-
-
-    @Override
-    public void write(@NotNull byte[] bArray) throws IOException {
-
+    public byte[] compress (byte[] bArray){
         int[] inputArr = toSingleByte(bArray);
         String inputS="";
         for(int i = 0 ; i < inputArr.length; i++){
-            inputS+=inputArr[i];
+            if (i > 29) {
+                inputS+=inputArr[i]+"~";
+            }
+            else {
+                inputS += inputArr[i];
+            }
         }
 
-        int spotInTable = 128;
+        int spotInTable = 256;
         String curr = ""+inputArr[0];
         String next;
         ArrayList<String> output=new ArrayList<>();
@@ -54,15 +55,25 @@ public class MyCompressorOutputStream extends OutputStream {
                 spotInTable++;
             }
         }
+        output.add(""+table.get(curr));
 
         byte[] toByte = new byte[output.size()*2];
         for(int i = 0 ; i < output.size();i++){
             splitToTwoByte(toByte,output.get(i),i);
         }
 
+        return toByte;
+    }
+
+
+    @Override
+    public void write(@NotNull byte[] bArray) throws IOException {
+
+        byte[] toByte = compress(bArray);
+
         //writing to output using out
         out.write(toByte.length);
-        for(int i = 0 ;  i < output.size(); i++){
+        for(int i = 0 ;  i < (toByte.length/2); i++){
             out.write(toByte);
         }
 
@@ -160,18 +171,3 @@ public class MyCompressorOutputStream extends OutputStream {
         return left.length - right.length;
     }
 }
-
-
-/* int currNum = toComp[0] ;
-        int numCount=1;
-        for(int place = 1 ; place<toComp.length ; place++){
-            if(toComp[place]!=currNum){
-                order.add((byte) currNum);
-                order.add((byte) numCount);
-                currNum=toComp[place];
-                numCount=1;
-            }
-            else{
-                numCount++;
-            }
-        }*/
