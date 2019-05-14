@@ -72,37 +72,56 @@ public class MyCompressorOutputStream extends OutputStream {
         byte[] toByte = compress(bArray);
 
         //writing to output using out
-        out.write(toByte.length);
-        for(int i = 0 ;  i < (toByte.length/2); i++){
-            out.write(toByte);
-        }
-
+        byte[] sizeOfStream = stringToByte(""+toByte.length);
+        //splitToTwoByte(sizeOfStream,""+toByte.length,0);
+        out.write(sizeOfStream.length);
+        out.write(sizeOfStream);
+        out.write(toByte);
     }
 
     private void splitToTwoByte(byte[] toByte, String num, int place){
-        int whole = Integer.parseInt(num);
-        byte first= (byte) (whole/255);
-        byte second= (byte) (whole%255);
+        if(Integer.parseInt(num)<65025) {
+            int whole = Integer.parseInt(num);
+            byte first = (byte) (whole / 255);
+            byte second = (byte) (whole % 255);
 
-        toByte[place*2]= first;
-        toByte[place*2+1]= second;
+            toByte[place * 2] = first;
+            toByte[place * 2 + 1] = second;
+        }
+        else splitToFourByte(toByte,num,place);
+    }
+
+    private void splitToFourByte(byte[] toByte, String num, int place) {
+        int whole = Integer.parseInt(num);
+        int firstDev = whole/255;
+        int firstMod = whole%255;
+        byte first = (byte) firstDev;
+        byte second = (byte) firstMod;
+        byte third = (byte) (firstDev/255);
+        byte fourth = (byte) (firstDev % 255);
+
+        toByte[place * 2] = first;
+        toByte[place * 2 + 1] = second;
+        toByte[place * 2 + 2] = third;
+        toByte[place * 2 + 3] = fourth;
     }
 
     private int[] toSingleByte(byte[] bytesArr){//move to maze with omer
         ArrayList<Byte> shrinked = new ArrayList<>();
         Byte[] toShrink =  new Byte[8];
-        for(int i=30 ; i < bytesArr.length;i++){
+        int i=30;
+        while(i < bytesArr.length){
             if(i+7>bytesArr.length-1){
                 Byte[] last=new Byte[8];
                 int zeroes = 8-(bytesArr.length-i);
                 int place=0;
                 while(place < zeroes){
-                    last[place]=0;
+                    last[7-place]=0;
                     place++;
 
                 }
                 while( i < bytesArr.length){
-                    last[place]=bytesArr[i];
+                    last[7-place]=bytesArr[i];
                     place++;
                     i++;
                 }
@@ -118,6 +137,8 @@ public class MyCompressorOutputStream extends OutputStream {
                     toShrink[7-place]=bytesArr[i];
                     place++;
                     i++;
+
+
                 }
                 double sum=0;
                 for (int j = 0 ; j < 8 ; j++){
@@ -144,30 +165,5 @@ public class MyCompressorOutputStream extends OutputStream {
         return to;
     }
 
-    private String byteToString(byte[] from){
-        String to = "";
-        for(int j = 0 ; j < from.length; j++){
-            to += from[j];
-        }
-        return to;
-    }
 
-    private byte[] copyArray(byte[] bytes) {
-        byte[] newB = new byte[bytes.length];
-        for(int i = 0 ; i < newB.length; i++){
-            newB[i] = bytes[i];
-        }
-        return newB;
-    }
-
-    private int compareTo(byte[] left, byte[] right) {
-        for (int i = 0, j = 0; i < left.length && j < right.length; i++, j++) {
-            int a = (left[i] & 0xff);
-            int b = (right[j] & 0xff);
-            if (a != b) {
-                return a - b;
-            }
-        }
-        return left.length - right.length;
-    }
 }
