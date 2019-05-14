@@ -144,7 +144,7 @@ public class MyDecompressorInputStream extends InputStream {
 
 
     private String combineToOneByte(byte times, byte left){
-        int first= (times*255) ;
+        int first= (times & 0xff)*255 ;
         int second = left & 0xff;
         int whole= first+second ;
         return ""+whole;
