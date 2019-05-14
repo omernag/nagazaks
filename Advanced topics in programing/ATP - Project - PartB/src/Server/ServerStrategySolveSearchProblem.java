@@ -2,13 +2,13 @@ package Server;
 
 import IO.MyCompressorOutputStream;
 import algorithms.mazeGenerators.Maze;
-import algorithms.search.BestFirstSearch;
-import algorithms.search.SearchableMaze;
-import algorithms.search.Solution;
+import algorithms.search.*;
 
 import java.io.*;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy  {
+
+    ASearchingAlgorithm solveAlgorithm;
 
     @Override
     public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
@@ -18,8 +18,10 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy  {
             toClient.flush();
             Maze maze=(Maze)fromClient.readObject();
             SearchableMaze sMaze = new SearchableMaze(maze);
-            BestFirstSearch bestFS = new BestFirstSearch();
-            Solution solution = bestFS.solve(sMaze);
+            //BestFirstSearch bestFS = new BestFirstSearch();
+            //Solution solution = bestFS.solve(sMaze);
+            solveAlgorithm = getSearchingAlgorithm();
+            Solution solution = solveAlgorithm.solve(sMaze);
             toClient.writeObject(solution);
 
 
@@ -28,5 +30,17 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy  {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private ASearchingAlgorithm getSearchingAlgorithm(){
+        String algorithm = Configurations.loadSearchAlgorithm();
+        if(algorithm.equals("BestFirstSearch")){
+            return new BestFirstSearch();
+        }
+        else if(algorithm.equals("BreadthFirstSearch")){
+            return new BreadthFirstSearch();
+        }
+        else return new DepthFirstSearch();
+
     }
 }

@@ -23,7 +23,7 @@ public class Server {
         this.port = port;
         this.listeningInterval = listeningInterval;
         this.serverStrategy = serverStrategy;
-        executor = Executors.newFixedThreadPool(6);
+        executor = Executors.newFixedThreadPool(getPoolSize());
 
     }
 
@@ -61,5 +61,9 @@ public class Server {
 
     public void stop() {
         stop = true;
+    }
+
+    private int getPoolSize() {
+        return Integer.parseInt(Configurations.getThreadPoolAmount());
     }
 }
