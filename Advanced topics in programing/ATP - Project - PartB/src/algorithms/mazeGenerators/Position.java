@@ -1,7 +1,6 @@
 package algorithms.mazeGenerators;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * This class represent a single position

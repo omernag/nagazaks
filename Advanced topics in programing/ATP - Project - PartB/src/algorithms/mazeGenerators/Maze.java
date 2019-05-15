@@ -2,8 +2,6 @@ package algorithms.mazeGenerators;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class represent a maze as 2 dimensions int array.

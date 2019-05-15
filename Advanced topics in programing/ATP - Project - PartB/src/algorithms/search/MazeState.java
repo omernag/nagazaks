@@ -13,7 +13,6 @@ import java.io.Serializable;
 public class MazeState extends AState implements Serializable {
 
     private Position state;
-    private boolean visit=false;
 
     /**
      * This is a constructor for maze state

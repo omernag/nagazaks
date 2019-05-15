@@ -153,4 +153,26 @@ public class SearchableMaze implements ISearchable, Serializable {
         return goalState;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SearchableMaze)) return false;
+        SearchableMaze that = (SearchableMaze) o;
+        return Objects.equals(startState, that.startState) &&
+                Objects.equals(goalState, that.goalState) &&
+                mapEqual(m_dMazeMap, that.m_dMazeMap);
+    }
+
+    public boolean mapEqual(MazeState[][] origin, MazeState[][] other){
+        boolean ans = true;
+        for(int i=0;i<origin.length;i++){
+            for (int j=0;j<origin[0].length;j++){
+                if(!(origin[i][j].equals(other[i][j]))){
+                    ans=false;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
 }
