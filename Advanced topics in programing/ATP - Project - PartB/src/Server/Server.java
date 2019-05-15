@@ -23,7 +23,7 @@ public class Server {
         this.port = port;
         this.listeningInterval = listeningInterval;
         this.serverStrategy = serverStrategy;
-        this.executor = Executors.newFixedThreadPool(getPoolSize());
+        //this.executor = Executors.newFixedThreadPool(getPoolSize());
 
     }
 
@@ -35,7 +35,7 @@ public class Server {
 
     private void runServer() {
         try {
-            //executor = Executors.newFixedThreadPool(getPoolSize());
+            executor = Executors.newFixedThreadPool(getPoolSize());
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningInterval);
             while (!stop) {
