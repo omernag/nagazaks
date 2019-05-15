@@ -4,6 +4,7 @@ import algorithms.mazeGenerators.*;
 
 import java.io.*;
 
+
 public class ServerStrategyGenerateMaze implements IServerStrategy {
 
     AMazeGenerator generatorAlgorithm;

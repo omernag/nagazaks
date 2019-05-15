@@ -5,6 +5,7 @@ import algorithms.search.*;
 
 import java.io.*;
 
+
 public class ServerStrategySolveSearchProblem implements IServerStrategy  {
 
     private ASearchingAlgorithm solveAlgorithm;

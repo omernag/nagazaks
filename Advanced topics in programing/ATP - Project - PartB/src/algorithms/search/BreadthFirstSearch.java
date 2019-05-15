@@ -1,7 +1,10 @@
 package algorithms.search;
 
-import java.util.*;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.PriorityQueue;
 
 /**
  * This class represent a solve of a Searchable problem according to the BFS algorithm

@@ -1,6 +1,8 @@
 package algorithms.search;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This class represent an abstract class for searching algorithms

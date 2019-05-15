@@ -1,9 +1,10 @@
 package IO;
 
-import com.sun.istack.internal.NotNull;
-import java.io.*;
-import java.util.*;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MyCompressorOutputStream extends OutputStream {
 
@@ -66,7 +67,7 @@ public class MyCompressorOutputStream extends OutputStream {
 
 
     @Override
-    public void write(@NotNull byte[] bArray) throws IOException {
+    public void write(byte[] bArray) throws IOException {
 
         byte[] toByte = compress(bArray);
 
