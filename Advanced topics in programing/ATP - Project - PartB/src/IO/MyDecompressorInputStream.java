@@ -36,13 +36,39 @@ public class MyDecompressorInputStream extends InputStream {
     @Override
     public int read(byte[] deCompMaze) throws IOException {
 
-        int sizeOfStreamLength = in.read();
-        byte[] sizeOfStream = new byte[sizeOfStreamLength];
-        in.read(sizeOfStream);
-        int size = Integer.parseInt(byteToString(sizeOfStream));
-        byte[] inputStream = new byte[size];
-        in.read(inputStream);
+//        int sizeOfStreamLength = in.read();
+//        byte[] sizeOfStream = new byte[sizeOfStreamLength];
+//        in.read(sizeOfStream);
+//        int size = Integer.parseInt(byteToString(sizeOfStream));
+//        byte[] inputStream = new byte[size];
+//        in.read(inputStream);
+//
+        ArrayList<Integer> readerList = new ArrayList<>();
+        int reader = 0 ;
+        int readerSize = in.available();
+        int index=0;
+        while(index<readerSize){
+            reader = in.read();
+            readerList.add(reader);
+            index++;
+        }
 
+        byte[] inputStream = new byte[readerList.size()];
+        for(int i = 0 ; i < inputStream.length; i++){
+            inputStream[i]=readerList.get(i).byteValue();
+        }
+
+        byte[] tmpResult=new byte[deCompMaze.length];
+        decompressLZW(tmpResult,inputStream);
+        for(int i = 0 ; i < deCompMaze.length; i++){
+            deCompMaze[i]=tmpResult[i];
+        }
+
+        return 0;
+    }
+
+
+    public void decompressLZW(byte[] result, byte[] inputStream){
         ArrayList<String> toOpen = new ArrayList<>();
         for (int i = 0; i < inputStream.length; i += 2) {
             toOpen.add(combineToOneByte(inputStream[i], inputStream[i + 1]));
@@ -87,12 +113,10 @@ public class MyDecompressorInputStream extends InputStream {
             }
         }
         ArrayList<Integer> fixed;
-        fixed=toEightByte(list,deCompMaze.length);
-        for(int i = 0 ; i < fixed.size() && i < deCompMaze.length; i ++){
-            deCompMaze[i] = fixed.get(i).byteValue();
+        fixed=toEightByte(list,result.length);
+        for(int i = 0 ; i < fixed.size() && i < result.length; i ++){
+            result[i] = fixed.get(i).byteValue();
         }
-
-        return 0;
     }
 
 

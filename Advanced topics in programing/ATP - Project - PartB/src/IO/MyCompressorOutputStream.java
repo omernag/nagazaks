@@ -74,8 +74,8 @@ public class MyCompressorOutputStream extends OutputStream {
         //writing to output using out
         byte[] sizeOfStream = stringToByte(""+toByte.length);
         //splitToTwoByte(sizeOfStream,""+toByte.length,0);
-        out.write(sizeOfStream.length);
-        out.write(sizeOfStream);
+        //out.write(sizeOfStream.length);
+        //out.write(sizeOfStream);
         out.write(toByte);
     }
 
