@@ -2,6 +2,8 @@ package algorithms.search;
 
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
+
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -10,7 +12,7 @@ import java.util.*;
  * @author  Asaf Zaks, Omer Nagar
  *
  */
-public class SearchableMaze implements ISearchable {
+public class SearchableMaze implements ISearchable, Serializable {
 
     private AState startState;
     private AState goalState;

@@ -1,5 +1,6 @@
 package algorithms.mazeGenerators;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Objects;
  * @author  Asaf Zaks, Omer Nagar
  *
  */
-public class Position {
+public class Position implements Serializable {
     private int line;
     private int column;
     private int value;

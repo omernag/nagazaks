@@ -1,5 +1,6 @@
 package algorithms.search;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @author  Asaf Zaks, Omer Nagar
  *
  */
-public class Solution {
+public class Solution implements Serializable {
 
     ArrayList<AState> solPath;
 

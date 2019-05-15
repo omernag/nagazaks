@@ -19,7 +19,6 @@ public class MyCompressorOutputStream extends OutputStream {
         }
     }
 
-
     @Override
     public void write(int b) throws IOException {
 
@@ -72,10 +71,6 @@ public class MyCompressorOutputStream extends OutputStream {
         byte[] toByte = compress(bArray);
 
         //writing to output using out
-        byte[] sizeOfStream = stringToByte(""+toByte.length);
-        //splitToTwoByte(sizeOfStream,""+toByte.length,0);
-        //out.write(sizeOfStream.length);
-        //out.write(sizeOfStream);
         out.write(toByte);
     }
 
@@ -156,14 +151,4 @@ public class MyCompressorOutputStream extends OutputStream {
         }
         return result ;
     }
-
-    private byte[] stringToByte(String from){
-        byte[] to = new byte[from.length()];
-        for(int j = 0 ; j < from.length(); j++){
-            to[j] = (byte) from.charAt(j);
-        }
-        return to;
-    }
-
-
 }

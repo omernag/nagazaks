@@ -1,6 +1,7 @@
 package algorithms.mazeGenerators;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author  Asaf Zaks, Omer Nagar
  *
  */
-public class Maze {
+public class Maze implements Serializable {
 
     private int[][] struct;
     private int s_lines;

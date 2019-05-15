@@ -36,13 +36,6 @@ public class MyDecompressorInputStream extends InputStream {
     @Override
     public int read(byte[] deCompMaze) throws IOException {
 
-//        int sizeOfStreamLength = in.read();
-//        byte[] sizeOfStream = new byte[sizeOfStreamLength];
-//        in.read(sizeOfStream);
-//        int size = Integer.parseInt(byteToString(sizeOfStream));
-//        byte[] inputStream = new byte[size];
-//        in.read(inputStream);
-//
         ArrayList<Integer> readerList = new ArrayList<>();
         int reader = 0 ;
         int readerSize = in.available();

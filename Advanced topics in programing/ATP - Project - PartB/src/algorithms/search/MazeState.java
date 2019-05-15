@@ -2,13 +2,15 @@ package algorithms.search;
 
 import algorithms.mazeGenerators.Position;
 
+import java.io.Serializable;
+
 /**
  * This class represent a class for a state in the maze
  *
  * @author  Asaf Zaks, Omer Nagar
  *
  */
-public class MazeState extends AState {
+public class MazeState extends AState implements Serializable {
 
     private Position state;
     private boolean visit=false;
