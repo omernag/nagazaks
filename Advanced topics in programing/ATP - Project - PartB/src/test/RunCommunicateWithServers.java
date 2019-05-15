@@ -53,7 +53,7 @@ public class RunCommunicateWithServers {
                         toServer.flush();
                         byte[] compressedMaze = (byte[]) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
                         InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
-                        byte[] decompressedMaze = new byte[2530 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
+                        byte[] decompressedMaze = new byte[1000 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
                         Maze maze = new Maze(decompressedMaze);
                         maze.print();
@@ -62,7 +62,7 @@ public class RunCommunicateWithServers {
                     }
                 }
             });
-            client.start();
+            client.communicateWithServer();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -95,7 +95,7 @@ public class RunCommunicateWithServers {
                     }
                 }
             });
-            client.start();
+            client.communicateWithServer();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -124,7 +124,7 @@ public class RunCommunicateWithServers {
                     }
                 }
             });
-            client.start();
+            client.communicateWithServer();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
