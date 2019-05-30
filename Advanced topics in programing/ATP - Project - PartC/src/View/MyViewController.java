@@ -19,7 +19,9 @@ public class MyViewController implements IView{
             root = FXMLLoader.load(getClass().getResource("../View/NewGame.fxml"));
             Stage stage = new Stage();
             stage.setTitle("New Game");
-            stage.setScene(new Scene(root, 400, 300));
+            Scene scene = new Scene(root, 400, 300);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("../View/NewGameStyle.css").toExternalForm());
             stage.show();
             // Hide this current window (if this is what you want)
             //((Node)(event.getSource())).getScene().getWindow().hide();
