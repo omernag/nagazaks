@@ -4,9 +4,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.mazeWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class MyViewController implements IView{
     public void preesButton(ActionEvent event){
@@ -30,5 +35,30 @@ public class MyViewController implements IView{
             e.printStackTrace();
         }
     }
+
+    public void pressLoad(ActionEvent LoadMaze){
+            Stage loadStage = new Stage();
+            loadStage.setTitle("Load Maze");
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+            fileChooser.getExtensionFilters().add(extFilter);
+            File file = fileChooser.showOpenDialog(loadStage);
+            //Generate Maze from file
+    }
+
+    private void pressSave(String content){
+
+            Stage saveStage = new Stage();
+            saveStage.setTitle("Load Maze");
+            File mazefile = null;
+            FileChooser fileChooser = new FileChooser();
+            mazefile = fileChooser.showSaveDialog(saveStage);
+            // write to the file
+
+
+    }
+
+
+
 
 }

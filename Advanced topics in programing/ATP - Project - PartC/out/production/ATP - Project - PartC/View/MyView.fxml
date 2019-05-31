@@ -42,10 +42,8 @@
         </MenuBar>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button layoutX="131.0" layoutY="21.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="141.0" text="Genarare Maze" />
-            <Button layoutX="376.0" layoutY="21.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="141.0" text="Solve Maze" />
+            <Button layoutX="42.0" layoutY="21.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="141.0" />
          </children>
       </Pane>
-      <Pane prefHeight="417.0" prefWidth="640.0" />
     </children>
 </VBox>
