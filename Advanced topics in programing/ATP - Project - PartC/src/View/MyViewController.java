@@ -8,17 +8,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.mazeWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class MyViewController implements IView{
-    public void preesButton(ActionEvent event){
-        System.out.println("Hellsssaa");
-    }
 
-    public void pressNew(ActionEvent newMaze){
+
+    public void pressNew(){
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("../View/NewGame.fxml"));
@@ -36,7 +31,7 @@ public class MyViewController implements IView{
         }
     }
 
-    public void pressLoad(ActionEvent LoadMaze){
+    public void pressLoad(){
             Stage loadStage = new Stage();
             loadStage.setTitle("Load Maze");
             FileChooser fileChooser = new FileChooser();
@@ -46,7 +41,7 @@ public class MyViewController implements IView{
             //Generate Maze from file
     }
 
-    private void pressSave(String content){
+    public void pressSave(){
 
             Stage saveStage = new Stage();
             saveStage.setTitle("Load Maze");
@@ -57,7 +52,23 @@ public class MyViewController implements IView{
 
 
     }
-
+    public void pressAbout(){
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../View/About.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("About");
+            Scene scene = new Scene(root, 400, 400);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("../View/MyViewStyle.css").toExternalForm());
+            stage.show();
+            // Hide this current window (if this is what you want)
+            //((Node)(event.getSource())).getScene().getWindow().hide();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
