@@ -1,5 +1,6 @@
 package View;
 
+import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -8,12 +9,14 @@ import javafx.scene.control.TextField;
 
 public class NewGameController {
 
+    private static MyViewModel viewModel;
     int NumOfRows=0;
     int NumOfCols=0;
     @FXML
     TextField rowsTextfield;
     @FXML
     TextField colsTextfield;
+
 
 
     public void generateMaze(){
@@ -26,12 +29,16 @@ public class NewGameController {
             showAlert("One of the numbers you've entered is not positive, please try again");
         }
         //call maze generator
-
+        viewModel.generateMaze(rows,columns);
     }
 
     private void showAlert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(alertMessage);
         alert.show();
+    }
+
+    public void setViewModel(MyViewModel viewModel) {
+        this.viewModel = viewModel;
     }
 }

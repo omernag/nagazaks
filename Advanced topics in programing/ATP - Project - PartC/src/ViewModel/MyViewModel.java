@@ -1,8 +1,10 @@
 package ViewModel;
 
 import Model.IModel;
+import algorithms.mazeGenerators.Maze;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.input.KeyCode;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -22,6 +24,33 @@ public class MyViewModel extends Observable implements Observer {
     }
 
     public void update(Observable o, Object arg) {   //activated when the model changes. here the VM will ask for data from the Model
+        if (o==model){
+            characterPositionRowIndex = model.getCharacterPositionRow();
+            characterPositionRow.set(characterPositionRowIndex + "");
+            characterPositionColumnIndex = model.getCharacterPositionColumn();
+            characterPositionColumn.set(characterPositionColumnIndex + "");
+            setChanged();
+            notifyObservers();
+        }
+    }
 
+    public void generateMaze(int width, int height){
+        model.generateMaze(width, height);
+    }
+
+    public void moveCharacter(KeyCode movement){
+        model.moveCharacter(movement);
+    }
+
+    public Maze getMaze() {
+        return model.getMaze();
+    }
+
+    public int getCharacterPositionRow() {
+        return characterPositionRowIndex;
+    }
+
+    public int getCharacterPositionColumn() {
+        return characterPositionColumnIndex;
     }
 }

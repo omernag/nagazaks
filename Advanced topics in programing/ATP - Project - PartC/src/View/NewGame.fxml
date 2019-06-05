@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.NewGameController">
+<AnchorPane prefHeight="300.0" prefWidth="700.0"  xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.NewGameController">
    <children>
       <Label fx:id="lbl_rows" layoutX="42.0" layoutY="87.0" text="Number of rows:">
          <font>
@@ -23,7 +23,7 @@
          <padding>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
          </padding></TextField>
-      <TextField id="Columns" fx:id="colsTextfield" layoutX="241.0" layoutY="82.0" stylesheets="@NewGameStyle.css">
+      <TextField id="Columns" fx:id="colsTextfield" layoutX="241.0" layoutY="82.0" >
          <padding>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
          </padding></TextField>
