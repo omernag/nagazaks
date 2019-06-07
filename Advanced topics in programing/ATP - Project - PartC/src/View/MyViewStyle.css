@@ -1,5 +1,5 @@
 .root{
-    -fx-background-color: bisque;
+    -fx-background-color: gray;
 }
 
 Button {
@@ -7,6 +7,6 @@ Button {
     -fx-text-fill: white;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-background-color: rgba(255, 42, 0, 0.51);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }

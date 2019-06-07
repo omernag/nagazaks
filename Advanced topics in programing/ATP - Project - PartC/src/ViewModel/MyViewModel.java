@@ -16,9 +16,6 @@ public class MyViewModel extends Observable implements Observer {
     private int characterPositionRowIndex;
     private int characterPositionColumnIndex;
 
-    public StringProperty characterPositionRow = new SimpleStringProperty("1"); //For Binding
-    public StringProperty characterPositionColumn = new SimpleStringProperty("1"); //For Binding
-
     public MyViewModel(IModel model){
         this.model = model;
     }
@@ -26,9 +23,9 @@ public class MyViewModel extends Observable implements Observer {
     public void update(Observable o, Object arg) {   //activated when the model changes. here the VM will ask for data from the Model
         if (o==model){
             characterPositionRowIndex = model.getCharacterPositionRow();
-            characterPositionRow.set(characterPositionRowIndex + "");
+
             characterPositionColumnIndex = model.getCharacterPositionColumn();
-            characterPositionColumn.set(characterPositionColumnIndex + "");
+
             setChanged();
             notifyObservers();
         }

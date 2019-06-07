@@ -24,10 +24,10 @@ import java.util.concurrent.Executors;
 
 public class MyModel extends Observable implements IModel {
 
-    private ExecutorService threadPool = Executors.newCachedThreadPool();
+
     private static Maze currentMaze;
-    private int characterPositionRow;
-    private int characterPositionColumn;
+    public int characterPositionRow;
+    public int characterPositionColumn;
 
     Server mazeGeneratingServer;
     Server solveSearchProblemServer;
@@ -62,7 +62,7 @@ public class MyModel extends Observable implements IModel {
     }
 
     public void generateMaze(int width, int height) {
-        threadPool.execute(() -> {
+
             try {
                 Client client = new Client(InetAddress.getLocalHost(), 5400, new IClientStrategy() {
                     public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
@@ -89,7 +89,7 @@ public class MyModel extends Observable implements IModel {
             }
             setChanged();
             notifyObservers();
-        });
+
     }
 
     private static void CommunicateWithServer_SolveSearchProblem() {

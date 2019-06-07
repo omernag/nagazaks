@@ -7,33 +7,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf9290e3-7002-4ff8-921f-2387327a0aca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ATP - Project - PartB.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ATPProjectPartB_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/ATP - Project - PartC.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/libraries/ATPProjectPartB.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/libraries/src.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyPropertiesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/Properties.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/resources/Images/bush.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/resources/Images/yellowbrick.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/resources/Images/yellowbrick2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/resources/Images/yellowbrickDorthy.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/IModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/IModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/MyModel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/MyModel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/MyModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/MyModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MazeDisplayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MazeDisplayer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/NewGameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/NewGameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/Properties.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/Properties.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/ViewModel/MyViewModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/ViewModel/MyViewModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/Model/IModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/Model/IModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/Model/MyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/Model/MyModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MazeDisplayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MazeDisplayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyPropertiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyPropertiesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/NewGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/NewGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyViewStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyViewStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/Properties.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/Properties.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/ViewModel/MyViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/ViewModel/MyViewModel.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -126,10 +124,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1928" />
-    <option name="y" value="-262" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-1721" />
+    <option name="y" value="-190" />
+    <option name="width" value="1938" />
+    <option name="height" value="907" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -241,12 +239,12 @@
       <workItem from="1559722934706" duration="587000" />
       <workItem from="1559725146295" duration="609000" />
       <workItem from="1559731445350" duration="288000" />
-      <workItem from="1559910674894" duration="1208000" />
+      <workItem from="1559910674894" duration="1810000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3236000" />
+    <option name="totallyTimeSpent" value="3838000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-262" width="1936" height="1056" extended-state="6" />

@@ -1,6 +1,7 @@
 package View;
 
 import algorithms.mazeGenerators.Maze;
+import com.sun.tracing.dtrace.Attributes;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
@@ -25,8 +26,17 @@ public class MazeDisplayer extends Canvas {
     private int characterPositionRow = 1;
     private int characterPositionColumn = 1;
 
+    private StringProperty NotBeenFileName = new SimpleStringProperty();
+
+    private StringProperty ImageFileNameWall = new SimpleStringProperty();
+    private StringProperty ImageFileNameCharacter = new SimpleStringProperty();
+    private StringProperty BeenFileName = new SimpleStringProperty();
+
+
+
     public void setMaze(Maze maze) {
         this.maze = maze;
+
         redraw();
     }
 
@@ -52,8 +62,10 @@ public class MazeDisplayer extends Canvas {
             double cellWidth = canvasWidth / maze.getColumns();
 
             try {
-                Image wallImage = new Image(new FileInputStream("resources/Images/character1.jpg"));
-                Image characterImage = new Image(new FileInputStream("resources/Images/wall3.jpg"));
+                Image wallImage = new Image(new FileInputStream(ImageFileNameWall.get()));
+                Image characterImage = new Image(new FileInputStream(ImageFileNameCharacter.get()));
+                Image notBeenImage = new Image(new FileInputStream(NotBeenFileName.get()));
+                Image BeenImage = new Image(new FileInputStream(BeenFileName.get()));
 
                 GraphicsContext gc = getGraphicsContext2D();
                 gc.clearRect(0, 0, getWidth(), getHeight());
@@ -65,22 +77,26 @@ public class MazeDisplayer extends Canvas {
                             //gc.fillRect(i * cellHeight, j * cellWidth, cellHeight, cellWidth);
                             gc.drawImage(wallImage, i * cellHeight, j * cellWidth, cellHeight, cellWidth);
                         }
+                        else if (maze.getValueByInt(i,j) == 0) {
+                            //gc.fillRect(i * cellHeight, j * cellWidth, cellHeight, cellWidth);
+                            gc.drawImage(notBeenImage, i * cellHeight, j * cellWidth, cellHeight, cellWidth);
+                        }
                     }
                 }
 
                 //Draw Character
                 //gc.setFill(Color.RED);
                 //gc.fillOval(characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);
+                gc.drawImage(BeenImage, maze.getGoalPosition().getRowIndex() * cellHeight, maze.getGoalPosition().getColumnIndex() * cellWidth, cellHeight, cellWidth);
                 gc.drawImage(characterImage, characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);
             } catch (FileNotFoundException e) {
-                //e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
 
     //region Properties
-    private StringProperty ImageFileNameWall = new SimpleStringProperty();
-    private StringProperty ImageFileNameCharacter = new SimpleStringProperty();
+
 
     public String getImageFileNameWall() {
         return ImageFileNameWall.get();
@@ -97,6 +113,26 @@ public class MazeDisplayer extends Canvas {
     public void setImageFileNameCharacter(String imageFileNameCharacter) {
         this.ImageFileNameCharacter.set(imageFileNameCharacter);
     }
+
+    public String getBeenFileName() {
+        return BeenFileName.get();
+    }
+
+    public void setBeenFileName(String beenFileName) {
+        this.BeenFileName.set(beenFileName);
+    }
+
+    public String getNotBeenFileName() {
+        return NotBeenFileName.get();
+    }
+
+    public void setNotBeenFileName(String notBeenFileName) {
+        this.NotBeenFileName.set(notBeenFileName);
+    }
+
+
+
+
     //endregion
 
 }

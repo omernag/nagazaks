@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
@@ -49,12 +50,12 @@ public class MyViewController implements Observer, IView{
         bindProperties(viewModel);
         NewGameController newGame = new NewGameController();
         newGame.setViewModel(viewModel);
-        mazeDisplayer=new MazeDisplayer();
+
     }
 
     private void bindProperties(MyViewModel viewModel) {
-        lbl_currRow.textProperty().bind(viewModel.characterPositionRow);
-        lbl_currCol.textProperty().bind(viewModel.characterPositionColumn);
+        lbl_currRow.textProperty().bind(characterPositionRow);
+        lbl_currCol.textProperty().bind(characterPositionColumn);
     }
 
     @Override
@@ -159,6 +160,13 @@ public class MyViewController implements Observer, IView{
         }
     }
 
+    public void pressExit(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Do you want to save before leaving?");
+        alert.showAndWait();
+
+    }
+
     public void pressAbout(){
         Parent root;
         try {
@@ -197,5 +205,7 @@ public class MyViewController implements Observer, IView{
         return characterPositionColumn;
     }
 
-
+    public void mouseClicked(MouseEvent mouseEvent) {
+        this.mazeDisplayer.requestFocus();
+    }
 }
