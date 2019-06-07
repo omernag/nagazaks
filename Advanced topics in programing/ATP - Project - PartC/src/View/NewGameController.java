@@ -2,9 +2,13 @@ package View;
 
 import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 public class NewGameController {
@@ -16,20 +20,24 @@ public class NewGameController {
     TextField rowsTextfield;
     @FXML
     TextField colsTextfield;
+    private Scene mainScene;
+    private Stage mainStage;
 
 
-
-    public void generateMaze(){
+    public void generateMaze(ActionEvent event){
         if(rowsTextfield==null || colsTextfield==null){
             showAlert("Wrong input, please enter a valid number!");
         }
         int rows = Integer.valueOf(rowsTextfield.getText());
         int columns = Integer.valueOf(colsTextfield.getText());
-        if(rows<=0 || columns<=0){
-            showAlert("One of the numbers you've entered is not positive, please try again");
+        if(rows<10 || columns<10){
+            showAlert("Please insert Integers bigger than 9");
         }
         //call maze generator
+        ((Stage)((Node)(event.getSource())).getScene().getWindow()).close();
         viewModel.generateMaze(rows,columns);
+
+
     }
 
     private void showAlert(String alertMessage) {
@@ -41,4 +49,6 @@ public class NewGameController {
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
     }
+
+
 }

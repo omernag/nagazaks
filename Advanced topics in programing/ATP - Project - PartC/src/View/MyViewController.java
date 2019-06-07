@@ -2,16 +2,24 @@ package View;
 
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
+import algorithms.mazeGenerators.Position;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +28,7 @@ import java.util.Observer;
 
 public class MyViewController implements Observer, IView{
 
-    private MyViewModel viewModel;
+    //private MyViewModel viewModel;
     public MazeDisplayer mazeDisplayer;
     public javafx.scene.control.Label lbl_currRow;
     public javafx.scene.control.Label lbl_currCol;
@@ -28,6 +36,12 @@ public class MyViewController implements Observer, IView{
 
     public StringProperty characterPositionRow = new SimpleStringProperty();
     public StringProperty characterPositionColumn = new SimpleStringProperty();
+
+
+    @FXML
+    private MyViewModel viewModel;
+    private Scene mainScene;
+    private Stage mainStage;
 
 
     public void setViewModel(MyViewModel viewModel) {
@@ -47,7 +61,7 @@ public class MyViewController implements Observer, IView{
     public void update(Observable o, Object arg) {
         if (o == viewModel) {
             displayMaze(viewModel.getMaze());
-            btn_generateMaze.setDisable(false);//?
+            btn_generateMaze.setDisable(true);//?
         }
     }
 
@@ -78,10 +92,15 @@ public class MyViewController implements Observer, IView{
         });
     }
 
-    public void pressNew(){
+    public void pressNew(ActionEvent event){
         Parent root;
         try {
             Stage stage = new Stage();
+
+            Region veil = new Region();
+            veil.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3)");
+            veil.setVisible(true);
+
             stage.setTitle("New Game");
             FXMLLoader fxmlLoader = new FXMLLoader();
             root = fxmlLoader.load(getClass().getResource("../View/NewGame.fxml").openStream());
@@ -89,6 +108,7 @@ public class MyViewController implements Observer, IView{
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("../View/NewGameStyle.css").toExternalForm());
             stage.show();
+
 
             // Hide this current window (if this is what you want)
             //((Node)(event.getSource())).getScene().getWindow().hide();
@@ -119,6 +139,26 @@ public class MyViewController implements Observer, IView{
 
 
     }
+
+    public void pressProperties(){
+
+        Parent root;
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Properties");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            root = fxmlLoader.load(getClass().getResource("../View/Properties.fxml").openStream());
+            Scene scene = new Scene(root, 400, 300);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("../View/MyViewStyle.css").toExternalForm());
+            stage.show();
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void pressAbout(){
         Parent root;
         try {
