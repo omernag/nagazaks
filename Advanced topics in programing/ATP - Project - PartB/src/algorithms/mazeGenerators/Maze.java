@@ -203,6 +203,9 @@ public class Maze implements Serializable {
         return struct[i][j];
     }
 
+    public void setValueByInt(int i, int j,int value){
+       struct[i][j]=value;
+    }
     /**
      * This method sets a wall on a given position.
      * @param position i, j

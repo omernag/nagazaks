@@ -3,6 +3,7 @@ package View;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -34,9 +35,11 @@ public class MyViewController implements Observer, IView{
     public javafx.scene.control.Label lbl_currRow;
     public javafx.scene.control.Label lbl_currCol;
     public javafx.scene.control.Button btn_generateMaze;
+    public javafx.scene.control.Button btn_solveMaze;
 
     public StringProperty characterPositionRow = new SimpleStringProperty();
     public StringProperty characterPositionColumn = new SimpleStringProperty();
+    public boolean newMaze;
 
 
     @FXML
@@ -61,17 +64,54 @@ public class MyViewController implements Observer, IView{
     @Override
     public void update(Observable o, Object arg) {
         if (o == viewModel) {
-            displayMaze(viewModel.getMaze());
-            btn_generateMaze.setDisable(false);//?
+            if(viewModel.isSolved()){
+                displaySolution(viewModel.getSolution());
+                btn_generateMaze.setDisable(false);
+                btn_solveMaze.setDisable(true);
+            }
+            else if(viewModel.isFinished() && viewModel.isMoved()){ //just finished congratulations
+                displayMaze(viewModel.getMaze());
+                showAlert("Congratulations - you are the BEST!");
+                btn_generateMaze.setDisable(false);
+
+            }
+            else if (viewModel.isFinished() && !viewModel.isMoved()){ //already finished
+                showAlert("You've already finished \nyou can always start a new game!");
+            }
+            else if (!viewModel.isFinished() && !viewModel.isMoved()){ //illegal move
+                showAlert("Cant do that :(");
+            }
+            else {
+                displayMaze(viewModel.getMaze());
+                btn_generateMaze.setDisable(true);
+            }
         }
+    }
+
+    private void displaySolution(Solution solution) {
+        mazeDisplayer.setSolution(solution);
+    }
+
+    private void showAlert(String alertMessage) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(alertMessage);
+        alert.show();
     }
 
     @Override
     public void displayMaze(Maze maze) {
-        mazeDisplayer.setMaze(maze);
+
+
         int characterPositionRow = viewModel.getCharacterPositionRow();
         int characterPositionColumn = viewModel.getCharacterPositionColumn();
-        mazeDisplayer.setCharacterPosition(characterPositionRow, characterPositionColumn);
+        if(newMaze){
+            mazeDisplayer.setMaze(maze);
+            mazeDisplayer.setCharacterPosition(characterPositionRow, characterPositionColumn);
+
+        }
+        else{
+            mazeDisplayer.resetCharacterPosition(characterPositionRow,characterPositionColumn);
+        }
         this.characterPositionRow.set(characterPositionRow + "");
         this.characterPositionColumn.set(characterPositionColumn + "");
     }
@@ -94,6 +134,9 @@ public class MyViewController implements Observer, IView{
     }
 
     public void pressNew(ActionEvent event){
+        newMaze=true;
+        btn_solveMaze.setDisable(false);
+
         Parent root;
         try {
             Stage stage = new Stage();
@@ -186,9 +229,11 @@ public class MyViewController implements Observer, IView{
     }
 
     public void pressSolveMaze(ActionEvent actionEvent) {
+        viewModel.solveSearchProblem();
     }
 
     public void KeyPressed(KeyEvent keyEvent) {
+        newMaze=false;
         viewModel.moveCharacter(keyEvent.getCode());
         keyEvent.consume();
     }
@@ -213,4 +258,6 @@ public class MyViewController implements Observer, IView{
     public void mouseClicked(MouseEvent mouseEvent) {
         this.mazeDisplayer.requestFocus();
     }
+
+
 }
