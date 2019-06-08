@@ -113,6 +113,7 @@ public class MyModel extends Observable implements IModel {
     }
 
     public void SolveSearchProblem() {
+        currentMaze.setStartPosition(new Position(characterPositionRow,characterPositionColumn));
         try {
             Client client = new Client(InetAddress.getLocalHost(), 5401, new IClientStrategy() {
                 @Override

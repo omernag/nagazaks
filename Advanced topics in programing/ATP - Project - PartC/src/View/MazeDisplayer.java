@@ -191,9 +191,9 @@ public class MazeDisplayer extends Canvas {
         for (AState mazeState : mazeSolution.getSolutionPath())
         {
           Position p =  ((MazeState)mazeState).getState();
-          if(maze.getValueByInt(p.getRowIndex(),p.getColumnIndex())!=2){
+        //  if(maze.getValueByInt(p.getRowIndex(),p.getColumnIndex())!=2){
                 maze.setValueByInt(p.getRowIndex(),p.getColumnIndex(),3);
-          }
+        //   }
         }
         draw();
     }
