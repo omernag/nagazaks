@@ -9,6 +9,12 @@
     <list default="true" id="cf9290e3-7002-4ff8-921f-2387327a0aca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/MyModel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/MyModel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/MyModel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/MyModel$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/MyModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/Model/MyModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MazeDisplayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MazeDisplayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/Model/MyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/Model/MyModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MazeDisplayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MazeDisplayer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +111,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-12" />
     <option name="y" value="-12" />
     <option name="width" value="1944" />
@@ -245,7 +251,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17894737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
