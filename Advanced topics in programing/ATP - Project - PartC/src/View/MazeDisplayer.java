@@ -25,6 +25,8 @@ public class MazeDisplayer extends Canvas {
     private Maze maze;
     private int characterPositionRow = 1;
     private int characterPositionColumn = 1;
+    private int prevRow = 1;
+    private int prevCol = 1;
 
     private StringProperty NotBeenFileName = new SimpleStringProperty();
 
@@ -41,9 +43,14 @@ public class MazeDisplayer extends Canvas {
     }
 
     public void setCharacterPosition(int row, int column) {
+        int prevRow = characterPositionRow;
+        int prevCol = characterPositionColumn;
         characterPositionRow = row;
         characterPositionColumn = column;
+
         redraw();
+
+        //move(row,column,prevRow,prevCol);
     }
 
     public int getCharacterPositionRow() {
@@ -53,6 +60,26 @@ public class MazeDisplayer extends Canvas {
     public int getCharacterPositionColumn() {
         return characterPositionColumn;
     }
+
+    public void move(int currRow,int currCol, int prevRow, int prevCol) {
+        try {
+            Image beenImage = new Image(new FileInputStream(BeenFileName.get()));
+            Image characterImage = new Image(new FileInputStream(ImageFileNameCharacter.get()));
+
+            double canvasHeight = getHeight();
+            double canvasWidth = getWidth();
+            double cellHeight = canvasHeight / maze.getLines();
+            double cellWidth = canvasWidth / maze.getColumns();
+
+            GraphicsContext gc = getGraphicsContext2D();
+            gc.drawImage(beenImage, prevRow * cellHeight, prevCol * cellWidth, cellHeight, cellWidth);
+            gc.drawImage(characterImage, currRow * cellHeight, currCol * cellWidth, cellHeight, cellWidth);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void redraw() {
         if (maze != null) {

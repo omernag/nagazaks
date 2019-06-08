@@ -62,7 +62,7 @@ public class MyViewController implements Observer, IView{
     public void update(Observable o, Object arg) {
         if (o == viewModel) {
             displayMaze(viewModel.getMaze());
-            btn_generateMaze.setDisable(true);//?
+            btn_generateMaze.setDisable(false);//?
         }
     }
 
@@ -186,6 +186,11 @@ public class MyViewController implements Observer, IView{
     }
 
     public void pressSolveMaze(ActionEvent actionEvent) {
+    }
+
+    public void KeyPressed(KeyEvent keyEvent) {
+        viewModel.moveCharacter(keyEvent.getCode());
+        keyEvent.consume();
     }
 
 

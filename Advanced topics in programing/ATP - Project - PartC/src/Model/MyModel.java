@@ -126,28 +126,55 @@ public class MyModel extends Observable implements IModel {
     }
 
     public void moveCharacter(KeyCode movement) {
-        switch (movement) {
-            case UP:
-                characterPositionRow--;
-                break;
-            case DOWN:
-                characterPositionRow++;
-                break;
-            case RIGHT:
-                characterPositionColumn++;
-                break;
-            case LEFT:
-                characterPositionColumn--;
-                break;
+        if(isLegalMove(movement)){
+            switch (movement) {
+                case UP:
+                    characterPositionRow--;
+                    break;
+                case DOWN:
+                    characterPositionRow++;
+                    break;
+                case RIGHT:
+                    characterPositionColumn++;
+                    break;
+                case LEFT:
+                    characterPositionColumn--;
+                    break;
+            }
+            setChanged();
+            notifyObservers();
         }
-        setChanged();
-        notifyObservers();
     }
 
     public int getCharacterPositionRow() {
         return characterPositionRow;
     }
 
+    public boolean isLegalMove(KeyCode movement){
+        switch (movement) {
+            case UP:
+                if(currentMaze.getValueByInt(characterPositionRow-1,characterPositionColumn)==0){
+                    return true;
+                }
+                break;
+            case DOWN:
+                if(currentMaze.getValueByInt(characterPositionRow+1,characterPositionColumn)==0){
+                    return true;
+                }
+                break;
+            case RIGHT:
+                if(currentMaze.getValueByInt(characterPositionRow,characterPositionColumn+1)==0){
+                    return true;
+                }
+                break;
+            case LEFT:
+                if(currentMaze.getValueByInt(characterPositionRow,characterPositionColumn-1)==0){
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
 
     public int getCharacterPositionColumn() {
         return characterPositionColumn;
