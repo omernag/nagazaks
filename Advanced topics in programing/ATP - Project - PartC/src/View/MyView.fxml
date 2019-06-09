@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane onKeyPressed="#KeyPressed" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<BorderPane fx:id="mainPane" onKeyPressed="#KeyPressed" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <left>
         <VBox prefHeight="200.0" prefWidth="178.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
@@ -37,7 +37,7 @@
                     <Button fx:id="btn_solveMaze" onAction="#pressSolveMaze" prefHeight="25.0" prefWidth="167.0" text="Solve Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                     <Label text="Char row:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                     <Label text="Char column:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                    <Label fx:id="lbl_currRow"  GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <Label fx:id="lbl_currRow" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     <Label fx:id="lbl_currCol" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                     <!--<Label GridPane.columnIndex="1" GridPane.rowIndex="4" text="${controller.characterPositionRow}" />-->
                     <!--<Label GridPane.columnIndex="1" GridPane.rowIndex="5" text="${controller.characterPositionColumn}"/>-->
@@ -91,7 +91,7 @@
                                 <MenuItem mnemonicParsing="false" onAction="#pressAbout" text="About" />
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
+                        <Menu fx:id="tab_help" mnemonicParsing="false" onAction="#pressHelp" text="Help">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="Help" />
                             </items>
@@ -102,9 +102,9 @@
         </VBox>
     </top>
     <center>
-        <Pane BorderPane.alignment="CENTER">
+        <Pane fx:id="mazePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplayer fx:id="mazeDisplayer" solutionFileName="resources/Images/greenbrick.jpg" imageFileNameCharacter="resources/Images/yellowbrickDorthy.jpg" imageFileNameWall="resources/Images/bush.jpg" beenFileName="resources/Images/yellowbrick.jpg" notBeenFileName="resources/Images/yellowbrick2.jpg"  onMouseClicked="#mouseClicked" width="600" height="600" />
+                <MazeDisplayer fx:id="mazeDisplayer" beenFileName="resources/Images/yellowbrick.jpg" height="600" imageFileNameCharacter="resources/Images/yellowbrickDorthy.jpg" imageFileNameWall="resources/Images/bush.jpg" notBeenFileName="resources/Images/yellowbrick2.jpg" onMouseClicked="#mouseClicked" solutionFileName="resources/Images/greenbrick.jpg" width="600" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

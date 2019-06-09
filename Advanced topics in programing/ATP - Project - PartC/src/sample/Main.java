@@ -28,7 +28,7 @@ public class Main extends Application {
         primaryStage.setTitle("MAzE SurViVoRS");
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("../View/MyView.fxml").openStream());
-        Scene scene = new Scene(root, 800, 700);
+        Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add(getClass().getResource("../View/MyViewStyle.css").toExternalForm());
         primaryStage.setScene(scene);
         //--------------

@@ -10,14 +10,17 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -25,10 +28,12 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
-public class MyViewController implements Observer, IView{
+public class MyViewController implements Observer, IView, Initializable {
 
     //private MyViewModel viewModel;
     public MazeDisplayer mazeDisplayer;
@@ -36,6 +41,8 @@ public class MyViewController implements Observer, IView{
     public javafx.scene.control.Label lbl_currCol;
     public javafx.scene.control.Button btn_generateMaze;
     public javafx.scene.control.Button btn_solveMaze;
+    public javafx.scene.layout.Pane mazePane;
+    public javafx.scene.layout.Pane mainPane;
 
     public StringProperty characterPositionRow = new SimpleStringProperty();
     public StringProperty characterPositionColumn = new SimpleStringProperty();
@@ -59,6 +66,7 @@ public class MyViewController implements Observer, IView{
     private void bindProperties(MyViewModel viewModel) {
         lbl_currRow.textProperty().bind(characterPositionRow);
         lbl_currCol.textProperty().bind(characterPositionColumn);
+
     }
 
     @Override
@@ -206,8 +214,21 @@ public class MyViewController implements Observer, IView{
     public void pressExit(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Do you want to save before leaving?");
+        alert.setOnCloseRequest(ActionEvent event)->{
+
+        };
         alert.showAndWait();
 
+
+    }
+
+    public void pressHelp(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("MAzE SurVivor");
+        alert.setHeaderText("Help");
+        alert.setContentText("Game Rules:\nGet you'r character out of the maze\nYou'r location is marked with an image of you'r character\n" +
+                "The exit point is marked with Yellow Stones\nMove freely with the NUMPAD\n\nGood luck. You'll need it");
+        alert.show();
     }
 
     public void pressAbout(){
@@ -260,4 +281,10 @@ public class MyViewController implements Observer, IView{
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        mazePane.prefHeightProperty().bind(mainPane.heightProperty());
+        mazePane.prefWidthProperty().bind(mainPane.widthProperty());
+
+    }
 }
