@@ -75,4 +75,5 @@ public class MyViewModel extends Observable implements Observer {
 
     public void solveSearchProblem() { model.SolveSearchProblem(); }
 
-    }
+    public void stopServers(){model.stopServers();}
+}

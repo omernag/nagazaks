@@ -18,24 +18,32 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MyViewController implements Observer, IView, Initializable {
 
-    //private MyViewModel viewModel;
+    @FXML
+    private MyViewModel viewModel;
+    private Scene mainScene;
+    private Stage mainStage;
     public MazeDisplayer mazeDisplayer;
     public javafx.scene.control.Label lbl_currRow;
     public javafx.scene.control.Label lbl_currCol;
@@ -49,18 +57,11 @@ public class MyViewController implements Observer, IView, Initializable {
     public boolean newMaze;
 
 
-    @FXML
-    private MyViewModel viewModel;
-    private Scene mainScene;
-    private Stage mainStage;
-
-
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
         bindProperties(viewModel);
         NewGameController newGame = new NewGameController();
         newGame.setViewModel(viewModel);
-
     }
 
     private void bindProperties(MyViewModel viewModel) {
@@ -108,8 +109,6 @@ public class MyViewController implements Observer, IView, Initializable {
 
     @Override
     public void displayMaze(Maze maze) {
-
-
         int characterPositionRow = viewModel.getCharacterPositionRow();
         int characterPositionColumn = viewModel.getCharacterPositionColumn();
         if(newMaze){
@@ -178,9 +177,10 @@ public class MyViewController implements Observer, IView, Initializable {
             fileChooser.getExtensionFilters().add(extFilter);
             File file = fileChooser.showOpenDialog(loadStage);
             //Generate Maze from file
+
     }
 
-    public void pressSave(){
+    public void pressSave() throws FileNotFoundException {
 
             Stage saveStage = new Stage();
             saveStage.setTitle("Load Maze");
@@ -188,7 +188,7 @@ public class MyViewController implements Observer, IView, Initializable {
             FileChooser fileChooser = new FileChooser();
             mazefile = fileChooser.showSaveDialog(saveStage);
             // write to the file
-
+            //FileOutputStream sw = new FileOutputStream(mazefile);
 
     }
 
@@ -211,14 +211,31 @@ public class MyViewController implements Observer, IView, Initializable {
         }
     }
 
-    public void pressExit(){
+    public void pressExit() throws FileNotFoundException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Do you want to save before leaving?");
-        alert.setOnCloseRequest(ActionEvent event)->{
+        ButtonType btn_save = new ButtonType("Save and Exit");
+        ButtonType btn_exit = new ButtonType("Exit without saving");
+        ButtonType btn_stay = new ButtonType("I want to stay");
 
-        };
-        alert.showAndWait();
+        alert.getButtonTypes().setAll(btn_save, btn_exit, btn_stay);
+        Stage stage = (Stage) btn_solveMaze.getScene().getWindow();
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == btn_save){
+            pressSave();
+            viewModel.stopServers();
+            stage.close();
+            alert.close();
 
+
+        } else if(result.get() == btn_exit){
+
+            stage.close();
+            alert.close();
+        }
+        else{
+            alert.close();
+        }
 
     }
 

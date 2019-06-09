@@ -17,10 +17,11 @@ import javafx.stage.WindowEvent;
 import java.util.Optional;
 
 public class Main extends Application {
+    MyModel model;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        MyModel model = new MyModel();
+        model = new MyModel();
         model.startServers();
         MyViewModel viewModel = new MyViewModel(model);
         model.addObserver(viewModel);
@@ -48,12 +49,14 @@ public class Main extends Application {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK){
+                    model.stopServers();
                     // ... user chose OK
                     // Close program
                 } else {
                     // ... user chose CANCEL or closed the dialog
                     windowEvent.consume();
                 }
+
             }
         });
     }

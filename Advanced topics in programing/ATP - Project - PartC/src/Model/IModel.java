@@ -19,6 +19,7 @@ public interface IModel {
     void SolveSearchProblem();
     Maze getMaze();
     Solution getSolution();
+    void stopServers();
 
 
 

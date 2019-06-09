@@ -7,14 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf9290e3-7002-4ff8-921f-2387327a0aca" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/sample/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -112,10 +107,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1928" />
-    <option name="y" value="-262" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-11" />
+    <option name="y" value="-11" />
+    <option name="width" value="1943" />
+    <option name="height" value="1043" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -250,10 +245,10 @@
     <option name="totallyTimeSpent" value="4528000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-262" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.117803834" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17894737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
