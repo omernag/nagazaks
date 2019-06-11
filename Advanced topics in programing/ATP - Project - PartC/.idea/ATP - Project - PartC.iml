@@ -20,6 +20,6 @@
         <jarDirectory url="file://$MODULE_DIR$/../ATP - Project - PartB/out/artifacts/ATPProjectPartB_jar" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="ATP - Project - PartB" level="project" />
+    <orderEntry type="library" exported="" name="ATP - Project - PartB" level="project" />
   </component>
 </module>

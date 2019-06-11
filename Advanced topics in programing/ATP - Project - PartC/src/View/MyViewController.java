@@ -128,6 +128,10 @@ public class MyViewController implements Observer, IView, Initializable {
         this.characterPositionColumn.set(characterPositionColumn + "");
     }
 
+    public void backroundMusic(){
+
+    }
+
     public void setResizeEvent(Scene scene) {
         long width = 0;
         long height = 0;

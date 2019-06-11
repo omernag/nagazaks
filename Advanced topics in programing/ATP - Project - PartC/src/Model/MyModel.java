@@ -167,6 +167,34 @@ public class MyModel extends Observable implements IModel {
                     case LEFT:
                         characterPositionColumn--;
                         break;
+                    case NUMPAD1:
+                        characterPositionRow++;
+                        characterPositionColumn--;
+                        break;
+                    case NUMPAD2:
+                        characterPositionRow++;
+                        break;
+                    case NUMPAD3:
+                        characterPositionRow++;
+                        characterPositionColumn++;
+                        break;
+                    case NUMPAD4:
+                        characterPositionColumn--;
+                        break;
+                    case NUMPAD6:
+                        characterPositionColumn++;
+                        break;
+                    case NUMPAD7:
+                        characterPositionRow--;
+                        characterPositionColumn--;
+                        break;
+                    case NUMPAD8:
+                        characterPositionRow--;
+                        break;
+                    case NUMPAD9:
+                        characterPositionRow--;
+                        characterPositionColumn++;
+                        break;
                 }
                 if(currentMaze.getGoalPosition().getRowIndex()==characterPositionRow && currentMaze.getGoalPosition().getColumnIndex()==characterPositionColumn )
                 {
@@ -207,6 +235,47 @@ public class MyModel extends Observable implements IModel {
                 break;
             case LEFT:
                 if( currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn-1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn-1)==0 ){
+                    return true;
+                }
+                break;
+
+            case NUMPAD1:
+                if(currentMaze.isInMaze(new Position(characterPositionRow+1,characterPositionColumn-1)) && currentMaze.getValueByInt(characterPositionRow+1,characterPositionColumn-1)==0){
+                    return true;
+                }
+                break;
+            case NUMPAD2:
+                if(  currentMaze.isInMaze(new Position(characterPositionRow+1,characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow+1,characterPositionColumn)==0){
+                    return true;
+                }
+                break;
+            case NUMPAD3:
+                if(currentMaze.isInMaze(new Position(characterPositionRow+1,characterPositionColumn+1)) && currentMaze.getValueByInt(characterPositionRow+1,characterPositionColumn+1)==0){
+                    return true;
+                }
+                break;
+            case NUMPAD4:
+                if( currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn-1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn-1)==0 ){
+                    return true;
+                }
+                break;
+            case NUMPAD6:
+                if(  currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn+1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn+1)==0){
+                    return true;
+                }
+                break;
+            case NUMPAD7:
+                if(currentMaze.isInMaze(new Position(characterPositionRow-1,characterPositionColumn-1)) && currentMaze.getValueByInt(characterPositionRow-1,characterPositionColumn-1)==0){
+                    return true;
+                }
+                break;
+            case NUMPAD8:
+                if(currentMaze.isInMaze(new Position(characterPositionRow-1,characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow-1,characterPositionColumn)==0){
+                    return true;
+                }
+                break;
+            case NUMPAD9:
+                if(currentMaze.isInMaze(new Position(characterPositionRow-1,characterPositionColumn+1)) && currentMaze.getValueByInt(characterPositionRow-1,characterPositionColumn+1)==0){
                     return true;
                 }
                 break;
