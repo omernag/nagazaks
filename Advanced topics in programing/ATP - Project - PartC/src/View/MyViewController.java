@@ -3,6 +3,7 @@ package View;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
+import algorithms.search.SearchableMaze;
 import algorithms.search.Solution;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,10 +29,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.*;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -62,6 +61,8 @@ public class MyViewController implements Observer, IView, Initializable {
         bindProperties(viewModel);
         NewGameController newGame = new NewGameController();
         newGame.setViewModel(viewModel);
+        btn_solveMaze.setDisable(true);
+
     }
 
     private void bindProperties(MyViewModel viewModel) {
@@ -93,6 +94,10 @@ public class MyViewController implements Observer, IView, Initializable {
             else {
                 displayMaze(viewModel.getMaze());
                 btn_generateMaze.setDisable(true);
+            }
+
+            if(viewModel.isFinished()){
+                btn_solveMaze.setDisable(true);
             }
         }
     }
@@ -173,23 +178,59 @@ public class MyViewController implements Observer, IView, Initializable {
             Stage loadStage = new Stage();
             loadStage.setTitle("Load Maze");
             FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("MAZE files (*.maze)", "*.maze");
             fileChooser.getExtensionFilters().add(extFilter);
             File file = fileChooser.showOpenDialog(loadStage);
-            //Generate Maze from file
+            if(file!=null) {
+                if (!file.getName().endsWith(".maze")) {
+                    showAlert("The file you chose is not a Maze!");
+                } else {
+                    try {
+                        FileInputStream inputMaze = new FileInputStream(file);
+                        ObjectInputStream objectIn = new ObjectInputStream(inputMaze);
+                        Maze mazeInput = (Maze) objectIn.readObject();
+                        newMaze = true;
+                        btn_solveMaze.setDisable(false);
+                        viewModel.generateMazeFromFile(mazeInput);
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        showAlert("The file you chose is not a Maze!");
+                    }
+
+
+                }
+            }
 
     }
 
-    public void pressSave() throws FileNotFoundException {
-
-            Stage saveStage = new Stage();
-            saveStage.setTitle("Load Maze");
-            File mazefile = null;
-            FileChooser fileChooser = new FileChooser();
-            mazefile = fileChooser.showSaveDialog(saveStage);
-            // write to the file
-            //FileOutputStream sw = new FileOutputStream(mazefile);
-
+    public void pressSave()  {
+        try {
+            if(mazeDisplayer.gotmaze) {
+                Stage saveStage = new Stage();
+                saveStage.setTitle("Save Maze");
+                Maze sMaze = viewModel.getMaze();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setInitialFileName("NewMaze");
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("MAZE files (*.maze)", "*.maze");
+                fileChooser.getExtensionFilters().add(extFilter);
+                File mazeFile = fileChooser.showSaveDialog(saveStage);
+                if (mazeFile != null) {
+                    FileOutputStream fileOut = new FileOutputStream(mazeFile);
+                    ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+                    objectOut.flush();
+                    objectOut.writeObject(sMaze);
+                    objectOut.close();
+                }
+            }
+            else{
+                showAlert("No Maze to save");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void pressProperties(){

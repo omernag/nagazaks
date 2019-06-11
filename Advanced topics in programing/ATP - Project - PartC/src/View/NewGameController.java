@@ -32,10 +32,14 @@ public class NewGameController {
         int columns = Integer.valueOf(colsTextfield.getText());
         if(rows<10 || columns<10){
             showAlert("Please insert Integers bigger than 9");
+            ((Stage) ((Node) (event.getSource())).getScene().getWindow()).close();
+
         }
         //call maze generator
-        ((Stage)((Node)(event.getSource())).getScene().getWindow()).close();
-        viewModel.generateMaze(rows,columns);
+        else {
+            ((Stage) ((Node) (event.getSource())).getScene().getWindow()).close();
+            viewModel.generateMaze(rows, columns);
+        }
 
 
     }

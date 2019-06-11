@@ -22,6 +22,5 @@ public interface IModel {
     void stopServers();
 
 
-
-
+    void generateMazeFromFile(Maze mazeInput);
 }

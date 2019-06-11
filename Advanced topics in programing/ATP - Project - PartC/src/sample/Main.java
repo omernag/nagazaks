@@ -26,7 +26,7 @@ public class Main extends Application {
         MyViewModel viewModel = new MyViewModel(model);
         model.addObserver(viewModel);
         //--------------
-        primaryStage.setTitle("MAzE SurViVoRS");
+        primaryStage.setTitle("The Wiz Maze");
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("../View/MyView.fxml").openStream());
         Scene scene = new Scene(root, 800, 600);

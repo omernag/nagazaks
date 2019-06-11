@@ -97,6 +97,15 @@ public class MyModel extends Observable implements IModel {
             notifyObservers();
     }
 
+    public void generateMazeFromFile(Maze mazeInput){
+        solved=false;
+        setcurrentMaze(mazeInput);
+        finished = false;
+        moved = true;
+        setChanged();
+        notifyObservers();
+    }
+
     @Override
     public boolean isFinished() {
         return finished;
