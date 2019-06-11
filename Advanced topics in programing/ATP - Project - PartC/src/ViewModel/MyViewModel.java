@@ -18,7 +18,7 @@ public class MyViewModel extends Observable implements Observer {
     private int characterPositionColumnIndex;
     private boolean finished;
     private boolean moved;
-    private boolean solved;
+    private boolean justSolved;
 
 
     public MyViewModel(IModel model){
@@ -31,9 +31,10 @@ public class MyViewModel extends Observable implements Observer {
             characterPositionColumnIndex = model.getCharacterPositionColumn();
             finished = model.isFinished();
             moved = model.isMoved();
-            solved = model.isSolved();
+            justSolved = model.isSolved();
             setChanged();
             notifyObservers();
+
         }
     }
 
@@ -46,7 +47,7 @@ public class MyViewModel extends Observable implements Observer {
     }
 
     public boolean isSolved() {
-        return solved;
+        return justSolved;
     }
 
     public void generateMaze(int width, int height){

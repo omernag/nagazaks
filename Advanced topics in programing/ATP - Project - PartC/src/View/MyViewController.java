@@ -2,34 +2,27 @@ package View;
 
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.Position;
-import algorithms.search.SearchableMaze;
 import algorithms.search.Solution;
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.Region;
+import javafx.scene.media.Media;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import java.net.URL;
 import java.util.Observable;
@@ -53,7 +46,10 @@ public class MyViewController implements Observer, IView, Initializable {
 
     public StringProperty characterPositionRow = new SimpleStringProperty();
     public StringProperty characterPositionColumn = new SimpleStringProperty();
+    public StringProperty MusicFileName = new SimpleStringProperty();
+
     public boolean newMaze;
+    public boolean solved;
 
 
     public void setViewModel(MyViewModel viewModel) {
@@ -75,6 +71,7 @@ public class MyViewController implements Observer, IView, Initializable {
     public void update(Observable o, Object arg) {
         if (o == viewModel) {
             if(viewModel.isSolved()){
+                solved=true;
                 displaySolution(viewModel.getSolution());
                 btn_generateMaze.setDisable(false);
                 btn_solveMaze.setDisable(true);
@@ -93,7 +90,11 @@ public class MyViewController implements Observer, IView, Initializable {
             }
             else {
                 displayMaze(viewModel.getMaze());
-                btn_generateMaze.setDisable(true);
+                if(solved){
+                    btn_generateMaze.setDisable(false);
+                }else{
+                    btn_generateMaze.setDisable(true);
+                }
             }
 
             if(viewModel.isFinished()){
@@ -119,6 +120,7 @@ public class MyViewController implements Observer, IView, Initializable {
         if(newMaze){
             mazeDisplayer.setMaze(maze);
             mazeDisplayer.setCharacterPosition(characterPositionRow, characterPositionColumn);
+            solved = false;
 
         }
         else{
@@ -126,10 +128,6 @@ public class MyViewController implements Observer, IView, Initializable {
         }
         this.characterPositionRow.set(characterPositionRow + "");
         this.characterPositionColumn.set(characterPositionColumn + "");
-    }
-
-    public void backroundMusic(){
-
     }
 
     public void setResizeEvent(Scene scene) {
@@ -196,7 +194,6 @@ public class MyViewController implements Observer, IView, Initializable {
                         newMaze = true;
                         btn_solveMaze.setDisable(false);
                         viewModel.generateMazeFromFile(mazeInput);
-
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -338,9 +335,13 @@ public class MyViewController implements Observer, IView, Initializable {
         return characterPositionColumn;
     }
 
+
     public void mouseClicked(MouseEvent mouseEvent) {
         this.mazeDisplayer.requestFocus();
     }
+
+
+
 
 
     @Override

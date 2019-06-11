@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainPane" onKeyPressed="#KeyPressed" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<BorderPane fx:id="mainPane" onKeyPressed="#KeyPressed"  xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <left>
-        <VBox prefHeight="200.0" prefWidth="178.0" spacing="5.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="200.0" prefWidth="178.0" spacing="5.0" BorderPane.alignment="CENTER" >
             <children>
                 <GridPane>
                     <columnConstraints>
@@ -104,7 +104,7 @@
     <center>
         <Pane fx:id="mazePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplayer fx:id="mazeDisplayer" beenFileName="resources/Images/yellowbrick.jpg" height="600" imageFileNameCharacter="resources/Images/yellowbrickDorthy.jpg" imageFileNameWall="resources/Images/bush.jpg" notBeenFileName="resources/Images/yellowbrick2.jpg" onMouseClicked="#mouseClicked" solutionFileName="resources/Images/greenbrick.jpg" width="600" />
+                <MazeDisplayer fx:id="mazeDisplayer" beenFileName="resources/Images/yellowbrick.jpg" height="600" imageFileNameCharacter="resources/Images/yellowbrickDorthy.jpg" imageFileNameWall="resources/Images/bush.jpg" notBeenFileName="resources/Images/yellowbrick2.jpg" onMouseClicked="#mouseClicked" solutionFileName="resources/Images/greenbrick.jpg"  width="600" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
