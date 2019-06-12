@@ -1,7 +1,8 @@
 
 
 .root{
-    -fx-background-color: gray;
+    -fx-background-image: url("file:resources/Images/wizback.jpg");
+    -fx-background-size: stretch;
 }
 
 Button {
