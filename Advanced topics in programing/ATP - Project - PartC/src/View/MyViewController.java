@@ -3,22 +3,32 @@ package View;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Control;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.media.Media;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -30,12 +40,16 @@ import java.util.Observer;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class MyViewController implements Observer, IView, Initializable {
+import static javafx.scene.input.KeyCode.CONTROL;
 
-    @FXML
+public class MyViewController implements Observer, IView {
+
+
     private MyViewModel viewModel;
     private Scene mainScene;
     private Stage mainStage;
+
+    @FXML
     public MazeDisplayer mazeDisplayer;
     public javafx.scene.control.Label lbl_currRow;
     public javafx.scene.control.Label lbl_currCol;
@@ -50,6 +64,7 @@ public class MyViewController implements Observer, IView, Initializable {
 
     public boolean newMaze;
     public boolean solved;
+    public boolean ctrlPress=false;
 
 
     public void setViewModel(MyViewModel viewModel) {
@@ -131,21 +146,28 @@ public class MyViewController implements Observer, IView, Initializable {
     }
 
     public void setResizeEvent(Scene scene) {
-        long width = 0;
-        long height = 0;
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                System.out.println("Width: " + newSceneWidth);
+                mazeDisplayer.widthProperty().bind(mazePane.widthProperty());
+
             }
         });
         scene.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                System.out.println("Height: " + newSceneHeight);
+                mazeDisplayer.heightProperty().bind(mazePane.heightProperty());
             }
         });
     }
+
+
+
+    public void zoom( ScrollEvent event) {
+        if(ctrlPress)
+            mazeDisplayer.zoom(event);
+    }
+
 
     public void pressNew(ActionEvent event){
         newMaze=true;
@@ -313,11 +335,20 @@ public class MyViewController implements Observer, IView, Initializable {
     }
 
     public void KeyPressed(KeyEvent keyEvent) {
-        newMaze=false;
-        viewModel.moveCharacter(keyEvent.getCode());
+        if(keyEvent.getCode() == CONTROL){
+            ctrlPress=  true;
+        }
+        else {
+            newMaze=false;
+            viewModel.moveCharacter(keyEvent.getCode());
+        }
         keyEvent.consume();
     }
 
+    public void ctrlRelease(KeyEvent event){
+        ctrlPress=false;
+        event.consume();
+    }
 
     public String getCharacterPositionRow() {
         return characterPositionRow.get();
@@ -338,16 +369,5 @@ public class MyViewController implements Observer, IView, Initializable {
 
     public void mouseClicked(MouseEvent mouseEvent) {
         this.mazeDisplayer.requestFocus();
-    }
-
-
-
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        mazePane.prefHeightProperty().bind(mainPane.heightProperty());
-        mazePane.prefWidthProperty().bind(mainPane.widthProperty());
-
     }
 }

@@ -5,14 +5,24 @@ import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.MazeState;
 import algorithms.search.Solution;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.transform.Scale;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
 
 public class MazeDisplayer extends Canvas {
 
@@ -25,32 +35,37 @@ public class MazeDisplayer extends Canvas {
     private int prevRow = 1;
     private int prevCol = 1;
     private GraphicsContext gc;
-    private StringProperty NotBeenFileName = new SimpleStringProperty();
 
+    //Image
+    private StringProperty NotBeenFileName = new SimpleStringProperty();
     private StringProperty ImageFileNameWall = new SimpleStringProperty();
     private StringProperty ImageFileNameCharacter = new SimpleStringProperty();
     private StringProperty BeenFileName = new SimpleStringProperty();
-
     private StringProperty SolutionFileName = new SimpleStringProperty();
+    //endImage
 
+    public MazeDisplayer() {
+        widthProperty().addListener(event -> draw());
+        heightProperty().addListener(event -> draw());
+    }
 
     public void setMaze(Maze maze) {
-        this.maze=new Maze (maze.toByteArray());
-        mazePointer=maze;
-        gotmaze=true;
-        mazeSolution=null;
+        this.maze = new Maze(maze.toByteArray());
+        mazePointer = maze;
+        gotmaze = true;
+        mazeSolution = null;
 
     }
 
     public void setCharacterPosition(int row, int column) {
-      //  int prevRow = characterPositionRow;
-      //  int prevCol = characterPositionColumn;
+        //  int prevRow = characterPositionRow;
+        //  int prevCol = characterPositionColumn;
         characterPositionRow = row;
         characterPositionColumn = column;
         draw();
 
 
-     //   move(row,column,prevRow,prevCol);
+        //   move(row,column,prevRow,prevCol);
     }
 
     public void resetCharacterPosition(int row, int column) {
@@ -60,7 +75,7 @@ public class MazeDisplayer extends Canvas {
         characterPositionColumn = column;
 
 
-        move(row,column,prevRow,prevCol);
+        move(row, column, prevRow, prevCol);
     }
 
 
@@ -72,7 +87,7 @@ public class MazeDisplayer extends Canvas {
         return characterPositionColumn;
     }
 
-    public void move(int currRow,int currCol, int prevRow, int prevCol) {
+    public void move(int currRow, int currCol, int prevRow, int prevCol) {
 
         try {
             Image beenImage = new Image(new FileInputStream(BeenFileName.get()));
@@ -83,9 +98,9 @@ public class MazeDisplayer extends Canvas {
             double cellHeight = canvasHeight / maze.getLines();
             double cellWidth = canvasWidth / maze.getColumns();
 
-            maze.setValueByInt(prevRow,prevCol,2);
-            gc.drawImage(beenImage, prevCol * cellHeight, prevRow * cellWidth, cellHeight, cellWidth);
-            gc.drawImage(characterImage, currCol * cellHeight, currRow * cellWidth, cellHeight, cellWidth);
+            maze.setValueByInt(prevRow, prevCol, 2);
+            gc.drawImage(beenImage, prevCol * cellWidth, prevRow * cellHeight, cellWidth, cellHeight);
+            gc.drawImage(characterImage, currCol * cellWidth, currRow * cellHeight, cellWidth, cellHeight);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -112,26 +127,27 @@ public class MazeDisplayer extends Canvas {
                 gc = getGraphicsContext2D();
                 gc.clearRect(0, 0, getWidth(), getHeight());
 
+
                 //Draw Maze
 
-                    for (int i = 0; i < maze.getLines(); i++) {
-                        for (int j = 0; j < maze.getColumns(); j++) {
-                            if (maze.getValueByInt(i, j) == 1) {
-                                gc.drawImage(wallImage, j * cellHeight, i * cellWidth, cellHeight, cellWidth);
-                            } else if (maze.getValueByInt(i, j) == 0) {
-                                gc.drawImage(notBeenImage, j * cellHeight, i * cellWidth, cellHeight, cellWidth);
-                            } else if (maze.getValueByInt(i, j) == 2) {
-                                gc.drawImage(BeenImage, j * cellHeight, i * cellWidth, cellHeight, cellWidth);
-                            } else if (maze.getValueByInt(i, j) == 3) {
-                                gc.drawImage(SolutionImage, j * cellHeight, i * cellWidth, cellHeight, cellWidth);
-                            }
+                for (int i = 0; i < maze.getLines(); i++) {
+                    for (int j = 0; j < maze.getColumns(); j++) {
+                        if (maze.getValueByInt(i, j) == 1) {
+                            gc.drawImage(wallImage, j * cellWidth, i * cellHeight, cellWidth, cellHeight);
+                        } else if (maze.getValueByInt(i, j) == 0) {
+                            gc.drawImage(notBeenImage, j * cellWidth, i * cellHeight, cellWidth, cellHeight);
+                        } else if (maze.getValueByInt(i, j) == 2) {
+                            gc.drawImage(BeenImage, j * cellWidth, i * cellHeight, cellWidth, cellHeight);
+                        } else if (maze.getValueByInt(i, j) == 3) {
+                            gc.drawImage(SolutionImage, j * cellWidth, i * cellHeight, cellWidth, cellHeight);
                         }
                     }
-                    this.requestFocus();
+                }
+                this.requestFocus();
 
 
-                gc.drawImage(BeenImage, maze.getGoalPosition().getColumnIndex() * cellHeight, maze.getGoalPosition().getRowIndex() * cellWidth, cellHeight, cellWidth);
-                gc.drawImage(characterImage, characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);
+                gc.drawImage(BeenImage, maze.getGoalPosition().getColumnIndex() * cellWidth, maze.getGoalPosition().getRowIndex() * cellHeight, cellWidth, cellHeight);
+                gc.drawImage(characterImage, characterPositionColumn * cellWidth, characterPositionRow * cellHeight, cellWidth, cellHeight);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -140,6 +156,7 @@ public class MazeDisplayer extends Canvas {
     }
 
     //region Properties
+
 
 
     public String getImageFileNameWall() {
@@ -175,7 +192,6 @@ public class MazeDisplayer extends Canvas {
     }
 
 
-
     public String getSolutionFileName() {
         return SolutionFileName.get();
     }
@@ -185,20 +201,59 @@ public class MazeDisplayer extends Canvas {
     }
 
 
-
     public void setSolution(Solution solution) {
         mazeSolution = solution;
-        for (AState mazeState : mazeSolution.getSolutionPath())
-        {
-          Position p =  ((MazeState)mazeState).getState();
-        //  if(maze.getValueByInt(p.getRowIndex(),p.getColumnIndex())!=2){
-                maze.setValueByInt(p.getRowIndex(),p.getColumnIndex(),3);
-        //   }
+        for (AState mazeState : mazeSolution.getSolutionPath()) {
+            Position p = ((MazeState) mazeState).getState();
+            //  if(maze.getValueByInt(p.getRowIndex(),p.getColumnIndex())!=2){
+            maze.setValueByInt(p.getRowIndex(), p.getColumnIndex(), 3);
+            //   }
         }
         draw();
     }
 
 
-    //endregion
+    //////////////////////////////////////////
+    //dragging and zooming
 
+   /* public void zoomm(ScrollEvent event) {
+        double zoomFactor = 1.05;
+        double deltaY = event.getDeltaY();
+
+        if (deltaY < 0) {
+            zoomFactor = 0.95;
+        }
+        setScaleX(getScaleX() * zoomFactor);
+        setScaleY(getScaleY() * zoomFactor);
+        event.consume();
+    }*/
+
+    Delta initial_mouse_pos = new Delta();
+    class Delta { double x, y; }
+
+    public void zoom(ScrollEvent event) {
+        initial_mouse_pos.x = event.getX();
+        initial_mouse_pos.y = event.getY();
+        double zoom_fac = 1.05;
+        double delta_y = event.getDeltaY();
+
+        if(delta_y < 0) {
+            zoom_fac = 2.0 - zoom_fac;
+        }
+
+        Scale newScale = new Scale();
+        newScale.setPivotX(initial_mouse_pos.x);
+        newScale.setPivotY(initial_mouse_pos.y);
+        newScale.setX( getScaleX() * zoom_fac );
+        newScale.setY( getScaleY() * zoom_fac );
+
+        getTransforms().add(newScale);
+
+        event.consume();
+    }
 }
+
+
+
+
+
