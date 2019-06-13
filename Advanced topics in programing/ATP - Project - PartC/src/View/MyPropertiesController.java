@@ -17,6 +17,9 @@ public class MyPropertiesController implements Initializable {
     public ChoiceBox box_solve = new ChoiceBox();
     public ChoiceBox box_character = new ChoiceBox();
     public CheckBox check_mute = new CheckBox();
+    public String genAlgo;
+    public String solveAlgo;
+    public String characterName;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,13 +38,12 @@ public class MyPropertiesController implements Initializable {
                 "DepthFirstSearch"
         );
         //character
-        box_character.setValue("Doroty");
+        box_character.setValue("Dorothy");
         box_character.getItems().addAll(
-                "Highest",
-                "High",
-                "Normal",
-                "Low",
-                "Lowest"
+                "Dorothy",
+                "The Cowardly Lion",
+                "The Tin Man",
+                "Scarecrow"
         );
     }
 
@@ -49,13 +51,18 @@ public class MyPropertiesController implements Initializable {
 
     }
 
-    public void updateCharachter(){}
+    public void updateCharachter(){
+        characterName= (String) box_character.getValue();
+
+    }
 
     public void updateGenerateAlgo(){
-        //Configurations.setGeneratorAlgorithm();
+        genAlgo= (String) box_generate.getValue();
+        Configurations.setGeneratorAlgorithm(genAlgo);
     }
     public void updateSolveAlgo(){
-        //Configurations.setSearchAlgorithm();
+        solveAlgo = (String) box_solve.getValue();
+        Configurations.setSearchAlgorithm(solveAlgo);
     }
 
 

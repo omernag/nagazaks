@@ -104,7 +104,7 @@
     <center>
         <Pane fx:id="mazePane" BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplayer fx:id="mazeDisplayer" beenFileName="resources/Images/yellowbrick.jpg" height="600" imageFileNameCharacter="resources/Images/yellowbrickDorthy.jpg" imageFileNameWall="resources/Images/bush.jpg" notBeenFileName="resources/Images/yellowbrick2.jpg" onMouseClicked="#mouseClicked" onScroll="#zoom" solutionFileName="resources/Images/greenbrick.jpg" width="600" />
+                <MazeDisplayer fx:id="mazeDisplayer" beenFileName="resources/Images/yellowbrick.jpg" height="500" imageFileNameCharacter="resources/Images/yellowbrickDorthy.jpg" imageFileNameWall="resources/Images/bush.jpg" notBeenFileName="resources/Images/yellowbrick2.jpg" onMouseClicked="#mouseClicked" onScroll="#zoom" solutionFileName="resources/Images/greenbrick.jpg" width="500" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

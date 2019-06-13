@@ -10,12 +10,12 @@
    <children>
       <VBox prefHeight="227.0" prefWidth="204.0">
          <children>
-            <Label text="Select search algorithm" />
-            <ChoiceBox fx:id="box_generate" prefWidth="150.0" />
+            <Label text="Select generate algorithm" />
+            <ChoiceBox fx:id="box_generate" onMouseClicked="#updateGenerateAlgo" prefWidth="150.0" />
             <Label text="Select solve algorithm" />
-            <ChoiceBox fx:id="box_solve" prefWidth="150.0" />
+            <ChoiceBox fx:id="box_solve" onMouseClicked="#updateSolveAlgo" prefWidth="150.0" />
             <Label text="Select character" />
-            <ChoiceBox fx:id="box_character" prefWidth="150.0" />
+            <ChoiceBox fx:id="box_character" onMouseClicked="#updateCharachter" prefWidth="150.0" />
             <CheckBox fx:id="check_mute" mnemonicParsing="false" text="mute" />
          </children>
       </VBox>
