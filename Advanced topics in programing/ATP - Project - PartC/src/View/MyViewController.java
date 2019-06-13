@@ -266,7 +266,7 @@ public class MyViewController implements Observer, IView {
             root = fxmlLoader.load(getClass().getResource("../View/Properties.fxml").openStream());
             Scene scene = new Scene(root, 400, 300);
             stage.setScene(scene);
-            scene.getStylesheets().add(getClass().getResource("../View/MyViewStyle.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("../View/NewGameStyle.css").toExternalForm());
             stage.show();
 
         }
@@ -320,7 +320,7 @@ public class MyViewController implements Observer, IView {
             stage.setTitle("About");
             Scene scene = new Scene(root, 400, 400);
             stage.setScene(scene);
-            scene.getStylesheets().add(getClass().getResource("../View/MyViewStyle.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("../View/NewGameStyle.css").toExternalForm());
             stage.show();
             // Hide this current window (if this is what you want)
             //((Node)(event.getSource())).getScene().getWindow().hide();

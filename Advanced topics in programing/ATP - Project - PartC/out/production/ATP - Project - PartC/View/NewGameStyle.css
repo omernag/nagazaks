@@ -4,13 +4,16 @@
 
 }
 
-pane{
-    -fx-text-fill: black;
-}
 btn_submit{
     -fx-text-fill: black;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
     /*-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );*/
+}
+
+
+Label{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
 }
