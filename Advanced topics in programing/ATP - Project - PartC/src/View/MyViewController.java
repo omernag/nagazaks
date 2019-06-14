@@ -1,5 +1,6 @@
 package View;
 
+import Server.Configurations;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
@@ -254,7 +255,7 @@ public class MyViewController implements Observer, IView {
     }
 
     public void pressProperties(){
-
+        /*
         Parent root;
         try {
             Stage stage = new Stage();
@@ -270,6 +271,12 @@ public class MyViewController implements Observer, IView {
         catch (IOException e) {
             e.printStackTrace();
         }
+        */
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("MAzE SurVivor");
+        alert.setHeaderText("Properties");
+        alert.setContentText(" TreadPoolSize: "+ Configurations.getThreadPoolAmount() +" \n Generator: "+ Configurations.loadGeneratorAlgorithm() +" \n Maze Solving algorithm: "+ Configurations.loadSearchAlgorithm());
+        alert.show();
     }
 
     public void pressExit() throws FileNotFoundException {
@@ -310,6 +317,7 @@ public class MyViewController implements Observer, IView {
     }
 
     public void pressAbout(){
+        /*
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("../View/About.fxml"));
@@ -324,7 +332,12 @@ public class MyViewController implements Observer, IView {
         }
         catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("MAzE SurVivor");
+        alert.setHeaderText("About");
+        alert.setContentText(" Created by: Asi Zaks & Omer Nagar \n Maze generation algorithm: Prim \n Maze Solving algorithm: Best First Search" );
+        alert.show();
     }
 
     public void pressSolveMaze(ActionEvent actionEvent) {

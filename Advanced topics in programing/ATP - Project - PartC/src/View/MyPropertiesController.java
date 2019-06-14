@@ -13,6 +13,9 @@ import java.util.ResourceBundle;
 
 public class MyPropertiesController implements Initializable {
     @FXML
+    public javafx.scene.control.Button SetChar;
+    public javafx.scene.control.Button SetSolv;
+    public javafx.scene.control.Button SetGene;
     public ChoiceBox box_generate = new ChoiceBox();
     public ChoiceBox box_solve = new ChoiceBox();
     public ChoiceBox box_character = new ChoiceBox();
@@ -50,16 +53,20 @@ public class MyPropertiesController implements Initializable {
 
     public void updateCharachter(){
         characterName= (String) box_character.getValue();
+        Configurations.setProperty("characterName",characterName);
 
     }
 
     public void updateGenerateAlgo(){
         genAlgo= (String) box_generate.getValue();
-        Configurations.setGeneratorAlgorithm(genAlgo);
+        //Configurations.setGeneratorAlgorithm(genAlgo);
+        Configurations.setProperty("generatorAlgorithm",genAlgo);
+
     }
     public void updateSolveAlgo(){
         solveAlgo = (String) box_solve.getValue();
-        Configurations.setSearchAlgorithm(solveAlgo);
+        //Configurations.setSearchAlgorithm(solveAlgo);
+        Configurations.setProperty("searchAlgorithm",solveAlgo);
     }
 
 

@@ -1,5 +1,6 @@
 package View;
 
+import Server.Configurations;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
@@ -119,6 +120,9 @@ public class MazeDisplayer extends Canvas {
 
             try {
                 Image wallImage = new Image(new FileInputStream(ImageFileNameWall.get()));
+
+     //           String imageChar =  Configurations.getCharacter();
+
                 Image characterImage = new Image(new FileInputStream(ImageFileNameCharacter.get()));
                 Image notBeenImage = new Image(new FileInputStream(NotBeenFileName.get()));
                 Image BeenImage = new Image(new FileInputStream(BeenFileName.get()));

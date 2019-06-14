@@ -2,41 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf5d1a28-ad73-4965-a6bd-2af57b2b149b" name="Default Changelist" comment="created model, and view model&#10;some problems with the server">
-      <change afterPath="$PROJECT_DIR$/resources/Images/mute.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/Images/unmute.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/seethewizard.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/View/mute.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/0.1" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/0.1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/0.2" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/0.2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/artifacts/ATPProjectPartB_jar/ATP - Project - PartB.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ATP - Project - PartB.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/artifacts/ATP___Project___PartB_jar/ATPProjectPartB.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Server/Configurations.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Server/Configurations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/resources/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/Server/Configurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/src/Server/Configurations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/ATP - Project - PartC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ATP - Project - PartC.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/src.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/0.1" beforeDir="false" afterPath="$PROJECT_DIR$/0.1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/0.2" beforeDir="false" afterPath="$PROJECT_DIR$/0.2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.1" beforeDir="false" afterPath="$PROJECT_DIR$/1.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.2" beforeDir="false" afterPath="$PROJECT_DIR$/1.2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/Somewhere.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/Somewhere.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MazeDisplayer$Delta.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MazeDisplayer$Delta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MazeDisplayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MazeDisplayer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyPropertiesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyPropertiesController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyViewController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyViewController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyViewController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyViewController$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGame.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGameStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGameStyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/Properties.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/Properties.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/sample/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/sample/Main$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Somewhere.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Somewhere.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/MazeDisplayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MazeDisplayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/MyPropertiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MyPropertiesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/MyView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MyView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/MyViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MyViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/NewGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/NewGame.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/NewGameStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/NewGameStyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/Properties.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Properties.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ViewModel/MyViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewModel/MyViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,27 +42,60 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/View/MyViewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="183" column="45" selection-start-line="183" selection-start-column="45" selection-end-line="183" selection-end-column="45" />
+            <state relative-caret-position="-1616">
+              <caret line="274" column="61" lean-forward="true" selection-start-line="274" selection-start-column="61" selection-end-line="274" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#11779#11780#0" expanded="true" />
+                <element signature="e#11825#11826#0" expanded="true" />
+                <element signature="e#12249#12250#0" expanded="true" />
+                <element signature="e#12298#12299#0" expanded="true" />
+                <element signature="e#12358#12359#0" expanded="true" />
+                <element signature="e#12401#12402#0" expanded="true" />
+                <element signature="e#12451#12452#0" expanded="true" />
+                <element signature="e#12503#12504#0" expanded="true" />
+                <element signature="e#12566#12567#0" expanded="true" />
+                <element signature="e#12612#12613#0" expanded="true" />
+                <element signature="e#12668#12669#0" expanded="true" />
+                <element signature="e#12717#12718#0" expanded="true" />
                 <element signature="method#muteBotton#0;class#MyViewController#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/View/MyPropertiesController.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/View/MazeDisplayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-127">
-              <caret line="32" column="46" lean-forward="true" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
+            <state relative-caret-position="200">
+              <caret line="113" column="24" lean-forward="true" selection-start-line="113" selection-start-column="24" selection-end-line="113" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/View/MyPropertiesController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/out/production/ATP - Project - PartC/config.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="18" selection-start-line="1" selection-end-line="1" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -78,40 +104,18 @@
         <entry file="file://$PROJECT_DIR$/src/View/Properties.fxml">
           <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="357">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/View/MyView.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1904">
+          <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="1224">
               <caret line="127" column="99" selection-start-line="127" selection-start-column="67" selection-end-line="127" selection-end-column="99" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/View/MazeDisplayer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-124">
-              <caret line="120" column="63" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="63" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/View/NewGame.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -119,7 +123,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/View/NewGameController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="34">
               <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -133,8 +137,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Model/MyModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="96" selection-start-line="96" selection-end-line="96" />
+            <state relative-caret-position="411">
+              <caret line="144" selection-start-line="144" selection-end-line="144" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -145,7 +149,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ViewModel/MyViewModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
+            <state relative-caret-position="621">
               <caret line="84" selection-start-line="84" selection-end-line="84" />
               <folding>
                 <element signature="e#1401#1402#0" expanded="true" />
@@ -158,8 +162,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/config.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+            <state relative-caret-position="34">
+              <caret line="2" column="8" selection-start-line="2" selection-end-line="2" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -195,6 +199,9 @@
       <find>Style</find>
       <find>setMusic</find>
       <find>fini</find>
+      <find>bind</find>
+      <find>btn_generateMaze</find>
+      <find>help</find>
     </findStrings>
     <replaceStrings>
       <replace>mazefile</replace>
@@ -213,7 +220,6 @@
         <option value="$PROJECT_DIR$/src/View/MazeDisplay.java" />
         <option value="$PROJECT_DIR$/src/Model/IModel.java" />
         <option value="$PROJECT_DIR$/src/View/ResizableCanvas.java" />
-        <option value="$PROJECT_DIR$/src/View/MazeDisplayer.java" />
         <option value="$PROJECT_DIR$/src/Model/MyModel.java" />
         <option value="$PROJECT_DIR$/src/View/PropertiesController.java" />
         <option value="$PROJECT_DIR$/src/View/NewGameStyle.css" />
@@ -221,12 +227,14 @@
         <option value="$PROJECT_DIR$/src/View/MyViewStyle.css" />
         <option value="$PROJECT_DIR$/src/ViewModel/MyViewModel.java" />
         <option value="$PROJECT_DIR$/src/View/NewGameController.java" />
+        <option value="$PROJECT_DIR$/src/View/NewGame.fxml" />
         <option value="$PROJECT_DIR$/resources/config.properties" />
         <option value="$PROJECT_DIR$/src/View/Properties.fxml" />
         <option value="$PROJECT_DIR$/src/View/MyPropertiesController.java" />
-        <option value="$PROJECT_DIR$/src/View/NewGame.fxml" />
-        <option value="$PROJECT_DIR$/src/View/MyViewController.java" />
+        <option value="$PROJECT_DIR$/out/production/ATP - Project - PartC/config.properties" />
+        <option value="$PROJECT_DIR$/src/View/MazeDisplayer.java" />
         <option value="$PROJECT_DIR$/src/View/MyView.fxml" />
+        <option value="$PROJECT_DIR$/src/View/MyViewController.java" />
       </list>
     </option>
   </component>
@@ -288,18 +296,7 @@
             <path>
               <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
               <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="Images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
@@ -338,8 +335,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560531002561" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560537885286" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ATP - Project - PartB/out/artifacts/ATPProjectPartB_jar" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -350,16 +347,16 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\onagar\Desktop\bgu\nagazaks\Advanced topics in programing\ATP - Project - PartC" />
       <recent name="C:\Users\onagar\Desktop\bgu\nagazaks\Advanced topics in programing\ATP - Project - PartC\resources\Images" />
       <recent name="C:\Users\onagar\Desktop\bgu\nagazaks\Advanced topics in programing\ATP - Project - PartC\src\View" />
-      <recent name="C:\Users\onagar\Desktop\bgu\nagazaks\Advanced topics in programing\ATP - Project - PartC" />
       <recent name="C:\Users\onagar\Desktop\bgu\nagazaks\Advanced topics in programing\ATP - Project - PartC\resources" />
       <recent name="C:\Users\Asi Zaks\Documents\GitHub\nagazaks\Advanced topics in programing\ATP - Project - PartC\resources\Images" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\onagar\Desktop\bgu\nagazaks\Advanced topics in programing\ATP - Project - PartC" />
       <recent name="C:\Users\onagar\Desktop\bgu\nagazaks\Advanced topics in programing\ATP - Project - PartC\resources\Images" />
       <recent name="C:\Users\onagar\Desktop\bgu\nagazaks\Advanced topics in programing\ATP - Project - PartC\resources" />
-      <recent name="C:\Users\onagar\Desktop\bgu\nagazaks\Advanced topics in programing\ATP - Project - PartC" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -426,7 +423,7 @@
       <workItem from="1560358027770" duration="4287000" />
       <workItem from="1560418007926" duration="383000" />
       <workItem from="1560418782069" duration="1129000" />
-      <workItem from="1560516492180" duration="8103000" />
+      <workItem from="1560516492180" duration="14832000" />
     </task>
     <task id="LOCAL-00001" summary="did some work on view">
       <created>1558872099129</created>
@@ -460,7 +457,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132803000" />
+    <option name="totallyTimeSpent" value="139532000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -475,7 +472,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328125" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49596775" visible="true" weight="0.24289773" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49596775" weight="0.24289773" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3380682" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -496,6 +493,37 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven" order="8" weight="0.05263158" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8159204" visible="true" weight="0.20900537" />
+      <window_info id="Structure" order="1" sideWeight="0.1840796" side_tool="true" weight="0.22995952" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.328125" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49596775" visible="true" weight="0.24289773" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3380682" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.07954545" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49865592" weight="0.15767045" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50403225" side_tool="true" weight="0.23295455" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49932796" weight="0.32386363" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24939272" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Maven" order="8" weight="0.05263158" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -510,70 +538,52 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/View/MyViewController.java</url>
-          <line>262</line>
-          <properties />
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/View/MazeDisplayer.java</url>
-          <line>179</line>
+          <line>183</line>
           <properties />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/View/MazeDisplayer.java</url>
-          <line>107</line>
-          <properties />
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Model/MyModel.java</url>
-          <line>130</line>
-          <properties />
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/View/MazeDisplayer.java</url>
-          <line>146</line>
+          <line>150</line>
           <properties />
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/View/MyViewController.java</url>
-          <line>231</line>
+          <line>232</line>
           <properties />
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Model/MyModel.java</url>
-          <line>144</line>
-          <properties />
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Model/MyModel.java</url>
-          <line>136</line>
-          <properties />
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/View/MyViewController.java</url>
-          <line>373</line>
+          <line>89</line>
           <properties />
-          <option name="timeStamp" value="54" />
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/View/MyPropertiesController.java</url>
+          <line>67</line>
+          <properties />
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/View/MyPropertiesController.java</url>
+          <line>68</line>
+          <properties />
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/View/MazeDisplayer.java</url>
-          <line>120</line>
+          <line>123</line>
           <properties />
-          <option name="timeStamp" value="58" />
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/View/MyViewController.java</url>
-          <line>88</line>
+          <url>file://$PROJECT_DIR$/src/View/MazeDisplayer.java</url>
+          <line>125</line>
           <properties />
-          <option name="timeStamp" value="59" />
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -583,7 +593,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/lang/Class.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/lang/Thread.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/javafx-src.zip!/javafx/event/EventType.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -828,60 +837,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/MazeDisplayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-124">
-          <caret line="120" column="63" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/MyModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="96" selection-start-line="96" selection-end-line="96" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ViewModel/MyViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="84" selection-start-line="84" selection-end-line="84" />
-          <folding>
-            <element signature="e#1401#1402#0" expanded="true" />
-            <element signature="e#1450#1451#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/config.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/ATPProjectJAR.jar!/Server/Configurations.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/NewGameController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1477#1478#0" expanded="true" />
-            <element signature="e#1519#1520#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -893,21 +852,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/MyView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
+    <entry file="file://$PROJECT_DIR$/src/Model/MyModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1904">
-          <caret line="127" column="99" selection-start-line="127" selection-start-column="67" selection-end-line="127" selection-end-column="99" />
+        <state relative-caret-position="411">
+          <caret line="144" selection-start-line="144" selection-end-line="144" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/MyViewController.java">
+    <entry file="file://$PROJECT_DIR$/resources/config.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="183" column="45" selection-start-line="183" selection-start-column="45" selection-end-line="183" selection-end-column="45" />
+        <state relative-caret-position="34">
+          <caret line="2" column="8" selection-start-line="2" selection-end-line="2" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ViewModel/MyViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#muteBotton#0;class#MyViewController#0" />
+            <element signature="e#1401#1402#0" expanded="true" />
+            <element signature="e#1450#1451#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -915,17 +883,77 @@
     <entry file="file://$PROJECT_DIR$/src/View/Properties.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="357">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/NewGameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1477#1478#0" expanded="true" />
+            <element signature="e#1519#1520#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/MyView.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="127" column="99" selection-start-line="127" selection-start-column="67" selection-end-line="127" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/MazeDisplayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="113" column="24" lean-forward="true" selection-start-line="113" selection-start-column="24" selection-end-line="113" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/MyPropertiesController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-127">
-          <caret line="32" column="46" lean-forward="true" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
+        <state relative-caret-position="247">
+          <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/ATP - Project - PartC/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="18" selection-start-line="1" selection-end-line="1" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/MyViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1616">
+          <caret line="274" column="61" lean-forward="true" selection-start-line="274" selection-start-column="61" selection-end-line="274" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11779#11780#0" expanded="true" />
+            <element signature="e#11825#11826#0" expanded="true" />
+            <element signature="e#12249#12250#0" expanded="true" />
+            <element signature="e#12298#12299#0" expanded="true" />
+            <element signature="e#12358#12359#0" expanded="true" />
+            <element signature="e#12401#12402#0" expanded="true" />
+            <element signature="e#12451#12452#0" expanded="true" />
+            <element signature="e#12503#12504#0" expanded="true" />
+            <element signature="e#12566#12567#0" expanded="true" />
+            <element signature="e#12612#12613#0" expanded="true" />
+            <element signature="e#12668#12669#0" expanded="true" />
+            <element signature="e#12717#12718#0" expanded="true" />
+            <element signature="method#muteBotton#0;class#MyViewController#0" />
           </folding>
         </state>
       </provider>

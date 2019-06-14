@@ -102,11 +102,6 @@
                                 <MenuItem fx:id="tab_properties" mnemonicParsing="false" onAction="#pressProperties" text="Properties" />
                             </items>
                         </Menu>
-                        <Menu fx:id="tab_exit" mnemonicParsing="false" onAction="#pressExit" text="Exit">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Exit" />
-                            </items>
-                        </Menu>
                         <Menu mnemonicParsing="false" text="About">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#pressAbout" text="About" />
@@ -115,6 +110,11 @@
                         <Menu fx:id="tab_help" mnemonicParsing="false" onAction="#pressHelp" text="Help">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="Help" />
+                            </items>
+                        </Menu>
+                        <Menu fx:id="tab_exit" mnemonicParsing="false" onAction="#pressExit" text="Exit">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Exit" />
                             </items>
                         </Menu>
                     </menus>
