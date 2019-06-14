@@ -16,7 +16,6 @@
             <ChoiceBox fx:id="box_solve" onMouseClicked="#updateSolveAlgo" prefWidth="150.0" />
             <Label text="Select character" />
             <ChoiceBox fx:id="box_character" onMouseClicked="#updateCharachter" prefWidth="150.0" />
-            <CheckBox fx:id="check_mute" mnemonicParsing="false" text="mute" />
          </children>
       </VBox>
    </children>

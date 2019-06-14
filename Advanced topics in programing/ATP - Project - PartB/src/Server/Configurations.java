@@ -68,4 +68,21 @@ public class Configurations {
         return null;
     }
 
+    public static void setProperty(String propertyName,String propertyValue) {
+       try{
+        FileInputStream inStream = new FileInputStream("resources/config.properties");
+        Properties props = new Properties();
+        props.load(inStream);
+        inStream.close();
+
+        FileOutputStream outStream = new FileOutputStream("resources/config.properties");
+        props.setProperty(propertyName, propertyValue);
+        props.store(outStream, null);
+        outStream.close();
+       }
+       catch (IOException ex) {
+            ex.printStackTrace();
+       }
+    }
+
 }

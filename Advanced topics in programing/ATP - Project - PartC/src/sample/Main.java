@@ -1,6 +1,5 @@
 package sample;
 
-import Model.IModel;
 import Model.MyModel;
 import View.MyViewController;
 import ViewModel.MyViewModel;
@@ -9,7 +8,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
@@ -37,6 +35,7 @@ public class Main extends Application {
         MyViewController view = fxmlLoader.getController();
         view.setResizeEvent(scene);
         view.setViewModel(viewModel);
+        view.setMusic("resources/seethewizard.mp3","on");
         viewModel.addObserver(view);
         //--------------
         SetStageCloseEvent(primaryStage);

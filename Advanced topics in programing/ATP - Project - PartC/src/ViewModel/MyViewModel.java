@@ -81,4 +81,6 @@ public class MyViewModel extends Observable implements Observer {
     public void generateMazeFromFile(Maze mazeInput) {
         model.generateMazeFromFile(mazeInput);
     }
+
+
 }

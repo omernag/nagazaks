@@ -13,13 +13,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../ATP - Project - PartB/out/artifacts/ATPProjectPartB_jar" />
+          <root url="jar://$MODULE_DIR$/ATPProjectJAR.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/../ATP - Project - PartB/out/artifacts/ATPProjectPartB_jar" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="ATP - Project - PartB" level="project" />
   </component>
 </module>

@@ -16,7 +16,6 @@ public class MyPropertiesController implements Initializable {
     public ChoiceBox box_generate = new ChoiceBox();
     public ChoiceBox box_solve = new ChoiceBox();
     public ChoiceBox box_character = new ChoiceBox();
-    public CheckBox check_mute = new CheckBox();
     public String genAlgo;
     public String solveAlgo;
     public String characterName;
@@ -47,9 +46,7 @@ public class MyPropertiesController implements Initializable {
         );
     }
 
-    public void mutePressed(ActionEvent event){
 
-    }
 
     public void updateCharachter(){
         characterName= (String) box_character.getValue();

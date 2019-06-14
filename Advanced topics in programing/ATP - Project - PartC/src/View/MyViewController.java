@@ -3,42 +3,33 @@ package View;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Control;
-import javafx.scene.input.KeyCode;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.media.Media;
-import javafx.scene.paint.Color;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
 import java.io.*;
-import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import static javafx.scene.input.KeyCode.CONTROL;
 
@@ -46,8 +37,7 @@ public class MyViewController implements Observer, IView {
 
 
     private MyViewModel viewModel;
-    private Scene mainScene;
-    private Stage mainStage;
+
 
     @FXML
     public MazeDisplayer mazeDisplayer;
@@ -55,16 +45,18 @@ public class MyViewController implements Observer, IView {
     public javafx.scene.control.Label lbl_currCol;
     public javafx.scene.control.Button btn_generateMaze;
     public javafx.scene.control.Button btn_solveMaze;
+    public javafx.scene.control.Button btn_SetMusic;
     public javafx.scene.layout.Pane mazePane;
     public javafx.scene.layout.Pane mainPane;
 
     public StringProperty characterPositionRow = new SimpleStringProperty();
     public StringProperty characterPositionColumn = new SimpleStringProperty();
-    public StringProperty MusicFileName = new SimpleStringProperty();
 
     public boolean newMaze;
     public boolean solved;
     public boolean ctrlPress=false;
+    public MediaPlayer mediaPlayer;
+    public boolean musicTurnedOn;
 
 
     public void setViewModel(MyViewModel viewModel) {
@@ -94,6 +86,7 @@ public class MyViewController implements Observer, IView {
             else if(viewModel.isFinished() && viewModel.isMoved()){ //just finished congratulations
                 displayMaze(viewModel.getMaze());
                 showAlert("Congratulations - you are the BEST!");
+                setMusic("resources/Somewhere.mp3","on");
                 btn_generateMaze.setDisable(false);
 
             }
@@ -107,6 +100,7 @@ public class MyViewController implements Observer, IView {
                 displayMaze(viewModel.getMaze());
                 if(solved){
                     btn_generateMaze.setDisable(false);
+
                 }else{
                     btn_generateMaze.setDisable(true);
                 }
@@ -172,6 +166,9 @@ public class MyViewController implements Observer, IView {
     public void pressNew(ActionEvent event){
         newMaze=true;
         btn_solveMaze.setDisable(false);
+        if(mazeDisplayer.gotmaze){
+            setMusic("resources/seethewizard.mp3","on");
+        }
 
         Parent root;
         try {
@@ -184,7 +181,7 @@ public class MyViewController implements Observer, IView {
             stage.setTitle("New Game");
             FXMLLoader fxmlLoader = new FXMLLoader();
             root = fxmlLoader.load(getClass().getResource("../View/NewGame.fxml").openStream());
-            Scene scene = new Scene(root, 400, 300);
+            Scene scene = new Scene(root, 500, 300);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("../View/NewGameStyle.css").toExternalForm());
             stage.show();
@@ -369,5 +366,32 @@ public class MyViewController implements Observer, IView {
 
     public void mouseClicked(MouseEvent mouseEvent) {
         this.mazeDisplayer.requestFocus();
+    }
+
+
+    public void setMusic(String filePath, String s) {
+        if(s=="on") {
+            if (musicTurnedOn) {
+                mediaPlayer.stop();
+            }
+            Media musicFile = new Media(new File(filePath).toURI().toString());
+            mediaPlayer = new MediaPlayer(musicFile);
+            mediaPlayer.setVolume(0.5);
+            mediaPlayer.play();
+            musicTurnedOn = true;
+        }
+    }
+
+    public void muteBotton() throws FileNotFoundException {
+        if(mediaPlayer.getVolume()==0){
+            mediaPlayer.setVolume(0.5);
+            btn_SetMusic.setGraphic(new ImageView(new Image(new FileInputStream("resources/Images/mute.png"))));
+
+        }
+        else{
+            mediaPlayer.setVolume(0);
+            btn_SetMusic.setGraphic(new ImageView(new Image(new FileInputStream("resources/Images/unmute.png"))));
+        }
+
     }
 }
