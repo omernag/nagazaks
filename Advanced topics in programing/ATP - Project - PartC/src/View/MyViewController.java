@@ -184,10 +184,10 @@ public class MyViewController implements Observer, IView {
 
             stage.setTitle("New Game");
             FXMLLoader fxmlLoader = new FXMLLoader();
-            root = fxmlLoader.load(getClass().getResource("../View/NewGame.fxml").openStream());
+            root = fxmlLoader.load(getClass().getResource("/View/NewGame.fxml").openStream());
             Scene scene = new Scene(root, 500, 300);
             stage.setScene(scene);
-            scene.getStylesheets().add(getClass().getResource("../View/NewGameStyle.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/View/NewGameStyle.css").toExternalForm());
             stage.show();
 
         }

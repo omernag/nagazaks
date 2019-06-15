@@ -41,9 +41,9 @@ public class Configurations {
             prop.load(input);
             return  prop.getProperty("searchAlgorithm");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            return "BestFirstSearch";
         }
-        return null;
+        //return null;
     }
 
     public static String loadGeneratorAlgorithm(){
@@ -52,9 +52,9 @@ public class Configurations {
             prop.load(input);
             return  prop.getProperty("generatorAlgorithm");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            return "MyMazeGenerator";
         }
-        return null;
+        //return null;
     }
 
     public static String getThreadPoolAmount(){
@@ -63,9 +63,9 @@ public class Configurations {
             prop.load(input);
             return  prop.getProperty("poolSize");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            return "3";
         }
-        return null;
+        //return null;
     }
 
     public static void setProperty(String propertyName,String propertyValue) {
