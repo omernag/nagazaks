@@ -19,6 +19,7 @@ public class MyViewModel extends Observable implements Observer {
     private boolean finished;
     private boolean moved;
     private boolean justSolved;
+    private boolean wrongKey;
 
 
     public MyViewModel(IModel model){
@@ -32,6 +33,8 @@ public class MyViewModel extends Observable implements Observer {
             finished = model.isFinished();
             moved = model.isMoved();
             justSolved = model.isSolved();
+            wrongKey=model.isWrongKey();
+
             setChanged();
             notifyObservers();
 
@@ -48,6 +51,13 @@ public class MyViewModel extends Observable implements Observer {
 
     public boolean isSolved() {
         return justSolved;
+    }
+
+    public boolean isWrongKey() {
+        return wrongKey;
+    }
+    public void setWrongKey(boolean wrongKey) {
+       model.setWrongKey(false);
     }
 
     public void generateMaze(int width, int height){

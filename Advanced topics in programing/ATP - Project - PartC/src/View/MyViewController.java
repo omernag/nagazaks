@@ -95,7 +95,10 @@ public class MyViewController implements Observer, IView {
                 showAlert("You've already finished \nyou can always start a new game!");
             }
             else if (!viewModel.isFinished() && !viewModel.isMoved()){ //illegal move
-                showAlert("Cant do that :(");
+                if(!viewModel.isWrongKey()){
+                    showAlert("Cant do that :(");
+                }
+                viewModel.setWrongKey(false);
             }
             else {
                 displayMaze(viewModel.getMaze());

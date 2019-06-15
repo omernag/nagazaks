@@ -21,6 +21,7 @@ import java.util.Observable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static javafx.scene.input.KeyCode.*;
 
 
 public class MyModel extends Observable implements IModel {
@@ -32,11 +33,13 @@ public class MyModel extends Observable implements IModel {
     public boolean finished;
     public boolean moved;
     public boolean solved;
+    public boolean wrongKey;
 
     public Solution mazeSolution;
 
     Server mazeGeneratingServer;
     Server solveSearchProblemServer;
+
 
     public MyModel() {
         mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
@@ -114,6 +117,14 @@ public class MyModel extends Observable implements IModel {
     @Override
     public boolean isMoved() {
         return moved;
+    }
+
+    public boolean isWrongKey() {
+        return wrongKey;
+    }
+
+    public void setWrongKey(boolean wrongKey) {
+        this.wrongKey = wrongKey;
     }
 
     @Override
@@ -205,6 +216,9 @@ public class MyModel extends Observable implements IModel {
             }
             else{
                 moved = false;
+                if(!movingKey(movement)){
+                    wrongKey = true;
+                }
             }
         setChanged();
         notifyObservers();
@@ -217,80 +231,92 @@ public class MyModel extends Observable implements IModel {
 
 
     public boolean isLegalMove(KeyCode movement){
-        switch (movement) {
-            case UP:
-                if(currentMaze.isInMaze(new Position(characterPositionRow-1,characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow-1,characterPositionColumn)==0){
-                    return true;
-                }
-                break;
-            case DOWN:
-                if(  currentMaze.isInMaze(new Position(characterPositionRow+1,characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow+1,characterPositionColumn)==0){
-                    return true;
-                }
-                break;
-            case RIGHT:
-                if(  currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn+1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn+1)==0){
-                    return true;
-                }
-                break;
-            case LEFT:
-                if(currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn-1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn-1)==0 ){
-                    return true;
-                }
-                break;
+        if(movingKey(movement)) {
+            switch (movement) {
+                case UP:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow - 1, characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow - 1, characterPositionColumn) == 0) {
+                        return true;
+                    }
+                    break;
+                case DOWN:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow + 1, characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow + 1, characterPositionColumn) == 0) {
+                        return true;
+                    }
+                    break;
+                case RIGHT:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow, characterPositionColumn + 1)) && currentMaze.getValueByInt(characterPositionRow, characterPositionColumn + 1) == 0) {
+                        return true;
+                    }
+                    break;
+                case LEFT:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow, characterPositionColumn - 1)) && currentMaze.getValueByInt(characterPositionRow, characterPositionColumn - 1) == 0) {
+                        return true;
+                    }
+                    break;
 
-            case NUMPAD1:
-                if(currentMaze.isInMaze(new Position(characterPositionRow+1,characterPositionColumn-1)) && currentMaze.getValueByInt(characterPositionRow+1,characterPositionColumn-1)==0
-                &&((currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn-1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn-1)==0 )
-                        ||(  currentMaze.isInMaze(new Position(characterPositionRow+1,characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow+1,characterPositionColumn)==0))
-                ){
-                    return true;
-                }
-                break;
-            case NUMPAD2:
-                if(  currentMaze.isInMaze(new Position(characterPositionRow+1,characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow+1,characterPositionColumn)==0){
-                    return true;
-                }
-                break;
-            case NUMPAD3:
-                if(currentMaze.isInMaze(new Position(characterPositionRow+1,characterPositionColumn+1)) && currentMaze.getValueByInt(characterPositionRow+1,characterPositionColumn+1)==0
-                &&((  currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn+1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn+1)==0)
-                        ||(  currentMaze.isInMaze(new Position(characterPositionRow+1,characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow+1,characterPositionColumn)==0))
-                ){
-                    return true;
-                }
-                break;
-            case NUMPAD4:
-                if( currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn-1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn-1)==0 ){
-                    return true;
-                }
-                break;
-            case NUMPAD6:
-                if(  currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn+1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn+1)==0){
-                    return true;
-                }
-                break;
-            case NUMPAD7:
-                if(currentMaze.isInMaze(new Position(characterPositionRow-1,characterPositionColumn-1)) && currentMaze.getValueByInt(characterPositionRow-1,characterPositionColumn-1)==0
-                &&((currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn-1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn-1)==0 )
-                        ||(currentMaze.isInMaze(new Position(characterPositionRow-1,characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow-1,characterPositionColumn)==0))
-                ){
-                    return true;
-                }
-                break;
-            case NUMPAD8:
-                if(currentMaze.isInMaze(new Position(characterPositionRow-1,characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow-1,characterPositionColumn)==0){
-                    return true;
-                }
-                break;
-            case NUMPAD9:
-                if(currentMaze.isInMaze(new Position(characterPositionRow-1,characterPositionColumn+1)) && currentMaze.getValueByInt(characterPositionRow-1,characterPositionColumn+1)==0
-                &&((  currentMaze.isInMaze(new Position(characterPositionRow,characterPositionColumn+1)) && currentMaze.getValueByInt(characterPositionRow,characterPositionColumn+1)==0)
-                        ||(currentMaze.isInMaze(new Position(characterPositionRow-1,characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow-1,characterPositionColumn)==0))
-                ){
-                    return true;
-                }
-                break;
+                case NUMPAD1:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow + 1, characterPositionColumn - 1)) && currentMaze.getValueByInt(characterPositionRow + 1, characterPositionColumn - 1) == 0
+                            && ((currentMaze.isInMaze(new Position(characterPositionRow, characterPositionColumn - 1)) && currentMaze.getValueByInt(characterPositionRow, characterPositionColumn - 1) == 0)
+                            || (currentMaze.isInMaze(new Position(characterPositionRow + 1, characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow + 1, characterPositionColumn) == 0))
+                    ) {
+                        return true;
+                    }
+                    break;
+                case NUMPAD2:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow + 1, characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow + 1, characterPositionColumn) == 0) {
+                        return true;
+                    }
+                    break;
+                case NUMPAD3:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow + 1, characterPositionColumn + 1)) && currentMaze.getValueByInt(characterPositionRow + 1, characterPositionColumn + 1) == 0
+                            && ((currentMaze.isInMaze(new Position(characterPositionRow, characterPositionColumn + 1)) && currentMaze.getValueByInt(characterPositionRow, characterPositionColumn + 1) == 0)
+                            || (currentMaze.isInMaze(new Position(characterPositionRow + 1, characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow + 1, characterPositionColumn) == 0))
+                    ) {
+                        return true;
+                    }
+                    break;
+                case NUMPAD4:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow, characterPositionColumn - 1)) && currentMaze.getValueByInt(characterPositionRow, characterPositionColumn - 1) == 0) {
+                        return true;
+                    }
+                    break;
+                case NUMPAD6:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow, characterPositionColumn + 1)) && currentMaze.getValueByInt(characterPositionRow, characterPositionColumn + 1) == 0) {
+                        return true;
+                    }
+                    break;
+                case NUMPAD7:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow - 1, characterPositionColumn - 1)) && currentMaze.getValueByInt(characterPositionRow - 1, characterPositionColumn - 1) == 0
+                            && ((currentMaze.isInMaze(new Position(characterPositionRow, characterPositionColumn - 1)) && currentMaze.getValueByInt(characterPositionRow, characterPositionColumn - 1) == 0)
+                            || (currentMaze.isInMaze(new Position(characterPositionRow - 1, characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow - 1, characterPositionColumn) == 0))
+                    ) {
+                        return true;
+                    }
+                    break;
+                case NUMPAD8:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow - 1, characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow - 1, characterPositionColumn) == 0) {
+                        return true;
+                    }
+                    break;
+                case NUMPAD9:
+                    if (currentMaze.isInMaze(new Position(characterPositionRow - 1, characterPositionColumn + 1)) && currentMaze.getValueByInt(characterPositionRow - 1, characterPositionColumn + 1) == 0
+                            && ((currentMaze.isInMaze(new Position(characterPositionRow, characterPositionColumn + 1)) && currentMaze.getValueByInt(characterPositionRow, characterPositionColumn + 1) == 0)
+                            || (currentMaze.isInMaze(new Position(characterPositionRow - 1, characterPositionColumn)) && currentMaze.getValueByInt(characterPositionRow - 1, characterPositionColumn) == 0))
+                    ) {
+                        return true;
+                    }
+                    break;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    private boolean movingKey(KeyCode movement) {
+        if(movement == UP || movement == DOWN || movement == RIGHT || movement==LEFT || movement == NUMPAD1||
+                movement == NUMPAD2 || movement == NUMPAD3 || movement == NUMPAD4 || movement == NUMPAD6 ||
+                movement == NUMPAD7 || movement == NUMPAD8 || movement == NUMPAD9){
+            return true;
         }
         return false;
     }

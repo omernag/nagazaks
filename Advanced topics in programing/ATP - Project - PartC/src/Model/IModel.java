@@ -15,6 +15,8 @@ public interface IModel {
     boolean isFinished();
     boolean isMoved();
     boolean isSolved();
+    boolean isWrongKey();
+    void setWrongKey(boolean wrongKey);
     void setcurrentMaze(Maze maze);
     void SolveSearchProblem();
     Maze getMaze();
