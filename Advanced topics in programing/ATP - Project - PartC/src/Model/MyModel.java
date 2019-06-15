@@ -22,6 +22,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static javafx.scene.input.KeyCode.*;
+import static sun.net.www.protocol.http.AuthCacheValue.Type.Server;
 
 
 public class MyModel extends Observable implements IModel {

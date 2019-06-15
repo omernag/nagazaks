@@ -47,6 +47,8 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent windowEvent) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("Please Exit through the EXIT tab for a safe exit");
+                alert.setTitle("BE AWARE");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK){
                     model.stopServers();

@@ -276,7 +276,7 @@ public class MyViewController implements Observer, IView {
         }
         */
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("MAzE SurVivor");
+        alert.setTitle("The Wiz Maze");
         alert.setHeaderText("Properties");
         alert.setContentText(" TreadPoolSize: "+ Configurations.getThreadPoolAmount() +" \n Generator: "+ Configurations.loadGeneratorAlgorithm() +" \n Maze Solving algorithm: "+ Configurations.loadSearchAlgorithm());
         alert.show();
@@ -300,7 +300,7 @@ public class MyViewController implements Observer, IView {
 
 
         } else if(result.get() == btn_exit){
-
+            viewModel.stopServers();
             stage.close();
             alert.close();
         }
@@ -312,7 +312,7 @@ public class MyViewController implements Observer, IView {
 
     public void pressHelp(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("MAzE SurVivor");
+        alert.setTitle("The Wiz Maze");
         alert.setHeaderText("Help");
         alert.setContentText("Game Rules:\nGet you'r character out of the maze\nYou'r location is marked with an image of you'r character\n" +
                 "The exit point is marked with Yellow Stones\nMove freely with the NUMPAD\n\nGood luck. You'll need it");
@@ -337,7 +337,7 @@ public class MyViewController implements Observer, IView {
             e.printStackTrace();
         }*/
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("MAzE SurVivor");
+        alert.setTitle("The Wiz Maze");
         alert.setHeaderText("About");
         alert.setContentText(" Created by: Asi Zaks & Omer Nagar \n Maze generation algorithm: Prim \n Maze Solving algorithm: Best First Search" );
         alert.show();

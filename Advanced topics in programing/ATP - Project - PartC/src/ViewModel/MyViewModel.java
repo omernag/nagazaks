@@ -56,8 +56,9 @@ public class MyViewModel extends Observable implements Observer {
     public boolean isWrongKey() {
         return wrongKey;
     }
+
     public void setWrongKey(boolean wrongKey) {
-       model.setWrongKey(false);
+       model.setWrongKey(wrongKey);
     }
 
     public void generateMaze(int width, int height){
