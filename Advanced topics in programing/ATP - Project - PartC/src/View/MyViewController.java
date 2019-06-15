@@ -190,9 +190,6 @@ public class MyViewController implements Observer, IView {
             scene.getStylesheets().add(getClass().getResource("../View/NewGameStyle.css").toExternalForm());
             stage.show();
 
-
-            // Hide this current window (if this is what you want)
-            //((Node)(event.getSource())).getScene().getWindow().hide();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -258,23 +255,6 @@ public class MyViewController implements Observer, IView {
     }
 
     public void pressProperties(){
-        /*
-        Parent root;
-        try {
-            Stage stage = new Stage();
-            stage.setTitle("Properties");
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            root = fxmlLoader.load(getClass().getResource("../View/Properties.fxml").openStream());
-            Scene scene = new Scene(root, 400, 300);
-            stage.setScene(scene);
-            scene.getStylesheets().add(getClass().getResource("../View/NewGameStyle.css").toExternalForm());
-            stage.show();
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("The Wiz Maze");
         alert.setHeaderText("Properties");
@@ -320,22 +300,6 @@ public class MyViewController implements Observer, IView {
     }
 
     public void pressAbout(){
-        /*
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("../View/About.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("About");
-            Scene scene = new Scene(root, 400, 400);
-            stage.setScene(scene);
-            scene.getStylesheets().add(getClass().getResource("../View/NewGameStyle.css").toExternalForm());
-            stage.show();
-            // Hide this current window (if this is what you want)
-            //((Node)(event.getSource())).getScene().getWindow().hide();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }*/
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("The Wiz Maze");
         alert.setHeaderText("About");
@@ -378,7 +342,6 @@ public class MyViewController implements Observer, IView {
     public StringProperty characterPositionColumnProperty() {
         return characterPositionColumn;
     }
-
 
     public void mouseClicked(MouseEvent mouseEvent) {
         this.mazeDisplayer.requestFocus();

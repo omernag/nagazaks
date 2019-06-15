@@ -55,7 +55,7 @@ public class Server {
                     }));
                     LOG.info(String.format("Finished handle client: %s", clientSocket));
                 } catch (SocketTimeoutException e) {
-                    LOG.debug("Socket Timeout - No clients pending!");
+                    //LOG.debug("Socket Timeout - No clients pending!");
                 }
             }
             serverSocket.close();

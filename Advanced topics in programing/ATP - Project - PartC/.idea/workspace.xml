@@ -2,113 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf5d1a28-ad73-4965-a6bd-2af57b2b149b" name="Default Changelist" comment="created model, and view model&#10;some problems with the server">
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartB/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/ATP - Project - PartB.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/ATP - Project - PartB.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/artifacts/ATPProjectPartB_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/artifacts/ATPProjectPartB_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/0.1" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/0.2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Client/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Client/IClientStrategy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/IO/MyCompressorOutputStream.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/IO/MyDecompressorInputStream.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Jar/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Server/Configurations.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Server/IServerStrategy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Server/Server.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Server/ServerStrategyGenerateMaze.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Server/ServerStrategySolveSearchProblem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/Server/ServerStrategyStringReverser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/mazeGenerators/AMazeGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/mazeGenerators/EmptyMazeGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/mazeGenerators/IMazeGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/mazeGenerators/Maze.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/mazeGenerators/MyMazeGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/mazeGenerators/Position.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/mazeGenerators/SimpleMazeGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/search/ASearchingAlgorithm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/search/AState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/search/BestFirstSearch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/search/BreadthFirstSearch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/search/DepthFirstSearch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/search/ISearchable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/search/ISearchingAlgorithm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/search/MazeState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/search/SearchableMaze.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/algorithms/search/Solution.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/config.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/mett/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/test/RunCommunicateWithServers$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/test/RunCommunicateWithServers$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/test/RunCommunicateWithServers$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/test/RunCommunicateWithServers.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/test/RunCompressDecompressMaze.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/test/RunMazeGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/out/production/ATP - Project - PartB/test/RunSearchOnMaze.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/Client/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/Client/IClientStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/IO/MyCompressorOutputStream.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/IO/MyDecompressorInputStream.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/Jar/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/Server/Configurations.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/Server/IServerStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/Server/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/Server/ServerStrategyGenerateMaze.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/Server/ServerStrategySolveSearchProblem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/Server/ServerStrategyStringReverser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/mazeGenerators/AMazeGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/mazeGenerators/EmptyMazeGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/mazeGenerators/IMazeGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/mazeGenerators/Maze.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/mazeGenerators/MyMazeGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/mazeGenerators/Position.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/mazeGenerators/SimpleMazeGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/search/ASearchingAlgorithm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/search/AState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/search/BestFirstSearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/search/BreadthFirstSearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/search/DepthFirstSearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/search/ISearchable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/search/ISearchingAlgorithm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/search/MazeState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/search/SearchableMaze.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/algorithms/search/Solution.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/mett/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/test/RunCommunicateWithServers.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/test/RunCompressDecompressMaze.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/test/RunMazeGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/test/RunSearchOnMaze.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ATP - Project - PartC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ATP - Project - PartC.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/src/main/java/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/src/main/java/Server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/target/classes/Server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/target/classes/Server/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/0.1" beforeDir="false" afterPath="$PROJECT_DIR$/0.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/0.2" beforeDir="false" afterPath="$PROJECT_DIR$/0.2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ATP - Project - PartB.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ATP - Project - PartB.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/0.1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/0.2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ATP - Project - PartB.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ATPProjectJAR.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ATP - Project - PartC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ATP - Project - PartC.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ATPProjectJAR.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/Model/MyModel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/Model/MyModel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/Model/MyModel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/Model/MyModel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/Model/MyModel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/Model/MyModel$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/Model/MyModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/Model/MyModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MazeDisplayer$Delta.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MazeDisplayer$Delta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MazeDisplayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MazeDisplayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyPropertiesController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/MyViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGame.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGameController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGameController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGameController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/NewGameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/ViewModel/MyViewModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/ViewModel/MyViewModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/sample/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/sample/Main$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ATP - Project - PartC/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/MyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MyModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/MyView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MyView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ATP - Project - PartC/View/Properties.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/MazeDisplayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MazeDisplayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/MyPropertiesController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/MyViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MyViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ViewModel/MyViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewModel/MyViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Properties.fxml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,20 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/View/MyViewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-78">
-              <caret line="339" column="36" selection-start-line="339" selection-start-column="36" selection-end-line="339" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="54" column="40" lean-forward="true" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="175">
+              <caret line="349" lean-forward="true" selection-start-line="349" selection-end-line="349" />
             </state>
           </provider>
         </entry>
@@ -199,7 +100,6 @@
         <option value="$PROJECT_DIR$/resources/config.properties" />
         <option value="$PROJECT_DIR$/src/View/Properties.fxml" />
         <option value="$PROJECT_DIR$/out/production/ATP - Project - PartC/config.properties" />
-        <option value="$PROJECT_DIR$/src/View/MazeDisplayer.java" />
         <option value="$PROJECT_DIR$/src/View/MyPropertiesController.java" />
         <option value="$PROJECT_DIR$/src/Model/IModel.java" />
         <option value="$PROJECT_DIR$/src/View/NewGameController.java" />
@@ -208,6 +108,7 @@
         <option value="$PROJECT_DIR$/src/ViewModel/MyViewModel.java" />
         <option value="$PROJECT_DIR$/src/View/MyView.fxml" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
+        <option value="$PROJECT_DIR$/src/View/MazeDisplayer.java" />
         <option value="$PROJECT_DIR$/src/View/MyViewController.java" />
       </list>
     </option>
@@ -219,9 +120,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="width" value="980" />
-    <option name="height" value="1031" />
+    <option name="x" value="-12" />
+    <option name="width" value="981" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -240,18 +141,6 @@
               <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
               <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="sample" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="View" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -296,7 +185,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560537885286" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ATP - Project - PartB.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ATPProjectJAR.jar!/" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -385,7 +274,7 @@
       <workItem from="1560418782069" duration="1129000" />
       <workItem from="1560516492180" duration="14832000" />
       <workItem from="1560591201950" duration="4555000" />
-      <workItem from="1560597031475" duration="3870000" />
+      <workItem from="1560597031475" duration="5814000" />
     </task>
     <task id="LOCAL-00001" summary="did some work on view">
       <created>1558872099129</created>
@@ -419,13 +308,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147957000" />
+    <option name="totallyTimeSpent" value="149901000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8159204" visible="true" weight="0.17165992" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8159204" visible="true" weight="0.15384616" />
       <window_info id="Structure" order="1" sideWeight="0.1840796" side_tool="true" weight="0.22995952" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -434,7 +323,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328125" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49596775" visible="true" weight="0.3676732" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49596775" weight="0.3676732" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3374778" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -442,7 +331,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.07954545" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49865592" weight="0.1634103" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49865592" visible="true" weight="0.1634103" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50403225" side_tool="true" weight="0.23295455" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49932796" weight="0.3232682" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -501,25 +390,25 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/View/MazeDisplayer.java</url>
-          <line>183</line>
+          <line>178</line>
           <properties />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/View/MazeDisplayer.java</url>
-          <line>150</line>
+          <line>145</line>
           <properties />
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/View/MazeDisplayer.java</url>
-          <line>123</line>
+          <line>118</line>
           <properties />
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/View/MazeDisplayer.java</url>
-          <line>125</line>
+          <line>120</line>
           <properties />
           <option name="timeStamp" value="64" />
         </line-breakpoint>
@@ -543,9 +432,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/Images/wall2.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/Images/wall1.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -693,14 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/Properties.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/config.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -712,36 +590,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="18" selection-start-line="1" selection-end-line="1" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/MazeDisplayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1853">
-          <caret line="113" column="24" selection-start-line="113" selection-start-column="24" selection-end-line="113" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/MyPropertiesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/NewGameController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="9" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -812,31 +660,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ViewModel/MyViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ATP - Project - PartC.iml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/MyModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="28" lean-forward="true" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4133#4134#0" expanded="true" />
-            <element signature="e#4173#4174#0" expanded="true" />
-            <element signature="e#7774#7775#0" expanded="true" />
-            <element signature="e#7817#7818#0" expanded="true" />
-            <element signature="e#13989#13990#0" expanded="true" />
-            <element signature="e#14035#14036#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/MyView.fxml">
       <provider selected="true" editor-type-id="text-editor">
@@ -846,10 +671,75 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/Properties.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/MyPropertiesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-366">
+          <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/ATPProjectJAR.jar!/Server/Server.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ViewModel/MyViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/NewGameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-746">
+          <caret line="35" column="9" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/MyModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4571">
+          <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="54" column="40" lean-forward="true" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+          <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/MazeDisplayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="63" column="15" selection-start-line="63" selection-start-column="15" selection-end-line="63" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -858,8 +748,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/MyViewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-78">
-          <caret line="339" column="36" selection-start-line="339" selection-start-column="36" selection-end-line="339" selection-end-column="36" />
+        <state relative-caret-position="175">
+          <caret line="349" lean-forward="true" selection-start-line="349" selection-end-line="349" />
         </state>
       </provider>
     </entry>
