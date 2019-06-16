@@ -7,40 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf9290e3-7002-4ff8-921f-2387327a0aca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Configurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Configurations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Server/Configurations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Server/Configurations.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/ATPProjectJAR.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/ATPProjectJAR.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/View/MyViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/bush.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/character1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/greenbrick.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/mute.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/unmute.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/wall1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/wall2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/wall3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/wizback.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/wizbanner.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/yellowbrick.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/yellowbrick2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/yellowbrickDorthy.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Images/yellowbrickbush.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/Somewhere.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/View/About.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/View/MyView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/View/MyViewStyle.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/View/NewGame.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/View/NewGameStyle.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/View/Properties.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/View/mute.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/config.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/production/ATP - Project - PartC1/seethewizard.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/View/MyViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/src/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/ATPProjectPartB/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -130,7 +97,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="474" />
     <option name="y" value="381" />
     <option name="width" value="981" />
@@ -279,7 +246,8 @@
     <option name="totallyTimeSpent" value="35944000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27854252" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
