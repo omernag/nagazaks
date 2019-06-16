@@ -7,9 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf5d1a28-ad73-4965-a6bd-2af57b2b149b" name="Default Changelist" comment="created model, and view model&#10;some problems with the server">
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartB/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC.rar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="68" lean-forward="true" selection-start-line="27" selection-start-column="63" selection-end-line="27" selection-end-column="68" />
+            <state relative-caret-position="81">
+              <caret line="27" column="68" selection-start-line="27" selection-start-column="63" selection-end-line="27" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -131,8 +128,8 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="340" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="339" />
     <option name="y" value="453" />
     <option name="width" value="981" />
     <option name="height" value="1032" />
@@ -143,35 +140,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="View" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -198,6 +166,35 @@
               <item name="ATP - Project - PartC" type="58d84e3e:PackageViewProjectNode" />
               <item name="ATP - Project - PartC" type="616d4139:PackageViewModuleNode" />
               <item name="View" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATP - Project - PartC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATP - Project - PartC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -309,6 +306,7 @@
       <workItem from="1560616694578" duration="1927000" />
       <workItem from="1560619839086" duration="1855000" />
       <workItem from="1560683775343" duration="3392000" />
+      <workItem from="1560703207490" duration="691000" />
     </task>
     <task id="LOCAL-00001" summary="did some work on view">
       <created>1558872099129</created>
@@ -342,12 +340,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="160784000" />
+    <option name="totallyTimeSpent" value="161475000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="227" y="302" width="654" height="688" extended-state="0" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8159204" visible="true" weight="0.42424244" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8159204" visible="true" weight="0.21133603" />
       <window_info id="Structure" order="1" sideWeight="0.1840796" side_tool="true" weight="0.22995952" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -364,7 +362,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.07954545" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49865592" visible="true" weight="0.15827338" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49865592" weight="0.5293073" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50403225" side_tool="true" weight="0.23295455" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49932796" weight="0.3232682" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -717,6 +715,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="27" column="68" selection-start-line="27" selection-start-column="63" selection-end-line="27" selection-end-column="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/View/MyViewController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
@@ -728,16 +736,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="68" lean-forward="true" selection-start-line="27" selection-start-column="63" selection-end-line="27" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

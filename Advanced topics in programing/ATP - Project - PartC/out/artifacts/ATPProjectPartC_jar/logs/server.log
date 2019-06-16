@@ -1,0 +1,16 @@
+2019.06.15 20:54:57.076 INFO  Server.Server - Server starter at ServerSocket[addr=0.0.0.0/0.0.0.0,localport=5401]!
+2019.06.15 20:54:57.078 INFO  Server.Server - Server starter at ServerSocket[addr=0.0.0.0/0.0.0.0,localport=5400]!
+2019.06.15 20:54:57.079 INFO  Server.Server - Server's Strategy: ServerStrategySolveSearchProblem
+2019.06.15 20:54:57.079 INFO  Server.Server - Server's Strategy: ServerStrategyGenerateMaze
+2019.06.15 20:54:57.079 INFO  Server.Server - Server is waiting for clients...
+2019.06.15 20:54:57.079 INFO  Server.Server - Server is waiting for clients...
+2019.06.15 20:54:59.383 INFO  Server.Server - Stopping server..
+2019.06.15 20:54:59.384 INFO  Server.Server - Stopping server..
+2019.06.16 14:23:56.276 INFO  Server.Server - Server starter at ServerSocket[addr=0.0.0.0/0.0.0.0,localport=5400]!
+2019.06.16 14:23:56.276 INFO  Server.Server - Server starter at ServerSocket[addr=0.0.0.0/0.0.0.0,localport=5401]!
+2019.06.16 14:23:56.280 INFO  Server.Server - Server's Strategy: ServerStrategyGenerateMaze
+2019.06.16 14:23:56.280 INFO  Server.Server - Server's Strategy: ServerStrategySolveSearchProblem
+2019.06.16 14:23:56.281 INFO  Server.Server - Server is waiting for clients...
+2019.06.16 14:23:56.281 INFO  Server.Server - Server is waiting for clients...
+2019.06.16 14:24:11.507 INFO  Server.Server - Stopping server..
+2019.06.16 14:24:11.508 INFO  Server.Server - Stopping server..
