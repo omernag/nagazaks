@@ -14,3 +14,32 @@
 2019.06.16 14:23:56.281 INFO  Server.Server - Server is waiting for clients...
 2019.06.16 14:24:11.507 INFO  Server.Server - Stopping server..
 2019.06.16 14:24:11.508 INFO  Server.Server - Stopping server..
+2019.06.16 20:20:53.559 INFO  Server.Server - Server starter at ServerSocket[addr=0.0.0.0/0.0.0.0,localport=5400]!
+2019.06.16 20:20:53.559 INFO  Server.Server - Server starter at ServerSocket[addr=0.0.0.0/0.0.0.0,localport=5401]!
+2019.06.16 20:20:53.564 INFO  Server.Server - Server's Strategy: ServerStrategySolveSearchProblem
+2019.06.16 20:20:53.564 INFO  Server.Server - Server's Strategy: ServerStrategyGenerateMaze
+2019.06.16 20:20:53.565 INFO  Server.Server - Server is waiting for clients...
+2019.06.16 20:20:53.565 INFO  Server.Server - Server is waiting for clients...
+2019.06.16 20:20:58.744 INFO  Server.Server - Client excepted: Socket[addr=/10.100.102.5,port=50819,localport=5400]
+2019.06.16 20:20:58.750 INFO  Server.Server - Finished handle client: Socket[addr=/10.100.102.5,port=50819,localport=5400]
+2019.06.16 20:20:58.751 INFO  Server.Server - Handling client with socket: Socket[addr=/10.100.102.5,port=50819,localport=5400]
+2019.06.16 20:20:58.868 INFO  Server.ServerStrategyGenerateMaze - Maze size: 40X40
+2019.06.16 20:21:02.135 INFO  Server.Server - Client excepted: Socket[addr=/10.100.102.5,port=50820,localport=5401]
+2019.06.16 20:21:02.139 INFO  Server.Server - Finished handle client: Socket[addr=/10.100.102.5,port=50820,localport=5401]
+2019.06.16 20:21:02.139 INFO  Server.Server - Handling client with socket: Socket[addr=/10.100.102.5,port=50820,localport=5401]
+2019.06.16 20:21:02.465 INFO  Server.ServerStrategySolveSearchProblem - Solving algorithm: DepthFirstSearch
+2019.06.16 20:21:02.467 INFO  Server.ServerStrategySolveSearchProblem - Solution size: 58
+2019.06.16 20:21:31.228 INFO  Server.Server - Client excepted: Socket[addr=/10.100.102.5,port=58169,localport=5400]
+2019.06.16 20:21:31.236 INFO  Server.Server - Finished handle client: Socket[addr=/10.100.102.5,port=58169,localport=5400]
+2019.06.16 20:21:31.238 INFO  Server.Server - Handling client with socket: Socket[addr=/10.100.102.5,port=58169,localport=5400]
+2019.06.16 20:21:31.252 INFO  Server.ServerStrategyGenerateMaze - Maze size: 40X40
+2019.06.16 20:21:57.090 INFO  Server.Server - Stopping server..
+2019.06.16 20:21:57.120 INFO  Server.Server - Stopping server..
+2019.06.16 20:22:02.087 INFO  Server.Server - Server starter at ServerSocket[addr=0.0.0.0/0.0.0.0,localport=5401]!
+2019.06.16 20:22:02.087 INFO  Server.Server - Server starter at ServerSocket[addr=0.0.0.0/0.0.0.0,localport=5400]!
+2019.06.16 20:22:02.092 INFO  Server.Server - Server's Strategy: ServerStrategyGenerateMaze
+2019.06.16 20:22:02.092 INFO  Server.Server - Server's Strategy: ServerStrategySolveSearchProblem
+2019.06.16 20:22:02.093 INFO  Server.Server - Server is waiting for clients...
+2019.06.16 20:22:02.093 INFO  Server.Server - Server is waiting for clients...
+2019.06.16 20:22:14.000 INFO  Server.Server - Stopping server..
+2019.06.16 20:22:14.001 INFO  Server.Server - Stopping server..
