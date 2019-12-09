@@ -1,0 +1,1 @@
+{"0":"bus,doc1,100,true,true,false","1":"car,doc2,1000,true,true,false","2":"bus,doc1,100,true,true,false","3":"car,doc2,1000,false,false,true","4":"bus,doc3,100,true,true,false","5":"car,doc3,1000,true,true,false","6":"bus,doc4,100,true,true,false","7":"car,doc2,1000,true,true,false","8":"bus,doc4,100,true,true,false","9":"car,doc3,1000,true,true,false"}
