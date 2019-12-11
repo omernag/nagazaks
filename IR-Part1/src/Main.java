@@ -1,48 +1,68 @@
-package Indexer;
+import EngineUserInterface.Controller;
+import Indexer.SegmentProcesses;
+import Indexer.Term;
+import Indexer.TermInDoc;
+import Indexer.TermsInDocList;
+import EngineUserInterface.MyModel;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
-public class Main /*extends Application*/ {
 
-    /*@Override
-    public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//        primaryStage.setTitle("Hello World");
-//        primaryStage.setScene(new Scene(root, 300, 275));
-//        primaryStage.show();
-    }*/
+public class Main extends Application {
+    MyModel model;
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        model = new MyModel();
+        //--------------
+        primaryStage.setTitle("Enter a proper title");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource("/EngineUserInterface/MyView.fxml").openStream());
+        Scene scene = new Scene(root, 400, 400);
+        scene.getStylesheets().add(getClass().getResource("/EngineUserInterface/MyViewStyle.css").toExternalForm());
+        primaryStage.setScene(scene);
+        //--------------
+        Controller view = fxmlLoader.getController();
+        view.setModel(model);
+        //--------------
+        SetStageCloseEvent(primaryStage);
+        primaryStage.show();
+    }
+
+
+    private void SetStageCloseEvent(Stage primaryStage) {
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent windowEvent) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("Please Exit through the EXIT tab for a safe exit");
+                alert.setTitle("BE AWARE");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+
+                } else {
+                    // ... user chose CANCEL or closed the dialog
+                    windowEvent.consume();
+                }
+
+            }
+        });
+    }
 
 
     public static void main(String[] args) throws IOException {
-        //Simple test
-        /*TermsInDocList[] test = addTerm();
-        test[0].tidToJson();
-        test[1].tidToJson();
-        SegmentProcesses sgm = new SegmentProcesses();
-        System.out.println(sgm.getTheDictionary().getTermFromPosting("bus"));*/
-
-        //big corpus test all combos of 4
-        testTheIndex();
-        long startTimeIndex = System.nanoTime();
-        SegmentProcesses sgm = new SegmentProcesses();
-        long finishTimeIndex = System.nanoTime();
-        long startTimeIR = System.nanoTime();
-        //System.out.println(sgm.getTheDictionary().getTermFromPosting("abcd"));
-        long finishTimeIR = System.nanoTime();
-        System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
-        System.out.println("Time IR:  " + (finishTimeIR - startTimeIR) / 1000000.0 + "ms");
-        System.out.println("Bottom ten:\n");
-        for (Term trm : Term.bottomTenTerm
-        ) {
-            System.out.println(trm.toString());
-        }
-
-        System.out.println("Top ten:\n");
-        for (Term trm : Term.topTenTerm
-        ) {
-            System.out.println(trm.toString());
-        }
+        //indexTest();
+        launch(args);
     }
 
 
@@ -112,12 +132,12 @@ public class Main /*extends Application*/ {
         int termFq;
 
         char currC;
-        while (word.charAt(0) <= 'z') {
+        while (word.charAt(0) <= 'a') {
             while (word.charAt(1) <= 'z') {
                 while (word.charAt(2) <= 'z') {
                     while (word.charAt(3) <= 'l') {
                         docNum = (int) (Math.random() * 100);
-                        termFq = (int) (Math.random() * 100)+1;
+                        termFq = (int) (Math.random() * 100) + 1;
                         curr = new TermInDoc(word, "" + docNum, termFq, false, false, false);
                         list.add(curr);
                         currC = word.charAt(3);
@@ -140,5 +160,37 @@ public class Main /*extends Application*/ {
             test.tidToJson();
             list.clear();
         }
+    }
+
+    private static void simpleTestToLoad() throws IOException {
+        TermsInDocList[] test = addTerm();
+        test[0].tidToJson();
+        test[1].tidToJson();
+        SegmentProcesses sgm = new SegmentProcesses();
+        System.out.println(sgm.getTheDictionary().getTermFromPosting("bus"));
+    }
+
+    private static void indexTest() throws IOException {
+        testTheIndex();
+        long startTimeIndex = System.nanoTime();
+        SegmentProcesses sgm = new SegmentProcesses();
+        long finishTimeIndex = System.nanoTime();
+        long startTimeIR = System.nanoTime();
+        //System.out.println(sgm.getTheDictionary().getTermFromPosting("abcd"));
+        long finishTimeIR = System.nanoTime();
+        System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
+        System.out.println("Time IR:  " + (finishTimeIR - startTimeIR) / 1000000.0 + "ms");
+        System.out.println("Bottom ten:\n");
+        for (Term trm : Term.bottomTenTerm
+        ) {
+            System.out.println(trm.toString());
+        }
+
+        System.out.println("Top ten:\n");
+        for (Term trm : Term.topTenTerm
+        ) {
+            System.out.println(trm.toString());
+        }
+        System.out.println(sgm.getTheDictionary().getIndexerPrint());
     }
 }

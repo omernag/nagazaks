@@ -5,20 +5,23 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import static java.lang.Boolean.parseBoolean;
 
 public class IndexDictionary {
 
-    HashMap<String, IndexEntryValue> indexer;
+    private TreeMap<String, IndexEntryValue> indexer;
+    private String indexerPrint;
 
     public IndexDictionary(ArrayList<Term> termL) throws IOException {
-        indexer=new HashMap<>();
+        indexer=new TreeMap<>();
         createIndexer(termL);
     }
 
     public IndexDictionary() {
-        indexer=new HashMap<>();
+        indexer=new TreeMap<>();
     }
 
     private void createIndexer(ArrayList<Term> termL) throws IOException {
@@ -29,6 +32,7 @@ public class IndexDictionary {
             entry = new IndexEntryValue(trm,postFile.getPath());
             indexer.put(trm.getName(),entry);
         }
+        indexerPrint=printDictionary();
     }
 
     public Term getTermFromPosting(String termName) throws FileNotFoundException {
@@ -53,8 +57,12 @@ public class IndexDictionary {
         return termFromPosting;
     }
 
+    public void setIndexerPrint(String indexerPrint) {
+        this.indexerPrint = indexerPrint;
+    }
+
     public IndexDictionary createIndexFromPosting(String path) throws IOException {
-        IndexDictionary riseDictionery=new IndexDictionary();
+        IndexDictionary riseDictionary=new IndexDictionary();
         try{
             File postingFolder = new File(path);
             String termRep="";
@@ -69,14 +77,28 @@ public class IndexDictionary {
                     termRep=reader.readLine();
                     split=termRep.split(",");
                     IndexEntryValue nEntry= new IndexEntryValue(Integer.parseInt(split[1]),Integer.parseInt(split[2]),split[3]);
-                    riseDictionery.indexer.put(split[0],nEntry);
+                    riseDictionary.indexer.put(split[0],nEntry);
                 }
             }
         }
         catch (Exception e){
             System.out.println("cant find folder");
         }
-        return riseDictionery;
 
+        return riseDictionary;
+
+    }
+
+    public String getIndexerPrint() {
+        return indexerPrint;
+    }
+
+    public String printDictionary(){
+        String dict="";
+        for (Map.Entry ent:indexer.entrySet()
+             ) {
+            dict+=ent.getKey()+", "+ent.getValue().toString()+"\n";
+        }
+        return dict;
     }
 }
