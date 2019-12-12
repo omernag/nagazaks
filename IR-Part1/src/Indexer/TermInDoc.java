@@ -79,4 +79,13 @@ public class TermInDoc {
     public String toString() {
         return "" + term + "," + docNo + "," + termfq + "," + isBold + "," + isHeader + "," + isEntity;
     }
+
+
+    public void setTerm(String term) {
+        this.term = term;
+    }
+
+    public void updateCapsToLower() {
+        term = term.substring(0,1).toLowerCase()+term.substring(1);
+    }
 }

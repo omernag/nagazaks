@@ -130,36 +130,51 @@ public class Main extends Application {
         TermInDoc curr;
         int docNum;
         int termFq;
+        int counter=1;
+
 
         char currC;
-        while (word.charAt(0) <= 'a') {
-            while (word.charAt(1) <= 'z') {
-                while (word.charAt(2) <= 'z') {
-                    while (word.charAt(3) <= 'l') {
-                        docNum = (int) (Math.random() * 100);
-                        termFq = (int) (Math.random() * 100) + 1;
-                        curr = new TermInDoc(word, "" + docNum, termFq, false, false, false);
-                        list.add(curr);
-                        currC = word.charAt(3);
+        while (word.charAt(0) <= 'e') {
+                while (word.charAt(1) <= 'a') {
+                    while (word.charAt(2) <= 'a') {
+                        while (word.charAt(3) <= 'z') {
+                            docNum = (int) (Math.random() * 100);
+                            //termFq = (int) (Math.random() * 100) + 1;
+                            if (counter % 5 == 0) {
+                                curr = new TermInDoc(word.substring(0,1).toUpperCase()+word.substring(1), "" + docNum, counter, false, false, false);
+                            }
+                            else {
+                                curr = new TermInDoc(word, "" + docNum, counter, false, false, false);
+                            }
+                            list.add(curr);
+                            currC = word.charAt(3);
+                            if(counter>20) {
+                                currC++;
+                                counter=1;
+                            }
+                            else{
+                                counter++;
+                            }
+                            word = word.substring(0, 3) + currC;
+                        }
+                        currC = word.charAt(2);
                         currC++;
-                        word = word.substring(0, 3) + currC;
+                        word = word.substring(0, 2) + currC + 'a';
                     }
-                    currC = word.charAt(2);
+                    currC = word.charAt(1);
                     currC++;
-                    word = word.substring(0, 2) + currC + 'a';
+                    word = word.substring(0, 1) + currC + "aa";
                 }
-                currC = word.charAt(1);
+                currC = word.charAt(0);
                 currC++;
-                word = word.substring(0, 1) + currC + "aa";
+                word = currC + "aaa";
+                test = new TermsInDocList();
+                list.add(new TermInDoc("Zaaa","asd44",11,false,false,true));
+                test.setList(list);
+                test.tidToJson();
+                list.clear();
             }
-            currC = word.charAt(0);
-            currC++;
-            word = currC + "aaa";
-            test = new TermsInDocList();
-            test.setList(list);
-            test.tidToJson();
-            list.clear();
-        }
+
     }
 
     private static void simpleTestToLoad() throws IOException {

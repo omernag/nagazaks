@@ -107,4 +107,10 @@ public class Term {
             return o1.getTotalFq()-o2.getTotalFq();
         }
     };
+
+    public void updateToUpperCase() {
+        if(Character.isUpperCase(term.charAt(0))){
+            term = term.toUpperCase();
+        }
+    }
 }
