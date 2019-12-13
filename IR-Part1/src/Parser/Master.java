@@ -32,9 +32,14 @@ public class Master {
         int counter = 0;
         rf = new ReadFile(".");
         parser.stopwords = rf.readStopWords(new File(rf.getStopWordsPath()));
+
+        long startTimeIndex ;
+        long finishTimeIndex;
         for(String filePath : rf.filesPaths){
+
             //fileTexts.addAll(rf.handleFile(filePath));
             fileTexts= rf.handleFile(filePath);
+
 
             for(DocText dt : fileTexts){
                 parser = new Parser();
@@ -46,17 +51,17 @@ public class Master {
                 }
                 doc.words = null;
             }
-
             counter++;
             if(counter%50==0 || counter == rf.filesPaths.size()-1){
+                startTimeIndex = System.nanoTime();
                 for(int i = 0; i<20; i++){
 
-                    long startTimeIndex = System.nanoTime();
                     wordsToWrite[i].tidToJson(i);
                     wordsToWrite[i]=new TermsInDocList();
-                    long finishTimeIndex = System.nanoTime();
-                    System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
                 }
+                finishTimeIndex = System.nanoTime();
+                System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 1000000000.0 + "sec");
+
             }
         }
     }
