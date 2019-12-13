@@ -7,9 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf9290e3-7002-4ff8-921f-2387327a0aca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../IR/InformationRetrieval/src/ReadFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ATP - Project - PartC/out/artifacts/ATPProjectPartC_jar/logs/server.log" beforeDir="false" afterPath="$PROJECT_DIR$/../ATP - Project - PartC/out/artifacts/ATPProjectPartC_jar/logs/server.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../IR/InformationRetrieval/src/ReadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../IR/InformationRetrieval/src/ReadFile.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/ATPProjectPartB/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -248,12 +246,12 @@
       <workItem from="1560619823616" duration="594000" />
       <workItem from="1561368149833" duration="51000" />
       <workItem from="1561470885637" duration="351000" />
-      <workItem from="1574756108960" duration="279000" />
+      <workItem from="1574756108960" duration="734000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36625000" />
+    <option name="totallyTimeSpent" value="37080000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />

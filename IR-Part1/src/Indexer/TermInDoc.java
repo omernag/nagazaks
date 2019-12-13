@@ -1,6 +1,6 @@
 package Indexer;
 
-import javafx.util.Pair;
+
 import org.json.JSONObject;
 
 import java.text.ParseException;
