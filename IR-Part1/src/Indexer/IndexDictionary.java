@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -16,9 +16,15 @@ public class IndexDictionary {
     private String indexerPrint;
 
     public IndexDictionary(ArrayList<Term> termL) throws IOException {
-        indexer=new TreeMap<>();
+        indexer=new TreeMap<>(comp);
         createIndexer(termL);
     }
+    private Comparator<String> comp = new Comparator<String>() {
+        @Override
+        public int compare(String o1, String o2) {
+            return o1.toLowerCase().compareTo(o2.toLowerCase());
+        }
+    };
 
     public IndexDictionary() {
         indexer=new TreeMap<>();

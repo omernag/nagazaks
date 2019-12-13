@@ -61,8 +61,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws IOException {
-        //indexTest();
-        launch(args);
+        indexTest();
+       // launch(args);
     }
 
 
@@ -134,7 +134,7 @@ public class Main extends Application {
 
 
         char currC;
-        while (word.charAt(0) <= 'e') {
+        while (word.charAt(0) <= 'a') {
                 while (word.charAt(1) <= 'a') {
                     while (word.charAt(2) <= 'a') {
                         while (word.charAt(3) <= 'z') {
@@ -169,7 +169,7 @@ public class Main extends Application {
                 currC++;
                 word = currC + "aaa";
                 test = new TermsInDocList();
-                list.add(new TermInDoc("Zaaa","asd44",11,false,false,true));
+                list.add(new TermInDoc("Baaa","asd44",11,false,false,true));
                 test.setList(list);
                 test.tidToJson();
                 list.clear();
