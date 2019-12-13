@@ -4,6 +4,8 @@ import Indexer.Term;
 import Indexer.TermInDoc;
 import Indexer.TermsInDocList;
 import EngineUserInterface.MyModel;
+import Parser.Parser;
+import Parser.Master;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +19,12 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-
+/*
 public class Main extends Application {
     MyModel model;
 
@@ -61,8 +67,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws IOException {
-        indexTest();
-       // launch(args);
+       // indexTest();
+        launch(args);
     }
 
 
@@ -207,5 +213,19 @@ public class Main extends Application {
             System.out.println(trm.toString());
         }
         System.out.println(sgm.getTheDictionary().getIndexerPrint());
+    }
+}
+*/
+
+
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        // write your code here
+
+       Master m = new Master();
+        m.run();
+
     }
 }
