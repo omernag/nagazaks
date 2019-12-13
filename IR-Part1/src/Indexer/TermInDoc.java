@@ -10,7 +10,7 @@ public class TermInDoc {
 
     private String term;
     private String docNo;
-    private int termfq;
+    public int termfq;
     private boolean isBold;
     private boolean isHeader;
     private boolean isEntity;
@@ -86,6 +86,6 @@ public class TermInDoc {
     }
 
     public void updateCapsToLower() {
-        term = term.substring(0,1).toLowerCase()+term.substring(1);
+        term = term.toLowerCase();
     }
 }

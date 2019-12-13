@@ -1,5 +1,9 @@
 package Parser;
 
+
+import Indexer.TermInDoc;
+
+import javax.print.Doc;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,10 +13,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+    String docno;
     HashSet<String> stopwords;
     HashMap<String, String> months;
-   // Map<String, Integer> words;
-    ArrayList<String> words;
+    Map<String, TermInDoc> words;
+    //ArrayList<String> words;
     Pattern containDigitPat;
     Pattern isNumericPat;
     Pattern startsWithDollar; //find
@@ -24,6 +29,7 @@ public class Parser {
     Pattern garbage;
     Pattern isNotAscii;
     Pattern legalForNames;
+    Boolean currIsEntity;
 
 
     public Parser() {
@@ -70,10 +76,30 @@ public class Parser {
         months.put("december", "12");
     }
 
-    public ArrayList<String> parse(String text, String name) {
 
-        //words = new HashMap<>();
-        words = new ArrayList<>();
+
+    public DocMD handleDoc (String text, String docno){
+        DocMD doc = new DocMD(docno);
+        this.docno=docno;
+        doc.words = parse(text,docno);
+        doc.maxTf = calcMaxTF(doc.words);
+        doc.uniqueCount = doc.words.size();
+        return doc;
+    }
+
+    private int calcMaxTF(Map<String,TermInDoc> words){
+        int ans = Integer.MIN_VALUE;
+        for (TermInDoc tid : words.values() ){
+            ans = Math.max(ans,tid.termfq);
+        }
+        return ans;
+    }
+
+    public Map<String, TermInDoc> parse(String text, String docno) {
+
+
+        words = new HashMap<>();
+        //words = new ArrayList<>();
         String[] textAsLines = text.split("([^U.S][\\.][ ])|([\\.][/n])|([\\:][ ])|([\\!][ ])|([\\?][ ])");
         String[] lineAsWords;
         String line;
@@ -90,6 +116,7 @@ public class Parser {
             line = line.replaceAll("[  ]|[   ]", " ");
             lineAsWords = line.split("[ ]");
             for (int wordInd = 0; wordInd < lineAsWords.length; wordInd++) {
+                currIsEntity = false;
                 boolean added = false;
                 boolean allDigits = false;
                 if (wordInd == lineAsWords.length - 1) {
@@ -437,6 +464,8 @@ public class Parser {
 
                          }
                          if(i>1){
+                             //Entity
+                             currIsEntity=true;
                              finalEdit(word);
                              added = true;
                              wordInd = wordInd + i -1;
@@ -500,9 +529,48 @@ public class Parser {
     }
 
     public void addToWords(String word){
+        TermInDoc tid;
+        if(Character.isLetter(word.charAt(0))) {
+            String upper = word.toUpperCase();
+            String lower = word.toLowerCase();
+            if (words.containsKey(lower)) {
+                //just update it
+                words.get(lower).termfq++;
+            }
+            else if (words.containsKey(upper)) {
+                //just update it
+                if (Character.isLowerCase(word.charAt(0))) {
+                    //update upper to lower
+                    tid = words.remove(upper);
+                    tid.updateCapsToLower();
+                    tid.termfq++;
+                    words.put(tid.getTerm(),tid);
+                } else {
+                    //just update it
+                    words.get(upper).termfq++;
+                }
+            }
+            //new word
+            else if (Character.isUpperCase(word.charAt(0))) {
+                //add upper
+                tid = new TermInDoc(upper,docno,1,false,false,currIsEntity);
+                words.put(upper,tid);
+            } else {
+                //add lower
+                tid = new TermInDoc(lower,docno,1,false,false,currIsEntity);
+                words.put(lower,tid);
+            }
+        }
+        else{
+            //add original
+            tid = new TermInDoc(word,docno,1,false,false,currIsEntity);
+            words.put(word,tid);
+        }
+
 
     }
 
+    public void AddToWords(String word){}
     public String numToString(double num) {
         String numS = num + "";
         if (numS.indexOf('.') != -1) {

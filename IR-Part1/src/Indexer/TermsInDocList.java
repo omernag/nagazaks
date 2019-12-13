@@ -49,15 +49,16 @@ public class TermsInDocList {
         this.list = list;
     }
 
-    public void tidToJson() throws IOException {
+    public void tidToJson(int i) throws IOException {
         JSONObject tid = new JSONObject();
-        int index = 0;
+
         for (TermInDoc term: list) {
-            tid.put(index,term.toString());
-            index++;
+            tid.put(COUNT,term.toString());
+            COUNT++;
         }
         try{
-            Files.write(Paths.get("tTj-" + listNum + ".txt"),tid.toJSONString().getBytes());
+
+            Files.write(Paths.get("tTj-" + i + ".txt"),tid.toJSONString().getBytes(),Files.exists(Paths.get("tTj-" + i + ".txt")) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
 
         }
         catch (IOException e){
@@ -90,9 +91,9 @@ public class TermsInDocList {
 
     public void testToSave(TermsInDocList tidl) throws IOException {
         System.out.println(tidl.list.toString());
-        tidl.tidToJson();
+        tidl.tidToJson(999);
         TermsInDocList nTidl=new TermsInDocList();
-        nTidl.setList(JsonToTid("tTj-"+tidl.listNum));
+        nTidl.setList(JsonToTid("tTj-"+999));
         System.out.println(nTidl.list.toString());
 
     }
