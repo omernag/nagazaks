@@ -1,1 +1,0 @@
-{"0":"busf,doc1,100,true,true,false","1":"carg,doc2,1000,true,true,false","2":"busg,doc3,100,true,true,false","3":"carh,doc4,1000,true,true,false","4":"bush,doc5,100,true,true,false","5":"carj,doc1,1000,false,false,true","6":"busk,doc2,100,true,true,false","7":"carl,doc3,1000,true,true,false","8":"busc,doc4,100,true,true,false","9":"carv,doc5,1000,true,true,false"}
