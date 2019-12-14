@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -60,7 +61,7 @@ public class TermsInDocList {
         }
         try{
 
-            Files.write(Paths.get("tTj-" + i + ".txt"),tid.toJSONString().getBytes(),Files.exists(Paths.get("tTj-" + i + ".txt")) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
+            Files.write(Paths.get("tTj-" + i + ".txt"),(tid.toJSONString()+"\n").getBytes(),Files.exists(Paths.get("tTj-" + i + ".txt")) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
 
         }
         catch (IOException e){
@@ -71,15 +72,18 @@ public class TermsInDocList {
     /* maybe a constructor */
     public LinkedList<TermInDoc> JsonToTid(String location) throws FileNotFoundException {
         try {
-            FileReader reader = new FileReader(location);
             JSONParser parser = new JSONParser();
             LinkedList<TermInDoc> termList = new LinkedList<>();
-            JSONObject fromMem = (JSONObject)parser.parse(reader);
-            for ( Object term: fromMem.entrySet()) {
-                TermInDoc newTerm = new TermInDoc((String)((Map.Entry)term).getKey(),(String)((Map.Entry)term).getValue());
-                termList.add(newTerm);
+            List<String> jsonList = Files.readAllLines(Paths.get(location));
+            JSONObject fromMem;
+            for(String jsonObj : jsonList) {
+                fromMem = (JSONObject)parser.parse(jsonObj);
+                for (Object term : fromMem.entrySet()) {
+                    TermInDoc newTerm = new TermInDoc((String) ((Map.Entry) term).getKey(), (String) ((Map.Entry) term).getValue());
+                    termList.add(newTerm);
+                }
             }
-            reader.close();
+
             return termList;
         }
         catch (IOException e){
