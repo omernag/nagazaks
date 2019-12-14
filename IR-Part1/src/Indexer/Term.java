@@ -9,6 +9,7 @@ public class Term {
     private int totalFq;
     private int docFq;
     private LinkedList<String> occurrence;
+    private HashSet<String> docsNames;
     //public static Term[] topTenTerm= new Term[11];
     //public static Term[] bottomTenTerm= new Term[11];
     private static int termCounter=0;
@@ -25,6 +26,7 @@ public class Term {
         this.term = term;
         this.docFq = 0;
         this.occurrence = new LinkedList<>();
+        this.docsNames = new HashSet<>();
 
     }
 
@@ -33,11 +35,13 @@ public class Term {
         this.docFq = 0;
         this.totalFq=0;
         this.occurrence = new LinkedList<>();
+        this.docsNames = new HashSet<>();
         addOccurrence(termIn.getDocNo(), termIn.getTermfq(), termIn.isHeader(),termIn.isEntity());
     }
 
     public void addOccurrence(String docNum, int termfq, boolean isHeader, boolean isEntity) {
         totalFq+=termfq;
+        docsNames.add(docNum);
         this.occurrence.add(docNum+","+termfq +","+isHeader+","+isEntity+"\n");
     }
 
@@ -54,11 +58,9 @@ public class Term {
     }
 
     public void updateDocFq(){
-        Set<String> uniqueDocs = new HashSet<>();
-        for (int i=0; i< occurrence.size(); i++) {
-            uniqueDocs.add(occurrence.get(i).split(",")[0]);
-        }
-        docFq=uniqueDocs.size();
+
+        docFq=docsNames.size();
+        docsNames=null;
         /*addToTopBottom(this);*/
     }
 
@@ -107,9 +109,11 @@ public class Term {
         }
     };
 
-    public void updateToUpperCase() {
+    public boolean updateToUpperCase() {
         if(Character.isUpperCase(term.charAt(0))){
             term = term.toUpperCase();
+            return true;
         }
+        return false;
     }
 }

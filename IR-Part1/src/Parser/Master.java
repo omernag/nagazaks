@@ -59,7 +59,7 @@ public class Master {
             System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 1000000000.0 + "sec to parse file path " + filePath.toString());
             startTimeIndex = System.nanoTime();
             counter++;
-            if(counter%50==0 || counter == rf.filesPaths.size()-1){
+           // if(counter%50==0 || counter == rf.filesPaths.size()-1){
 
                 for(int i = 0; i<20; i++){
 
@@ -68,7 +68,7 @@ public class Master {
                 }
                 finishTimeIndex = System.nanoTime();
                 System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 1000000000.0 + "sec to save file");
-            }
+           // }
 
 
         }

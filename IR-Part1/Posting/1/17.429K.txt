@@ -1,0 +1,9 @@
+17.429K,4,4,Posting/1/17.429K.txt
+FT942-7839,1,false,false
+
+FT942-1908,1,false,false
+
+FT943-15428,1,false,false
+
+LA080390-0148,1,false,false
+

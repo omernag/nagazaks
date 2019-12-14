@@ -8,56 +8,65 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.LinkedList;
+import java.util.*;
 
 public class SegmentProcesses {
 
-    private LinkedList<Term> termL;
+    private HashMap<String,Term> termL;
     private IndexDictionary theDictionary;
     /*private Hashtable<String, Integer> termsDf = new Hashtable<>();*/
 
-    public LinkedList<Term> getTermL() {
+    public HashMap<String,Term> getTermL() {
         return termL;
     }
 
     public SegmentProcesses() throws IOException {
-        this.termL = new LinkedList<>();
+        this.termL = new HashMap<>();
         processCorpus();
     }
 
     public void processCorpus() throws IOException {
-        int i = 1;
+
         TermsInDocList fromJson = new TermsInDocList(1);
-        while (i <= TermsInDocList.COUNT) {
-            fromJson.setList(fromJson.JsonToTid("tTj-" + i + ".txt"));
+        //String path="C:\\Users\\Asi Zaks\\Desktop\\segment";
+        String path = ".";
+        File postingFolder = new File(path);
+        theDictionary = new IndexDictionary();
+        for (File json : postingFolder.listFiles()) {
+            if(json.getName().contains("tTj")){
+            fromJson.setList(fromJson.JsonToTid(json.getPath()));
             processSegment(fromJson);
-            //Files.delete(Paths.get("tTj-" + i + ".txt"));
-            i++;
+            theDictionary.createIndexer(termL);
+            termL.clear();
+            }
+            //Files.delete(json.getPath());
         }
-        theDictionary = new IndexDictionary(termL);
+
+
 
     }
 
     private void processSegment(TermsInDocList termsList) {
-        LinkedList<String> markTerms = new LinkedList<>();
+        //LinkedList<String> markTerms = new LinkedList<>();
         for (TermInDoc termIn : termsList.getList()) {
-            if (markTerms.contains(termIn.getTerm())) {//segment in place
-                addOccurrenceToTerm(termIn.getTerm(), termIn.getDocNo(), termIn.getTermfq(), termIn.isHeader(), termIn.isEntity());
+            if(termIn.getTerm().length()>1 && termIn.getDocNo()!=null) {
+                if (termL.containsKey(termIn.getTerm())) {//segment in place
+                    addOccurrenceToTerm(termIn.getTerm(), termIn.getDocNo(), termIn.getTermfq(), termIn.isHeader(), termIn.isEntity());
 
-            } else if (markTerms.contains(termIn.getTerm().toLowerCase())) {
-                addOccurrenceToTerm(termIn.getTerm(), termIn.getDocNo(), termIn.getTermfq(), termIn.isHeader(), termIn.isEntity());
-                termIn.updateCapsToLower();
-            }
-            else if(markTerms.contains(termIn.getTerm().substring(0,1).toUpperCase()+termIn.getTerm().substring(1))){
-                addOccurrenceToTerm(termIn.getTerm(), termIn.getDocNo(), termIn.getTermfq(), termIn.isHeader(), termIn.isEntity());
-                termIn.updateCapsToLower();
-            }
-            else {
-                Term newTerm = new Term(termIn);
-                termL.add(newTerm);
-                markTerms.add(newTerm.getName());
+                } else if (termL.containsKey(termIn.getTerm().toLowerCase())) {
+                    addOccurrenceToTerm(termIn.getTerm(), termIn.getDocNo(), termIn.getTermfq(), termIn.isHeader(), termIn.isEntity());
+                    termIn.updateCapsToLower();
+
+                } else if (termL.containsKey(termIn.getTerm().substring(0, 1).toUpperCase() + termIn.getTerm().substring(1))) {
+
+                    addOccurrenceToTerm(termIn.getTerm(), termIn.getDocNo(), termIn.getTermfq(), termIn.isHeader(), termIn.isEntity());
+                    termIn.updateCapsToLower();
+
+                } else {
+                    Term newTerm = new Term(termIn);
+                    termL.put(newTerm.getName(), newTerm);
+                    //markTerms.add(newTerm.getName());
+                }
             }
         }
         updateCaseToUpper();
@@ -65,28 +74,29 @@ public class SegmentProcesses {
     }
 
 
-
     public IndexDictionary getTheDictionary() {
         return theDictionary;
     }
 
     private void addOccurrenceToTerm(String name, String docNum, int termfq, boolean header, boolean entity) {
-        for (Term term : termL) {
-            if (term.getName().equals(name)) {
-                term.addOccurrence(docNum, termfq, header, entity);
-            }
+        if(termL.containsKey(name)){
+            termL.get(name).addOccurrence(docNum, termfq, header, entity);
         }
     }
 
     private void updateDocFreq() {
-        for (Term trm : termL) {
+        for (Term trm : termL.values()) {
             trm.updateDocFq();
         }
     }
 
     private void updateCaseToUpper() {
-        for (Term trm : termL) {
-            trm.updateToUpperCase();
+        Set<String> keys =new HashSet<>(termL.keySet());
+        for (String key : keys) {
+            if(termL.get(key).updateToUpperCase()){
+                Term t = termL.remove(key);
+                termL.put(t.getName(),t);
+            }
         }
     }
 }

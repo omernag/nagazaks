@@ -1,0 +1,3 @@
+AUTO-TYPE,1,1,Posting/A/AUTO-TYPE.txt
+FBIS3-40497,1,false,false
+

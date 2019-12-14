@@ -1,0 +1,11 @@
+irrelevancy,5,5,Posting/i/irrelevancy.txt
+FBIS3-1275,1,false,false
+
+FBIS3-51776,1,false,false
+
+FBIS3-51876,1,false,false
+
+FT924-8698,1,false,false
+
+LA103189-0025,1,false,false
+

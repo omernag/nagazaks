@@ -1,0 +1,3 @@
+IBARAGI PRE,1,1,Posting/I/IBARAGI PRE.txt
+FBIS4-44919,1,false,true
+

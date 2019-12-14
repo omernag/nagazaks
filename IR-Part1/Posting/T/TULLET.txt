@@ -1,0 +1,11 @@
+TULLET,5,6,Posting/T/TULLET.txt
+FT921-4396,1,false,false
+
+FT921-3230,1,false,false
+
+FT934-13540,1,false,false
+
+FT943-10483,1,false,false
+
+FT943-1733,2,false,false
+

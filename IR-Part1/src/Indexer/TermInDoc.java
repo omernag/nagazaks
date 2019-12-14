@@ -37,14 +37,14 @@ public class TermInDoc {
         return isEntity;
     }
 
-    public TermInDoc(String term, String meta) {
+    public TermInDoc( String meta) {
         String[] metaData = meta.split(",");
         this.term = metaData[0];
         this.docNo = metaData[1];
         try {
             this.termfq = Integer.parseInt(metaData[2]);
-            this.isHeader = Boolean.parseBoolean(metaData[3]);
-            this.isEntity = Boolean.parseBoolean(metaData[4]);
+            this.isHeader = ((metaData[3].charAt(0)=='t')?true:false); //Boolean.parseBoolean(metaData[3]);
+            this.isEntity = ((metaData[4].charAt(0)=='t')?true:false);
         } catch (Exception e) {
             this.termfq = 0;
             this.isHeader = false;

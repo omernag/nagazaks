@@ -77,10 +77,10 @@ public class TermsInDocList {
             List<String> jsonList = Files.readAllLines(Paths.get(location));
             JSONObject fromMem;
             for(String jsonObj : jsonList) {
+                //Files.write(Paths.get("t.txt"),(jsonObj+"\n").getBytes(),Files.exists(Paths.get("t.txt")) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
                 fromMem = (JSONObject)parser.parse(jsonObj);
                 for (Object term : fromMem.entrySet()) {
-                    TermInDoc newTerm = new TermInDoc((String) ((Map.Entry) term).getKey(), (String) ((Map.Entry) term).getValue());
-                    termList.add(newTerm);
+                    termList.add(new TermInDoc( (String) ((Map.Entry) term).getValue()));
                 }
             }
 

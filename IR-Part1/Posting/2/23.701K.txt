@@ -1,0 +1,7 @@
+23.701K,3,3,Posting/2/23.701K.txt
+FT932-9837,1,false,false
+
+FT941-5530,1,false,false
+
+LA052189-0205,1,false,false
+

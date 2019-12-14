@@ -1,0 +1,3 @@
+words-Israel,1,1,Posting/w/words-Israel.txt
+FBIS3-13952,1,false,false
+

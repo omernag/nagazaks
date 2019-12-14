@@ -1,0 +1,9 @@
+ANDREA TARQUINI,4,4,Posting/A/ANDREA TARQUINI.txt
+FBIS3-19380,1,false,true
+
+FBIS4-18113,1,false,true
+
+FBIS4-65444,1,false,true
+
+FBIS4-65933,1,false,true
+

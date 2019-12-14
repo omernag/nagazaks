@@ -1,0 +1,5 @@
+INTERVALE,2,2,Posting/I/INTERVALE.txt
+LA031590-0011,1,false,false
+
+LA110490-0249,1,false,false
+

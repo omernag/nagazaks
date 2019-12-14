@@ -12,10 +12,11 @@ public class IndexDictionary {
     private TreeMap<String, IndexEntryValue> indexer;
     private String indexerPrint;
 
-    public IndexDictionary(LinkedList<Term> termL) throws IOException {
+    public IndexDictionary(HashMap<String,Term> termL) throws IOException {
         indexer=new TreeMap<>(comp);
         createIndexer(termL);
     }
+
     private Comparator<String> comp = new Comparator<String>() {
         @Override
         public int compare(String o1, String o2) {
@@ -27,9 +28,9 @@ public class IndexDictionary {
         indexer=new TreeMap<>();
     }
 
-    private void createIndexer(LinkedList<Term> termL) throws IOException {
+    public void createIndexer(HashMap<String,Term> termL) throws IOException {
         IndexEntryValue entry;
-        for (Term trm: termL
+        for (Term trm: termL.values()
              ) {
             Posting postFile = new Posting(trm);
             entry = new IndexEntryValue(trm,postFile.getPath());

@@ -1,0 +1,3 @@
+electroconductivit,1,1,Posting/e/electroconductivit.txt
+FBIS3-43093,1,false,false
+
