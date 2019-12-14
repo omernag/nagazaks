@@ -223,9 +223,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         // write your code here
+        long startTimeIndex = System.nanoTime();
 
        Master m = new Master();
         m.run();
 
+        long finishTimeIndex = System.nanoTime();
+        System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 3600000000000.0 + "sec");
     }
 }

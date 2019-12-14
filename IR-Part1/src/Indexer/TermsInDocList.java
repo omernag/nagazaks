@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map;
 
 
@@ -22,30 +23,30 @@ import java.util.Map;
 @SuppressWarnings("ALL")
 public class TermsInDocList {
 
-    private ArrayList<TermInDoc> list;
+    private LinkedList<TermInDoc> list;
     public static int COUNT=0;
     private int listNum;
 
 
     public TermsInDocList() {
-        this.list = new ArrayList<>();
+        this.list = new LinkedList<>();
         COUNT++;
         this.listNum=COUNT;
     }
 
-    public TermsInDocList(ArrayList<TermInDoc> list) {
+    public TermsInDocList(LinkedList<TermInDoc> list) {
         this.list = list;
     }
 
     public TermsInDocList(int i) {
-        this.list = new ArrayList<>();
+        this.list = new LinkedList<>();
     }
 
-    public ArrayList<TermInDoc> getList() {
+    public LinkedList<TermInDoc> getList() {
         return list;
     }
 
-    public void setList(ArrayList<TermInDoc> list) {
+    public void setList(LinkedList<TermInDoc> list) {
         this.list = list;
     }
 
@@ -67,11 +68,11 @@ public class TermsInDocList {
     }
 
     /* maybe a constructor */
-    public ArrayList<TermInDoc> JsonToTid(String location) throws FileNotFoundException {
+    public LinkedList<TermInDoc> JsonToTid(String location) throws FileNotFoundException {
         try {
             FileReader reader = new FileReader(location);
             JSONParser parser = new JSONParser();
-            ArrayList<TermInDoc> termList = new ArrayList<>();
+            LinkedList<TermInDoc> termList = new LinkedList<>();
             JSONObject fromMem = (JSONObject)parser.parse(reader);
             for ( Object term: fromMem.entrySet()) {
                 TermInDoc newTerm = new TermInDoc((String)((Map.Entry)term).getKey(),(String)((Map.Entry)term).getValue());

@@ -16,37 +16,35 @@ public class Parser {
     String docno;
     HashSet<String> stopwords;
     HashMap<String, String> months;
-    Map<String, TermInDoc> words;
+    HashMap<String, TermInDoc> words;
     //ArrayList<String> words;
-    Pattern containDigitPat;
-    Pattern isNumericPat;
-    Pattern startsWithDollar; //find
-    Pattern endsWithBn;
-    Pattern endsWithM;
-    Pattern endsWithPerc;
-    Pattern wordPat;
-    Pattern twodots;
-    Pattern garbage;
-    Pattern isNotAscii;
-    Pattern legalForNames;
+    static Pattern containDigitPat = Pattern.compile("\\d+");
+    static Pattern isNumericPat = Pattern.compile("((-)?(\\d{1,3}\\,)+)?\\d+(\\.\\d+)?");
+    static Pattern startsWithDollar = Pattern.compile("\\A\\$");
+    static Pattern endsWithBn = Pattern.compile("bn\\b");
+    static Pattern endsWithM = Pattern.compile("m\\b");
+    static Pattern endsWithPerc = Pattern.compile("\\b%");
+    static Pattern wordPat = Pattern.compile("\\w+('s)?");
+    static Pattern twodots = Pattern.compile("\\w\\.\\w\\.(\\w\\.)?");
+    static Pattern garbage = Pattern.compile("[\\/\\,\\|\\%\\$\\?\\.\\<\\>\\^\\&\\*\\#\\+\\=\\_\\@\\\\]");
+    static Pattern isNotAscii = Pattern.compile("[^\\p{ASCII}]");
+    static Pattern legalForNames = Pattern.compile("(\\w+(\\-)?)+");
+    static Pattern lineSplit = Pattern.compile("([^U.S][\\.][ ])|([\\.][/n])|([\\:][ ])|([\\!][ ])|([\\?][ ])");
+    static Pattern lineJunk = Pattern.compile("[\";~!|:#^&*(){}\\[\\]\\s]");
+    static Pattern threedots = Pattern.compile("\\.\\.\\.");
+    static Pattern spaces = Pattern.compile("[  ]|[   ]");
+    static Pattern othercheck = Pattern.compile("[,;.'?`!/]$");
+    static Pattern geresh = Pattern.compile("['`]");
+
+
+
+
     Boolean currIsEntity;
 
 
     public Parser() {
         this.months = new HashMap<>();
-        this.containDigitPat = Pattern.compile("\\d+");
-        this.isNumericPat = Pattern.compile("((-)?(\\d{1,3}\\,)+)?\\d+(\\.\\d+)?");
-        this.startsWithDollar = Pattern.compile("\\A\\$");
-        this.endsWithBn = Pattern.compile("bn\\b");
-        this.endsWithM = Pattern.compile("m\\b");
-        this.endsWithPerc = Pattern.compile("\\b%");
-        this.wordPat = Pattern.compile("\\w+('s)?");
         this.stopwords = new HashSet<>();
-        this.twodots = Pattern.compile("\\w\\.\\w\\.(\\w\\.)?");
-        this.garbage = Pattern.compile("[\\/\\,\\|\\%\\$\\?\\.\\<\\>\\^\\&\\*\\#\\+\\=\\_\\@\\\\]");
-        this.isNotAscii = Pattern.compile("[^\\p{ASCII}]");
-        this.legalForNames = Pattern.compile("(\\w+(\\-)?)+");
-
         setMonths();
     }
 
@@ -76,8 +74,6 @@ public class Parser {
         months.put("december", "12");
     }
 
-
-
     public DocMD handleDoc (String text, String docno){
         DocMD doc = new DocMD(docno);
         this.docno=docno;
@@ -100,7 +96,7 @@ public class Parser {
 
         words = new HashMap<>();
         //words = new ArrayList<>();
-        String[] textAsLines = text.split("([^U.S][\\.][ ])|([\\.][/n])|([\\:][ ])|([\\!][ ])|([\\?][ ])");
+        String[] textAsLines = lineSplit.split(text);
         String[] lineAsWords;
         String line;
         String word;
@@ -111,9 +107,9 @@ public class Parser {
             boolean lastWord = false;
 
             line = textAsLines[lineInd];
-            line = line.replaceAll("[\";~!|:#^&*(){}\\[\\]\\s]", " ");
-            line = line.replaceAll("\\.\\.\\.", " ");
-            line = line.replaceAll("[  ]|[   ]", " ");
+            line = lineJunk.matcher(line).replaceAll(" ");
+           // line = threedots.matcher(line).replaceAll(" ");
+           // line = spaces.matcher(line).replaceAll(" ");
             lineAsWords = line.split("[ ]");
             for (int wordInd = 0; wordInd < lineAsWords.length; wordInd++) {
                 currIsEntity = false;
@@ -125,8 +121,8 @@ public class Parser {
 
 
                 word = lineAsWords[wordInd];
-                if (word.length() < 1) {
-                } else {
+                if (word.length() > 1 && !stopwords.contains(word.toLowerCase())) {
+
                     if (months.containsKey(word.toLowerCase())) {
                         //month name
                         if (!lastWord) {
@@ -138,16 +134,16 @@ public class Parser {
                                     lineAsWords[wordInd + 1] = "0" + lineAsWords[wordInd + 1];
                                 }
                                 word = months.get(word.toLowerCase()) + "-" + lineAsWords[wordInd + 1];
-                                finalEdit(word);
+                                addRuleWord(word);
                                 wordInd++;
                                 added = true;
                                 continue;
-                            } else if (mtc.matches() && lineAsWords[wordInd + 1].length() == 4) {
+                            } else if (lineAsWords[wordInd + 1].length() == 4 && mtc.matches()) {
                                 //d.2.1
 
                                 word = lineAsWords[wordInd + 1] + "-" + months.get(word.toLowerCase());
 
-                                finalEdit(word);
+                                addRuleWord(word);
                                 added = true;
                                 wordInd++;
                                 continue;
@@ -162,7 +158,7 @@ public class Parser {
                         String[] listedWord = word.split("-");
                         if (listedWord.length > 3) {
                             for (String w : listedWord) {
-                                if((mtc = garbage.matcher(word)).find()){
+                                if( garbage.matcher(word).find()){
                                     String[] splited = word.split(garbage.toString());
                                     for (String s : splited) {
                                         finalEdit(s);
@@ -184,7 +180,7 @@ public class Parser {
                                 }
                             }
                             if (!word.equals("")) {
-                                finalEdit(word.substring(0, word.length() - 1));
+                                addRuleWord(word.substring(0, word.length() - 1));
                                 added = true;
                             }
                             continue;
@@ -193,11 +189,11 @@ public class Parser {
 
                     }
                     if (word.toLowerCase().equals("between") && wordInd <= lineAsWords.length - 4) {
-                        if (((mtc = isNumericPat.matcher(lineAsWords[wordInd + 1])).matches()) && ((mtc = isNumericPat.matcher(lineAsWords[wordInd + 3])).matches()) && lineAsWords[wordInd + 2].toLowerCase().equals("and")) {
+                        if ( lineAsWords[wordInd + 2].toLowerCase().equals("and") && (  isNumericPat.matcher(lineAsWords[wordInd + 1]).matches()) && ( isNumericPat.matcher(lineAsWords[wordInd + 3]).matches()) ) {
                             //d.3.2
                             word = word + " " + lineAsWords[wordInd + 1] + " " + lineAsWords[wordInd + 2] + " " + lineAsWords[wordInd + 3];
                             wordInd = wordInd + 3;
-                            finalEdit(word);
+                            addRuleWord(word);
                             added = true;
                             continue;
                         }
@@ -217,14 +213,14 @@ public class Parser {
                                         word = "0" + word;
                                     }
                                     word =  months.get(lineAsWords[wordInd + 1].toLowerCase()) + "-" +word;
-                                    finalEdit(word);
+                                    addRuleWord(word);
                                     wordInd++;
                                     added = true;
                                     continue;
                                 }
                             }
                         }
-                        if (allDigits || (mtc = isNumericPat.matcher(word)).matches()) {
+                        if (allDigits ||  isNumericPat.matcher(word).matches()) {
                             //numeric value
                             double num = wordToNum(word);
                             if (!lastWord) {
@@ -232,7 +228,7 @@ public class Parser {
                                     //d.4.2 +d.4.3
                                     wordInd++;
                                     word += "%";
-                                    finalEdit(word);
+                                    addRuleWord(word);
                                     added = true;
                                     continue;
                                 } else if (lineAsWords[wordInd + 1].toLowerCase().equals("dollars")) {
@@ -240,7 +236,7 @@ public class Parser {
                                         //d.5.1
                                         wordInd++;
                                         word += " Dollars";
-                                        finalEdit(word);
+                                        addRuleWord(word);
                                         added = true;
                                         continue;
                                     } else {
@@ -248,31 +244,31 @@ public class Parser {
                                         num = num / 1000000;
                                         wordInd++;
                                         word = numToString(num) + " M Dollars";
-                                        finalEdit(word);
+                                        addRuleWord(word);
                                         added = true;
                                         continue;
                                     }
                                 }
                                 if (wordInd < lineAsWords.length - 2) {
-                                    if (lineAsWords[wordInd + 2].toLowerCase().equals("dollars") && (mtc = containDigitPat.matcher(lineAsWords[wordInd + 1])).find() && lineAsWords[wordInd + 1].contains("/")) {
+                                    if (lineAsWords[wordInd + 2].toLowerCase().equals("dollars") && lineAsWords[wordInd + 1].contains("/") && containDigitPat.matcher(lineAsWords[wordInd + 1]).find() ) {
                                         //d.5.2
                                         word += " " + lineAsWords[wordInd + 1] + " Dollars";
                                         wordInd = wordInd + 2;
-                                        finalEdit(word);
+                                        addRuleWord(word);
                                         added = true;
                                         continue;
                                     } else if (lineAsWords[wordInd + 1].toLowerCase().equals("m") && lineAsWords[wordInd + 2].toLowerCase().equals("dollars")) {
                                         //d.5.8 a
                                         wordInd = wordInd + 2;
                                         word += " M Dollars";
-                                        finalEdit(word);
+                                        addRuleWord(word);
                                         added = true;
                                         continue;
                                     } else if (lineAsWords[wordInd + 1].toLowerCase().equals("bn") && lineAsWords[wordInd + 2].toLowerCase().equals("dollars")) {
                                         //d.5.9 a
                                         wordInd = wordInd + 2;
                                         word = numToString(num * 1000) + " M Dollars";
-                                        finalEdit(word);
+                                        addRuleWord(word);
                                         added = true;
                                         continue;
                                     } else if (wordInd < lineAsWords.length - 3) {
@@ -281,21 +277,21 @@ public class Parser {
                                                 //d.5.10
                                                 wordInd = wordInd + 3;
                                                 word = numToString(num * 1000) + " M Dollars";
-                                                finalEdit(word);
+                                                addRuleWord(word);
                                                 added = true;
                                                 continue;
                                             } else if (lineAsWords[wordInd + 1].toLowerCase().contains("million")) {
                                                 //d.5.11
                                                 wordInd = wordInd + 3;
                                                 word = numToString(num) + " M Dollars";
-                                                finalEdit(word);
+                                                addRuleWord(word);
                                                 added = true;
                                                 continue;
                                             } else if (lineAsWords[wordInd + 1].toLowerCase().contains("trillion")) {
                                                 //d.5.12
                                                 wordInd = wordInd + 3;
                                                 word = numToString(num * 1000000) + " M Dollars";
-                                                finalEdit(word);
+                                                addRuleWord(word);
                                                 added = true;
                                                 continue;
                                             }
@@ -306,19 +302,19 @@ public class Parser {
                                     //d.6.2
                                     wordInd++;
                                     word = word + "K";
-                                    finalEdit(word);
+                                    addRuleWord(word);
                                     added = true;
                                     continue;
                                 } else if (lineAsWords[wordInd + 1].toLowerCase().equals("million")) {
                                     wordInd++;
                                     word = word + "M";
-                                    finalEdit(word);
+                                    addRuleWord(word);
                                     added = true;
                                     continue;
                                 } else if (lineAsWords[wordInd + 1].toLowerCase().equals("billion")) {
                                     wordInd++;
                                     word = word + "B";
-                                    finalEdit(word);
+                                    addRuleWord(word);
                                     added = true;
                                     continue;
                                 }
@@ -327,7 +323,7 @@ public class Parser {
                                 //d.6.7
                                 num = num / 1000000000;
                                 word = numToString(num) + "B";
-                                finalEdit(word);
+                                addRuleWord(word);
                                 added = true;
                                 continue;
                             }
@@ -335,7 +331,7 @@ public class Parser {
                                 //d.6.4
                                 num = num / 1000000;
                                 word = numToString(num) + "M";
-                                finalEdit(word);
+                                addRuleWord(word);
                                 added = true;
                                 continue;
                             }
@@ -343,15 +339,15 @@ public class Parser {
                                 //d.6.1
                                 num = num / 1000;
                                 word = numToString(num) + "K";
-                                finalEdit(word);
+                                addRuleWord(word);
                                 added = true;
                                 continue;
                             }
                             if (!lastWord) {
-                                if ((mtc = containDigitPat.matcher(lineAsWords[wordInd + 1])).find() && lineAsWords[wordInd + 1].contains("/")) {
+                                if ( lineAsWords[wordInd + 1].contains("/") && containDigitPat.matcher(lineAsWords[wordInd + 1]).find()) {
                                     //d.6.9
                                     word += " " + lineAsWords[wordInd + 1];
-                                    finalEdit(word);
+                                    addRuleWord(word);
                                     added = true;
                                     wordInd++;
                                     continue;
@@ -368,32 +364,32 @@ public class Parser {
                             mtc = isNumericPat.matcher(word.substring(0, word.length() - 1));
                             if (mtc.matches()) {
                                 //d.4.1
-                                finalEdit(word);
+                                addRuleWord(word);
                                 added = true;
                                 continue;
                             }
                         }
                         if (!lastWord) {
                             if (lineAsWords[wordInd + 1].toLowerCase().equals("dollars")) {
-                                if ((mtc = endsWithBn.matcher(word)).find()) {
+                                if ( endsWithBn.matcher(word).find()) {
                                     word = word.substring(0, word.length() - 2);
-                                    if ((mtc = isNumericPat.matcher(word)).matches()) {
+                                    if ( isNumericPat.matcher(word).matches()) {
                                         //d.5.8 b
                                         double num = wordToNum(word);
                                         wordInd++;
                                         word = numToString(num * 1000) + " M Dollars";
-                                        finalEdit(word);
+                                        addRuleWord(word);
                                         added = true;
                                         continue;
                                     }
-                                } else if ((mtc = endsWithM.matcher(word)).find()) {
+                                } else if (endsWithM.matcher(word).find()) {
                                     word = word.substring(0, word.length() - 1);
-                                    if ((mtc = isNumericPat.matcher(word)).matches()) {
+                                    if (isNumericPat.matcher(word).matches()) {
                                         //d.5.9 b
                                         double num = wordToNum(word);
                                         wordInd++;
                                         word = numToString(num) + " M Dollars";
-                                        finalEdit(word);
+                                        addRuleWord(word);
                                         added = true;
                                         continue;
                                     }
@@ -403,14 +399,14 @@ public class Parser {
                         }
 
 
-                        if ((mtc = startsWithDollar.matcher(word)).find()) {
-                            if ((mtc = isNumericPat.matcher(word.substring(1))).matches()) {
+                        if ( startsWithDollar.matcher(word).find()) {
+                            if ( isNumericPat.matcher(word.substring(1)).matches()) {
                                 if (!lastWord) {
                                     if (lineAsWords[wordInd + 1].toLowerCase().equals("million")) {
                                         //d.5.6
                                         word = word.substring(1) + " M Dollars";
                                         wordInd++;
-                                        finalEdit(word);
+                                        addRuleWord(word);
                                         added = true;
                                         continue;
                                     } else if (lineAsWords[wordInd + 1].toLowerCase().equals("billion")) {
@@ -418,7 +414,7 @@ public class Parser {
                                         double num = wordToNum(word.substring(1));
                                         word = numToString(num * 1000) + " M Dollars";
                                         wordInd++;
-                                        finalEdit(word);
+                                        addRuleWord(word);
                                         added = true;
                                         continue;
                                     }
@@ -427,13 +423,13 @@ public class Parser {
                                 if (num < 1000000) {
                                     //d.5.3
                                     word = word.substring(1) + " Dollars";
-                                    finalEdit(word);
+                                    addRuleWord(word);
                                     added = true;
                                     continue;
                                 } else {
                                     //d.5.5
                                     word = numToString(num / 1000000) + " M Dollars";
-                                    finalEdit(word);
+                                    addRuleWord(word);
                                     added = true;
                                     continue;
                                 }
@@ -442,7 +438,7 @@ public class Parser {
                         }
 
 
-                    } else if (((mtc = garbage.matcher(word)).find() && !(mtc = twodots.matcher(word)).matches())  ||word.contains("/")) {
+                    } else if (( garbage.matcher(word).find() && ! twodots.matcher(word).matches())  ||word.contains("/")) {
                         String[] splited = word.split(garbage.toString());
                         for (String s : splited) {
                             finalEdit(s);
@@ -455,7 +451,7 @@ public class Parser {
                          int i = 1;
                          while(wordInd+i<=lineAsWords.length-1){
                              String partOfName = lineAsWords[wordInd+i];
-                             if((mtc=legalForNames.matcher(partOfName)).matches()&&Character.isUpperCase(partOfName.charAt(0))) {
+                             if(legalForNames.matcher(partOfName).matches()&&Character.isUpperCase(partOfName.charAt(0))) {
                                  word = word + " " + partOfName;
                                  i++;
                                  continue;
@@ -500,24 +496,27 @@ public class Parser {
 
     public void finalEdit(String word) {
 
-        while (word.length() > 1 && (word.charAt(word.length() - 1) == ',' || word.charAt(word.length() - 1) == ';' || word.charAt(word.length() - 1) == '.' || word.charAt(word.length() - 1) == '\'' || word.charAt(word.length() - 1) == '?' || word.charAt(word.length() - 1) == '`' || word.charAt(word.length() - 1) == '!' || word.charAt(word.length() - 1) == '/')) {
-            Matcher mtc;
+        //while (word.length() > 1 && (word.charAt(word.length() - 1) == ',' || word.charAt(word.length() - 1) == ';' || word.charAt(word.length() - 1) == '.' || word.charAt(word.length() - 1) == '\'' || word.charAt(word.length() - 1) == '?' || word.charAt(word.length() - 1) == '`' || word.charAt(word.length() - 1) == '!' || word.charAt(word.length() - 1) == '/')) {
+        Matcher mtc;
+        while (word.length() > 1 &&(mtc = othercheck.matcher(word.charAt(word.length()-1)+"")).find()){
             if ((mtc = twodots.matcher(word)).matches()) {
                 break;
             }
             word = word.substring(0, word.length() - 1);
         }
-        while (word.length() > 1 && (word.charAt(0) == ',' || word.charAt(0) == ';' || word.charAt(0) == '.' || word.charAt(0) == '\'' || word.charAt(0) == '?' || word.charAt(0) == '`' || word.charAt(0) == '!' || word.charAt(0) == '/')) {
+        while (word.length() > 1 &&(mtc = othercheck.matcher(word.charAt(0)+"")).find()) {
             word = word.substring(1);
         }
-        if (word.length() > 1 && ((word.charAt(word.length() - 1)) + "").toLowerCase() == "s" && (word.charAt(word.length() - 2) == '\'')) {
+        if (word.length() > 1 && ((word.charAt(word.length() - 1)) + "").toLowerCase().equals("s") && (word.charAt(word.length() - 2) == '\'')) {
             word = word.substring(0, word.length() - 2);
         }
-        Matcher mtc;
-        if (word.length() > 1 && !stopwords.contains(word.toLowerCase()) && !(mtc = isNotAscii.matcher(word)).find()) {
+        if (word.length() > 1 && !stopwords.contains(word.toLowerCase()) && ! isNotAscii.matcher(word).find()) {
 
-            word = word.replaceAll("['`]", "");
+            if(geresh.matcher(word).find()) {
+                word = geresh.matcher(word).replaceAll("");
+            }
 
+            if(word.length()>1)
             addToWords(word);
            /* //just for test
             if (!((mtc = wordPat.matcher(word)).matches() || (mtc = containDigitPat.matcher(word)).find() || (mtc = twodots.matcher(word)).matches()) && !word.contains("Dollars") && !word.contains("U.S") && !word.contains("Between") && !word.contains("-") && !word.contains("%") && word.charAt(word.length() - 1) != 'K' && word.charAt(word.length() - 1) != 'M' && word.charAt(word.length() - 1) != 'B') {
@@ -570,7 +569,16 @@ public class Parser {
 
     }
 
-    public void AddToWords(String word){}
+    public void addRuleWord(String word) {
+        if (words.containsKey(word)) {
+            words.get(word).termfq++;
+        }
+        else{
+            TermInDoc tid = new TermInDoc(word,docno,1,false,false,currIsEntity);
+            words.put(word,tid);
+        }
+    }
+
     public String numToString(double num) {
         String numS = num + "";
         if (numS.indexOf('.') != -1) {
