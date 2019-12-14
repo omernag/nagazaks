@@ -16,7 +16,7 @@ public class Parser {
     String docno;
     HashSet<String> stopwords;
     HashMap<String, String> months;
-    Map<String, TermInDoc> words;
+    HashMap<String, TermInDoc> words;
     //ArrayList<String> words;
     static Pattern containDigitPat = Pattern.compile("\\d+");
     static Pattern isNumericPat = Pattern.compile("((-)?(\\d{1,3}\\,)+)?\\d+(\\.\\d+)?");
@@ -121,7 +121,7 @@ public class Parser {
 
 
                 word = lineAsWords[wordInd];
-                if (word.length() > 1) {
+                if (word.length() > 1 && !stopwords.contains(word.toLowerCase())) {
 
                     if (months.containsKey(word.toLowerCase())) {
                         //month name

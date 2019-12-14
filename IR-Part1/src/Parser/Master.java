@@ -41,6 +41,9 @@ public class Master {
             fileTexts= rf.handleFile(filePath);
 
 
+            startTimeIndex = System.nanoTime();
+
+
             for(DocText dt : fileTexts){
                 parser = new Parser();
                 DocMD doc = parser.handleDoc((dt.getInnerText()),dt.getDocno());
@@ -50,19 +53,25 @@ public class Master {
                     wordsToWrite[slot].getList().add(tid);
                 }
                 doc.words = null;
+                dt = null;
             }
+            finishTimeIndex = System.nanoTime();
+            System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 1000000000.0 + "sec to parse file path " + filePath.toString());
+            startTimeIndex = System.nanoTime();
             counter++;
-            if(counter%50==0 || counter == rf.filesPaths.size()-1){
-                startTimeIndex = System.nanoTime();
+            //if(counter%50==0 || counter == rf.filesPaths.size()-1){
+
                 for(int i = 0; i<20; i++){
 
                     wordsToWrite[i].tidToJson(i);
                     wordsToWrite[i]=new TermsInDocList();
                 }
-                finishTimeIndex = System.nanoTime();
-                System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 1000000000.0 + "sec");
 
-            }
+
+            //}
+            finishTimeIndex = System.nanoTime();
+            System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 1000000000.0 + "sec to save file path " + filePath.toString());
+
         }
     }
 }
