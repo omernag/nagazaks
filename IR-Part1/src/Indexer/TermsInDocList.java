@@ -26,6 +26,7 @@ public class TermsInDocList {
     private LinkedList<TermInDoc> list;
     public static int COUNT=0;
     private int listNum;
+    public static int[] insideCounter=new int[20];
 
 
     public TermsInDocList() {
@@ -54,8 +55,8 @@ public class TermsInDocList {
         JSONObject tid = new JSONObject();
 
         for (TermInDoc term: list) {
-            tid.put(COUNT,term.toString());
-            COUNT++;
+            tid.put(insideCounter[i],term.toString());
+            insideCounter[i]=insideCounter[i]+1;
         }
         try{
 

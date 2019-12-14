@@ -3,11 +3,11 @@ package Indexer;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Posting {
 
-    private ArrayList<String> posting;
+    private LinkedList<String> posting;
     private String path;
     private Term termToPost;
 

@@ -3,10 +3,7 @@ package Indexer;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import static java.lang.Boolean.parseBoolean;
 
@@ -15,7 +12,7 @@ public class IndexDictionary {
     private TreeMap<String, IndexEntryValue> indexer;
     private String indexerPrint;
 
-    public IndexDictionary(ArrayList<Term> termL) throws IOException {
+    public IndexDictionary(LinkedList<Term> termL) throws IOException {
         indexer=new TreeMap<>(comp);
         createIndexer(termL);
     }
@@ -30,7 +27,7 @@ public class IndexDictionary {
         indexer=new TreeMap<>();
     }
 
-    private void createIndexer(ArrayList<Term> termL) throws IOException {
+    private void createIndexer(LinkedList<Term> termL) throws IOException {
         IndexEntryValue entry;
         for (Term trm: termL
              ) {
@@ -45,13 +42,13 @@ public class IndexDictionary {
         Term termFromPosting=null;
         String path = "Posting/"+termName.charAt(0)+"/"+termName+".txt";
         try {
-            ArrayList<String> loadedPosting = new ArrayList<>(Files.readAllLines(Paths.get(path)));
+            LinkedList<String> loadedPosting = new LinkedList<>(Files.readAllLines(Paths.get(path)));
             termFromPosting = new Term(termName);
             String[] split;
             for (String occ:loadedPosting
                  ) {
                 split=occ.split(",");
-                termFromPosting.addOccurrence(split[0], Integer.parseInt(split[1]), parseBoolean(split[2]),parseBoolean(split[3]),parseBoolean(split[4]));
+                termFromPosting.addOccurrence(split[0], Integer.parseInt(split[1]),parseBoolean(split[2]),parseBoolean(split[3]));
 
             }
             termFromPosting.updateDocFq();

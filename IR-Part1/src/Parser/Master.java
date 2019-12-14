@@ -45,6 +45,7 @@ public class Master {
 
 
             for(DocText dt : fileTexts){
+                System.out.printf(dt.getDocno());
                 parser = new Parser();
                 DocMD doc = parser.handleDoc((dt.getInnerText()),dt.getDocno());
                 docsMDs.put(doc.docno,doc);

@@ -8,12 +8,12 @@ public class Term {
     private String term;
     private int totalFq;
     private int docFq;
-    private ArrayList<String> occurrence;
-    public static Term[] topTenTerm= new Term[11];
-    public static Term[] bottomTenTerm= new Term[11];
+    private LinkedList<String> occurrence;
+    //public static Term[] topTenTerm= new Term[11];
+    //public static Term[] bottomTenTerm= new Term[11];
     private static int termCounter=0;
 
-    public ArrayList<String> getOccurrence() {
+    public LinkedList<String> getOccurrence() {
         return occurrence;
     }
     public int getDocFq() {
@@ -24,7 +24,7 @@ public class Term {
     public Term(String term) {
         this.term = term;
         this.docFq = 0;
-        this.occurrence = new ArrayList<>();
+        this.occurrence = new LinkedList<>();
 
     }
 
@@ -32,13 +32,13 @@ public class Term {
         this.term = termIn.getTerm();
         this.docFq = 0;
         this.totalFq=0;
-        this.occurrence = new ArrayList<>();
-        addOccurrence(termIn.getDocNo(), termIn.getTermfq(), termIn.isBold(), termIn.isHeader(),termIn.isEntity());
+        this.occurrence = new LinkedList<>();
+        addOccurrence(termIn.getDocNo(), termIn.getTermfq(), termIn.isHeader(),termIn.isEntity());
     }
 
-    public void addOccurrence(String docNum, int termfq, boolean isBold, boolean isHeader, boolean isEntity) {
+    public void addOccurrence(String docNum, int termfq, boolean isHeader, boolean isEntity) {
         totalFq+=termfq;
-        this.occurrence.add(docNum+","+termfq +","+isBold+","+isHeader+","+isEntity+"\n");
+        this.occurrence.add(docNum+","+termfq +","+isHeader+","+isEntity+"\n");
     }
 
     public void setDocFq(int docFq) {
@@ -59,7 +59,7 @@ public class Term {
             uniqueDocs.add(occurrence.get(i).split(",")[0]);
         }
         docFq=uniqueDocs.size();
-        addToTopBottom(this);
+        /*addToTopBottom(this);*/
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Term {
                 '}';
     }
 
-    private void addToTopBottom(Term trm) {
+   /* private void addToTopBottom(Term trm) {
         if(termCounter<11){
             topTenTerm[termCounter]=trm;
             bottomTenTerm[termCounter]=trm;
@@ -91,7 +91,7 @@ public class Term {
                 Arrays.sort(bottomTenTerm,compBottom);
             }
         }
-    }
+    }*/
 
 
     private static Comparator<Term> compTop = new Comparator<Term>() {

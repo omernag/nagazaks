@@ -1,30 +1,19 @@
 package Indexer;
 
 
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.util.*;
-
 public class TermInDoc {
 
     private String term;
     private String docNo;
     public int termfq;
-    private boolean isBold;
     private boolean isHeader;
     private boolean isEntity;
 
 
-    //public static ArrayList<Map.Entry<String,Integer>> topTenTerm = new ArrayList<>();
-    //public static ArrayList<Map.Entry<String,Integer>> bottomTenTerm = new ArrayList<>();//change to array list for sort
-    //use Arrays.sort
-
-    public TermInDoc(String term, String docNo, int termfq, boolean isBold, boolean isHeader, boolean isEntity) {
+    public TermInDoc(String term, String docNo, int termfq, boolean isHeader, boolean isEntity) {
         this.term = term;
         this.docNo = docNo;
         this.termfq = termfq;
-        this.isBold = isBold;
         this.isHeader = isHeader;
         this.isEntity = isEntity;
     }
@@ -38,10 +27,6 @@ public class TermInDoc {
 
     public int getTermfq() {
         return termfq;
-    }
-
-    public boolean isBold() {
-        return isBold;
     }
 
     public boolean isHeader() {
@@ -58,12 +43,10 @@ public class TermInDoc {
         this.docNo = metaData[1];
         try {
             this.termfq = Integer.parseInt(metaData[2]);
-            this.isBold = Boolean.parseBoolean(metaData[3]);
-            this.isHeader = Boolean.parseBoolean(metaData[4]);
-            this.isEntity = Boolean.parseBoolean(metaData[5]);
+            this.isHeader = Boolean.parseBoolean(metaData[3]);
+            this.isEntity = Boolean.parseBoolean(metaData[4]);
         } catch (Exception e) {
             this.termfq = 0;
-            this.isBold = false;
             this.isHeader = false;
             this.isEntity = false;
         }
@@ -77,7 +60,7 @@ public class TermInDoc {
 
     @Override
     public String toString() {
-        return "" + term + "," + docNo + "," + termfq + "," + isBold + "," + isHeader + "," + isEntity;
+        return "" + term + "," + docNo + "," + termfq + "," + isHeader + "," + isEntity;
     }
 
 

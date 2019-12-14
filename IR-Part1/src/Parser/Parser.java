@@ -31,7 +31,7 @@ public class Parser {
     static Pattern legalForNames = Pattern.compile("(\\w+(\\-)?)+");
     static Pattern lineSplit = Pattern.compile("([^U.S][\\.][ ])|([\\.][/n])|([\\:][ ])|([\\!][ ])|([\\?][ ])");
     static Pattern lineJunk = Pattern.compile("[\";~!|:#^&*(){}\\[\\]\\s]");
-    static Pattern threedots = Pattern.compile("\\.\\.\\.");
+    static Pattern threedots = Pattern.compile("---");
     static Pattern spaces = Pattern.compile("[  ]|[   ]");
     static Pattern othercheck = Pattern.compile("[,;.'?`!/]$");
     static Pattern geresh = Pattern.compile("['`]");
@@ -108,7 +108,7 @@ public class Parser {
 
             line = textAsLines[lineInd];
             line = lineJunk.matcher(line).replaceAll(" ");
-           // line = threedots.matcher(line).replaceAll(" ");
+            line = threedots.matcher(line).replaceAll(" ");
            // line = spaces.matcher(line).replaceAll(" ");
             lineAsWords = line.split("[ ]");
             for (int wordInd = 0; wordInd < lineAsWords.length; wordInd++) {
@@ -451,7 +451,7 @@ public class Parser {
                          int i = 1;
                          while(wordInd+i<=lineAsWords.length-1){
                              String partOfName = lineAsWords[wordInd+i];
-                             if(legalForNames.matcher(partOfName).matches()&&Character.isUpperCase(partOfName.charAt(0))) {
+                             if(partOfName.length()<21 && legalForNames.matcher(partOfName).matches()&&Character.isUpperCase(partOfName.charAt(0))) {
                                  word = word + " " + partOfName;
                                  i++;
                                  continue;
@@ -552,17 +552,17 @@ public class Parser {
             //new word
             else if (Character.isUpperCase(word.charAt(0))) {
                 //add upper
-                tid = new TermInDoc(upper,docno,1,false,false,currIsEntity);
+                tid = new TermInDoc(upper,docno,1,false,currIsEntity);
                 words.put(upper,tid);
             } else {
                 //add lower
-                tid = new TermInDoc(lower,docno,1,false,false,currIsEntity);
+                tid = new TermInDoc(lower,docno,1,false,currIsEntity);
                 words.put(lower,tid);
             }
         }
         else{
             //add original
-            tid = new TermInDoc(word,docno,1,false,false,currIsEntity);
+            tid = new TermInDoc(word,docno,1,false,currIsEntity);
             words.put(word,tid);
         }
 
@@ -574,7 +574,7 @@ public class Parser {
             words.get(word).termfq++;
         }
         else{
-            TermInDoc tid = new TermInDoc(word,docno,1,false,false,currIsEntity);
+            TermInDoc tid = new TermInDoc(word,docno,1,false,currIsEntity);
             words.put(word,tid);
         }
     }
