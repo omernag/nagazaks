@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class Parser {
     String docno;
-    HashSet<String> stopwords;
+    static  HashSet<String> stopwords;
     HashMap<String, String> months;
     HashMap<String, TermInDoc> words;
     //ArrayList<String> words;
@@ -35,6 +35,8 @@ public class Parser {
     static Pattern spaces = Pattern.compile("[  ]|[   ]");
     static Pattern othercheck = Pattern.compile("[,;.'?`!/]$");
     static Pattern geresh = Pattern.compile("['`]");
+    Stemmer stemmer;
+    boolean stem;
 
 
 
@@ -42,10 +44,10 @@ public class Parser {
     Boolean currIsEntity;
 
 
-    public Parser() {
+    public Parser(boolean stem) {
         this.months = new HashMap<>();
-        this.stopwords = new HashSet<>();
         setMonths();
+        this.stem=stem;
     }
 
     private void setMonths() {
@@ -180,7 +182,7 @@ public class Parser {
                                 }
                             }
                             if (!word.equals("")) {
-                                addRuleWord(word.substring(0, word.length() - 1));
+                                finalEdit(word.substring(0, word.length() - 1));
                                 added = true;
                             }
                             continue;
@@ -193,7 +195,7 @@ public class Parser {
                             //d.3.2
                             word = word + " " + lineAsWords[wordInd + 1] + " " + lineAsWords[wordInd + 2] + " " + lineAsWords[wordInd + 3];
                             wordInd = wordInd + 3;
-                            addRuleWord(word);
+                            finalEdit(word);
                             added = true;
                             continue;
                         }
@@ -516,8 +518,16 @@ public class Parser {
                 word = geresh.matcher(word).replaceAll("");
             }
 
-            if(word.length()>1)
-            addToWords(word);
+            if(word.length()>1){
+                if(stem){
+                    stemmer=new Stemmer();
+                    char[] wordToStem = word.toCharArray();
+                    stemmer.add(wordToStem,wordToStem.length);
+                    stemmer.stem();
+                    word = stemmer.toString();
+                }
+                addToWords(word);
+            }
            /* //just for test
             if (!((mtc = wordPat.matcher(word)).matches() || (mtc = containDigitPat.matcher(word)).find() || (mtc = twodots.matcher(word)).matches()) && !word.contains("Dollars") && !word.contains("U.S") && !word.contains("Between") && !word.contains("-") && !word.contains("%") && word.charAt(word.length() - 1) != 'K' && word.charAt(word.length() - 1) != 'M' && word.charAt(word.length() - 1) != 'B') {
                 System.out.println(word);

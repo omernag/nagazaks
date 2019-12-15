@@ -101,7 +101,9 @@ public class ReadFile {
                     //handle header,title.
                 }
             }
-            docsTexts.add(new DocText(docno,text,title));
+            if(!docno.equals("")&&!text.equals("")) {
+                docsTexts.add(new DocText(docno, text, title));
+            }
 
         }
         return docsTexts;

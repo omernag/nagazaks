@@ -223,20 +223,20 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         // write your code here
-/*
+
 
         long startTimeIndex = System.nanoTime();
 
         Master m = new Master();
-        m.run();
+        m.run(true);
         long finishTimeIndex = System.nanoTime();
         System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
- */
 
-        long startTimeIndex1 = System.nanoTime();
+
+/*        long startTimeIndex1 = System.nanoTime();
         SegmentProcesses sgm = new SegmentProcesses();
         long finishTimeIndex1 = System.nanoTime();
-        System.out.println("Time:  " + (finishTimeIndex1 - startTimeIndex1) / 60000000000.0 + "min");
+        System.out.println("Time:  " + (finishTimeIndex1 - startTimeIndex1) / 60000000000.0 + "min");*/
 
 
     }

@@ -21,17 +21,16 @@ public class Master {
     public Master() {
         docsMDs = new HashMap<>();
         fileTexts = new ArrayList<>();
-        parser = new Parser();
         wordsToWrite = new TermsInDocList[20];
         for(int i = 0 ; i<wordsToWrite.length;i++){
             wordsToWrite[i] = new TermsInDocList();
         }
     }
 
-    public void run() throws IOException {
+    public void run(boolean stem) throws IOException {
         int counter = 0;
         rf = new ReadFile(".");
-        parser.stopwords = rf.readStopWords(new File(rf.getStopWordsPath()));
+        Parser.stopwords = rf.readStopWords(new File(rf.getStopWordsPath()));
 
         long startTimeIndex ;
         long finishTimeIndex;
@@ -45,7 +44,7 @@ public class Master {
 
 
             for(DocText dt : fileTexts){
-                parser = new Parser();
+                parser = new Parser(stem);
                 DocMD doc = parser.handleDoc((dt.getInnerText()),dt.getDocno());
                 docsMDs.put(doc.docno,doc);
                 for (TermInDoc tid : doc.words.values()){
