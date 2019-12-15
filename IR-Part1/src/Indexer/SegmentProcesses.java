@@ -14,14 +14,18 @@ public class SegmentProcesses {
 
     private HashMap<String, Term> termL;
     private IndexDictionary theDictionary;
+    private String postingPath;
+    private boolean stemmer;
     /*private Hashtable<String, Integer> termsDf = new Hashtable<>();*/
 
     public HashMap<String, Term> getTermL() {
         return termL;
     }
 
-    public SegmentProcesses() throws IOException {
+    public SegmentProcesses(boolean stemmed,String postingPath) throws IOException {
         this.termL = new HashMap<>();
+        this.postingPath=postingPath;
+        stemmer=stemmed;
         processCorpus();
     }
 
@@ -29,14 +33,22 @@ public class SegmentProcesses {
 
         TermsInDocList fromJson = new TermsInDocList(1);
         String path = ".";
-        File trmFile = new File("Posting");
-        if(!trmFile.exists()){
-            trmFile.mkdir();
+        if(stemmer){
+            File trmFile = new File(postingPath+"/Posting_s");
+            if(!trmFile.exists()){
+                trmFile.mkdir();
+            }
+        }
+        else{
+            File trmFile = new File(postingPath+"/Posting");
+            if(!trmFile.exists()){
+                trmFile.mkdir();
+            }
         }
         File postingFolder = new File(path);
-        theDictionary = new IndexDictionary();
+        theDictionary = new IndexDictionary(postingPath,stemmer);
         for (File json : postingFolder.listFiles()) {
-            if (json.getName().contains("tTj")) {
+            if (json.getName().contains("tTj-11")) {
                 System.out.println("stating: " + json.getName());
                 long sTime = System.nanoTime();
                 fromJson.setList(fromJson.JsonToTid(json.getPath()));
@@ -48,12 +60,12 @@ public class SegmentProcesses {
             }
             //Files.delete(json.getPath());
         }
+        theDictionary.saveToDisk();
 
 
     }
 
     private void processSegment(TermsInDocList termsList) {
-        //LinkedList<String> markTerms = new LinkedList<>();
         for (TermInDoc termIn : termsList.getList()) {
             if (termIn.getTerm().length() > 1 && termIn.getDocNo() != null) {
                 if (termL.containsKey(termIn.getTerm())) {//segment in place
@@ -71,7 +83,6 @@ public class SegmentProcesses {
                 } else {
                     Term newTerm = new Term(termIn);
                     termL.put(newTerm.getName(), newTerm);
-                    //markTerms.add(newTerm.getName());
                 }
             }
         }

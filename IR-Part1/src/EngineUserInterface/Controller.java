@@ -29,6 +29,7 @@ public class Controller {
 
     private ConnectController connectC;
     private DisplayController dispC;
+    public boolean isStemmer;
 
     public void pressConnect(ActionEvent event) {
         Parent root;
@@ -88,6 +89,7 @@ public class Controller {
     }
 
     public void pressStemming(ActionEvent event) {
+        model.changeStemmerMode();
     }
 
     public void pressClear(ActionEvent event) throws IOException {
@@ -106,13 +108,14 @@ public class Controller {
                 }
             }
             Files.delete(Paths.get(model.getPostingPa()));
-            tf_status.textProperty().setValue("Connected. Posting erased");
+            tf_status.textProperty().setValue("Connected. Posting and dictionary erased");
+            model.forgetDictionary();
         }
         else showAlert("Please insert the path to the Posting files");
     }
 
     private void showAlert(String alertMessage) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(alertMessage);
         alert.show();
     }

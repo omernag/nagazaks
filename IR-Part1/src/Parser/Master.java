@@ -27,9 +27,9 @@ public class Master {
         }
     }
 
-    public void run(boolean stem) throws IOException {
+    public void run(boolean stem,String path) throws IOException {
         int counter = 0;
-        rf = new ReadFile(".");
+        rf = new ReadFile(path);
         Parser.stopwords = rf.readStopWords(new File(rf.getStopWordsPath()));
 
         long startTimeIndex ;
@@ -71,5 +71,9 @@ public class Master {
 
 
         }
+    }
+
+    public int getDocAmount(){
+        return docsMDs.size();
     }
 }
