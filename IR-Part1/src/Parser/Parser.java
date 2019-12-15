@@ -263,6 +263,19 @@ public class Parser {
                                         continue;
                                     }
                                 }
+                                else if(lineAsWords[wordInd + 1].toLowerCase().contains("kilogram")){
+                                    num = num * 1000;
+                                    word = numToString(num) + " GR";
+                                    addRuleWord(word);
+                                    added = true;
+                                    continue;
+                                }
+                                else if(lineAsWords[wordInd + 1].toLowerCase().equals("grams")){
+                                    word = numToString(num) + " GR";
+                                    addRuleWord(word);
+                                    added = true;
+                                    continue;
+                                }
                                 if (wordInd < lineAsWords.length - 2) {
                                     if (lineAsWords[wordInd + 2].toLowerCase().equals("dollars") && lineAsWords[wordInd + 1].contains("/") && containDigitPat.matcher(lineAsWords[wordInd + 1]).find() ) {
                                         //d.5.2

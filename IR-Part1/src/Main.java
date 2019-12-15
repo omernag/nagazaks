@@ -228,7 +228,7 @@ public class Main {
         long startTimeIndex = System.nanoTime();
 
         Master m = new Master();
-        m.run(false);
+        m.run(false,".");
         long finishTimeIndex = System.nanoTime();
         System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
 /*
