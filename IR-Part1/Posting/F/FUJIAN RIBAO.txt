@@ -1,9 +1,0 @@
-FUJIAN RIBAO,4,5,Posting/F/FUJIAN RIBAO.txt
-FBIS3-26125,1,false,true
-
-FBIS3-26852,2,false,true
-
-FBIS4-26965,1,false,true
-
-FBIS4-26954,1,false,true
-

@@ -1,7 +1,0 @@
-kosun,3,3,Posting/k/kosun.txt
-FBIS4-28837,1,false,false
-
-FBIS4-29224,1,false,false
-
-FBIS4-40596,1,false,false
-

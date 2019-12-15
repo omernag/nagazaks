@@ -1,3 +1,0 @@
-LOST INSIDE,1,1,Posting/L/LOST INSIDE.txt
-LA032789-0090,1,false,true
-

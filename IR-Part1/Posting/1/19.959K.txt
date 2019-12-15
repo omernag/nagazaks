@@ -1,5 +1,0 @@
-19.959K,2,2,Posting/1/19.959K.txt
-FT923-2608,1,false,false
-
-LA042690-0179,1,false,false
-

@@ -1,3 +1,0 @@
-COPCA MICA,1,1,Posting/C/COPCA MICA.txt
-FT942-18,1,false,true
-

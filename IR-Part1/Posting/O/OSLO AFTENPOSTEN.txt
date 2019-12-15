@@ -1,5 +1,0 @@
-OSLO AFTENPOSTEN,2,7,Posting/O/OSLO AFTENPOSTEN.txt
-FBIS3-60,6,false,true
-
-FBIS3-59174,1,false,true
-

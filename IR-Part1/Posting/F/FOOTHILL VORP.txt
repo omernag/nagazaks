@@ -1,3 +1,0 @@
-FOOTHILL VORP,1,1,Posting/F/FOOTHILL VORP.txt
-LA110190-0155,1,false,true
-

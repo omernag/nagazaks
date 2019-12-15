@@ -1,9 +1,0 @@
-HISTORIC RESOURCES,4,5,Posting/H/HISTORIC RESOURCES.txt
-LA082590-0113,1,false,true
-
-LA100190-0057,1,false,true
-
-LA120690-0145,2,false,true
-
-LA121689-0140,1,false,true
-

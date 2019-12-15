@@ -1,5 +1,0 @@
-CIF STATE TRACK,2,2,Posting/C/CIF STATE TRACK.txt
-LA053190-0132,1,false,true
-
-LA060189-0136,1,false,true
-

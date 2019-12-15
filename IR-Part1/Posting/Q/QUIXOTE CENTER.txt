@@ -1,3 +1,0 @@
-QUIXOTE CENTER,1,1,Posting/Q/QUIXOTE CENTER.txt
-LA010289-0060,1,false,true
-

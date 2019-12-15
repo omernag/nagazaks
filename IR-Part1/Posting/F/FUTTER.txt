@@ -1,7 +1,0 @@
-FUTTER,3,3,Posting/F/FUTTER.txt
-FT921-3419,1,false,false
-
-FT931-16632,1,false,false
-
-FT932-8834,1,false,false
-

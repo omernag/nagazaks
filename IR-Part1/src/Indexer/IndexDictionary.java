@@ -12,8 +12,8 @@ public class IndexDictionary {
     private TreeMap<String, IndexEntryValue> indexer;
     private String indexerPrint;
 
-    public IndexDictionary(HashMap<String,Term> termL) throws IOException {
-        indexer=new TreeMap<>(comp);
+    public IndexDictionary(HashMap<String, Term> termL) throws IOException {
+        indexer = new TreeMap<>(comp);
         createIndexer(termL);
     }
 
@@ -25,36 +25,36 @@ public class IndexDictionary {
     };
 
     public IndexDictionary() {
-        indexer=new TreeMap<>();
+        indexer = new TreeMap<>();
     }
 
-    public void createIndexer(HashMap<String,Term> termL) throws IOException {
+    public void createIndexer(HashMap<String, Term> termL) throws IOException {
         IndexEntryValue entry;
-        for (Term trm: termL.values()
-             ) {
+        for (Term trm : termL.values()
+        ) {
             Posting postFile = new Posting(trm);
-            entry = new IndexEntryValue(trm,postFile.getPath());
-            indexer.put(trm.getName(),entry);
+            entry = new IndexEntryValue(trm, postFile.getPath());
+            indexer.put(trm.getName(), entry);
+
         }
-        indexerPrint=printDictionary();
+        //indexerPrint=printDictionary();
     }
 
     public Term getTermFromPosting(String termName) throws FileNotFoundException {
-        Term termFromPosting=null;
-        String path = "Posting/"+termName.charAt(0)+"/"+termName+".txt";
+        Term termFromPosting = null;
+        String path = "Posting/" + termName.charAt(0) + "/" + termName + ".txt";
         try {
             LinkedList<String> loadedPosting = new LinkedList<>(Files.readAllLines(Paths.get(path)));
             termFromPosting = new Term(termName);
             String[] split;
-            for (String occ:loadedPosting
-                 ) {
-                split=occ.split(",");
-                termFromPosting.addOccurrence(split[0], Integer.parseInt(split[1]),parseBoolean(split[2]),parseBoolean(split[3]));
+            for (String occ : loadedPosting
+            ) {
+                split = occ.split(",");
+                termFromPosting.addOccurrence(split[0], Integer.parseInt(split[1]), parseBoolean(split[2]), parseBoolean(split[3]));
 
             }
             termFromPosting.updateDocFq();
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             ///maybe change later
             System.out.println("Dictionary does not contain");
         }
@@ -66,26 +66,25 @@ public class IndexDictionary {
     }
 
     public IndexDictionary createIndexFromPosting(String path) throws IOException {
-        IndexDictionary riseDictionary=new IndexDictionary();
-        try{
+        IndexDictionary riseDictionary = new IndexDictionary();
+        try {
             File postingFolder = new File(path);
-            String termRep="";
+            String termRep = "";
             BufferedReader reader;
             Term risedTerm;
             String[] split;
-            for (File letterFolder: postingFolder.listFiles()
+            for (File letterFolder : postingFolder.listFiles()
             ) {
-                for (File termFile: letterFolder.listFiles()
-                     ) {
-                    reader=new BufferedReader(new FileReader(termFile));
-                    termRep=reader.readLine();
-                    split=termRep.split(",");
-                    IndexEntryValue nEntry= new IndexEntryValue(Integer.parseInt(split[1]),Integer.parseInt(split[2]),split[3]);
-                    riseDictionary.indexer.put(split[0],nEntry);
+                for (File termFile : letterFolder.listFiles()
+                ) {
+                    reader = new BufferedReader(new FileReader(termFile));
+                    termRep = reader.readLine();
+                    split = termRep.split(",");
+                    IndexEntryValue nEntry = new IndexEntryValue(Integer.parseInt(split[1]), Integer.parseInt(split[2]), split[3]);
+                    riseDictionary.indexer.put(split[0], nEntry);
                 }
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("cant find folder");
         }
 
@@ -97,11 +96,11 @@ public class IndexDictionary {
         return indexerPrint;
     }
 
-    public String printDictionary(){
-        String dict="";
-        for (Map.Entry ent:indexer.entrySet()
-             ) {
-            dict+=ent.getKey()+", "+ent.getValue().toString()+"\n";
+    public String printDictionary() {
+        String dict = "";
+        for (Map.Entry ent : indexer.entrySet()
+        ) {
+            dict += ent.getKey() + ", " + ent.getValue().toString() + "\n";
         }
         return dict;
     }

@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.regex.Pattern;
 
 public class Posting {
 
     private LinkedList<String> posting;
     private String path;
     private Term termToPost;
+    private static int postCounter=0;
 
     public String getPath() {
         return path;
@@ -27,12 +29,15 @@ public class Posting {
         if(!trmFile.exists()){
             trmFile.mkdir();
         }
-        trmFile=new File("Posting/"+trm.getName().charAt(0));
+        /*trmFile=new File("Posting/"+trm.getName().charAt(0));
         if(!trmFile.exists()){
             trmFile.mkdir();
-        }
-        return "Posting/"+trm.getName().charAt(0)+"/"+trm.getName()+".txt";
+        }*/
 
+        String pathCreator = "Posting/"+postCounter+".txt";
+        postCounter++;
+        return pathCreator;
+        /*"+trm.getName().charAt(0)+"/"*/
     }
 
     private void outputPosting() throws IOException {
@@ -42,7 +47,7 @@ public class Posting {
         postingFile.write(meta.getBytes());
         try{
             for (String term: posting) {
-                term+="\n";
+                //term+="\n";
                 postingFile.write(term.getBytes());
             }
         }

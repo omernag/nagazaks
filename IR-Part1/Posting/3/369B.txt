@@ -1,7 +1,0 @@
-369B,3,3,Posting/3/369B.txt
-FBIS3-11212,1,false,false
-
-FBIS3-21905,1,false,false
-
-FBIS4-56650,1,false,false
-

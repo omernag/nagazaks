@@ -1,3 +1,0 @@
-GALLMAN,1,1,Posting/G/GALLMAN.txt
-LA102190-0188,1,false,false
-

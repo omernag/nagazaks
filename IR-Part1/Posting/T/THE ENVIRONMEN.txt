@@ -1,3 +1,0 @@
-THE ENVIRONMEN,1,1,Posting/T/THE ENVIRONMEN.txt
-FT941-7561,1,false,true
-
