@@ -10,6 +10,7 @@ public class DocMD {
     int maxTf;
     int uniqueCount;
     Map<String, TermInDoc> words;
+    String maxFreqTerm;
 
     public DocMD(String docno) {
         this.docno = docno;

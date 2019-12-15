@@ -45,7 +45,7 @@ public class Master {
 
             for(DocText dt : fileTexts){
                 parser = new Parser(stem);
-                DocMD doc = parser.handleDoc((dt.getInnerText()),dt.getDocno());
+                DocMD doc = parser.handleDoc(dt);
                 docsMDs.put(doc.docno,doc);
                 for (TermInDoc tid : doc.words.values()){
                     int slot = Math.abs(tid.getTerm().toLowerCase().hashCode()) %20 ;

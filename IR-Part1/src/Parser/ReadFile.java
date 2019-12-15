@@ -85,7 +85,7 @@ public class ReadFile {
         String title="";
         String text="";
         for(Element docAsEle : docsAsEles){
-            Elements subEles=  docAsEle.children();
+            Elements subEles=  docAsEle.getAllElements();
             docno="";
             title="";
             text="";
@@ -97,8 +97,19 @@ public class ReadFile {
                 else if(subEle.tagName().equals("text")) {
                     text = subEle.text();
                 }
-                else{
-                    //handle header,title.
+                else if(subEle.tagName().equals("ti")){
+                    title = subEle.text();
+                }
+                else if(subEle.tagName().equals("headline")){
+                    if(subEle.getAllElements().size()==1) {
+                        title = subEle.text();
+                    }
+                    else{
+                        for(Element subSubEle : subEle.children()) {
+                            title = title + " " + subEle.text();
+                        }
+                    }
+
                 }
             }
             if(!docno.equals("")&&!text.equals("")) {

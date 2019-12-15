@@ -33,15 +33,13 @@ public class Parser {
     static Pattern lineJunk = Pattern.compile("[\";~!|:#^&*(){}\\[\\]\\s]");
     static Pattern threedots = Pattern.compile("---");
     static Pattern spaces = Pattern.compile("[  ]|[   ]");
-    static Pattern othercheck = Pattern.compile("[,;.'?`!/]$");
+    static Pattern othercheck = Pattern.compile("[,;.'?`!/<>]$");
     static Pattern geresh = Pattern.compile("['`]");
     Stemmer stemmer;
     boolean stem;
+    boolean currIsEntity;
+    boolean currIsHeader;
 
-
-
-
-    Boolean currIsEntity;
 
 
     public Parser(boolean stem) {
@@ -76,11 +74,13 @@ public class Parser {
         months.put("december", "12");
     }
 
-    public DocMD handleDoc (String text, String docno){
+    public DocMD handleDoc (DocText dt){
         DocMD doc = new DocMD(docno);
         this.docno=docno;
-        doc.words = parse(text,docno);
+        doc.words = parse(dt.getInnerText(),false);
+        doc.words.putAll(parse(dt.getHeader(),true));
         doc.maxTf = calcMaxTF(doc.words);
+        doc.maxFreqTerm = maxFreqTerm(words,doc.maxTf);
         doc.uniqueCount = doc.words.size();
         return doc;
     }
@@ -93,9 +93,20 @@ public class Parser {
         return ans;
     }
 
-    public Map<String, TermInDoc> parse(String text, String docno) {
+    private String maxFreqTerm(Map<String,TermInDoc> words,int maxTf){
+        String ans = "";
+        for (TermInDoc tid : words.values() ){
+            if(tid.termfq==maxTf) {
+                ans = tid.getTerm();
+                break;
+            }
+        }
+        return ans;
+    }
 
+    public Map<String, TermInDoc> parse(String text,boolean isHeader) {
 
+        currIsHeader=isHeader;
         words = new HashMap<>();
         //words = new ArrayList<>();
         String[] textAsLines = lineSplit.split(text);
@@ -114,6 +125,7 @@ public class Parser {
            // line = spaces.matcher(line).replaceAll(" ");
             lineAsWords = line.split("[ ]");
             for (int wordInd = 0; wordInd < lineAsWords.length; wordInd++) {
+
                 currIsEntity = false;
                 boolean added = false;
                 boolean allDigits = false;
@@ -517,6 +529,7 @@ public class Parser {
             if(geresh.matcher(word).find()) {
                 word = geresh.matcher(word).replaceAll("");
             }
+
 
             if(word.length()>1){
                 if(stem){

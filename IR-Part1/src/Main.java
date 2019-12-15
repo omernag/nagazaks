@@ -227,17 +227,17 @@ public class Main {
 
         long startTimeIndex = System.nanoTime();
 
-        /*Master m = new Master();
+        Master m = new Master();
         m.run(false);
         long finishTimeIndex = System.nanoTime();
-        System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");*/
-
+        System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
+/*
 
         long startTimeIndex1 = System.nanoTime();
         SegmentProcesses sgm = new SegmentProcesses();
         long finishTimeIndex1 = System.nanoTime();
         System.out.println("Time:  " + (finishTimeIndex1 - startTimeIndex1) / 60000000000.0 + "min");
-
+*/
 
     }
 }
