@@ -33,7 +33,7 @@ public class Parser {
     static Pattern lineJunk = Pattern.compile("[\";~!|:#^&*(){}\\[\\]\\s]");
     static Pattern threedots = Pattern.compile("---");
     static Pattern spaces = Pattern.compile("[  ]|[   ]");
-    static Pattern othercheck = Pattern.compile("[,;.'?`!/<>]$");
+    static Pattern othercheck = Pattern.compile("[+,;.'?`!/<>]$");
     static Pattern geresh = Pattern.compile("['`]");
     Stemmer stemmer;
     boolean stem;
