@@ -4,10 +4,11 @@ import Indexer.TermInDoc;
 import Indexer.TermsInDocList;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class Master {
 
@@ -17,14 +18,16 @@ public class Master {
     private ArrayList<DocText> fileTexts;
     private ReadFile rf;
     private Parser parser;
+    private boolean stemmer;
 
-    public Master() {
+    public Master(boolean stem) {
         docsMDs = new HashMap<>();
         fileTexts = new ArrayList<>();
         wordsToWrite = new TermsInDocList[20];
         for(int i = 0 ; i<wordsToWrite.length;i++){
             wordsToWrite[i] = new TermsInDocList();
         }
+        stemmer=stem;
     }
 
     public void run(boolean stem,String path) throws IOException {
@@ -75,5 +78,38 @@ public class Master {
 
     public int getDocAmount(){
         return docsMDs.size();
+    }
+
+
+    public void saveDocMD(String postingPath) throws IOException {
+        FileWriter writer;
+        if(stemmer){
+            writer = new FileWriter(postingPath+"Posting_s/docMD.txt");
+        }
+        else{
+            writer = new FileWriter(postingPath+"Posting/docMD.txt");
+        }
+        for (Map.Entry doc: docsMDs.entrySet()
+        ) {
+            writer.write(doc.getKey()+":"+doc.getValue().toString());
+        }
+    }
+
+    public HashMap LoadDocMD(String postingPath) throws IOException {
+        List<String> termList;
+        if(stemmer){
+            termList= Files.readAllLines(Paths.get(postingPath + "Posting_s/docMD.txt"));
+        }
+        else{
+            termList=Files.readAllLines(Paths.get(postingPath + "Posting/docMD.txt"));
+        }
+        docsMDs=new HashMap<>();
+        String[] parts;
+        for (String trmS: termList
+        ) {
+            parts=trmS.split(":");
+            docsMDs.put(parts[0],new DocMD(parts));
+        }
+        return docsMDs;
     }
 }

@@ -2,10 +2,12 @@ package EngineUserInterface;
 
 import Indexer.IndexDictionary;
 import Indexer.SegmentProcesses;
+import Parser.DocMD;
 import Parser.Master;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
 
 public class MyModel {
     private IndexDictionary dictionary;
@@ -13,6 +15,7 @@ public class MyModel {
     private String postingPa;
     public boolean isStemmer;
     private String infoOnRun;
+    private HashMap<String, DocMD> docMD;
 
     public String getPostingPa() {
         return postingPa;
@@ -37,9 +40,10 @@ public class MyModel {
         corpusPa=corpusPath;
         postingPa=postingPath;
         long startTimeIndex = System.nanoTime();
-        Master m = new Master();
+        Master m = new Master(isStemmer);
         m.run(isStemmer,corpusPath);
         SegmentProcesses sgm = new SegmentProcesses(isStemmer,postingPath);
+        m.saveDocMD(postingPath);
         long finishTimeIndex = System.nanoTime();
         dictionary=sgm.getTheDictionary();
         infoOnRun="RunTime Information:\n"+"Number of indexed docs: "+m.getDocAmount()+"\n"+
@@ -53,6 +57,9 @@ public class MyModel {
 
     public void bringUpDictionary() throws IOException {
         dictionary.loadDictionary(postingPa,isStemmer);
+        Master m = new Master(isStemmer);
+        docMD=m.LoadDocMD(postingPa);
+
     }
 
     public void changeStemmerMode() {
