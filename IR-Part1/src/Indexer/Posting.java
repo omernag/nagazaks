@@ -20,15 +20,15 @@ public class Posting {
     public Posting(Term trm) throws IOException {
         termToPost=trm;
         posting = trm.getOccurrence();
-        path=createFolder(trm);
+        path=createFolder();
         outputPosting();
     }
 
-    private String createFolder(Term trm) {
-        File trmFile = new File("Posting");
+    private String createFolder() {
+        /*File trmFile = new File("Posting");
         if(!trmFile.exists()){
             trmFile.mkdir();
-        }
+        }*/
         /*trmFile=new File("Posting/"+trm.getName().charAt(0));
         if(!trmFile.exists()){
             trmFile.mkdir();

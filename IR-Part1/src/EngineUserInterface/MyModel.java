@@ -36,7 +36,7 @@ public class MyModel {
     }
 
     public void bringUpDictionary() throws IOException {
-        dictionary=dictionary.createIndexFromPosting(postingPa);
+        //dictionary=dictionary.createIndexFromPosting(postingPa);
         dictionary.setIndexerPrint(dictionary.printDictionary());
     }
 }

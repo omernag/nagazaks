@@ -5,25 +5,25 @@ import java.util.ArrayList;
 public class IndexEntryValue {
     private int docFq;
     private int totalFq;
-    private String postingPath;
+    private int postingPathName;
 
-    public IndexEntryValue(int inDocFq, int inTotalFq, String inPostingPath) {
+    public IndexEntryValue(int inDocFq, int inTotalFq, int inPostingPath) {
         docFq = inDocFq;
         totalFq = inTotalFq;
-        postingPath = inPostingPath;
+        postingPathName = inPostingPath;
     }
 
-    public IndexEntryValue(Term trm, String path) {
+    public IndexEntryValue(Term trm, int pathName) {
         //this.term = trm.getName();
         docFq = trm.getDocFq();
         totalFq = trm.getTotalFq();
-        postingPath = path;
+        postingPathName = pathName;
     }
 
     @Override
     public String toString() {
         return "docFq=" + docFq +
                         ", totalFq=" + totalFq +
-                        ", postingPath='" + postingPath + '\'';
+                        ", postingPath='" + postingPathName + '\'';
     }
 }

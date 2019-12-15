@@ -29,6 +29,10 @@ public class SegmentProcesses {
 
         TermsInDocList fromJson = new TermsInDocList(1);
         String path = ".";
+        File trmFile = new File("Posting");
+        if(!trmFile.exists()){
+            trmFile.mkdir();
+        }
         File postingFolder = new File(path);
         theDictionary = new IndexDictionary();
         for (File json : postingFolder.listFiles()) {

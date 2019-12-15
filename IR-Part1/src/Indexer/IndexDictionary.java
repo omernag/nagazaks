@@ -9,8 +9,9 @@ import static java.lang.Boolean.parseBoolean;
 
 public class IndexDictionary {
 
-    private TreeMap<String, IndexEntryValue> indexer;
+    private TreeMap<String, String> indexer;
     private String indexerPrint;
+    private static int postCounter = 0;
 
     public IndexDictionary(HashMap<String, Term> termL) throws IOException {
         indexer = new TreeMap<>(comp);
@@ -30,42 +31,37 @@ public class IndexDictionary {
 
     public void createIndexer(HashMap<String, Term> termL) throws IOException {
         IndexEntryValue entry;
+        Posting postFile;
         for (Term trm : termL.values()
         ) {
-            Posting postFile = new Posting(trm);
-            entry = new IndexEntryValue(trm, postFile.getPath());
-            indexer.put(trm.getName(), entry);
+            postFile = new Posting(trm);
+            //entry = new IndexEntryValue(trm, postCounter);
+            indexer.put(trm.getName(), ""+trm.getTotalFq()+","+trm.getDocFq()+","+postCounter);
+            postCounter++;
 
         }
         //indexerPrint=printDictionary();
     }
 
-    public Term getTermFromPosting(String termName) throws FileNotFoundException {
-        Term termFromPosting = null;
-        String path = "Posting/" + termName.charAt(0) + "/" + termName + ".txt";
-        try {
-            LinkedList<String> loadedPosting = new LinkedList<>(Files.readAllLines(Paths.get(path)));
-            termFromPosting = new Term(termName);
-            String[] split;
-            for (String occ : loadedPosting
-            ) {
-                split = occ.split(",");
-                termFromPosting.addOccurrence(split[0], Integer.parseInt(split[1]), parseBoolean(split[2]), parseBoolean(split[3]));
-
-            }
-            termFromPosting.updateDocFq();
-        } catch (IOException e) {
-            ///maybe change later
-            System.out.println("Dictionary does not contain");
-        }
-        return termFromPosting;
-    }
 
     public void setIndexerPrint(String indexerPrint) {
         this.indexerPrint = indexerPrint;
     }
 
-    public IndexDictionary createIndexFromPosting(String path) throws IOException {
+    public String getIndexerPrint() {
+        return indexerPrint;
+    }
+
+    public String printDictionary() {
+        String dict = "";
+        for (Map.Entry ent : indexer.entrySet()
+        ) {
+            dict += ent.getKey() + ", " + ent.getValue().toString() + "\n";
+        }
+        return dict;
+    }
+
+    /*public IndexDictionary createIndexFromPosting(String path) throws IOException {
         IndexDictionary riseDictionary = new IndexDictionary();
         try {
             File postingFolder = new File(path);
@@ -90,18 +86,26 @@ public class IndexDictionary {
 
         return riseDictionary;
 
-    }
+    }*/
 
-    public String getIndexerPrint() {
-        return indexerPrint;
-    }
+    /*public Term getTermFromPosting(String termName) throws FileNotFoundException {
+        Term termFromPosting = null;
+        String path = "Posting/" + termName.charAt(0) + "/" + termName + ".txt";
+        try {
+            LinkedList<String> loadedPosting = new LinkedList<>(Files.readAllLines(Paths.get(path)));
+            termFromPosting = new Term(termName);
+            String[] split;
+            for (String occ : loadedPosting
+            ) {
+                split = occ.split(",");
+                termFromPosting.addOccurrence(split[0], Integer.parseInt(split[1]), parseBoolean(split[2]), parseBoolean(split[3]));
 
-    public String printDictionary() {
-        String dict = "";
-        for (Map.Entry ent : indexer.entrySet()
-        ) {
-            dict += ent.getKey() + ", " + ent.getValue().toString() + "\n";
+            }
+            termFromPosting.updateDocFq();
+        } catch (IOException e) {
+            ///maybe change later
+            System.out.println("Dictionary does not contain");
         }
-        return dict;
-    }
+        return termFromPosting;
+    }*/
 }
