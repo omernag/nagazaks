@@ -234,7 +234,7 @@ public class Main {
 /*
 
         long startTimeIndex1 = System.nanoTime();
-        SegmentProcesses sgm = new SegmentProcesses();
+        SegmentProcesses sgm = new SegmentProcesses(false,".");
         long finishTimeIndex1 = System.nanoTime();
         System.out.println("Time:  " + (finishTimeIndex1 - startTimeIndex1) / 60000000000.0 + "min");
 */

@@ -12,6 +12,8 @@ public class IndexDictionary {
     private TreeMap<String, String> indexer;
     private String indexerPrint;
     private static int postCounter = 0;
+    private boolean stemmer;
+    private String path;
 
     public IndexDictionary(HashMap<String, Term> termL) throws IOException {
         indexer = new TreeMap<>(comp);
@@ -25,17 +27,17 @@ public class IndexDictionary {
         }
     };
 
-    public IndexDictionary() {
+    public IndexDictionary(String postingPath, boolean stemmer) {
+        path=postingPath;
+        this.stemmer=stemmer;
         indexer = new TreeMap<>();
     }
 
     public void createIndexer(HashMap<String, Term> termL) throws IOException {
-        IndexEntryValue entry;
         Posting postFile;
         for (Term trm : termL.values()
         ) {
             postFile = new Posting(trm);
-            //entry = new IndexEntryValue(trm, postCounter);
             indexer.put(trm.getName(), ""+trm.getTotalFq()+","+trm.getDocFq()+","+postCounter);
             postCounter++;
 
@@ -49,6 +51,10 @@ public class IndexDictionary {
     }
 
     public String getIndexerPrint() {
+        for (Map.Entry term: indexer.entrySet()
+             ) {
+            indexerPrint+=term.getKey()+":"+((String)term.getValue()).substring(0,((String) term.getValue()).indexOf(","));
+        }
         return indexerPrint;
     }
 
@@ -59,6 +65,41 @@ public class IndexDictionary {
             dict += ent.getKey() + ", " + ent.getValue().toString() + "\n";
         }
         return dict;
+    }
+
+    public void saveToDisk() throws IOException {
+        FileWriter writer;
+        if(stemmer){
+             writer = new FileWriter(path+"Posting_s/dictionary.txt");
+        }
+        else{
+             writer = new FileWriter(path+"Posting/dictionary.txt");
+        }
+        for (Map.Entry term: indexer.entrySet()
+        ) {
+            writer.write(term.getKey()+":"+term.getValue());
+        }
+    }
+
+    public void loadDictionary(String postingPa,boolean isStemmed) throws IOException {
+        List<String> termList;
+        if(isStemmed){
+            termList=Files.readAllLines(Paths.get(postingPa + "Posting_s/dictionary.txt"));
+        }
+        else{
+            termList=Files.readAllLines(Paths.get(postingPa + "Posting/dictionary.txt"));
+        }
+        indexer=new TreeMap<>(comp);
+        String[] parts;
+        for (String trmS: termList
+        ) {
+            parts=trmS.split(":");
+            indexer.put(parts[0],parts[1]);
+        }
+    }
+
+    public int getNumOfUniqueTerms(){
+        return indexer.size();
     }
 
     /*public IndexDictionary createIndexFromPosting(String path) throws IOException {

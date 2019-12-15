@@ -12,6 +12,7 @@ public class Posting {
     private String path;
     private Term termToPost;
     private static int postCounter=0;
+    private boolean stemmer;
 
     public String getPath() {
         return path;
