@@ -10,6 +10,7 @@ import static java.lang.Boolean.parseBoolean;
 public class IndexDictionary {
 
     private TreeMap<String, String> indexer;
+    //private HashMap<String,String> indexer;
     private String indexerPrint;
     private static int postCounter = 0;
     private boolean stemmer;
@@ -17,6 +18,7 @@ public class IndexDictionary {
 
     public IndexDictionary(HashMap<String, Term> termL) throws IOException {
         indexer = new TreeMap<>(comp);
+        //indexer=new HashMap<>();
         createIndexer(termL);
     }
 
@@ -30,7 +32,8 @@ public class IndexDictionary {
     public IndexDictionary(String postingPath, boolean stemmer) {
         path=postingPath;
         this.stemmer=stemmer;
-        indexer = new TreeMap<>();
+        gindexer = new TreeMap<>();
+        //indexer=new HashMap<>();
     }
 
     public void createIndexer(HashMap<String, Term> termL) throws IOException {
@@ -42,7 +45,7 @@ public class IndexDictionary {
             postCounter++;
 
         }
-        //indexerPrint=printDictionary();
+
     }
 
 
@@ -70,15 +73,16 @@ public class IndexDictionary {
     public void saveToDisk() throws IOException {
         FileWriter writer;
         if(stemmer){
-             writer = new FileWriter(path+"Posting_s/dictionary.txt");
+             writer = new FileWriter(path+"/Posting_s/dictionary.txt");
         }
         else{
-             writer = new FileWriter(path+"Posting/dictionary.txt");
+             writer = new FileWriter(path+"/Posting/dictionary.txt");
         }
         for (Map.Entry term: indexer.entrySet()
         ) {
             writer.write(term.getKey()+":"+term.getValue());
         }
+        writer.close();
     }
 
     public void loadDictionary(String postingPa,boolean isStemmed) throws IOException {
@@ -90,6 +94,7 @@ public class IndexDictionary {
             termList=Files.readAllLines(Paths.get(postingPa + "Posting/dictionary.txt"));
         }
         indexer=new TreeMap<>(comp);
+        //indexer=new HashMap<>();
         String[] parts;
         for (String trmS: termList
         ) {
@@ -102,32 +107,7 @@ public class IndexDictionary {
         return indexer.size();
     }
 
-    /*public IndexDictionary createIndexFromPosting(String path) throws IOException {
-        IndexDictionary riseDictionary = new IndexDictionary();
-        try {
-            File postingFolder = new File(path);
-            String termRep = "";
-            BufferedReader reader;
-            Term risedTerm;
-            String[] split;
-            for (File letterFolder : postingFolder.listFiles()
-            ) {
-                for (File termFile : letterFolder.listFiles()
-                ) {
-                    reader = new BufferedReader(new FileReader(termFile));
-                    termRep = reader.readLine();
-                    split = termRep.split(",");
-                    IndexEntryValue nEntry = new IndexEntryValue(Integer.parseInt(split[1]), Integer.parseInt(split[2]), split[3]);
-                    riseDictionary.indexer.put(split[0], nEntry);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("cant find folder");
-        }
 
-        return riseDictionary;
-
-    }*/
 
     /*public Term getTermFromPosting(String termName) throws FileNotFoundException {
         Term termFromPosting = null;

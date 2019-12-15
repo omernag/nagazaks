@@ -84,10 +84,10 @@ public class Master {
     public void saveDocMD(String postingPath) throws IOException {
         FileWriter writer;
         if(stemmer){
-            writer = new FileWriter(postingPath+"Posting_s/docMD.txt");
+            writer = new FileWriter(postingPath+"/Posting_s/docMD.txt");
         }
         else{
-            writer = new FileWriter(postingPath+"Posting/docMD.txt");
+            writer = new FileWriter(postingPath+"/Posting/docMD.txt");
         }
         for (Map.Entry doc: docsMDs.entrySet()
         ) {
@@ -98,10 +98,10 @@ public class Master {
     public HashMap LoadDocMD(String postingPath) throws IOException {
         List<String> termList;
         if(stemmer){
-            termList= Files.readAllLines(Paths.get(postingPath + "Posting_s/docMD.txt"));
+            termList= Files.readAllLines(Paths.get(postingPath + "/Posting_s/docMD.txt"));
         }
         else{
-            termList=Files.readAllLines(Paths.get(postingPath + "Posting/docMD.txt"));
+            termList=Files.readAllLines(Paths.get(postingPath + "/Posting/docMD.txt"));
         }
         docsMDs=new HashMap<>();
         String[] parts;
