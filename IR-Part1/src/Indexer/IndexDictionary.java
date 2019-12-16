@@ -12,9 +12,9 @@ public class IndexDictionary {
     private TreeMap<String, String> indexer;
     //private HashMap<String,String> indexer;
     private String indexerPrint;
-    private static int postCounter = 0;
     private boolean stemmer;
     private String path;
+    private LinkedList<Posting> toPost;
 
     public IndexDictionary(HashMap<String, Term> termL) throws IOException {
         indexer = new TreeMap<>(comp);
@@ -30,21 +30,52 @@ public class IndexDictionary {
     };
 
     public IndexDictionary(String postingPath, boolean stemmer) {
-        path=postingPath;
-        this.stemmer=stemmer;
-        gindexer = new TreeMap<>();
+
+        this.stemmer = stemmer;
+        if(stemmer){
+            path = postingPath+"/Posting_s/";
+        }
+        else{
+            path = postingPath+"/Posting/";
+        }
+        indexer = new TreeMap<>();
+        toPost = new LinkedList<>();
         //indexer=new HashMap<>();
     }
 
     public void createIndexer(HashMap<String, Term> termL) throws IOException {
         Posting postFile;
+        int counter = 0;
         for (Term trm : termL.values()
         ) {
-            postFile = new Posting(trm);
-            indexer.put(trm.getName(), ""+trm.getTotalFq()+","+trm.getDocFq()+","+postCounter);
-            postCounter++;
+            if (counter < 200) {//1 is missing
+                postFile = new Posting(trm);
+                toPost.add(postFile.addToPostingList());
+                indexer.put(trm.getName(), "" + trm.getTotalFq() + "," + trm.getDocFq() + "," + postFile.getPath());
+                counter++;
+            } else {
+                outputPostList(path+"/"+Posting.postCounter+".txt");
+                toPost.clear();
+                Posting.postCounter++;
+                Posting.placeInPost = 0;
+                counter=0;
+            }
+
 
         }
+
+    }
+
+    private void outputPostList(String path) throws IOException {
+        FileOutputStream postingFile = new FileOutputStream(path);
+        for (Posting pst: toPost
+             ) {
+            postingFile.write(pst.getMetaOfTerm().getBytes());
+            for (String term : pst.getPosting()) {
+                postingFile.write(term.getBytes());
+            }
+        }
+        postingFile.close();
 
     }
 
@@ -54,9 +85,9 @@ public class IndexDictionary {
     }
 
     public String getIndexerPrint() {
-        for (Map.Entry term: indexer.entrySet()
-             ) {
-            indexerPrint+=term.getKey()+":"+((String)term.getValue()).substring(0,((String) term.getValue()).indexOf(","));
+        for (Map.Entry term : indexer.entrySet()
+        ) {
+            indexerPrint += term.getKey() + ":" + ((String) term.getValue()).substring(0, ((String) term.getValue()).indexOf(","));
         }
         return indexerPrint;
     }
@@ -72,38 +103,36 @@ public class IndexDictionary {
 
     public void saveToDisk() throws IOException {
         FileWriter writer;
-        if(stemmer){
-             writer = new FileWriter(path+"/Posting_s/dictionary.txt");
+        if (stemmer) {
+            writer = new FileWriter(path + "/dictionary.txt");
+        } else {
+            writer = new FileWriter(path + "/dictionary.txt");
         }
-        else{
-             writer = new FileWriter(path+"/Posting/dictionary.txt");
-        }
-        for (Map.Entry term: indexer.entrySet()
+        for (Map.Entry term : indexer.entrySet()
         ) {
-            writer.write(term.getKey()+":"+term.getValue());
+            writer.write(term.getKey() + ":" + term.getValue()+"\n");
         }
         writer.close();
     }
 
-    public void loadDictionary(String postingPa,boolean isStemmed) throws IOException {
+    public void loadDictionary(String postingPa, boolean isStemmed) throws IOException {
         List<String> termList;
-        if(isStemmed){
-            termList=Files.readAllLines(Paths.get(postingPa + "Posting_s/dictionary.txt"));
+        if (isStemmed) {
+            termList = Files.readAllLines(Paths.get(postingPa + "Posting_s/dictionary.txt"));
+        } else {
+            termList = Files.readAllLines(Paths.get(postingPa + "Posting/dictionary.txt"));
         }
-        else{
-            termList=Files.readAllLines(Paths.get(postingPa + "Posting/dictionary.txt"));
-        }
-        indexer=new TreeMap<>(comp);
+        indexer = new TreeMap<>(comp);
         //indexer=new HashMap<>();
         String[] parts;
-        for (String trmS: termList
+        for (String trmS : termList
         ) {
-            parts=trmS.split(":");
-            indexer.put(parts[0],parts[1]);
+            parts = trmS.split(":");
+            indexer.put(parts[0], parts[1]);
         }
     }
 
-    public int getNumOfUniqueTerms(){
+    public int getNumOfUniqueTerms() {
         return indexer.size();
     }
 

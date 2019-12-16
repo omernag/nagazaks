@@ -48,7 +48,7 @@ public class SegmentProcesses {
         File postingFolder = new File(path);
         theDictionary = new IndexDictionary(postingPath,stemmer);
         for (File json : postingFolder.listFiles()) {
-            if (json.getName().contains("tTj-11")) {
+            if (json.getName().contains("tTj")) {
                 System.out.println("stating: " + json.getName());
                 long sTime = System.nanoTime();
                 fromJson.setList(fromJson.JsonToTid(json.getPath()));
