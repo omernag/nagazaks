@@ -29,7 +29,7 @@ public class Controller {
 
     private ConnectController connectC;
     private DisplayController dispC;
-    public boolean isStemmer;
+    private boolean isStemmer;
 
     public void pressConnect(ActionEvent event) {
         Parent root;

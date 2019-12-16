@@ -4,6 +4,7 @@ import Indexer.IndexDictionary;
 import Indexer.SegmentProcesses;
 import Parser.DocMD;
 import Parser.Master;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -36,19 +37,25 @@ public class MyModel {
         return infoOnRun;
     }
 
-    public void connectToCorpus(String corpusPath, String postingPath) throws IOException {
-        corpusPa=corpusPath;
-        postingPa=postingPath;
-        long startTimeIndex = System.nanoTime();
-        Master m = new Master(isStemmer);
-        m.run(isStemmer,corpusPath);
-        SegmentProcesses sgm = new SegmentProcesses(isStemmer,postingPath);
-        m.saveDocMD(postingPath);
-        long finishTimeIndex = System.nanoTime();
-        dictionary=sgm.getTheDictionary();
-        infoOnRun="RunTime Information:\n"+"Number of indexed docs: "+m.getDocAmount()+"\n"+
-                "Number of unique Terms in dictionary: "+dictionary.getNumOfUniqueTerms()+"\n"+
-                "Total time: " + (finishTimeIndex - startTimeIndex) / 1000000000.0 + "sec";
+    public void connectToCorpus(String corpusPath, String postingPath) {
+        try {
+
+            corpusPa = corpusPath;
+            postingPa = postingPath;
+            long startTimeIndex = System.nanoTime();
+            Master m = new Master(isStemmer);
+            m.run(isStemmer, corpusPath);
+            SegmentProcesses sgm = new SegmentProcesses(isStemmer, postingPath);
+            m.saveDocMD(postingPath);
+            long finishTimeIndex = System.nanoTime();
+            dictionary = sgm.getTheDictionary();
+            infoOnRun = "RunTime Information:\n" + "Number of indexed docs: " + m.getDocAmount() + "\n" +
+                    "Number of unique Terms in dictionary: " + dictionary.getNumOfUniqueTerms() + "\n" +
+                    "Total time: " + (finishTimeIndex - startTimeIndex) / 1000000000.0 + "sec";
+        }
+        catch (IOException e){
+            System.out.println("failed somehow");
+        }
     }
 
     public String getDictionaryToPrint() {

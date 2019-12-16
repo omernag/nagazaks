@@ -75,8 +75,8 @@ public class Parser {
     }
 
     public DocMD handleDoc (DocText dt){
-        DocMD doc = new DocMD(docno);
-        this.docno=docno;
+        DocMD doc = new DocMD(dt.getDocno());
+        this.docno=dt.getDocno();
         doc.words = parse(dt.getInnerText(),false);
         doc.words.putAll(parse(dt.getHeader(),true));
         doc.maxTf = calcMaxTF(doc.words);
@@ -88,7 +88,7 @@ public class Parser {
     private int calcMaxTF(Map<String,TermInDoc> words){
         int ans = Integer.MIN_VALUE;
         for (TermInDoc tid : words.values() ){
-            ans = Math.max(ans,tid.termfq);
+            ans = Math.max(ans,tid.termFq);
         }
         return ans;
     }
@@ -96,7 +96,7 @@ public class Parser {
     private String maxFreqTerm(Map<String,TermInDoc> words,int maxTf){
         String ans = "";
         for (TermInDoc tid : words.values() ){
-            if(tid.termfq==maxTf) {
+            if(tid.termFq==maxTf) {
                 ans = tid.getTerm();
                 break;
             }
@@ -570,7 +570,7 @@ public class Parser {
             String lower = word.toLowerCase();
             if (words.containsKey(lower)) {
                 //just update it
-                words.get(lower).termfq++;
+                words.get(lower).termFq++;
             }
             else if (words.containsKey(upper)) {
                 //just update it
@@ -578,11 +578,11 @@ public class Parser {
                     //update upper to lower
                     tid = words.remove(upper);
                     tid.updateCapsToLower();
-                    tid.termfq++;
+                    tid.termFq++;
                     words.put(tid.getTerm(),tid);
                 } else {
                     //just update it
-                    words.get(upper).termfq++;
+                    words.get(upper).termFq++;
                 }
             }
             //new word
@@ -607,7 +607,7 @@ public class Parser {
 
     public void addRuleWord(String word) {
         if (words.containsKey(word)) {
-            words.get(word).termfq++;
+            words.get(word).termFq++;
         }
         else{
             TermInDoc tid = new TermInDoc(word,docno,1,false,currIsEntity);

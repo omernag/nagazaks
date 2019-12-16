@@ -1,13 +1,9 @@
 package Indexer;
 
-
-import org.json.JSONObject;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class SegmentProcesses {
@@ -16,11 +12,6 @@ public class SegmentProcesses {
     private IndexDictionary theDictionary;
     private String postingPath;
     private boolean stemmer;
-    /*private Hashtable<String, Integer> termsDf = new Hashtable<>();*/
-
-    public HashMap<String, Term> getTermL() {
-        return termL;
-    }
 
     public SegmentProcesses(boolean stemmed,String postingPath) throws IOException {
         this.termL = new HashMap<>();
@@ -31,7 +22,7 @@ public class SegmentProcesses {
 
     public void processCorpus() throws IOException {
 
-        TermsInDocList fromJson = new TermsInDocList(1);
+        TermsInDocList fromJson = new TermsInDocList();
         String path = ".";
         if(stemmer){
             File trmFile = new File(postingPath+"/Posting_s");
@@ -90,11 +81,6 @@ public class SegmentProcesses {
         updateDocFreq();
     }
 
-
-    public IndexDictionary getTheDictionary() {
-        return theDictionary;
-    }
-
     private void addOccurrenceToTerm(String name, String docNum, int termfq, boolean header, boolean entity) {
         if (termL.containsKey(name)) {
             termL.get(name).addOccurrence(docNum, termfq, header, entity);
@@ -115,6 +101,10 @@ public class SegmentProcesses {
                 termL.put(t.getName(), t);
             }
         }
+    }
+
+    public IndexDictionary getTheDictionary() {
+        return theDictionary;
     }
 }
 

@@ -5,32 +5,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-import static java.lang.Boolean.parseBoolean;
+
 
 public class IndexDictionary {
 
     private TreeMap<String, String> indexer;
-    //private HashMap<String,String> indexer;
     private String indexerPrint;
     private boolean stemmer;
     private String path;
     private LinkedList<Posting> toPost;
 
-    public IndexDictionary(HashMap<String, Term> termL) throws IOException {
-        indexer = new TreeMap<>(comp);
-        //indexer=new HashMap<>();
-        createIndexer(termL);
-    }
-
-    private Comparator<String> comp = new Comparator<String>() {
-        @Override
-        public int compare(String o1, String o2) {
-            return o1.toLowerCase().compareTo(o2.toLowerCase());
-        }
-    };
 
     public IndexDictionary(String postingPath, boolean stemmer) {
-
         this.stemmer = stemmer;
         if(stemmer){
             path = postingPath+"/Posting_s/";
@@ -40,7 +26,7 @@ public class IndexDictionary {
         }
         indexer = new TreeMap<>();
         toPost = new LinkedList<>();
-        //indexer=new HashMap<>();
+
     }
 
     public void createIndexer(HashMap<String, Term> termL) throws IOException {
@@ -80,10 +66,6 @@ public class IndexDictionary {
     }
 
 
-    public void setIndexerPrint(String indexerPrint) {
-        this.indexerPrint = indexerPrint;
-    }
-
     public String getIndexerPrint() {
         for (Map.Entry term : indexer.entrySet()
         ) {
@@ -92,14 +74,6 @@ public class IndexDictionary {
         return indexerPrint;
     }
 
-    public String printDictionary() {
-        String dict = "";
-        for (Map.Entry ent : indexer.entrySet()
-        ) {
-            dict += ent.getKey() + ", " + ent.getValue().toString() + "\n";
-        }
-        return dict;
-    }
 
     public void saveToDisk() throws IOException {
         FileWriter writer;
@@ -123,7 +97,6 @@ public class IndexDictionary {
             termList = Files.readAllLines(Paths.get(postingPa + "Posting/dictionary.txt"));
         }
         indexer = new TreeMap<>(comp);
-        //indexer=new HashMap<>();
         String[] parts;
         for (String trmS : termList
         ) {
@@ -136,7 +109,12 @@ public class IndexDictionary {
         return indexer.size();
     }
 
-
+    private Comparator<String> comp = new Comparator<String>() {
+        @Override
+        public int compare(String o1, String o2) {
+            return o1.toLowerCase().compareTo(o2.toLowerCase());
+        }
+    };
 
     /*public Term getTermFromPosting(String termName) throws FileNotFoundException {
         Term termFromPosting = null;

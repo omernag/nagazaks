@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 public class Posting {
 
-
     private LinkedList<String> posting;
     private String path;
     private Term termToPost;
@@ -16,33 +15,11 @@ public class Posting {
     public static int placeInPost=0;
     private boolean stemmer;
 
-    public String getPath() {
-        return path;
-    }
-
     public Posting(Term trm) throws IOException {
         termToPost=trm;
         posting = trm.getOccurrence();
-        //path=createFolder();
         path = "";
         stemmer=false;
-        //outputPosting();
-    }
-
-    private String createFolder() {
-        /*File trmFile = new File("Posting");
-        if(!trmFile.exists()){
-            trmFile.mkdir();
-        }*/
-        /*trmFile=new File("Posting/"+trm.getName().charAt(0));
-        if(!trmFile.exists()){
-            trmFile.mkdir();
-        }*/
-
-        String pathCreator = "Posting/"+postCounter+".txt";
-        postCounter++;
-        return pathCreator;
-        /*"+trm.getName().charAt(0)+"/"*/
     }
 
     public Posting addToPostingList() throws IOException {
@@ -51,12 +28,15 @@ public class Posting {
         return this;
     }
 
-
     public LinkedList<String> getPosting() {
         return posting;
     }
 
     public String getMetaOfTerm(){
         return "" + termToPost.getName() + "," + termToPost.getDocFq() + "," + termToPost.getTotalFq() + "," + path + "\n";
+    }
+
+    public String getPath() {
+        return path;
     }
 }

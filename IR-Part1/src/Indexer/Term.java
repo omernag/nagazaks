@@ -10,16 +10,6 @@ public class Term {
     private int docFq;
     private LinkedList<String> occurrence;
     private HashSet<String> docsNames;
-    //public static Term[] topTenTerm= new Term[11];
-    //public static Term[] bottomTenTerm= new Term[11];
-    private static int termCounter=0;
-
-    public LinkedList<String> getOccurrence() {
-        return occurrence;
-    }
-    public int getDocFq() {
-        return docFq;
-    }
 
 
     public Term(String term) {
@@ -27,7 +17,6 @@ public class Term {
         this.docFq = 0;
         this.occurrence = new LinkedList<>();
         this.docsNames = new HashSet<>();
-
     }
 
     public Term(TermInDoc termIn) {
@@ -45,8 +34,27 @@ public class Term {
         this.occurrence.add(docNum+","+termfq +","+isHeader+","+isEntity+"\n");
     }
 
-    public void setDocFq(int docFq) {
-        this.docFq = docFq;
+    public void updateDocFq(){
+
+        docFq=docsNames.size();
+        docsNames=null;
+        /*addToTopBottom(this);*/
+    }
+
+    public boolean updateToUpperCase() {
+        if(Character.isUpperCase(term.charAt(0))){
+            term = term.toUpperCase();
+            return true;
+        }
+        return false;
+    }
+
+    public LinkedList<String> getOccurrence() {
+        return occurrence;
+    }
+
+    public int getDocFq() {
+        return docFq;
     }
 
     public int getTotalFq() {
@@ -57,16 +65,8 @@ public class Term {
         return term;
     }
 
-    public void updateDocFq(){
-
-        docFq=docsNames.size();
-        docsNames=null;
-        /*addToTopBottom(this);*/
-    }
-
     @Override
     public String toString() {
-        String termToPrint;
         return
                 "term='" + term + '\'' +
                 ", docFq=" + docFq +", totalFq="+totalFq+
@@ -74,7 +74,10 @@ public class Term {
                 '}';
     }
 
-   /* private void addToTopBottom(Term trm) {
+   /*
+    public static Term[] topTenTerm= new Term[11];
+    public static Term[] bottomTenTerm= new Term[11];
+    private void addToTopBottom(Term trm) {
         if(termCounter<11){
             topTenTerm[termCounter]=trm;
             bottomTenTerm[termCounter]=trm;
@@ -93,7 +96,7 @@ public class Term {
                 Arrays.sort(bottomTenTerm,compBottom);
             }
         }
-    }*/
+    }
 
 
     private static Comparator<Term> compTop = new Comparator<Term>() {
@@ -107,13 +110,7 @@ public class Term {
         public int compare(Term o1, Term o2) {
             return o1.getTotalFq()-o2.getTotalFq();
         }
-    };
+    };*/
 
-    public boolean updateToUpperCase() {
-        if(Character.isUpperCase(term.charAt(0))){
-            term = term.toUpperCase();
-            return true;
-        }
-        return false;
-    }
+
 }

@@ -27,8 +27,8 @@ public class ConnectController {
     private String corpusPath;
     private String postingPath;
     private MyModel model;
-    private boolean corpusPathSet=false;
-    private boolean postingPathSet=false;
+    private boolean corpusPathSet;//=false;
+    private boolean postingPathSet;//=false;
 
     public void pressConnect(ActionEvent event) throws IOException {
         if(corpusPathSet&&postingPathSet) {
@@ -45,6 +45,8 @@ public class ConnectController {
 
     public void setModel(MyModel model) {
         this.model = model;
+        corpusPathSet=false;
+        postingPathSet=false;
     }
 
     public void browseCorpus(ActionEvent event) {
