@@ -17,40 +17,44 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainPane" onKeyPressed="#KeyPressed" onKeyReleased="#ctrlRelease" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<BorderPane fx:id="mainPane" onKeyPressed="#KeyPressed" onKeyReleased="#ctrlRelease"
+            xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="View.MyViewController">
     <left>
         <VBox prefHeight="200.0" prefWidth="208.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
                 <GridPane prefHeight="314.0" prefWidth="195.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="106.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="61.0" minWidth="0.0" prefWidth="57.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="10.0" prefWidth="47.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="106.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="61.0" minWidth="0.0" prefWidth="57.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="10.0" prefWidth="47.0"/>
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
-                  <RowConstraints maxHeight="19.0" minHeight="0.0" prefHeight="11.0" />
-                  <RowConstraints maxHeight="20.0" minHeight="1.0" prefHeight="9.0" />
-                  <RowConstraints maxHeight="20.0" minHeight="1.0" prefHeight="9.0" />
-                  <RowConstraints maxHeight="4.0" minHeight="0.0" prefHeight="0.0" />
-                  <RowConstraints maxHeight="4.0" minHeight="10.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="4.0" minHeight="10.0" prefHeight="30.0" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints/>
+                        <RowConstraints/>
+                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
+                        <RowConstraints maxHeight="19.0" minHeight="0.0" prefHeight="11.0"/>
+                        <RowConstraints maxHeight="20.0" minHeight="1.0" prefHeight="9.0"/>
+                        <RowConstraints maxHeight="20.0" minHeight="1.0" prefHeight="9.0"/>
+                        <RowConstraints maxHeight="4.0" minHeight="0.0" prefHeight="0.0"/>
+                        <RowConstraints maxHeight="4.0" minHeight="10.0" prefHeight="30.0"/>
+                        <RowConstraints maxHeight="4.0" minHeight="10.0" prefHeight="30.0"/>
                     </rowConstraints>
-                    <Button fx:id="btn_generateMaze" onAction="#pressNew" prefHeight="72.0" prefWidth="168.0" text="Generate Maze" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                    <Button fx:id="btn_solveMaze" onAction="#pressSolveMaze" prefHeight="25.0" prefWidth="167.0" text="Solve Maze" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                    <Label text="Char row:" GridPane.rowIndex="5" />
-                    <Label text="Char column:" GridPane.rowIndex="6" />
-                    <Label fx:id="lbl_currRow" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                    <Label fx:id="lbl_currCol" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                    <Button fx:id="btn_generateMaze" onAction="#pressNew" prefHeight="72.0" prefWidth="168.0"
+                            text="Generate Maze" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+                    <Button fx:id="btn_solveMaze" onAction="#pressSolveMaze" prefHeight="25.0" prefWidth="167.0"
+                            text="Solve Maze" GridPane.columnSpan="2" GridPane.rowIndex="4"/>
+                    <Label text="Char row:" GridPane.rowIndex="5"/>
+                    <Label text="Char column:" GridPane.rowIndex="6"/>
+                    <Label fx:id="lbl_currRow" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    <Label fx:id="lbl_currCol" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
                     <!--<Label GridPane.columnIndex="1" GridPane.rowIndex="4" text="${controller.characterPositionRow}" />-->
                     <!--<Label GridPane.columnIndex="1" GridPane.rowIndex="5" text="${controller.characterPositionColumn}"/>-->
                     <!--                    <ChoiceBox value="2 minutes" GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -63,25 +67,25 @@
                                             </items>
                                         </ChoiceBox>-->
                 </GridPane>
-                 <Button fx:id="btn_SetMusic" onAction="#muteBotton" prefHeight="50.0" prefWidth="50.0">
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@/View/mute.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+                <Button fx:id="btn_SetMusic" onAction="#muteBotton" prefHeight="50.0" prefWidth="50.0">
+                    <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@/View/mute.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
             </children>
             <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </padding>
         </VBox>
     </left>
     <bottom>
         <HBox BorderPane.alignment="CENTER">
             <children>
-                <Label text="The Wiz Maze" />
+                <Label text="The Wiz Maze"/>
             </children>
         </HBox>
     </bottom>
@@ -92,29 +96,30 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="File">
                             <items>
-                                <MenuItem fx:id="btn_new" mnemonicParsing="false" onAction="#pressNew" text="New" />
-                                <MenuItem fx:id="btn_save" mnemonicParsing="false" onAction="#pressSave" text="Save" />
-                                <MenuItem fx:id="btn_load" mnemonicParsing="false" onAction="#pressLoad" text="Load" />
+                                <MenuItem fx:id="btn_new" mnemonicParsing="false" onAction="#pressNew" text="New"/>
+                                <MenuItem fx:id="btn_save" mnemonicParsing="false" onAction="#pressSave" text="Save"/>
+                                <MenuItem fx:id="btn_load" mnemonicParsing="false" onAction="#pressLoad" text="Load"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Options">
                             <items>
-                                <MenuItem fx:id="tab_properties" mnemonicParsing="false" onAction="#pressProperties" text="Properties" />
+                                <MenuItem fx:id="tab_properties" mnemonicParsing="false" onAction="#pressProperties"
+                                          text="Properties"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="About">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#pressAbout" text="About" />
+                                <MenuItem mnemonicParsing="false" onAction="#pressAbout" text="About"/>
                             </items>
                         </Menu>
                         <Menu fx:id="tab_help" mnemonicParsing="false" onAction="#pressHelp" text="Help">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Help" />
+                                <MenuItem mnemonicParsing="false" text="Help"/>
                             </items>
                         </Menu>
                         <Menu fx:id="tab_exit" mnemonicParsing="false" onAction="#pressExit" text="Exit">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Exit" />
+                                <MenuItem mnemonicParsing="false" text="Exit"/>
                             </items>
                         </Menu>
                     </menus>
@@ -125,10 +130,14 @@
     <center>
         <Pane fx:id="mazePane" BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplayer fx:id="mazeDisplayer" beenFileName="resources/Images/yellowbrick.jpg" height="500" imageFileNameCharacter="resources/Images/yellowbrickDorthy.jpg" imageFileNameWall="resources/Images/bush.jpg" notBeenFileName="resources/Images/yellowbrick2.jpg" onMouseClicked="#mouseClicked" onScroll="#zoom" solutionFileName="resources/Images/greenbrick.jpg" width="500" />
+                <MazeDisplayer fx:id="mazeDisplayer" beenFileName="resources/Images/yellowbrick.jpg" height="500"
+                               imageFileNameCharacter="resources/Images/yellowbrickDorthy.jpg"
+                               imageFileNameWall="resources/Images/bush.jpg"
+                               notBeenFileName="resources/Images/yellowbrick2.jpg" onMouseClicked="#mouseClicked"
+                               onScroll="#zoom" solutionFileName="resources/Images/greenbrick.jpg" width="500"/>
             </children>
             <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </padding>
         </Pane>
     </center>

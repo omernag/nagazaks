@@ -92,9 +92,9 @@ public class IndexDictionary {
     public void loadDictionary(String postingPa, boolean isStemmed) throws IOException {
         List<String> termList;
         if (isStemmed) {
-            termList = Files.readAllLines(Paths.get(postingPa + "Posting_s/dictionary.txt"));
+            termList = Files.readAllLines(Paths.get(postingPa + "/Posting_s/dictionary.txt"));
         } else {
-            termList = Files.readAllLines(Paths.get(postingPa + "Posting/dictionary.txt"));
+            termList = Files.readAllLines(Paths.get(postingPa + "/Posting/dictionary.txt"));
         }
         indexer = new TreeMap<>(comp);
         String[] parts;

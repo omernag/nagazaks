@@ -1,6 +1,7 @@
 package EngineUserInterface;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -15,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class ConnectController {
+
+    @FXML
     public Label lbl_pathCorpus;
     public Label lbl_pathPosting;
     public TextField tf_pathCorpus;
@@ -27,8 +30,8 @@ public class ConnectController {
     private String corpusPath;
     private String postingPath;
     private MyModel model;
-    private boolean corpusPathSet;//=false;
-    private boolean postingPathSet;//=false;
+    private boolean corpusPathSet=false;
+    private boolean postingPathSet=false;
 
     public void pressConnect(ActionEvent event) throws IOException {
         if(corpusPathSet&&postingPathSet) {
@@ -71,6 +74,7 @@ public class ConnectController {
         tf_pathPosting.textProperty().setValue(postingDirectory.getPath());
         postingPath=tf_pathPosting.textProperty().get();
         corpusPathSet=true;
+        model.setPostingPa(postingPath);
     }
 
     public MyModel getModel() {

@@ -1,5 +1,6 @@
 package EngineUserInterface;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +18,8 @@ import java.util.Comparator;
 
 
 public class Controller {
+
+    @FXML
     public Button btn_ConnectToEn;
     public Button btn_loadDict;
     public Button btn_displayDict;
@@ -25,11 +28,11 @@ public class Controller {
     public Label lbl_status;
     public BorderPane mainPane;
     public Label tf_status;
-    private MyModel model;
 
-    private ConnectController connectC;
-    private DisplayController dispC;
-    private boolean isStemmer;
+    public MyModel model;
+    public ConnectController connectC;
+    public DisplayController dispC;
+    public boolean isStemmer;
 
     public void pressConnect(ActionEvent event) {
         Parent root;
@@ -64,7 +67,7 @@ public class Controller {
     }
 
     public void pressDisplay(ActionEvent event) {
-        if(tf_status.textProperty().getValue().equals("Ready")) {
+        //if(tf_status.textProperty().getValue().equals("Ready")) {
             Parent root;
             try {
                 Stage stage = new Stage();
@@ -81,10 +84,10 @@ public class Controller {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else{
-            showAlert("Please Load a Dictionary first");
-        }
+        //}
+        //else{
+          //  showAlert("Please Load a Dictionary first");
+        //}
 
     }
 

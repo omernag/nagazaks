@@ -18,12 +18,12 @@
             <Font name="Levenim MT" size="18.0" />
         </font>
     </Label>
-    <TextField id="Columns" fx:id="tf_pathCorpus" layoutX="44.0" layoutY="80.0" prefHeight="39.0" prefWidth="349.0">
+    <TextField fx:id="tf_pathCorpus" layoutX="44.0" layoutY="80.0" prefHeight="39.0" prefWidth="349.0">
         <padding>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
         </padding>
     </TextField>
-    <TextField id="Rows" fx:id="tf_pathPosting" layoutX="44.0" layoutY="180.0" prefHeight="39.0" prefWidth="349.0">
+    <TextField fx:id="tf_pathPosting" layoutX="44.0" layoutY="180.0" prefHeight="39.0" prefWidth="349.0">
         <padding>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
         </padding>

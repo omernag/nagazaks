@@ -37,6 +37,10 @@ public class MyModel {
         return infoOnRun;
     }
 
+    public void setPostingPa(String postingPa) {
+        this.postingPa = postingPa;
+    }
+
     public void connectToCorpus(String corpusPath, String postingPath) {
         try {
 
