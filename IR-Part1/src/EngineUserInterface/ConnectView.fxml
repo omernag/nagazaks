@@ -28,7 +28,7 @@
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
         </padding>
     </TextField>
-    <Button fx:id="btn_connect" layoutX="210.0" layoutY="236.0" mnemonicParsing="false" onAction="#pressConnect" text="Connect" />
+    <Button fx:id="btn_accept" layoutX="210.0" layoutY="236.0" mnemonicParsing="false" onAction="#pressAccept" text="Accept" />
     <Button fx:id="btn_browseCorpus" layoutX="409.0" layoutY="80.0" mnemonicParsing="false" onAction="#browseCorpus" text="Browse" />
     <Button fx:id="btn_browsePosting" layoutX="409.0" layoutY="180.0" mnemonicParsing="false" onAction="#browsePosting" text="Browse" />
 </AnchorPane>

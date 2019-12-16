@@ -11,10 +11,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import java.io.IOException;
 import java.util.Optional;
 
 
-public class Main extends Application {
+/*public class Main extends Application {
     MyModel model;
 
     @Override
@@ -31,27 +33,7 @@ public class Main extends Application {
         Controller view = fxmlLoader.getController();
         view.setModel(model);
         //--------------
-        SetStageCloseEvent(primaryStage);
         primaryStage.show();
-    }
-
-
-    private void SetStageCloseEvent(Stage primaryStage) {
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent windowEvent) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText("Please Exit through the EXIT tab for a safe exit");
-                alert.setTitle("BE AWARE");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK) {
-
-                } else {
-                    // ... user chose CANCEL or closed the dialog
-                    windowEvent.consume();
-                }
-
-            }
-        });
     }
 
 
@@ -59,7 +41,7 @@ public class Main extends Application {
         launch(args);
     }
 
-}
+}*/
     /*private static TermsInDocList[] addTerm() throws IOException {
         TermsInDocList test = new TermsInDocList();
         TermsInDocList test2 = new TermsInDocList();
@@ -207,23 +189,23 @@ public class Main extends Application {
 
 
 
-/*public class Main {
+public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, IOException {
         // write your code here
 
 
-        long startTimeIndex = System.nanoTime();
+       /* long startTimeIndex = System.nanoTime();
         Master m = new Master(false);
         m.run(false,".");
         long finishTimeIndex = System.nanoTime();
         System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
-
+*/
         long startTimeIndex1 = System.nanoTime();
         SegmentProcesses sgm = new SegmentProcesses(false,".");
         long finishTimeIndex1 = System.nanoTime();
-        System.out.println("Parse Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
+        //System.out.println("Parse Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
         System.out.println("Index Time:  " + (finishTimeIndex1 - startTimeIndex1) / 60000000000.0 + "min");
-        System.out.println("Total Time:" + (finishTimeIndex1 + finishTimeIndex - startTimeIndex - startTimeIndex1) / 60000000000.0 + "min");
+        //System.out.println("Total Time:" + (finishTimeIndex1 + finishTimeIndex - startTimeIndex - startTimeIndex1) / 60000000000.0 + "min");
     }
-}*/
+}

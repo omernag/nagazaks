@@ -66,6 +66,14 @@ public class MyModel {
         return dictionary.getIndexerPrint();
     }
 
+    public String getCorpusPa() {
+        return corpusPa;
+    }
+
+    public void setCorpusPa(String corpusPa) {
+        this.corpusPa = corpusPa;
+    }
+
     public void bringUpDictionary() throws IOException {
         dictionary.loadDictionary(postingPa,isStemmer);
         Master m = new Master(isStemmer);

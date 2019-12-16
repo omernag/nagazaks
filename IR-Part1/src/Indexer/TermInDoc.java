@@ -5,23 +5,24 @@ public class TermInDoc {
 
     private String term;
     private String docNo;
-    public int termFq;
+    public int termfq;
     private boolean isHeader;
     private boolean isEntity;
 
-    public TermInDoc(String term, String docNo, int termFq, boolean isHeader, boolean isEntity) {
+
+    public TermInDoc(String term, String docNo, int termfq, boolean isHeader, boolean isEntity) {
         this.term = term;
         this.docNo = docNo;
-        this.termFq = termFq;
+        this.termfq = termfq;
         this.isHeader = isHeader;
         this.isEntity = isEntity;
     }
 
     public TermInDoc(String meta) {
-        String[] metaData = meta.split(",");
+        String[] metaData = meta.split("&");
         this.term = metaData[0];
         this.docNo = metaData[1];
-        this.termFq = Integer.parseInt(metaData[2]);
+        this.termfq = Integer.parseInt(metaData[2]);
         this.isHeader = (metaData[3].charAt(0) == 't');
         this.isEntity = (metaData[4].charAt(0) == 't');
     }
@@ -39,7 +40,7 @@ public class TermInDoc {
     }
 
     public int getTermfq() {
-        return termFq;
+        return termfq;
     }
 
     public boolean isHeader() {
@@ -56,6 +57,6 @@ public class TermInDoc {
 
     @Override
     public String toString() {
-        return "" + term + "," + docNo + "," + termFq + "," + isHeader + "," + isEntity;
+        return "" + term + "&" + docNo + "&" + termfq + "&" + isHeader + "&" + isEntity;
     }
 }

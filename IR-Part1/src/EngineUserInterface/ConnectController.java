@@ -30,21 +30,9 @@ public class ConnectController {
     private String corpusPath;
     private String postingPath;
     private MyModel model;
-    private boolean corpusPathSet=false;
-    private boolean postingPathSet=false;
+    private boolean corpusPathSet;
+    private boolean postingPathSet;
 
-    public void pressConnect(ActionEvent event) throws IOException {
-        if(corpusPathSet&&postingPathSet) {
-            ((Stage) ((Node) (event.getSource())).getScene().getWindow()).close();
-            model.connectToCorpus(corpusPath, postingPath);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText(model.getInfoOnRun());
-            alert.show();
-        }
-        else{
-            showAlert("Please Insert Address");
-        }
-    }
 
     public void setModel(MyModel model) {
         this.model = model;
@@ -62,6 +50,7 @@ public class ConnectController {
         tf_pathCorpus.textProperty().setValue(corpusDirectory.getPath());
         corpusPath=tf_pathCorpus.textProperty().get();
         corpusPathSet=true;
+        model.setCorpusPa(corpusPath);
     }
 
     public void browsePosting(ActionEvent event) {
@@ -73,7 +62,7 @@ public class ConnectController {
         File postingDirectory = directoryChooser.showDialog(saveStage);
         tf_pathPosting.textProperty().setValue(postingDirectory.getPath());
         postingPath=tf_pathPosting.textProperty().get();
-        corpusPathSet=true;
+        postingPathSet=true;
         model.setPostingPa(postingPath);
     }
 
@@ -85,5 +74,9 @@ public class ConnectController {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(alertMessage);
         alert.show();
+    }
+
+    public void pressAccept(ActionEvent event) {
+        ((Stage) ((Node) (event.getSource())).getScene().getWindow()).close();
     }
 }

@@ -2,6 +2,7 @@ package EngineUserInterface;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -33,8 +34,12 @@ public class Controller {
     public ConnectController connectC;
     public DisplayController dispC;
     public boolean isStemmer;
+    private boolean corpusPathSet;
+    private boolean postingPathSet;
+    public String corpusPath;
+    public String postingPath;
 
-    public void pressConnect(ActionEvent event) {
+    public void pressSet(ActionEvent event) {
         Parent root;
         try {
             Stage stage = new Stage();
@@ -50,6 +55,18 @@ public class Controller {
             tf_status.textProperty().setValue("Connected");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void pressConnect(ActionEvent event) throws IOException {
+        if(model.getPostingPa()!=null&&model.getCorpusPa()!=null) {
+            model.connectToCorpus(model.getCorpusPa(), model.getPostingPa());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText(model.getInfoOnRun());
+            alert.show();
+        }
+        else{
+            showAlert("Please Insert Address");
         }
     }
 
