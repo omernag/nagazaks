@@ -29,7 +29,7 @@ public class Parser {
     static Pattern garbage = Pattern.compile("[\\/\\,\\|\\%\\$\\?\\.\\<\\>\\^\\&\\*\\#\\+\\=\\_\\@\\\\]");
     static Pattern isNotAscii = Pattern.compile("[^\\p{ASCII}]");
     static Pattern legalForNames = Pattern.compile("(\\w+(\\-)?)+");
-    static Pattern lineSplit = Pattern.compile("([.][ ])|([.][/n])|([:][ ])|([!][ ])|([?][ ])");
+    static Pattern lineSplit = Pattern.compile("([.][/n])|([!][ ])|([?][ ])");
     static Pattern lineJunk = Pattern.compile("[\";~!|:#^&*(){}\\[\\]\\s]");
     static Pattern twosep = Pattern.compile("--");
     static Pattern spaces = Pattern.compile("[  ]|[   ]");
