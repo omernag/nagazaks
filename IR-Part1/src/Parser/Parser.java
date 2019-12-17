@@ -18,8 +18,8 @@ public class Parser {
     HashMap<String, String> months;
     HashMap<String, TermInDoc> words;
     //ArrayList<String> words;
-    static Pattern containDigitPat = Pattern.compile("\\d+");
-    static Pattern isNumericPat = Pattern.compile("((-)?(\\d{1,3}\\,)+)?\\d(\\d+)?(\\.\\d+)?");
+    static Pattern containDigitPat = Pattern.compile("(-)?\\d+");
+    static Pattern isNumericPat = Pattern.compile("(\\+)?(-)?((\\d{1,3}\\,))?\\d(\\d)?(\\.\\d+)?");
     static Pattern startsWithDollar = Pattern.compile("\\A\\$");
     static Pattern endsWithBn = Pattern.compile("bn\\b");
     static Pattern endsWithM = Pattern.compile("m\\b");
@@ -33,8 +33,9 @@ public class Parser {
     static Pattern lineJunk = Pattern.compile("[\";~!|:#^&*(){}\\[\\]\\s]");
     static Pattern twosep = Pattern.compile("--");
     static Pattern spaces = Pattern.compile("[  ]|[   ]");
-    static Pattern othercheck = Pattern.compile("[$+,;.'?`!/<>-]$");
+    static Pattern othercheck = Pattern.compile("[%$+,;.'?`!/<>\\-]");
     static Pattern geresh = Pattern.compile("['`]");
+
     Stemmer stemmer;
     boolean stem;
     boolean currIsEntity;
@@ -46,7 +47,7 @@ public class Parser {
         this.months = new HashMap<>();
         setMonths();
         this.stem=stem;
-        stopwords = new HashSet<>();
+        if(stopwords==null){stopwords = new HashSet<>();}
     }
 
     private void setMonths() {
@@ -123,7 +124,7 @@ public class Parser {
             line = textAsLines[lineInd];
             line = lineJunk.matcher(line).replaceAll(" ");
             line = twosep.matcher(line).replaceAll(" ");
-           // line = spaces.matcher(line).replaceAll(" ");
+            // line = spaces.matcher(line).replaceAll(" ");
             lineAsWords = line.split("[ ]");
             for (int wordInd = 0; wordInd < lineAsWords.length; wordInd++) {
 
@@ -168,6 +169,9 @@ public class Parser {
                     mtc = containDigitPat.matcher(word);
                     if (mtc.find()) {
                         //contains digits
+                        if(word.charAt(0)=='\'' || word.charAt(0)=='+'){
+                            word=word.substring(1);
+                        }
                         if (mtc.matches()) {
                             //contains digits only
                             allDigits = true;
@@ -298,28 +302,9 @@ public class Parser {
                                     continue;
                                 }
                             }
-                            if (num >= 1000000000 || num <= -1000000000) {
-                                //d.6.7
-                                num = num / 1000000000;
-                                word = numToString(num) + "B";
-                                addRuleWord(word);
-                                added = true;
-                                continue;
-                            }
-                            if (num >= 1000000 || num <= -1000000) {
-                                //d.6.4
-                                num = num / 1000000;
-                                word = numToString(num) + "M";
-                                addRuleWord(word);
-                                added = true;
-                                continue;
-                            }
-                            if (num >= 1000 || num <= -1000) {
-                                //d.6.1
-                                num = num / 1000;
-                                word = numToString(num) + "K";
-                                addRuleWord(word);
-                                added = true;
+                            //handle number
+                            added = handleNumber(num);
+                            if(added){
                                 continue;
                             }
                             if (!lastWord) {
@@ -423,6 +408,9 @@ public class Parser {
                         if (word.charAt(word.length() - 1) == '-') {
                             word = word.substring(0, word.length() - 1);
                         }
+                        if (word.charAt(0) == '-') {
+                            word = word.substring(1);
+                        }
                         String[] listedWord = word.split("-");
                         if (listedWord.length > 3) {
                             for (String w : listedWord) {
@@ -475,26 +463,26 @@ public class Parser {
                         }
                         continue;
                     }
-                     else if(Character.isUpperCase(word.charAt(0))&&!lastWord){
-                         int i = 1;
-                         while(wordInd+i<=lineAsWords.length-1){
-                             String partOfName = lineAsWords[wordInd+i];
-                             if(partOfName.length()<21 && legalForNames.matcher(partOfName).matches()&&Character.isUpperCase(partOfName.charAt(0))) {
-                                 word = word + " " + partOfName;
-                                 i++;
-                                 continue;
-                             }
-                                 break;
+                    else if(Character.isUpperCase(word.charAt(0))&&!lastWord){
+                        int i = 1;
+                        while(wordInd+i<=lineAsWords.length-1){
+                            String partOfName = lineAsWords[wordInd+i];
+                            if(partOfName.length()<21 && legalForNames.matcher(partOfName).matches()&&Character.isUpperCase(partOfName.charAt(0))) {
+                                word = word + " " + partOfName;
+                                i++;
+                                continue;
+                            }
+                            break;
 
-                         }
-                         if(i>1){
-                             //Entity
-                             currIsEntity=true;
-                             finalEdit(word);
-                             added = true;
-                             wordInd = wordInd + i -1;
-                             continue;
-                         }
+                        }
+                        if(i>1){
+                            //Entity
+                            currIsEntity=true;
+                            finalEdit(word);
+                            added = true;
+                            wordInd = wordInd + i -1;
+                            continue;
+                        }
                     }
                     if (!added) {
                         finalEdit(word);
@@ -553,7 +541,13 @@ public class Parser {
                     stemmer.stem();
                     word = stemmer.toString();
                 }
-                addToWords(word);
+                if(isNumericPat.matcher(word).matches()) {
+                    double num = wordToNum(word);
+                    handleNumber(num);
+                }
+                else {
+                    addToWords(word);
+                }
             }
            /* //just for test
             if (!((mtc = wordPat.matcher(word)).matches() || (mtc = containDigitPat.matcher(word)).find() || (mtc = twodots.matcher(word)).matches()) && !word.contains("Dollars") && !word.contains("U.S") && !word.contains("Between") && !word.contains("-") && !word.contains("%") && word.charAt(word.length() - 1) != 'K' && word.charAt(word.length() - 1) != 'M' && word.charAt(word.length() - 1) != 'B') {
@@ -627,6 +621,34 @@ public class Parser {
         }
         return numS;
 
+    }
+
+    public boolean handleNumber(double num){
+        String word="";
+        if (num >= 1000000000 || num <= -1000000000) {
+            //d.6.7
+            num = num / 1000000000;
+            word = numToString(num) + "B";
+            addRuleWord(word);
+            return true;
+        }
+        if (num >= 1000000 || num <= -1000000) {
+            //d.6.4
+            num = num / 1000000;
+            word = numToString(num) + "M";
+            addRuleWord(word);
+            return true;
+
+        }
+        if (num >= 1000 || num <= -1000) {
+            //d.6.1
+            num = num / 1000;
+            word = numToString(num) + "K";
+            addRuleWord(word);
+            return true;
+
+        }
+        return false;
     }
 
 }
