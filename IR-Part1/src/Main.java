@@ -25,24 +25,22 @@ import java.util.*;
 import java.text.NumberFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-/*
-public class Main {
+/*public class Main {
     public static void main(String[] args) {
 
-       // Parser pars = new Parser(false);
-       // Map<String, TermInDoc> s = pars.parse("%High-performance",false);
-        double num = 0;
-        try {
-            num = NumberFormat.getNumberInstance(Locale.US).parse("+22").doubleValue();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Parser pars = new Parser(false);
+        Map<String, TermInDoc> s = pars.parse("20,160U.S. CSAAFDS",false);
+        System.out.println(" ");
 
-        System.out.println(num);
-}
+
+
+*//*        Pattern isNumericPat = Pattern.compile("([+]|[-])?(\\d{1,3}[,])*\\d(\\d+)?([.]\\d+)?");
+        String x = "-2,220,160";
+
+        System.out.println(isNumericPat.matcher(x).matches());*//*
+
     }
-*/
-
+}*/
 
 public class Main extends Application {
     MyModel model;

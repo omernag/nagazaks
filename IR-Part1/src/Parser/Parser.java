@@ -19,7 +19,7 @@ public class Parser {
     HashMap<String, TermInDoc> words;
     //ArrayList<String> words;
     static Pattern containDigitPat = Pattern.compile("(-)?\\d+");
-    static Pattern isNumericPat = Pattern.compile("(\\+)?(-)?((\\d{1,3}\\,))?\\d(\\d)?(\\.\\d+)?");
+    static Pattern isNumericPat = Pattern.compile("([+]|[-])?(\\d{1,3}[,])*\\d(\\d+)?([.]\\d+)?");
     static Pattern startsWithDollar = Pattern.compile("\\A\\$");
     static Pattern endsWithBn = Pattern.compile("bn\\b");
     static Pattern endsWithM = Pattern.compile("m\\b");
@@ -29,7 +29,7 @@ public class Parser {
     static Pattern garbage = Pattern.compile("[\\/\\,\\|\\%\\$\\?\\.\\<\\>\\^\\&\\*\\#\\+\\=\\_\\@\\\\]");
     static Pattern isNotAscii = Pattern.compile("[^\\p{ASCII}]");
     static Pattern legalForNames = Pattern.compile("(\\w+(\\-)?)+");
-    static Pattern lineSplit = Pattern.compile("([^U.S][\\.][ ])|([\\.][/n])|([\\:][ ])|([\\!][ ])|([\\?][ ])");
+    static Pattern lineSplit = Pattern.compile("([.][ ])|([.][/n])|([:][ ])|([!][ ])|([?][ ])");
     static Pattern lineJunk = Pattern.compile("[\";~!|:#^&*(){}\\[\\]\\s]");
     static Pattern twosep = Pattern.compile("--");
     static Pattern spaces = Pattern.compile("[  ]|[   ]");
@@ -131,12 +131,15 @@ public class Parser {
                 currIsEntity = false;
                 boolean added = false;
                 boolean allDigits = false;
+                word = lineAsWords[wordInd];
+
                 if (wordInd == lineAsWords.length - 1) {
                     lastWord = true;
+                    if(word.toLowerCase().contains("u.s")){
+                        word+=".";
+                    }
                 }
 
-
-                word = lineAsWords[wordInd];
                 if (word.length() > 1 && !stopwords.contains(word.toLowerCase())) {
 
                     if (months.containsKey(word.toLowerCase())) {
@@ -455,6 +458,11 @@ public class Parser {
                         }
                     }
                     if (( garbage.matcher(word).find() && ! twodots.matcher(word).matches())  ||word.contains("/")) {
+                        if(isNumericPat.matcher(word).find()){
+                            finalEdit(word);
+                            added = true;
+                            continue;
+                        }
                         String[] splited = word.split(garbage.toString());
                         for (String s : splited) {
                             finalEdit(s);
