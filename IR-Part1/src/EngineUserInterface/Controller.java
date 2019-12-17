@@ -2,6 +2,7 @@ package EngineUserInterface;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -33,8 +34,12 @@ public class Controller {
     public ConnectController connectC;
     public DisplayController dispC;
     public boolean isStemmer;
+    private boolean corpusPathSet;
+    private boolean postingPathSet;
+    public String corpusPath;
+    public String postingPath;
 
-    public void pressConnect(ActionEvent event) {
+    public void pressSet(ActionEvent event) {
         Parent root;
         try {
             Stage stage = new Stage();
@@ -49,7 +54,18 @@ public class Controller {
             connectC.setModel(model);
             tf_status.textProperty().setValue("Connected");
         } catch (IOException e) {
-            e.printStackTrace();
+        }
+    }
+
+    public void pressConnect(ActionEvent event) throws IOException {
+        if(model.getPostingPa()!=null&&model.getCorpusPa()!=null) {
+            model.connectToCorpus(model.getCorpusPa(), model.getPostingPa());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText(model.getInfoOnRun());
+            alert.show();
+        }
+        else{
+            showAlert("Please Insert Address");
         }
     }
 
@@ -60,14 +76,13 @@ public class Controller {
             if (connectC.getModel().getDictionary() != null)
                 tf_status.textProperty().setValue("Ready");
         } catch (IOException e) {
-            e.printStackTrace();
             showAlert("Cant find posting in this path");
             tf_status.textProperty().setValue("Failed to load");
         }
     }
 
     public void pressDisplay(ActionEvent event) {
-        //if(tf_status.textProperty().getValue().equals("Ready")) {
+        if(model.getDictionary()!=null) {
             Parent root;
             try {
                 Stage stage = new Stage();
@@ -81,13 +96,12 @@ public class Controller {
                 dispC = fxmlLoader.getController();
                 dispC.setModel(model);
                 dispC.displayDictionary(model);
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
             }
-        //}
-        //else{
-          //  showAlert("Please Load a Dictionary first");
-        //}
+        }
+        else{
+            showAlert("Please Load a Dictionary first");
+        }
 
     }
 
@@ -96,21 +110,25 @@ public class Controller {
     }
 
     public void pressClear(ActionEvent event) throws IOException {
-        if(!tf_status.textProperty().getValue().equals("Waiting")) {
+        if(model.getPostingPa()!=null) {
             model=connectC.getModel();
-            File file = new File(model.getPostingPa());
+            File file;
+            if(model.isStemmer) {
+                 file = new File(model.getPostingPa()+"/Posting_s/");
+            }
+            else{
+                 file = new File(model.getPostingPa()+"/Posting/");
+            }
             if (file.isDirectory()) {
                 File[] entries = file.listFiles();
                 if (entries != null) {
                     for (File entry : entries) {
-                        Files.walk(Paths.get(model.getPostingPa()))
-                                .sorted(Comparator.reverseOrder())
-                                .map(Path::toFile)
-                                .forEach(File::delete);
+                       entry.delete();
                     }
                 }
             }
-            Files.delete(Paths.get(model.getPostingPa()));
+            file.delete();
+            //Files.delete(Paths.get(file.getPath()));
             tf_status.textProperty().setValue("Connected. Posting and dictionary erased");
             model.forgetDictionary();
         }

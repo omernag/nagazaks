@@ -1,14 +1,7 @@
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import EngineUserInterface.Controller;
 import EngineUserInterface.MyModel;
 import Indexer.SegmentProcesses;
-import Indexer.TermInDoc;
 import Parser.Master;
-import Parser.Parser;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -18,58 +11,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
-
-public class Main {
-
-    public static void main(String[] args) {
-        // write your code here
-
-        /*
-       Master m = new Master();
-        m.run("C:\\Users\\onagar\\Desktop\\bgu\\nagazaks\\IR");
-*/
-        /* */
-        Parser pars = new Parser(false);
-        Map<String, TermInDoc> s = pars.parse("$10,411,700",false);
-        for(TermInDoc ss : (s.values())){
-            System.out.println(ss.getTerm());
-        }
-
-
-        //  System.out.printf((Character.isUpperCase('1'))+"");
-       // String s = "1H3J";
-     //   System.out.printf(s.toLowerCase());
-        //String s = "114,00bn0.444";
-
-        /*
-        String pat = "bn\\b";
-        Pattern isNumericPat = Pattern.compile(pat);
-        Matcher m = isNumericPat.matcher(s);
-        System.out.println(m.find()+"");
-*/
-        /*
-        try{
-        Number v = NumberFormat.getNumberInstance(java.util.Locale.US).parse("265,858.33");
-            System.out.println((double)v);}
-        catch (Exception e){}
-
-*/
-
-        // String s = "U.S. ARMY";
-        //  String[] ss = s.split("([\\.][ ])");
-        //  String[] sס = s.split("([^U.S][\\.][ ])");
-        // String X = "";
-        // System.out.println(s.c(pat)+"");
-    }
-}
-
-
-
-
-
-/*
-
+import java.util.TreeMap;
 
 
 public class Main extends Application {
@@ -89,27 +38,7 @@ public class Main extends Application {
         Controller view = fxmlLoader.getController();
         view.setModel(model);
         //--------------
-        SetStageCloseEvent(primaryStage);
         primaryStage.show();
-    }
-
-
-    private void SetStageCloseEvent(Stage primaryStage) {
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent windowEvent) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText("Please Exit through the EXIT tab for a safe exit");
-                alert.setTitle("BE AWARE");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK) {
-
-                } else {
-                    // ... user chose CANCEL or closed the dialog
-                    windowEvent.consume();
-                }
-
-            }
-        });
     }
 
 
@@ -118,8 +47,7 @@ public class Main extends Application {
     }
 
 }
-    */
-/*private static TermsInDocList[] addTerm() throws IOException {
+    /*private static TermsInDocList[] addTerm() throws IOException {
         TermsInDocList test = new TermsInDocList();
         TermsInDocList test2 = new TermsInDocList();
         ArrayList<TermInDoc> list = new ArrayList<>();
@@ -260,36 +188,50 @@ public class Main extends Application {
             System.out.println(trm.toString());
         }
         System.out.println(sgm.getTheDictionary().getIndexerPrint());
-    }*//*
+    }*/
 
 
 
 
 
+/*
+public class Main {
 
-*/
-/*public class Main {
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, IOException {
         // write your code here
 
 
-        long startTimeIndex = System.nanoTime();
+       */
+/* long startTimeIndex = System.nanoTime();
         Master m = new Master(false);
         m.run(false,".");
         long finishTimeIndex = System.nanoTime();
-        System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
+        System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");*//*
 
         long startTimeIndex1 = System.nanoTime();
-        SegmentProcesses sgm = new SegmentProcesses(false,".");
+        //SegmentProcesses sgm = new SegmentProcesses(false,".");
         long finishTimeIndex1 = System.nanoTime();
-        System.out.println("Parse Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
+        //System.out.println("Parse Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
         System.out.println("Index Time:  " + (finishTimeIndex1 - startTimeIndex1) / 60000000000.0 + "min");
-        System.out.println("Total Time:" + (finishTimeIndex1 + finishTimeIndex - startTimeIndex - startTimeIndex1) / 60000000000.0 + "min");
+        //System.out.println("Total Time:" + (finishTimeIndex1 + finishTimeIndex - startTimeIndex - startTimeIndex1) / 60000000000.0 + "min");
+
+        System.out.println(howMuchNumberTerm());
     }
-}*/
 
+    private static int howMuchNumberTerm() throws IOException {
+        List<String> termList;
+        termList = Files.readAllLines(Paths.get("./Posting/dictionary.txt"));
 
-
-
-
+        HashMap indexer = new HashMap();
+        String[] parts;
+        for (String trmS : termList
+        ) {
+            parts = trmS.split(":");
+            if(Character.isDigit(parts[0].charAt(0))) {
+                indexer.put(parts[0], parts[1]);
+            }
+        }
+        return indexer.size();
+    }
+}
+*/

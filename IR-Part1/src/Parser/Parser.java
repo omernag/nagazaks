@@ -89,7 +89,7 @@ public class Parser {
     private int calcMaxTF(Map<String,TermInDoc> words){
         int ans = Integer.MIN_VALUE;
         for (TermInDoc tid : words.values() ){
-            ans = Math.max(ans,tid.termFq);
+            ans = Math.max(ans,tid.termfq);
         }
         return ans;
     }
@@ -97,7 +97,7 @@ public class Parser {
     private String maxFreqTerm(Map<String,TermInDoc> words,int maxTf){
         String ans = "";
         for (TermInDoc tid : words.values() ){
-            if(tid.termFq==maxTf) {
+            if(tid.termfq==maxTf) {
                 ans = tid.getTerm();
                 break;
             }
@@ -571,7 +571,7 @@ public class Parser {
             String lower = word.toLowerCase();
             if (words.containsKey(lower)) {
                 //just update it
-                words.get(lower).termFq++;
+                words.get(lower).termfq++;
             }
             else if (words.containsKey(upper)) {
                 //just update it
@@ -579,11 +579,11 @@ public class Parser {
                     //update upper to lower
                     tid = words.remove(upper);
                     tid.updateCapsToLower();
-                    tid.termFq++;
+                    tid.termfq++;
                     words.put(tid.getTerm(),tid);
                 } else {
                     //just update it
-                    words.get(upper).termFq++;
+                    words.get(upper).termfq++;
                 }
             }
             //new word
@@ -608,7 +608,7 @@ public class Parser {
 
     public void addRuleWord(String word) {
         if (words.containsKey(word)) {
-            words.get(word).termFq++;
+            words.get(word).termfq++;
         }
         else{
             TermInDoc tid = new TermInDoc(word,docno,1,false,currIsEntity);

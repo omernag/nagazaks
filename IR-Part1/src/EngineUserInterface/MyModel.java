@@ -25,7 +25,7 @@ public class MyModel {
 
 
     public MyModel() {
-        dictionary=new IndexDictionary("",false);
+        //dictionary=new IndexDictionary("",false);
         isStemmer=false;
     }
 
@@ -64,6 +64,18 @@ public class MyModel {
 
     public String getDictionaryToPrint() {
         return dictionary.getIndexerPrint();
+    }
+
+    public String getCorpusPa() {
+        return corpusPa;
+    }
+
+    public void setCorpusPa(String corpusPa) {
+        this.corpusPa = corpusPa;
+    }
+
+    public boolean isStemmer() {
+        return isStemmer;
     }
 
     public void bringUpDictionary() throws IOException {
