@@ -22,7 +22,6 @@ public class ConnectController {
     public Label lbl_pathPosting;
     public TextField tf_pathCorpus;
     public TextField tf_pathPosting;
-    public Button btn_connect;
     public Button btn_browseCorpus;
     public Button btn_browsePosting;
     public AnchorPane pane;
@@ -47,10 +46,12 @@ public class ConnectController {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         //directoryChooser.setInitialDirectory(new File("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1"));
         File corpusDirectory = directoryChooser.showDialog(saveStage);
-        tf_pathCorpus.textProperty().setValue(corpusDirectory.getPath());
-        corpusPath=tf_pathCorpus.textProperty().get();
-        corpusPathSet=true;
-        model.setCorpusPa(corpusPath);
+        if(corpusDirectory!=null) {
+            tf_pathCorpus.textProperty().setValue(corpusDirectory.getPath());
+            corpusPath = tf_pathCorpus.textProperty().get();
+            corpusPathSet = true;
+            model.setCorpusPa(corpusPath);
+        }
     }
 
     public void browsePosting(ActionEvent event) {
@@ -60,10 +61,12 @@ public class ConnectController {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         //directoryChooser.setInitialDirectory(new File("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1\\Posting"));
         File postingDirectory = directoryChooser.showDialog(saveStage);
-        tf_pathPosting.textProperty().setValue(postingDirectory.getPath());
-        postingPath=tf_pathPosting.textProperty().get();
-        postingPathSet=true;
-        model.setPostingPa(postingPath);
+        if(postingDirectory!=null) {
+            tf_pathPosting.textProperty().setValue(postingDirectory.getPath());
+            postingPath = tf_pathPosting.textProperty().get();
+            postingPathSet = true;
+            model.setPostingPa(postingPath);
+        }
     }
 
     public MyModel getModel() {

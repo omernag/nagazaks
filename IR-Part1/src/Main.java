@@ -13,10 +13,15 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
+import java.util.TreeMap;
 
 
-/*public class Main extends Application {
+public class Main extends Application {
     MyModel model;
 
     @Override
@@ -41,7 +46,7 @@ import java.util.Optional;
         launch(args);
     }
 
-}*/
+}
     /*private static TermsInDocList[] addTerm() throws IOException {
         TermsInDocList test = new TermsInDocList();
         TermsInDocList test2 = new TermsInDocList();
@@ -189,23 +194,44 @@ import java.util.Optional;
 
 
 
+/*
 public class Main {
 
     public static void main(String[] args) throws IOException, IOException {
         // write your code here
 
 
-       /* long startTimeIndex = System.nanoTime();
+       */
+/* long startTimeIndex = System.nanoTime();
         Master m = new Master(false);
         m.run(false,".");
         long finishTimeIndex = System.nanoTime();
-        System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
-*/
+        System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");*//*
+
         long startTimeIndex1 = System.nanoTime();
-        SegmentProcesses sgm = new SegmentProcesses(false,".");
+        //SegmentProcesses sgm = new SegmentProcesses(false,".");
         long finishTimeIndex1 = System.nanoTime();
         //System.out.println("Parse Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");
         System.out.println("Index Time:  " + (finishTimeIndex1 - startTimeIndex1) / 60000000000.0 + "min");
         //System.out.println("Total Time:" + (finishTimeIndex1 + finishTimeIndex - startTimeIndex - startTimeIndex1) / 60000000000.0 + "min");
+
+        System.out.println(howMuchNumberTerm());
+    }
+
+    private static int howMuchNumberTerm() throws IOException {
+        List<String> termList;
+        termList = Files.readAllLines(Paths.get("./Posting/dictionary.txt"));
+
+        HashMap indexer = new HashMap();
+        String[] parts;
+        for (String trmS : termList
+        ) {
+            parts = trmS.split(":");
+            if(Character.isDigit(parts[0].charAt(0))) {
+                indexer.put(parts[0], parts[1]);
+            }
+        }
+        return indexer.size();
     }
 }
+*/
