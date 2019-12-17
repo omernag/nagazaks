@@ -499,6 +499,9 @@ public class Parser {
 
 
     private double wordToNum(String s) {
+        if(s.charAt(0)=='+'){
+            s=s.substring(1);
+        }
         double num = 0;
         try {
             num = NumberFormat.getNumberInstance(java.util.Locale.US).parse(s).doubleValue();

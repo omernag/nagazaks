@@ -1,6 +1,7 @@
 import EngineUserInterface.Controller;
 import EngineUserInterface.MyModel;
 import Indexer.SegmentProcesses;
+import Indexer.Term;
 import Indexer.TermInDoc;
 import Parser.Master;
 import Parser.Parser;
@@ -17,21 +18,33 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.*;
-/*
+
+
+import java.text.NumberFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        Parser pars = new Parser(false);
-        Map<String, TermInDoc> s = pars.parse("'110%'",false);
-
-
-        for(TermInDoc t : s.values()){
-            System.out.println(t.getTerm());
+       // Parser pars = new Parser(false);
+       // Map<String, TermInDoc> s = pars.parse("%High-performance",false);
+        double num = 0;
+        try {
+            num = NumberFormat.getNumberInstance(Locale.US).parse("+22").doubleValue();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+
+        System.out.println(num);
+}
     }
-}*/
+
+
+/*
 public class Main extends Application {
     MyModel model;
 
@@ -57,8 +70,8 @@ public class Main extends Application {
         launch(args);
     }
 
-}
-    /*private static TermsInDocList[] addTerm() throws IOException {
+}*/
+/*private static TermsInDocList[] addTerm() throws IOException {
         TermsInDocList test = new TermsInDocList();
         TermsInDocList test2 = new TermsInDocList();
         ArrayList<TermInDoc> list = new ArrayList<>();
@@ -199,12 +212,14 @@ public class Main extends Application {
             System.out.println(trm.toString());
         }
         System.out.println(sgm.getTheDictionary().getIndexerPrint());
-    }*/
+    }*//*
 
 
 
 
 
+
+*/
 /*
 public class Main {
 
@@ -212,12 +227,16 @@ public class Main {
         // write your code here
 
 
-       */
+       *//*
+
+*/
 /* long startTimeIndex = System.nanoTime();
         Master m = new Master(false);
         m.run(false,".");
         long finishTimeIndex = System.nanoTime();
         System.out.println("Time:  " + (finishTimeIndex - startTimeIndex) / 60000000000.0 + "min");*//*
+*/
+/*
 
         long startTimeIndex1 = System.nanoTime();
         //SegmentProcesses sgm = new SegmentProcesses(false,".");
@@ -246,3 +265,7 @@ public class Main {
     }
 }
 */
+
+
+
+
