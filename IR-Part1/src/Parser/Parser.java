@@ -19,7 +19,7 @@ public class Parser {
     HashMap<String, TermInDoc> words;
     //ArrayList<String> words;
     static Pattern containDigitPat = Pattern.compile("\\d+");
-    static Pattern isNumericPat = Pattern.compile("((-)?(\\d{1,3}\\,)+)?\\d+(\\.\\d+)?");
+    static Pattern isNumericPat = Pattern.compile("((-)?(\\d{1,3}\\,)+)?\\d(\\d+)?(\\.\\d+)?");
     static Pattern startsWithDollar = Pattern.compile("\\A\\$");
     static Pattern endsWithBn = Pattern.compile("bn\\b");
     static Pattern endsWithM = Pattern.compile("m\\b");
@@ -31,9 +31,9 @@ public class Parser {
     static Pattern legalForNames = Pattern.compile("(\\w+(\\-)?)+");
     static Pattern lineSplit = Pattern.compile("([^U.S][\\.][ ])|([\\.][/n])|([\\:][ ])|([\\!][ ])|([\\?][ ])");
     static Pattern lineJunk = Pattern.compile("[\";~!|:#^&*(){}\\[\\]\\s]");
-    static Pattern threedots = Pattern.compile("---");
+    static Pattern twosep = Pattern.compile("--");
     static Pattern spaces = Pattern.compile("[  ]|[   ]");
-    static Pattern othercheck = Pattern.compile("[+,;.'?`!/<>]$");
+    static Pattern othercheck = Pattern.compile("[$+,;.'?`!/<>-]$");
     static Pattern geresh = Pattern.compile("['`]");
     Stemmer stemmer;
     boolean stem;
@@ -46,6 +46,7 @@ public class Parser {
         this.months = new HashMap<>();
         setMonths();
         this.stem=stem;
+        stopwords = new HashSet<>();
     }
 
     private void setMonths() {
@@ -121,7 +122,7 @@ public class Parser {
 
             line = textAsLines[lineInd];
             line = lineJunk.matcher(line).replaceAll(" ");
-            line = threedots.matcher(line).replaceAll(" ");
+            line = twosep.matcher(line).replaceAll(" ");
            // line = spaces.matcher(line).replaceAll(" ");
             lineAsWords = line.split("[ ]");
             for (int wordInd = 0; wordInd < lineAsWords.length; wordInd++) {
@@ -164,55 +165,6 @@ public class Parser {
                             }
                         }
                     }
-                    if (word.contains("-")) {
-                        //d.3
-                        if (word.charAt(word.length() - 1) == '-') {
-                            word = word.substring(0, word.length() - 1);
-                        }
-                        String[] listedWord = word.split("-");
-                        if (listedWord.length > 3) {
-                            for (String w : listedWord) {
-                                if( garbage.matcher(word).find()){
-                                    String[] splited = word.split(garbage.toString());
-                                    for (String s : splited) {
-                                        finalEdit(s);
-                                        added = true;
-                                    }
-                                }
-                                else if (!w.equals("")) {
-                                    finalEdit(w);
-                                }
-                            }
-                            added = true;
-                            continue;
-                        } else {
-                            //d.3.1
-                            word = "";
-                            for (String w : listedWord) {
-                                if (!w.equals("")) {
-                                    word = word + w + "-";
-                                }
-                            }
-                            if (!word.equals("")) {
-                                finalEdit(word.substring(0, word.length() - 1));
-                                added = true;
-                            }
-                            continue;
-                        }
-
-
-                    }
-                    if (word.toLowerCase().equals("between") && wordInd <= lineAsWords.length - 4) {
-                        if ( lineAsWords[wordInd + 2].toLowerCase().equals("and") && (  isNumericPat.matcher(lineAsWords[wordInd + 1]).matches()) && ( isNumericPat.matcher(lineAsWords[wordInd + 3]).matches()) ) {
-                            //d.3.2
-                            word = word + " " + lineAsWords[wordInd + 1] + " " + lineAsWords[wordInd + 2] + " " + lineAsWords[wordInd + 3];
-                            wordInd = wordInd + 3;
-                            finalEdit(word);
-                            added = true;
-                            continue;
-                        }
-                    }
-
                     mtc = containDigitPat.matcher(word);
                     if (mtc.find()) {
                         //contains digits
@@ -381,7 +333,7 @@ public class Parser {
                                 }
                             }
                             //d.6.8
-                            finalEdit(word);
+                            addRuleWord(word);
                             added = true;
                             continue;
 
@@ -389,7 +341,7 @@ public class Parser {
                         mtc = endsWithPerc.matcher(word);
                         if (mtc.find()) {
                             mtc = isNumericPat.matcher(word.substring(0, word.length() - 1));
-                            if (mtc.matches()) {
+                            if (mtc.find()) {
                                 //d.4.1
                                 addRuleWord(word);
                                 added = true;
@@ -465,7 +417,56 @@ public class Parser {
                         }
 
 
-                    } else if (( garbage.matcher(word).find() && ! twodots.matcher(word).matches())  ||word.contains("/")) {
+                    }
+                    if (word.contains("-")) {
+                        //d.3
+                        if (word.charAt(word.length() - 1) == '-') {
+                            word = word.substring(0, word.length() - 1);
+                        }
+                        String[] listedWord = word.split("-");
+                        if (listedWord.length > 3) {
+                            for (String w : listedWord) {
+                                if( garbage.matcher(word).find()){
+                                    String[] splited = word.split(garbage.toString());
+                                    for (String s : splited) {
+                                        finalEdit(s);
+                                        added = true;
+                                    }
+                                }
+                                else if (!w.equals("")) {
+                                    finalEdit(w);
+                                }
+                            }
+                            added = true;
+                            continue;
+                        } else {
+                            //d.3.1
+                            word = "";
+                            for (String w : listedWord) {
+                                if (!w.equals("")) {
+                                    word = word + w + "-";
+                                }
+                            }
+                            if (!word.equals("")) {
+                                finalEdit(word.substring(0, word.length() - 1));
+                                added = true;
+                            }
+                            continue;
+                        }
+
+
+                    }
+                    if (word.toLowerCase().equals("between") && wordInd <= lineAsWords.length - 4) {
+                        if ( lineAsWords[wordInd + 2].toLowerCase().equals("and") && (  isNumericPat.matcher(lineAsWords[wordInd + 1]).matches()) && ( isNumericPat.matcher(lineAsWords[wordInd + 3]).matches()) ) {
+                            //d.3.2
+                            word = word + " " + lineAsWords[wordInd + 1] + " " + lineAsWords[wordInd + 2] + " " + lineAsWords[wordInd + 3];
+                            wordInd = wordInd + 3;
+                            finalEdit(word);
+                            added = true;
+                            continue;
+                        }
+                    }
+                    if (( garbage.matcher(word).find() && ! twodots.matcher(word).matches())  ||word.contains("/")) {
                         String[] splited = word.split(garbage.toString());
                         for (String s : splited) {
                             finalEdit(s);

@@ -73,7 +73,7 @@ public class ConnectController {
         File postingDirectory = directoryChooser.showDialog(saveStage);
         tf_pathPosting.textProperty().setValue(postingDirectory.getPath());
         postingPath=tf_pathPosting.textProperty().get();
-        corpusPathSet=true;
+        postingPathSet=true;
         model.setPostingPa(postingPath);
     }
 

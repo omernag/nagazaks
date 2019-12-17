@@ -18,7 +18,7 @@ public class DocMD {
 
     public DocMD(String[] parts) {
         docno=parts[0];
-        String[] rest = parts[1].split(",");
+        String[] rest = parts[1].split("&");
         maxTf=Integer.parseInt(rest[0]);
         uniqueCount=Integer.parseInt(rest[1]);
         maxFreqTerm=rest[2];
