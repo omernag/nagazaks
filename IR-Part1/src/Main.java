@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-
+/*
 public class Main {
 
     public static void main(String[] args) {
@@ -31,8 +31,8 @@ public class Main {
             System.out.println(t.getTerm());
         }
     }
-}
-/*public class Main extends Application {
+}*/
+public class Main extends Application {
     MyModel model;
 
     @Override
@@ -57,7 +57,7 @@ public class Main {
         launch(args);
     }
 
-}*/
+}
     /*private static TermsInDocList[] addTerm() throws IOException {
         TermsInDocList test = new TermsInDocList();
         TermsInDocList test2 = new TermsInDocList();
