@@ -1,7 +1,9 @@
 import EngineUserInterface.Controller;
 import EngineUserInterface.MyModel;
 import Indexer.SegmentProcesses;
+import Indexer.TermInDoc;
 import Parser.Master;
+import Parser.Parser;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -15,13 +17,22 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.TreeMap;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Parser pars = new Parser(false);
+        Map<String, TermInDoc> s = pars.parse("'110%'",false);
 
 
-public class Main extends Application {
+        for(TermInDoc t : s.values()){
+            System.out.println(t.getTerm());
+        }
+    }
+}
+/*public class Main extends Application {
     MyModel model;
 
     @Override
@@ -46,7 +57,7 @@ public class Main extends Application {
         launch(args);
     }
 
-}
+}*/
     /*private static TermsInDocList[] addTerm() throws IOException {
         TermsInDocList test = new TermsInDocList();
         TermsInDocList test2 = new TermsInDocList();
