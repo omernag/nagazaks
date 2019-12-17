@@ -25,9 +25,8 @@ import java.util.*;
 import java.text.NumberFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/*
 public class Main {
-
     public static void main(String[] args) {
 
        // Parser pars = new Parser(false);
@@ -42,9 +41,9 @@ public class Main {
         System.out.println(num);
 }
     }
+*/
 
 
-/*
 public class Main extends Application {
     MyModel model;
 
@@ -70,7 +69,7 @@ public class Main extends Application {
         launch(args);
     }
 
-}*/
+}
 /*private static TermsInDocList[] addTerm() throws IOException {
         TermsInDocList test = new TermsInDocList();
         TermsInDocList test2 = new TermsInDocList();
