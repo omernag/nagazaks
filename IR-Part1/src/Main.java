@@ -29,9 +29,11 @@ import java.util.regex.Pattern;
     public static void main(String[] args) {
 
         Parser pars = new Parser(false);
-        Map<String, TermInDoc> s = pars.parse("20,160U.S. CSAAFDS",false);
+        Map<String, TermInDoc> s = pars.parse("May 1994, MAY 1994",false);
         System.out.println(" ");
-
+        for(TermInDoc tid : s.values()){
+            System.out.println(tid.getTerm());
+        }
 
 
 *//*        Pattern isNumericPat = Pattern.compile("([+]|[-])?(\\d{1,3}[,])*\\d(\\d+)?([.]\\d+)?");
@@ -66,7 +68,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }
 /*private static TermsInDocList[] addTerm() throws IOException {
         TermsInDocList test = new TermsInDocList();
