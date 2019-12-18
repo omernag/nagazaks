@@ -79,6 +79,16 @@ public class SegmentProcesses {
         }
         updateCaseToUpper();
         updateDocFreq();
+        updateEntities();
+    }
+
+    private void updateEntities() {
+        Set<String> keys = new HashSet<>(termL.keySet());
+        for (String key : keys) {
+            if(termL.get(key).isEntity() && termL.get(key).getDocFq()==1){
+                termL.remove(key);
+            }
+        }
     }
 
     private void addOccurrenceToTerm(String name, String docNum, int termfq, boolean header, boolean entity) {

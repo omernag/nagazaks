@@ -10,6 +10,7 @@ public class Term {
     private int docFq;
     private LinkedList<String> occurrence;
     private HashSet<String> docsNames;
+    private boolean isEntity;
 
 
     public Term(String term) {
@@ -25,6 +26,7 @@ public class Term {
         this.totalFq=0;
         this.occurrence = new LinkedList<>();
         this.docsNames = new HashSet<>();
+        this.isEntity=termIn.isEntity();
         addOccurrence(termIn.getDocNo(), termIn.getTermfq(), termIn.isHeader(),termIn.isEntity());
     }
 
@@ -39,6 +41,9 @@ public class Term {
         docFq=docsNames.size();
         docsNames=null;
         /*addToTopBottom(this);*/
+    }
+    public boolean isEntity(){
+        return isEntity;
     }
 
     public boolean updateToUpperCase() {

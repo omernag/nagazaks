@@ -32,13 +32,6 @@ public class ConnectController {
     private boolean corpusPathSet;
     private boolean postingPathSet;
 
-
-    public void setModel(MyModel model) {
-        this.model = model;
-        corpusPathSet=false;
-        postingPathSet=false;
-    }
-
     public void browseCorpus(ActionEvent event) {
         corpusPathSet=false;
         Stage saveStage = new Stage();
@@ -73,13 +66,13 @@ public class ConnectController {
         return model;
     }
 
-    private void showAlert(String alertMessage) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText(alertMessage);
-        alert.show();
-    }
-
     public void pressAccept(ActionEvent event) {
         ((Stage) ((Node) (event.getSource())).getScene().getWindow()).close();
+    }
+
+    public void setModel(MyModel model) {
+        this.model = model;
+        corpusPathSet=false;
+        postingPathSet=false;
     }
 }
