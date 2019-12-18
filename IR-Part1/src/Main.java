@@ -25,9 +25,17 @@ import java.util.*;
 import java.text.NumberFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-/*public class Main {
+public class Main {
     public static void main(String[] args) {
 
+
+        Master m = new Master(false);
+        try {
+            m.run(false,".");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+/*
         Parser pars = new Parser(false);
         Map<String, TermInDoc> s = pars.parse("May 1994, MAY 1994",false);
         System.out.println(" ");
@@ -36,15 +44,16 @@ import java.util.regex.Pattern;
         }
 
 
-*//*        Pattern isNumericPat = Pattern.compile("([+]|[-])?(\\d{1,3}[,])*\\d(\\d+)?([.]\\d+)?");
+        Pattern isNumericPat = Pattern.compile("([+]|[-])?(\\d{1,3}[,])*\\d(\\d+)?([.]\\d+)?");
         String x = "-2,220,160";
 
-        System.out.println(isNumericPat.matcher(x).matches());*//*
+        System.out.println(isNumericPat.matcher(x).matches());
+*/
 
     }
-}*/
+}
 
-public class Main extends Application {
+/*public class Main extends Application {
     MyModel model;
 
     @Override
@@ -68,7 +77,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}
+}*/
 /*private static TermsInDocList[] addTerm() throws IOException {
         TermsInDocList test = new TermsInDocList();
         TermsInDocList test2 = new TermsInDocList();
