@@ -18,27 +18,9 @@ public class MyModel {
     private String infoOnRun;
     private HashMap<String, DocMD> docMD;
 
-    public String getPostingPa() {
-        return postingPa;
-    }
-
-
-
     public MyModel() {
         //dictionary=new IndexDictionary("",false);
         isStemmer=false;
-    }
-
-    public IndexDictionary getDictionary() {
-        return dictionary;
-    }
-
-    public String getInfoOnRun() {
-        return infoOnRun;
-    }
-
-    public void setPostingPa(String postingPa) {
-        this.postingPa = postingPa;
     }
 
     public void connectToCorpus(String corpusPath, String postingPath) {
@@ -62,22 +44,6 @@ public class MyModel {
         }
     }
 
-    public String getDictionaryToPrint() {
-        return dictionary.getIndexerPrint();
-    }
-
-    public String getCorpusPa() {
-        return corpusPa;
-    }
-
-    public void setCorpusPa(String corpusPa) {
-        this.corpusPa = corpusPa;
-    }
-
-    public boolean isStemmer() {
-        return isStemmer;
-    }
-
     public void bringUpDictionary() throws IOException {
         dictionary.loadDictionary(postingPa,isStemmer);
         Master m = new Master(isStemmer);
@@ -97,4 +63,37 @@ public class MyModel {
     public void forgetDictionary() {
         dictionary=null;
     }
+
+    public String getPostingPa() {
+        return postingPa;
+    }
+
+    public String getDictionaryToPrint() {
+        return dictionary.getIndexerPrint();
+    }
+
+    public String getCorpusPa() {
+        return corpusPa;
+    }
+
+    public void setCorpusPa(String corpusPa) {
+        this.corpusPa = corpusPa;
+    }
+
+    public boolean isStemmer() {
+        return isStemmer;
+    }
+
+    public IndexDictionary getDictionary() {
+        return dictionary;
+    }
+
+    public String getInfoOnRun() {
+        return infoOnRun;
+    }
+
+    public void setPostingPa(String postingPa) {
+        this.postingPa = postingPa;
+    }
+
 }
