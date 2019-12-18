@@ -67,11 +67,13 @@ public class IndexDictionary {
 
 
     public String getIndexerPrint() {
+        StringBuilder stb = new StringBuilder();
         for (Map.Entry term : indexer.entrySet()
         ) {
-            indexerPrint += term.getKey() + ":" + ((String) term.getValue()).substring(0, ((String) term.getValue()).indexOf(","));
+            stb.append(term.getKey() + ":" + ((String) term.getValue()).substring(0, ((String) term.getValue()).indexOf(","))+"\n");
         }
-        return indexerPrint;
+        indexerPrint=stb.toString();
+        return stb.toString();
     }
 
 

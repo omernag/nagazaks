@@ -46,8 +46,8 @@ public class MyModel {
 
     public void bringUpDictionary() throws IOException {
         dictionary.loadDictionary(postingPa,isStemmer);
-        Master m = new Master(isStemmer);
-        docMD=m.LoadDocMD(postingPa);
+        //Master m = new Master(isStemmer);
+        //docMD=m.LoadDocMD(postingPa);
 
     }
 
@@ -96,4 +96,7 @@ public class MyModel {
         this.postingPa = postingPa;
     }
 
+    public void initializeDictionary() {
+        dictionary=new IndexDictionary(postingPa,isStemmer);
+    }
 }

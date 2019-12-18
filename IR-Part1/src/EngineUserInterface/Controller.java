@@ -72,8 +72,11 @@ public class Controller {
     public void pressLoad(ActionEvent event) {
         try {
             model=connectC.getModel();
+            if(model.getDictionary()==null){
+                model.initializeDictionary();
+            }
             model.bringUpDictionary();
-            if (connectC.getModel().getDictionary() != null)
+            if (model.getDictionary() != null)
                 tf_status.textProperty().setValue("Ready");
         } catch (IOException e) {
             showAlert("Cant find posting in this path");
