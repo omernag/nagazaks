@@ -37,6 +37,9 @@ public class Master {
 
         long startTimeIndex ;
         long finishTimeIndex;
+        File f = new File("./Segment/");
+        f.mkdir();
+
         for(String filePath : rf.filesPaths){
 
             //fileTexts.addAll(rf.handleFile(filePath));

@@ -53,7 +53,7 @@ public class Controller {
             connectC = fxmlLoader.getController();
             connectC.setModel(model);
             tf_status.textProperty().setValue("Connected");
-        } catch (IOException e) {
+        } catch (Exception e) {
         }
     }
 
@@ -78,7 +78,7 @@ public class Controller {
             model.bringUpDictionary();
             if (model.getDictionary() != null)
                 tf_status.textProperty().setValue("Ready");
-        } catch (IOException e) {
+        } catch (Exception e) {
             showAlert("Cant find posting in this path");
             tf_status.textProperty().setValue("Failed to load");
         }

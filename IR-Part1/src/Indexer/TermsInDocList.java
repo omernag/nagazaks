@@ -30,7 +30,7 @@ public class TermsInDocList {
             tid.put(insideCounter[i], term.toString());
             insideCounter[i] = insideCounter[i] + 1;
         }
-        Files.write(Paths.get("tTj-" + i + ".txt"), (tid.toJSONString() + "\n").getBytes(), Files.exists(Paths.get("tTj-" + i + ".txt")) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
+        Files.write(Paths.get("./Segment/tTj-" + i + ".txt"), (tid.toJSONString() + "\n").getBytes(), Files.exists(Paths.get("./Segment/tTj-" + i + ".txt")) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
     }
 
     public LinkedList<TermInDoc> JsonToTid(String location) throws IOException {

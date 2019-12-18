@@ -4,6 +4,8 @@ import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class SegmentProcesses {
@@ -36,9 +38,9 @@ public class SegmentProcesses {
                 trmFile.mkdir();
             }
         }
-        File postingFolder = new File(path);
+        File segmentFolder = new File(path+"/Segment/");
         theDictionary = new IndexDictionary(postingPath,stemmer);
-        for (File json : postingFolder.listFiles()) {
+        for (File json : segmentFolder.listFiles()) {
             if (json.getName().contains("tTj")) {
                 System.out.println("stating: " + json.getName());
                 long sTime = System.nanoTime();
@@ -48,8 +50,9 @@ public class SegmentProcesses {
                 termL.clear();
                 long fTime = System.nanoTime();
                 System.out.println("Time:  " + (fTime - sTime) / 60000000000.0 + "min");
+                Files.delete(Paths.get(json.getPath()));
             }
-            //Files.delete(json.getPath());
+
         }
         theDictionary.saveToDisk();
 
