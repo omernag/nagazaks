@@ -17,7 +17,6 @@ public class Parser {
     static  HashSet<String> stopwords;
     HashMap<String, String> months;
     HashMap<String, TermInDoc> words;
-    //ArrayList<String> words;
     static Pattern containDigitPat = Pattern.compile("(-)?\\d+");
     static Pattern isNumericPat = Pattern.compile("([+]|[-])?(\\d{1,3}[,])*\\d(\\d+)?([.]\\d+)?");
     static Pattern startsWithDollar = Pattern.compile("\\A\\$");

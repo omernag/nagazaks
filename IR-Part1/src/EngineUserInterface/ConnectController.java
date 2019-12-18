@@ -47,6 +47,13 @@ public class ConnectController {
         }
     }
 
+    public void typeCorpusPath(ActionEvent event) {
+        corpusPathSet=false;
+        corpusPath = tf_pathCorpus.textProperty().get();
+        corpusPathSet = true;
+        model.setCorpusPa(corpusPath);
+    }
+
     public void browsePosting(ActionEvent event) {
         postingPathSet=false;
         Stage saveStage = new Stage();
@@ -60,6 +67,12 @@ public class ConnectController {
             postingPathSet = true;
             model.setPostingPa(postingPath);
         }
+    }
+    public void typePostingPath(ActionEvent event) {
+        postingPathSet=false;
+        postingPath = tf_pathPosting.textProperty().get();
+        postingPathSet = true;
+        model.setPostingPa(postingPath);
     }
 
     public MyModel getModel() {
