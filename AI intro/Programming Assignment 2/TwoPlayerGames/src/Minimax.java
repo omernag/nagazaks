@@ -1,6 +1,4 @@
-import java.util.List;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Minimax implements ISolver {
     @Override
@@ -14,34 +12,27 @@ public class Minimax implements ISolver {
         return MinimaxAlgorithm(root);
     }
 
-    //getNodeChildren
-    //getScore
-
     private double MinimaxAlgorithm(Node node) {
         if(node.isTerminalNode()){
             return node.getScore();
         }
         if(node.getNodeType().equals(Node.NodeType.MAX)){
             List<Node> childes = node.getNodeChildren();
-            double max=Double.MIN_VALUE;
+            LinkedList<Double> maxes = new LinkedList<>();
             for (Node nd: childes
                  ) {
-                if(MinimaxAlgorithm(nd)>max){
-                    max=nd.getScore();
-                }
+                maxes.add(MinimaxAlgorithm(nd));
             }
-            return max;
+            return Collections.max(maxes);
         }
         else{
             List<Node> childes = node.getNodeChildren();
-            double min=Double.MAX_VALUE;
+            LinkedList<Double> mines = new LinkedList<>();
             for (Node nd: childes
             ) {
-                if(MinimaxAlgorithm(nd)<min){
-                    min=nd.getScore();
-                }
+                mines.add(MinimaxAlgorithm(nd));
             }
-            return min;
+            return Collections.min(mines);
         }
     }
 
