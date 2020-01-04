@@ -24,33 +24,42 @@ public class DocMD {
     }
 
     public DocMD(String[] parts) {
-        docno=parts[0];
-        String[] rest = parts[1].split("&");
-        maxTf=Integer.parseInt(rest[0]);
-        uniqueCount=Integer.parseInt(rest[1]);
-        maxFreqTerm=rest[2];
+        docno = parts[0];
+        String[] rest = parts[1].split("@");
+        maxTf = Integer.parseInt(rest[0]);
+        uniqueCount = Integer.parseInt(rest[1]);
+        maxFreqTerm = rest[2];
+        countEntities = Integer.parseInt(rest[3]);///add to split
+        for (int i = 4; i < 9; i++) { //add to split entitis 5 bes
+            String[] kv = rest[i].split("#");
+            entities.put(kv[0],new TermInDoc(kv[1]));
+        }
         rank = 0;
-        countEntities =0;
     }
 
     @Override
     public String toString() {
-        return "" + maxTf + "," + uniqueCount + "," + maxFreqTerm;
+        String toSave= maxTf + "@" + uniqueCount + "@" + maxFreqTerm + "@" + countEntities+"@";
+        for (Map.Entry ent: entities.entrySet()
+             ) {
+            toSave+=ent.getKey()+"#"+ent.getValue()+"@";
+        }
+        return toSave;
     }
 
     public void setEntities() {
         Comparator<TermInDoc> comp = (o1, o2) -> (int) (o1.getTermfq() - o2.getTermfq());
         PriorityQueue<TermInDoc> pq = new PriorityQueue<>(comp);
-        for(TermInDoc tid : words.values()){
-            if(tid.isEntity()){
+        for (TermInDoc tid : words.values()) {
+            if (tid.isEntity()) {
                 pq.add(tid);
-                countEntities +=tid.getTermfq();
+                countEntities += tid.getTermfq();
             }
         }
-        int i =0;
-        while(!pq.isEmpty() && i<5){
+        int i = 0;
+        while (!pq.isEmpty() && i < 5) {
             TermInDoc curr = pq.poll();
-            entities.put(curr.getTerm(),curr);
+            entities.put(curr.getTerm(), curr);
             i++;
         }
     }

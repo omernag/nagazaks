@@ -94,11 +94,12 @@ public class Master {
         }
         for (Map.Entry doc: docsMDs.entrySet()
         ) {
-            writer.write(doc.getKey()+":"+doc.getValue().toString());
+            writer.write(doc.getKey()+":"+doc.getValue().toString()+"\n");
         }
+        writer.close();
     }
 
-    public HashMap LoadDocMD(String postingPath) throws IOException {
+    public HashMap LoadDocMD(String postingPath) throws IOException {/// find who call
         List<String> termList;
         if(stemmer){
             termList= Files.readAllLines(Paths.get(postingPath + "/Posting_s/docMD.txt"));
