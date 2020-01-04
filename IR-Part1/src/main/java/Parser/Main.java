@@ -1,4 +1,4 @@
-package main.java.Parser;
+package Parser;
 
 import EngineUserInterface.Controller;
 import EngineUserInterface.MyModel;
@@ -44,9 +44,9 @@ public class Main extends Application {
         //--------------
         primaryStage.setTitle("Enter a proper title");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(getClass().getResource("/MyView.fxml").openStream());
+        Parent root = fxmlLoader.load(getClass().getResource("/EngineUserInterface/MyView.fxml").openStream());
         Scene scene = new Scene(root, 400, 400);
-        scene.getStylesheets().add(getClass().getResource("/MyViewStyle.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/EngineUserInterface/MyViewStyle.css").toExternalForm());
         primaryStage.setScene(scene);
         //--------------
         Controller view = fxmlLoader.getController();

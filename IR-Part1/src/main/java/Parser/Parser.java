@@ -82,6 +82,7 @@ public class Parser {
         doc.maxTf = calcMaxTF(doc.words);
         doc.maxFreqTerm = maxFreqTerm(words,doc.maxTf);
         doc.uniqueCount = doc.words.size();
+        doc.setEntities();
         return doc;
     }
 

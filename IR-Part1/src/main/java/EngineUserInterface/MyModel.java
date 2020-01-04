@@ -4,7 +4,7 @@ import Indexer.IndexDictionary;
 import Indexer.SegmentProcesses;
 import Parser.DocMD;
 import Parser.Master;
-
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.nio.file.Path;
