@@ -9,7 +9,7 @@ public class Server {
     private volatile boolean stop=false;
 
     private byte[] buf = new byte[256];
-    private final String teamName = "abcdeabcdeabcdeabcdeabcdeabcdeab";
+    private final String teamName = "bW9zdC1jeWJlcmktbmFtZS1hcm91bmQ=";
     private final int ttl=10000;
 
     private final int UDP_PORT=3117;

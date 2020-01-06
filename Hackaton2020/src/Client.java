@@ -9,7 +9,7 @@ import java.util.Timer;
 public class Client {
     private DatagramSocket socket;
     private byte[] buf;
-    private final String teamName = "abcdeabcdeabcdeabcdeabcdeabcdeab";
+    private final String teamName = "bW9zdC1jeWJlcmktbmFtZS1hcm91bmQ=";
     private LinkedList<InetAddress> readyServers;
     private final int ttl = 15000;
     private final int UDP_PORT = 3117;
@@ -141,5 +141,9 @@ public class Client {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public String getHintForTeamName() {
+        return "base64";
     }
 }

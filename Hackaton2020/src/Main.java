@@ -14,5 +14,6 @@ public class Main {
         String ans = client.sendRequestToServers();
         System.out.println(ans);
         sv.stopServers();
+        //System.out.println(client.getHintForTeamName());
     }
 }
