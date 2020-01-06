@@ -1,3 +1,5 @@
+import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
+
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -13,17 +15,19 @@ public class ServerManager {
     public ServerManager(int size) throws UnknownHostException, SocketException {
         this.size = size;
         servers = new Server[size];
+
+
         for (int i=0; i<size;i++){
             servers[i]=new Server(1, "8.8.8.");
         }
         raiseServers();
     }
 
-    private void raiseServers(){
+    private void raiseServers()  {
         executor = Executors.newFixedThreadPool(size);
         for (int i=0; i <size; i++) {
             int index=i;
-            executor.execute(new Thread(() ->  servers[index].start()));
+            executor.execute(new Thread(() -> servers[index].start()));
         }
 
     }

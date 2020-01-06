@@ -1,4 +1,5 @@
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.*;
 import java.util.LinkedList;
@@ -6,9 +7,7 @@ import java.util.Scanner;
 import java.util.Timer;
 
 public class Client {
-    private InetAddress address;
     private DatagramSocket socket;
-
     private byte[] buf;
     private final String teamName = "abcdeabcdeabcdeabcdeabcdeabcdeab";
     private LinkedList<InetAddress> readyServers;
@@ -21,11 +20,9 @@ public class Client {
     public Client() {
         try {
             socket = new DatagramSocket();
-            address = InetAddress.getByName("localhost");
-        } catch (SocketException | UnknownHostException e) {
+        } catch (SocketException e) {
             e.printStackTrace();
         }
-
     }
 
     public String getReadyServers() {
@@ -33,11 +30,11 @@ public class Client {
     }
 
     public void requestHash() {
-        System.out.println("Welcome to <your-team-name-here>. Please enter the hash:");
+        System.out.println("Welcome to "+teamName+". Please enter the hash:");
         while (true) {
             Scanner input = new Scanner(System.in);
-            //hashS = input.next();
-            hashS = "9017347a610d1436c1aaf52764e6578e8fc1a083";
+            hashS = input.next();
+            //hashS = "a346f3083515cbc8ca18aae24f331dee2d23454b";
             if (hashS.length() == 40) {
                 break;
             } else {
@@ -47,8 +44,8 @@ public class Client {
         System.out.println("Please enter the input string length:");
         while (true) {
             Scanner input = new Scanner(System.in);
-            //size = input.nextInt();
-            size = 5;
+            size = input.nextInt();
+            //size = 5;
             if (size > 0 && size < 10) {
                 break;
             } else {
@@ -56,32 +53,32 @@ public class Client {
             }
         }
         readyServers = new LinkedList<>();
-        sendDiscover();
+        //sendDiscover();
     }
 
-    private void sendDiscover() {
+    public void sendDiscover() {
         try {
-            String dis = new Message(teamName, Type.DISCOVER, "", '1', "", "").toSend();
+            String dis = new Message(teamName, Type.DISCOVER, hashS, (char)size, "aaaaa", "zzzzz").toSend();
             buf = dis.getBytes();
 
             socket.setBroadcast(true);
-            InetAddress ip = InetAddress.getByName("255.255.255.255");
+            InetAddress ip = getBroadCastIP();
 
             DatagramPacket packet = new DatagramPacket(buf, buf.length, ip, UDP_PORT);
             socket.send(packet);
 
             packet = new DatagramPacket(buf, buf.length);
 
-            socket.setSoTimeout(ttl/10);
+            socket.setSoTimeout(ttl/5);
             while (!socket.isClosed()) {
                 socket.receive(packet);
-                if (packet.getData()[32] == 50) { //change 50 to 2 some how
+                if (packet.getData()[32] == 50) {
                     readyServers.add(packet.getAddress());
                 }
             }
-        } catch (IOException e) {
+        } catch (SocketTimeoutException e) {
             if(readyServers.size()==0) {
-                System.out.println("Socket timed out, want to try again?(y/n)");
+                System.out.println("Client OFFER Socket timed out, want to try again?(y/n)");
                 Scanner input = new Scanner(System.in);
                 String answer = input.next();
                 if (answer.equals("y")) {
@@ -89,16 +86,22 @@ public class Client {
                 }
             }
         }
+        catch (IOException e){
+            System.out.println("cant receive message"+socket.toString());
+            sendDiscover();
+        }
     }
+
+
 
     public String sendRequestToServers() {
         HelperFunctions hp = new HelperFunctions();
         try {
             socket = new DatagramSocket();
             String[] divides = hp.divideToDomains(size, readyServers.size());
-            for (InetAddress ip : readyServers
-            ) {
-                buf = new Message(teamName, Type.REQUEST, hashS, (char) size, divides[0], divides[1]).toSend().getBytes();
+            for (int i = 0 ; i < readyServers.size() ;i ++) {
+                InetAddress ip = readyServers.get(i);
+                buf = new Message(teamName, Type.REQUEST, hashS, (char)size, divides[i*2], divides[i*2+1]).toSend().getBytes();
                 DatagramPacket packet = new DatagramPacket(buf, buf.length, ip, UDP_PORT);
                 socket.send(packet);
             }
@@ -107,7 +110,7 @@ public class Client {
             while (counter < readyServers.size()) {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
-                if (packet.getData()[32] == 52) { //change 50 to 2 some how
+                if (packet.getData()[32] == 52) {
                     socket.close();
                     return new String(packet.getData()).substring(74, 74 + size);
                 } else if (packet.getData()[32] == 53) {
@@ -117,13 +120,25 @@ public class Client {
             socket.close();
             return null;
         } catch (IOException e) {
-            System.out.println("Socket timed out, want to try again?(y/n)");
+            System.out.println("Client ACK/NACK Socket timed out, want to try again?(y/n)");
             Scanner input = new Scanner(System.in);
             String answer = input.next();
             if (answer.equals("y")) {
                 sendRequestToServers();
             }
             socket.close();
+            return null;
+        }
+    }
+
+    private InetAddress getBroadCastIP() {
+        try {
+            InetAddress localIP=InetAddress.getLocalHost();
+            String add = localIP.getHostAddress();
+            String[] localFrag = add.split("\\x2e");
+            return InetAddress.getByName(localFrag[0]+"."+localFrag[1]+"."+localFrag[2]+".255");
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
             return null;
         }
     }
