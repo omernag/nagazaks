@@ -16,6 +16,7 @@ public class Message {
         this.originalStringEnd = originalStringEnd;
     }
 
+
     public String toSend(){
         return teamName+getTypeInt()+hash+originalLength+originalStringStart+originalStringEnd;
     }
