@@ -1,10 +1,8 @@
-
-import java.awt.*;
 import java.io.IOException;
 import java.net.*;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.Timer;
+
 
 public class Client {
     private DatagramSocket socket;
@@ -53,7 +51,6 @@ public class Client {
             }
         }
         readyServers = new LinkedList<>();
-        //sendDiscover();
     }
 
     public void sendDiscover() {
@@ -106,7 +103,7 @@ public class Client {
                 socket.send(packet);
             }
             int counter = 0;
-            socket.setSoTimeout(ttl);
+            socket.setSoTimeout(ttl*10);
             while (counter < readyServers.size()) {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
@@ -127,6 +124,8 @@ public class Client {
                 sendRequestToServers();
             }
             socket.close();
+            return null;
+        } catch (Exception e){
             return null;
         }
     }

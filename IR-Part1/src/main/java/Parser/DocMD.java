@@ -13,11 +13,11 @@ public class DocMD {
     int maxTf;
     int uniqueCount;
     public Map<String, TermInDoc> words;
-    String maxFreqTerm;
+    public String maxFreqTerm;
     int rank;
     public Map<String, TermInDoc> entities = new HashMap<>();
     public int countEntities;
-    int docSize;
+    public int docSize;
 
 
     public DocMD(String docno) {
@@ -31,8 +31,9 @@ public class DocMD {
         maxTf = Integer.parseInt(rest[0]);
         uniqueCount = Integer.parseInt(rest[1]);
         maxFreqTerm = rest[2];
-        countEntities = Integer.parseInt(rest[3]);///add to split
-        for (int i = 4; i < 9; i++) { //add to split entitis 5 bes
+        docSize = Integer.parseInt(rest[3]);
+        countEntities = Integer.parseInt(rest[4]);///add to split
+        for (int i = 5; i < 10; i++) { //add to split entitis 5 bes
             String[] kv = rest[i].split("#");
             entities.put(kv[0],new TermInDoc(kv[1]));
         }
@@ -41,7 +42,7 @@ public class DocMD {
 
     @Override
     public String toString() {
-        String toSave= maxTf + "@" + uniqueCount + "@" + maxFreqTerm + "@" + countEntities+"@";
+        String toSave= maxTf + "@" + uniqueCount + "@" + maxFreqTerm + "@" + docSize + "@" + countEntities+"@";
         for (Map.Entry ent: entities.entrySet()
              ) {
             toSave+=ent.getKey()+"#"+ent.getValue()+"@";
