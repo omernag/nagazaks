@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
 public class Searcher {
     String query;
     Parser parser;
-    private HashMap<String, TermInDoc> words;
+    public HashMap<String, TermInDoc> queryWords;
     private PriorityQueue<DocMD> orderedDocs;
     boolean showEntitys;
     HashMap<DocMD,HashMap<String,Double>> DocEntities;
@@ -23,16 +23,17 @@ public class Searcher {
         this.parser = new Parser (stem);
         this.showEntitys=showEntitys;
         parseQuery();
-        getRankedDocs();
-        if(showEntitys){calcEntities();}
+
+
     }
 
     private void parseQuery(){
-        words = new HashMap<>(parser.parse(query,false));
+        queryWords = new HashMap<>(parser.parse(query,false));
     }
 
-    private void getRankedDocs(){
+    private void getRankedDocs(Ranker ranker){
         //call Ranker function
+
     }
 
     private void calcEntities() {

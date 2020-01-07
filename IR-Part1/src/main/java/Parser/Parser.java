@@ -80,10 +80,15 @@ public class Parser {
         doc.words = parse(dt.getInnerText(),false);
         doc.words.putAll(parse(dt.getHeader(),true));
         doc.maxTf = calcMaxTF(doc.words);
-        doc.maxFreqTerm = maxFreqTerm(words,doc.maxTf);
+        doc.maxFreqTerm = maxFreqTerm(doc.words,doc.maxTf);
         doc.uniqueCount = doc.words.size();
+        doc.docSize = calcSize();
         doc.setEntities();
         return doc;
+    }
+
+    private int calcSize() {
+        return 0;
     }
 
     private int calcMaxTF(Map<String,TermInDoc> words){

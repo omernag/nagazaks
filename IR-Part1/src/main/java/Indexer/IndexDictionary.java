@@ -9,7 +9,7 @@ import java.util.*;
 
 public class IndexDictionary {
 
-    private TreeMap<String, String> indexer;
+    public TreeMap<String, String> indexer;
     private String indexerPrint;
     private boolean stemmer;
     private String path;
@@ -37,7 +37,7 @@ public class IndexDictionary {
             if (counter < 200) {//1 is missing
                 postFile = new Posting(trm);
                 toPost.add(postFile.addToPostingList());
-                indexer.put(trm.getName(), "" + trm.getTotalFq() + "," + trm.getDocFq() + "," + postFile.getPath());
+                indexer.put(trm.getName(), "" + trm.getDocFq() + "," + trm.getTotalFq() + "," + postFile.getPath());
                 counter++;
             } else {
                 outputPostList(path+"/"+Posting.postCounter+".txt");

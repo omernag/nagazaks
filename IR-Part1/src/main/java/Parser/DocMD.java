@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 
 public class DocMD {
 
-    String docno;
+    public String docno;
     int maxTf;
     int uniqueCount;
     public Map<String, TermInDoc> words;
@@ -17,6 +17,7 @@ public class DocMD {
     int rank;
     public Map<String, TermInDoc> entities = new HashMap<>();
     public int countEntities;
+    int docSize;
 
 
     public DocMD(String docno) {
@@ -24,6 +25,7 @@ public class DocMD {
     }
 
     public DocMD(String[] parts) {
+        words = new HashMap<>();
         docno = parts[0];
         String[] rest = parts[1].split("@");
         maxTf = Integer.parseInt(rest[0]);
@@ -48,7 +50,7 @@ public class DocMD {
     }
 
     public void setEntities() {
-        Comparator<TermInDoc> comp = (o1, o2) -> (int) (o1.getTermfq() - o2.getTermfq());
+        Comparator<TermInDoc> comp = (o1, o2) -> (int) (o2.getTermfq() - o1.getTermfq());
         PriorityQueue<TermInDoc> pq = new PriorityQueue<>(comp);
         for (TermInDoc tid : words.values()) {
             if (tid.isEntity()) {

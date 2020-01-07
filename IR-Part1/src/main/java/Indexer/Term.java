@@ -11,6 +11,7 @@ public class Term {
     private LinkedList<String> occurrence;
     private HashSet<String> docsNames;
     private boolean isEntity;
+    public HashMap<String,TermInDoc> termDocs;
 
 
     public Term(String term) {
@@ -18,6 +19,7 @@ public class Term {
         this.docFq = 0;
         this.occurrence = new LinkedList<>();
         this.docsNames = new HashSet<>();
+        this.termDocs = new HashMap<>();
     }
 
     public Term(TermInDoc termIn) {
@@ -32,8 +34,13 @@ public class Term {
 
     public void addOccurrence(String docNum, int termfq, boolean isHeader, boolean isEntity) {
         totalFq+=termfq;
-        docsNames.add(docNum);
         this.occurrence.add(docNum+","+termfq +","+isHeader+","+isEntity+"\n");
+        if(termDocs!=null) {
+            this.termDocs.put(docNum, new TermInDoc(term, docNum, termfq, isHeader, isEntity));
+        }
+        if(docsNames!=null) {
+            docsNames.add(docNum);
+        }
     }
 
     public void updateDocFq(){

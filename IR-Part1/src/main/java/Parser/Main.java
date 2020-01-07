@@ -3,11 +3,14 @@ package Parser;
 import EngineUserInterface.Controller;
 import EngineUserInterface.MyModel;
 import Indexer.IndexDictionary;
+import Indexer.SegmentProcesses;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import searchRank.Ranker;
+import searchRank.Searcher;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,12 +18,21 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) throws IOException {
         //small main for my big friend
-        Master m = new Master(false);
+        String projPath = "C:\\Users\\onagar\\Desktop\\bgu\\nagazaks\\IR-Part1";
+        Boolean stem = true;
+        Master m = new Master(stem);
+       // m.run(stem,projPath);
+        //SegmentProcesses sp = new SegmentProcesses(stem,projPath);
+       // m.saveDocMD(projPath);
+      //  sp.getTheDictionary().saveToDisk();
         //change the posting path to yours
-        HashMap docsMDs = m.LoadDocMD("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1");
-        IndexDictionary dictionary = new IndexDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",false);
-        dictionary.loadDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",false);
-
+        HashMap<String, DocMD> docsMDs = m.LoadDocMD(projPath);
+        IndexDictionary dictionary = new IndexDictionary(projPath,stem);
+        dictionary.loadDictionary(projPath,stem);
+        System.out.printf("");
+        Searcher searcher = new Searcher("my query -63 media",stem,false);
+        Ranker ranker = new Ranker(dictionary,projPath,stem,docsMDs);
+        ranker.handleQuery(searcher.queryWords);
         //now you have dictionary and docsMDs
         //enjoy lov ya
 
