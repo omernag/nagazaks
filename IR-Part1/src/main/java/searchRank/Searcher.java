@@ -6,13 +6,14 @@ import Parser.DocMD;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 
 
 public class Searcher {
     String query;
     Parser parser;
-    public HashMap<String, TermInDoc> queryWords;
+    public HashSet<String> queryWords;
     private PriorityQueue<DocMD> orderedDocs;
     boolean showEntities;
     HashMap<DocMD,HashMap<String,Double>> DocEntities;
@@ -30,7 +31,7 @@ public class Searcher {
     }
 
     private void parseQuery(){
-        queryWords = new HashMap<>(parser.parse(query,false));
+        queryWords = new HashSet<>((parser.parse(query,false)).keySet());
     }
 
     private void getRankedDocs(Ranker ranker){

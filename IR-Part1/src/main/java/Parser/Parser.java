@@ -598,17 +598,17 @@ public class Parser {
             //new word
             else if (Character.isUpperCase(word.charAt(0))) {
                 //add upper
-                tid = new TermInDoc(upper,docno,1,false,currIsEntity);
+                tid = new TermInDoc(upper,docno,1,currIsHeader,currIsEntity);
                 words.put(upper,tid);
             } else {
                 //add lower
-                tid = new TermInDoc(lower,docno,1,false,currIsEntity);
+                tid = new TermInDoc(lower,docno,1,currIsHeader,currIsEntity);
                 words.put(lower,tid);
             }
         }
         else{
             //add original
-            tid = new TermInDoc(word,docno,1,false,currIsEntity);
+            tid = new TermInDoc(word,docno,1,currIsHeader,currIsEntity);
             words.put(word,tid);
         }
 
@@ -636,7 +636,7 @@ public class Parser {
             words.get(word).termfq++;
         }
         else{
-            TermInDoc tid = new TermInDoc(word,docno,1,false,currIsEntity);
+            TermInDoc tid = new TermInDoc(word,docno,1,currIsHeader,currIsEntity);
             words.put(word,tid);
         }
     }

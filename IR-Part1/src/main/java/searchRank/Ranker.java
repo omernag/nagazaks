@@ -16,10 +16,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Ranker {
     IndexDictionary dictionary;
@@ -31,14 +28,14 @@ public class Ranker {
     HashMap<String,Double> idf;
     HashMap<String,Double> okapiRank;
     Double avgLength;
-
-
     //////
-    HashMap<String, TermInDoc> query;
-    boolean semanticTreatment = true;
+    boolean semanticTreatment ;
+    HashSet<String> queryWords;
     //////
 
-    public Ranker(IndexDictionary dictionary, String postingPath, boolean stem, HashMap<String, DocMD> docMDs) {
+    public Ranker(IndexDictionary dictionary, String postingPath, boolean stem, HashMap<String, DocMD> docMDs, boolean semanticTreatment, HashSet<String> queryWords) {
+        this.queryWords=queryWords;
+        this.semanticTreatment = semanticTreatment;
         this.dictionary = dictionary;
         this.postingPath = postingPath;
         this.stem = stem;
@@ -62,11 +59,11 @@ public class Ranker {
         return (ans/docMDs.size());
     }
 
-    public double handleQuery(HashMap<String, TermInDoc> queryWords) {
+    public double handleQuery() {
         relevantDocs = new HashMap<>();
         terms = new HashMap<>();
-        for(TermInDoc tid : queryWords.values()){
-            String name = tid.getTerm();
+        if(semanticTreatment){semanticTreat();}
+        for(String name : queryWords){
             if (dictionary.indexer.containsKey(name)) {
                 Term term = new Term(name);
                 String[] termData = dictionary.indexer.get(name).split(",");
@@ -100,35 +97,45 @@ public class Ranker {
 
                 }
         }
+        Bm25Rank( 1.2,0.75);
         return 0;
     }
 
-    public void Bm25Rank(HashMap<String, TermInDoc> queryWords,double k,double b){
+    public void Bm25Rank(double k,double b){
         for(DocMD doc :relevantDocs.values()){
             double docRank = 0;
-            for(String termStr : queryWords.keySet()){
-                Term term = terms.get(termStr);
+            for(Term term : terms.values()){
+
 
                 if (term.termDocs.containsKey(doc.docno)) {
                     TermInDoc tid = term.termDocs.get(doc.docno);
                     int termfq = tid.termfq;
-                    docRank+= idf.get(termStr)*((termfq*(k+1))/(termfq+k*(1-b+(b*(doc.docSize/this.avgLength)))));
+                    double docTermRank = idf.get(term.getName())*((termfq*(k+1))/(termfq+k*(1-b+(b*(doc.docSize/this.avgLength)))));
+                    if(tid.isHeader()){
+                        docTermRank=docTermRank*3;
+                    }
+                    if(tid.isEntity()){
+                        docTermRank=docTermRank*2;
+                    }
+                    docRank+= docTermRank;
                 }
             }
+            doc.rank=docRank;
             okapiRank.put(doc.docno,docRank);
         }
     }
 
     /////
-    private HashMap<String, TermInDoc> semanticTreat(HashMap<String, TermInDoc> queryWords) {
-        for (Map.Entry word : queryWords.entrySet()
+    private void semanticTreat() {
+        List<String> commonW = new LinkedList<>();
+        for (String word : queryWords
         ) {
-            List<String> commonW = fetchFromWeb((String) word.getValue());
-            if (commonW != null) {
-
+            List<String> curr =fetchFromWeb((String) word);
+            if (curr != null) {
+                commonW.addAll(curr);
             }
         }
-        return null;
+        queryWords.addAll(commonW);
     }
 
     public List<String> fetchFromWeb(String word) {
@@ -144,7 +151,7 @@ public class Ranker {
             for (int i = 0; i < jArray.size(); i++) {
                 if (count < 4) {
                     JSONObject wordJson = (JSONObject) jArray.get(i);
-                    if ((Long) wordJson.get("score") > 80000) {
+                    if ((Long) wordJson.get("score") > 68000) {
                         list.add((String) wordJson.get("word"));
                         count++;
                     }

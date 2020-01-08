@@ -32,6 +32,7 @@ public class MyModel {
             Master m = new Master(isStemmer);
             m.run(isStemmer, corpusPath);
             SegmentProcesses sgm = new SegmentProcesses(isStemmer, postingPath);
+            m.updateEntities(sgm.getTheDictionary().indexer);
             m.saveDocMD(postingPath);
             long finishTimeIndex = System.nanoTime();
             dictionary = sgm.getTheDictionary();

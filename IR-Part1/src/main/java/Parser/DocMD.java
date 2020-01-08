@@ -14,16 +14,21 @@ public class DocMD {
     int uniqueCount;
     public Map<String, TermInDoc> words;
     public String maxFreqTerm;
-    int rank;
+    public double rank;
     public int countEntities;
     public int docSize;
     public PriorityQueue<TermInDoc> entities;
 
     public DocMD(String docno) {
+        Comparator<TermInDoc> comp = (o1, o2) -> (int) (o2.getTermfq() - o1.getTermfq());
+        entities = new PriorityQueue<>(comp);
         this.docno = docno;
+
     }
 
     public DocMD(String[] parts) {
+        Comparator<TermInDoc> comp = (o1, o2) -> (int) (o2.getTermfq() - o1.getTermfq());
+        entities = new PriorityQueue<>(comp);
         words = new HashMap<>();
         docno = parts[0];
         String[] rest = parts[1].split("@");
@@ -32,7 +37,7 @@ public class DocMD {
         maxFreqTerm = rest[2];
         docSize = Integer.parseInt(rest[3]);
         countEntities = Integer.parseInt(rest[4]);///add to split
-        for (int i = 5; i < 10; i++) { //add to split entities 5 best
+        for (int i = 5; i < 10 && i<rest.length; i++) { //add to split entities 5 best
             entities.add(new TermInDoc(rest[i]));
         }
         rank = 0;

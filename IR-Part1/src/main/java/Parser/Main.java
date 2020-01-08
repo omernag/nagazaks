@@ -19,9 +19,10 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        /*//small main for my big friend
+        //small main for my big friend
         String projPath = "C:\\Users\\onagar\\Desktop\\bgu\\nagazaks\\IR-Part1";
         Boolean stem = true;
+        Boolean semanticTreatment = true;
         Master m = new Master(stem);
         m.run(stem,projPath);
         SegmentProcesses sp = new SegmentProcesses(stem,projPath);
@@ -34,13 +35,14 @@ public class Main {
         dictionary.loadDictionary(projPath,stem);
         System.out.printf("");
         Searcher searcher = new Searcher("my query -63 media",stem,false);
-        Ranker ranker = new Ranker(dictionary,projPath,stem,docsMDs);
-        ranker.handleQuery(searcher.queryWords);
+        Ranker ranker = new Ranker(dictionary,projPath,stem,docsMDs,semanticTreatment,searcher.queryWords);
+        ranker.handleQuery();
+        System.out.println("");
         //now you have dictionary and docsMDs
         //enjoy lov ya
         //System.out.println(WS4J.runWUP("milk","cheese"));*/
-        Ranker r = new Ranker(null,"",false,null);
-        r.fetchFromWeb("bank");
+       // Ranker r = new Ranker(null,"",false,null);
+      //  r.fetchFromWeb("bank");
     }
 }
 
