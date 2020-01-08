@@ -10,7 +10,7 @@ public class Server {
     private ExecutorService exe;
     private byte[] buf = new byte[256];
     private final String teamName = "bW9zdC1jeWJlcmktbmFtZS1hcm91bmQ=";
-    private final int ttl=10000;
+    private final int ttl=50000;
     private volatile boolean working=false;
 
     private final int UDP_PORT=3117;
@@ -58,16 +58,24 @@ public class Server {
         try {
             InetAddress address = packet.getAddress();
             int port = packet.getPort();
-            if (packet.getData()[32]==49) {
+            if (packet.getData()[32]==49 || packet.getData()[32]==1) {
                 buf=new Message(teamName,Type.OFFER,"",'0',"","").toSend().getBytes();
                 packet = new DatagramPacket(buf, buf.length, address, port);
                 serverSocket.send(packet);
                 System.out.println("OFFER has sent to " + address);
             }
-            else if(packet.getData()[32]==51){
+            else if(packet.getData()[32]==51 || packet.getData()[32]==3){
                 System.out.println("REQUEST came from "+address);
-                int index = (packet.getLength()-32-1-40-1)/2;//74
+                //int index = (packet.getLength()-32-1-40-1)/2;//74
+
                 String stream = new String(packet.getData());
+                int index;
+                try{
+                     index = Integer.parseInt(stream.substring(73,74));
+                }
+                catch (Exception e){
+                     index = stream.charAt(73);
+                }
                 String start = stream.substring(74,74+index);
                 String end = stream.substring(74+index,74+2*index);
                 String hash=stream.substring(33,73);
@@ -86,7 +94,7 @@ public class Server {
             working=false;
 
         } catch (Exception e) {
-            System.out.println("handelpacket");
+            System.out.println("Received packet in a wrong format - probably malicious");
         }
     }
 

@@ -9,7 +9,7 @@ public class Client {
     private byte[] buf;
     private final String teamName = "bW9zdC1jeWJlcmktbmFtZS1hcm91bmQ=";
     private LinkedList<InetAddress> readyServers;
-    private final int ttl = 15000;
+    private final int ttl = 20000;
     private final int UDP_PORT = 3117;
 
     private String hashS;
@@ -55,7 +55,7 @@ public class Client {
 
     public void sendDiscover() {
         try {
-            String dis = new Message(teamName, Type.DISCOVER, hashS, (char)size, "aaaaa", "zzzzz").toSend();
+            String dis = new Message(teamName, Type.DISCOVER, hashS, size, "aaaaa", "zzzzz").toSend();
             buf = dis.getBytes();
 
             socket.setBroadcast(true);
@@ -66,12 +66,14 @@ public class Client {
 
             packet = new DatagramPacket(buf, buf.length);
 
-            socket.setSoTimeout(ttl/10);
+            socket.setSoTimeout(ttl);
             while (!socket.isClosed()) {
                 socket.receive(packet);
-                if (packet.getData()[32] == 50) {
+                if (packet.getData()[32] == 50 || packet.getData()[32]==2) {
                     readyServers.add(packet.getAddress());
+                    System.out.println("Got OFFER from "+packet.getAddress());
                 }
+                else System.out.println("Wrong packet");
             }
         } catch (SocketTimeoutException e) {
             if(readyServers.size()==0) {
@@ -107,10 +109,10 @@ public class Client {
             while (counter < readyServers.size()) {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
-                if (packet.getData()[32] == 52) {
+                if (packet.getData()[32] == 52 || packet.getData()[32]==4) {
                     socket.close();
                     return new String(packet.getData()).substring(74, 74 + size);
-                } else if (packet.getData()[32] == 53) {
+                } else if (packet.getData()[32] == 53 || packet.getData()[32]==5) {
                     counter++;
                 }
             }

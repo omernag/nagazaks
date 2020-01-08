@@ -1,8 +1,3 @@
-import java.net.SocketException;
-import java.net.UnknownHostException;
-
-
-
 public class Main {
 
     public static void main(String[] args) {
@@ -14,6 +9,6 @@ public class Main {
         String ans = client.sendRequestToServers();
         System.out.println(ans);
         sv.stopServers();
-        //System.out.println(client.getHintForTeamName());
+        System.out.println(client.getHintForTeamName());
     }
 }

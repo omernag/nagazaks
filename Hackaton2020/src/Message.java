@@ -7,11 +7,12 @@ public class Message {
     private String originalStringStart;
     private String originalStringEnd;
 
-    public Message(String teamName, Type type, String hash, char originalLength, String originalStringStart, String originalStringEnd) {
+    public Message(String teamName, Type type, String hash, int originalLength, String originalStringStart, String originalStringEnd) {
         this.teamName = teamName;
         this.type = type;
         this.hash = hash;
-        this.originalLength = originalLength;
+        String s = ""+originalLength;
+        this.originalLength = s.charAt(0);
         this.originalStringStart = originalStringStart;
         this.originalStringEnd = originalStringEnd;
     }
