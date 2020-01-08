@@ -116,4 +116,20 @@ public class Master {
         }
         return docsMDs;
     }
+
+    public void updateEntities(TreeMap<String, String> index) {
+        for(DocMD dmd:docsMDs.values()) {
+            int entitiesCount = 0;
+            Comparator<TermInDoc> comp = (o1, o2) -> (int) (o2.getTermfq() - o1.getTermfq());
+            PriorityQueue<TermInDoc> newEntities = new PriorityQueue<>(comp);
+            for (TermInDoc tid : dmd.entities) {
+                if (index.containsKey(tid.getTerm())) {
+                    entitiesCount += tid.termfq;
+                    newEntities.add(tid);
+                }
+            }
+            dmd.entities = newEntities;
+            dmd.countEntities = entitiesCount;
+        }
+    }
 }

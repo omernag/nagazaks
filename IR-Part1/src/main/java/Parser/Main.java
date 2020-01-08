@@ -23,10 +23,11 @@ public class Main {
         String projPath = "C:\\Users\\onagar\\Desktop\\bgu\\nagazaks\\IR-Part1";
         Boolean stem = true;
         Master m = new Master(stem);
-       // m.run(stem,projPath);
-        //SegmentProcesses sp = new SegmentProcesses(stem,projPath);
-       // m.saveDocMD(projPath);
-      //  sp.getTheDictionary().saveToDisk();
+        m.run(stem,projPath);
+        SegmentProcesses sp = new SegmentProcesses(stem,projPath);
+        m.updateEntities(sp.getTheDictionary().indexer);
+        m.saveDocMD(projPath);
+        sp.getTheDictionary().saveToDisk();
         //change the posting path to yours
         HashMap<String, DocMD> docsMDs = m.LoadDocMD(projPath);
         IndexDictionary dictionary = new IndexDictionary(projPath,stem);

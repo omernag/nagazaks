@@ -56,7 +56,6 @@ public class SegmentProcesses {
         }
         theDictionary.saveToDisk();
 
-
     }
 
     private void processSegment(TermsInDocList termsList) {

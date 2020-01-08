@@ -15,10 +15,9 @@ public class DocMD {
     public Map<String, TermInDoc> words;
     public String maxFreqTerm;
     int rank;
-    public Map<String, TermInDoc> entities = new HashMap<>();
     public int countEntities;
     public int docSize;
-
+    public PriorityQueue<TermInDoc> entities;
 
     public DocMD(String docno) {
         this.docno = docno;
@@ -33,9 +32,8 @@ public class DocMD {
         maxFreqTerm = rest[2];
         docSize = Integer.parseInt(rest[3]);
         countEntities = Integer.parseInt(rest[4]);///add to split
-        for (int i = 5; i < 10; i++) { //add to split entitis 5 bes
-            String[] kv = rest[i].split("#");
-            entities.put(kv[0],new TermInDoc(kv[1]));
+        for (int i = 5; i < 10; i++) { //add to split entities 5 best
+            entities.add(new TermInDoc(rest[i]));
         }
         rank = 0;
     }
@@ -43,27 +41,19 @@ public class DocMD {
     @Override
     public String toString() {
         String toSave= maxTf + "@" + uniqueCount + "@" + maxFreqTerm + "@" + docSize + "@" + countEntities+"@";
-        for (Map.Entry ent: entities.entrySet()
-             ) {
-            toSave+=ent.getKey()+"#"+ent.getValue()+"@";
+        for (TermInDoc ent: entities
+        ) {
+            toSave+=ent.toString()+"@";
         }
         return toSave;
     }
 
     public void setEntities() {
-        Comparator<TermInDoc> comp = (o1, o2) -> (int) (o2.getTermfq() - o1.getTermfq());
-        PriorityQueue<TermInDoc> pq = new PriorityQueue<>(comp);
         for (TermInDoc tid : words.values()) {
             if (tid.isEntity()) {
-                pq.add(tid);
+                entities.add(tid);
                 countEntities += tid.getTermfq();
             }
-        }
-        int i = 0;
-        while (!pq.isEmpty() && i < 5) {
-            TermInDoc curr = pq.poll();
-            entities.put(curr.getTerm(), curr);
-            i++;
         }
     }
 }

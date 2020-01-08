@@ -21,7 +21,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-
 public class Ranker {
     IndexDictionary dictionary;
     String postingPath;
@@ -29,7 +28,10 @@ public class Ranker {
     HashMap<String, DocMD> relevantDocs;
     HashMap<String, Term> terms;
     HashMap<String, DocMD> docMDs;
-    HashMap<String, Double> idf;
+    HashMap<String,Double> idf;
+    HashMap<String,Double> okapiRank;
+    Double avgLength;
+
 
     //////
     HashMap<String, TermInDoc> query;
@@ -43,19 +45,27 @@ public class Ranker {
         relevantDocs = new HashMap<>();
         this.docMDs = docMDs;
         idf = new HashMap<>();
+        this.postingPath=postingPath;
+        this.stem=stem;
+        this.relevantDocs = new HashMap<>();
+        this.docMDs=docMDs;
+        this.idf = new HashMap<>();
+        this.avgLength = calcAvgLength();
+        this.okapiRank = new HashMap<>();
+    }
+
+    private double calcAvgLength() {
+        double ans = 0;
+        for (DocMD doc : docMDs.values()) {
+            ans+=doc.docSize;
+        }
+        return (ans/docMDs.size());
     }
 
     public double handleQuery(HashMap<String, TermInDoc> queryWords) {
         relevantDocs = new HashMap<>();
         terms = new HashMap<>();
-        /////
-        if (semanticTreatment) {
-            query = semanticTreat(queryWords);
-        }
-        /////
-        /////
-        for (TermInDoc tid : query.values()) {
-            /////
+        for(TermInDoc tid : queryWords.values()){
             String name = tid.getTerm();
             if (dictionary.indexer.containsKey(name)) {
                 Term term = new Term(name);
@@ -88,26 +98,25 @@ public class Ranker {
                     e.printStackTrace();
                 }
 
-            }
+                }
         }
         return 0;
     }
 
-
-    public double Bm25Rank(HashMap<String, TermInDoc> queryWords) {
-        double docRank = 0;
-        for (DocMD doc : relevantDocs.values()) {
-            for (String termStr : queryWords.keySet()) {
+    public void Bm25Rank(HashMap<String, TermInDoc> queryWords,double k,double b){
+        for(DocMD doc :relevantDocs.values()){
+            double docRank = 0;
+            for(String termStr : queryWords.keySet()){
                 Term term = terms.get(termStr);
 
                 if (term.termDocs.containsKey(doc.docno)) {
                     TermInDoc tid = term.termDocs.get(doc.docno);
                     int termfq = tid.termfq;
-                    docRank += idf.get(termStr) * ((termfq * 3) / (termfq + 2 * (0.25 + (0.75))));
+                    docRank+= idf.get(termStr)*((termfq*(k+1))/(termfq+k*(1-b+(b*(doc.docSize/this.avgLength)))));
                 }
             }
+            okapiRank.put(doc.docno,docRank);
         }
-        return docRank;
     }
 
     /////

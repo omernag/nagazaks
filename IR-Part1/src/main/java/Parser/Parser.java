@@ -1,6 +1,7 @@
 package Parser;
 
 
+import Indexer.Term;
 import Indexer.TermInDoc;
 
 import javax.print.Doc;
@@ -82,14 +83,19 @@ public class Parser {
         doc.maxTf = calcMaxTF(doc.words);
         doc.maxFreqTerm = maxFreqTerm(doc.words,doc.maxTf);
         doc.uniqueCount = doc.words.size();
-        doc.docSize = calcSize();
+        doc.docSize = calcDocSize(doc.words);
         doc.setEntities();
         return doc;
     }
 
-    private int calcSize() {
-        return 0;
+    private int calcDocSize(Map<String, TermInDoc> words) {
+        int counter = 0;
+        for(TermInDoc tid : words.values()){
+            counter+=tid.getTermfq();
+        }
+        return counter;
     }
+
 
     private int calcMaxTF(Map<String,TermInDoc> words){
         int ans = Integer.MIN_VALUE;
