@@ -77,7 +77,7 @@ public class Server {
                     buf=new Message(teamName,Type.ACK,hash,(char)packet.getData()[73],check,"").toSend().getBytes();
                 }
                 else{
-                    buf=new Message(teamName,Type.NACK,"",'0',"","").toSend().getBytes();
+                    buf=new Message(teamName,Type.NACK,hash,(char)packet.getData()[73],start,end).toSend().getBytes();
                     System.out.println(address+ " Didn't found ");
                 }
                 packet = new DatagramPacket(buf, buf.length, address, port);

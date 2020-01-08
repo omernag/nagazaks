@@ -66,7 +66,7 @@ public class Client {
 
             packet = new DatagramPacket(buf, buf.length);
 
-            socket.setSoTimeout(ttl/5);
+            socket.setSoTimeout(ttl/10);
             while (!socket.isClosed()) {
                 socket.receive(packet);
                 if (packet.getData()[32] == 50) {
@@ -103,7 +103,7 @@ public class Client {
                 socket.send(packet);
             }
             int counter = 0;
-            socket.setSoTimeout(ttl*10);
+            socket.setSoTimeout(ttl);
             while (counter < readyServers.size()) {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);

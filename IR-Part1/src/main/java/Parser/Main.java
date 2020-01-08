@@ -4,6 +4,7 @@ import EngineUserInterface.Controller;
 import EngineUserInterface.MyModel;
 import Indexer.IndexDictionary;
 import Indexer.SegmentProcesses;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +16,10 @@ import searchRank.Searcher;
 import java.io.IOException;
 import java.util.HashMap;
 
+
 public class Main {
     public static void main(String[] args) throws IOException {
-        //small main for my big friend
+        /*//small main for my big friend
         String projPath = "C:\\Users\\onagar\\Desktop\\bgu\\nagazaks\\IR-Part1";
         Boolean stem = true;
         Master m = new Master(stem);
@@ -35,7 +37,9 @@ public class Main {
         ranker.handleQuery(searcher.queryWords);
         //now you have dictionary and docsMDs
         //enjoy lov ya
-
+        //System.out.println(WS4J.runWUP("milk","cheese"));*/
+        Ranker r = new Ranker(null,"",false,null);
+        r.fetchFromWeb("bank");
     }
 }
 
