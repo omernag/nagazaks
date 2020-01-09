@@ -4,10 +4,16 @@ import Indexer.IndexDictionary;
 import Indexer.SegmentProcesses;
 import Parser.DocMD;
 import Parser.Master;
+import javafx.scene.control.Alert;
 import org.json.simple.parser.ParseException;
+import searchRank.Ranker;
+import searchRank.Searcher;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class MyModel {
@@ -17,6 +23,9 @@ public class MyModel {
     public boolean isStemmer;
     private String infoOnRun;
     private HashMap<String, DocMD> docMD;
+    private String resultLog;
+    private Searcher searcher;
+
 
     public MyModel() {
         //dictionary=new IndexDictionary("",false);
@@ -52,9 +61,36 @@ public class MyModel {
 
     }
 
+    public void handleSingleQuery(String currentQuery, boolean findEntities, boolean semanticTreat) {
+        //add semanticTreat to searcher contractor
+        searcher = new Searcher(currentQuery,isStemmer,findEntities);
+        //resultLog = searcher
+        //missing the full searcher
+    }
+
+    public void handleQueryFile(String queryFilePath, boolean findEntities, boolean semanticTreat) {
+        //missing the full searcher - get result and stuff
+        //do some for loop here
+        //but first load the file
+    }
+
+    public void saveResult(String path) {
+        try {
+            File file = new File("path");
+            Files.write(Paths.get(file.getPath()),resultLog.getBytes());
+        } catch (IOException e) {
+            showAlert("Something went terribly wrong, Cant save the file");
+        }
+
+    }
+
+    public String getResultTOPrint() {
+        return resultLog;//maybe change
+    }
+
     public void changeStemmerMode() {
         if(!isStemmer){
-           isStemmer=true;
+            isStemmer=true;
         }
         else{
             isStemmer=false;
@@ -99,5 +135,15 @@ public class MyModel {
 
     public void initializeDictionary() {
         dictionary=new IndexDictionary(postingPa,isStemmer);
+    }
+
+    public String getResult() {
+        return resultLog;
+    }
+
+    private void showAlert(String alertMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(alertMessage);
+        alert.show();
     }
 }

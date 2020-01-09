@@ -16,12 +16,12 @@ import searchRank.Searcher;
 import java.io.IOException;
 import java.util.HashMap;
 
-
+/*
 public class Main {
     public static void main(String[] args) throws IOException {
         //small main for my big friend
-        String projPath = "C:\\Users\\onagar\\Desktop\\bgu\\nagazaks\\IR-Part1";
-        Boolean stem = true;
+        String projPath = "C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1";
+        Boolean stem = false;
         Boolean semanticTreatment = true;
         Master m = new Master(stem);
         m.run(stem,projPath);
@@ -30,21 +30,23 @@ public class Main {
         m.saveDocMD(projPath);
         sp.getTheDictionary().saveToDisk();
         //change the posting path to yours
-        HashMap<String, DocMD> docsMDs = m.LoadDocMD(projPath);
-        IndexDictionary dictionary = new IndexDictionary(projPath,stem);
-        dictionary.loadDictionary(projPath,stem);
-        System.out.printf("");
-        Searcher searcher = new Searcher("my query -63 media",stem,false);
-        Ranker ranker = new Ranker(dictionary,projPath,stem,docsMDs,semanticTreatment,searcher.queryWords);
-        ranker.handleQuery();
-        System.out.println("");
+        //HashMap<String, DocMD> docsMDs = m.LoadDocMD(projPath);
+        //  IndexDictionary dictionary = new IndexDictionary(projPath,stem);
+        //dictionary.loadDictionary(projPath,stem);
+        //    System.out.printf("");
+        //  Searcher searcher = new Searcher("my query -63 media",stem,false);
+        // Ranker ranker = new Ranker(dictionary,projPath,stem,docsMDs,semanticTreatment,searcher.queryWords);
+        //ranker.handleQuery();
+        //System.out.println("");
         //now you have dictionary and docsMDs
         //enjoy lov ya
-        //System.out.println(WS4J.runWUP("milk","cheese"));*/
-       // Ranker r = new Ranker(null,"",false,null);
-      //  r.fetchFromWeb("bank");
+        //System.out.println(WS4J.runWUP("milk","cheese"));
+        // Ranker r = new Ranker(null,"",false,null);
+        //  r.fetchFromWeb("bank");
     }
 }
+*/
+
 
 //public class main.java.Parser.Main {
 //    public static void main(String[] args) {
@@ -74,7 +76,7 @@ public class Main {
     }
 }*/
 
-/*public class Main extends Application {
+public class Main extends Application {
     MyModel model;
 
     @Override
@@ -98,7 +100,7 @@ public class Main {
     public static void main(String[] args) {
         launch(args);
     }
-}*/
+}
 
 
 

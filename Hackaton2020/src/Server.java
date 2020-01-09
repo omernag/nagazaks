@@ -10,7 +10,7 @@ public class Server {
     private ExecutorService exe;
     private byte[] buf = new byte[256];
     private final String teamName = "bW9zdC1jeWJlcmktbmFtZS1hcm91bmQ=";
-    private final int ttl=50000;
+    private final int ttl=500000;
     private volatile boolean working=false;
 
     private final int UDP_PORT=3117;

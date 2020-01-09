@@ -2,13 +2,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Client client = new Client();
-        client.requestHash();
+        //Client client = new Client();
+        //client.requestHash();
         ServerManager sv = new ServerManager(4);
-        client.sendDiscover();
-        String ans = client.sendRequestToServers();
-        System.out.println(ans);
-        sv.stopServers();
-        System.out.println(client.getHintForTeamName());
+        //client.sendDiscover();
+        //String ans = client.sendRequestToServers();
+        //System.out.println(ans);
+        //sv.stopServers();
+        //System.out.println(client.getHintForTeamName());
     }
 }

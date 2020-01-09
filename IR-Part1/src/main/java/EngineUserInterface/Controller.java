@@ -25,15 +25,21 @@ public class Controller {
     public Label lbl_status;
     public BorderPane mainPane;
     public Label tf_status;
+    public Button btn_Set;
+    public Button btn_search;
 
     public MyModel model;
     public ConnectController connectC;
     public DisplayController dispC;
+    private ResultController resultC;
+    private SearchController searchC;
+
     public boolean isStemmer;
     private boolean corpusPathSet;
     private boolean postingPathSet;
     public String corpusPath;
     public String postingPath;
+
 
     public void pressSet(ActionEvent event) {
         Parent root;
@@ -133,6 +139,47 @@ public class Controller {
         }
         else showAlert("Please insert the path to the Posting files");
     }
+    
+    public void openSearchWindow(ActionEvent event){
+        Parent root;
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Search the Corpus");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            root = fxmlLoader.load(getClass().getResource("/SearchView.fxml").openStream());
+            Scene scene = new Scene(root, 500, 300);
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("/SearchStyle.css").toExternalForm());
+            stage.show();
+            searchC = fxmlLoader.getController();
+            searchC.setModel(model);
+            //tf_status.textProperty().setValue("Connected");
+            openResultWindow();
+        } catch (Exception e) {
+        }
+    }
+
+    private void openResultWindow() {
+        if(model.getResult()!=null) {
+            Parent root;
+            try {
+                Stage stage = new Stage();
+                stage.setTitle("Result Log");
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                root = fxmlLoader.load(getClass().getResource("/ResultView.fxml").openStream());
+                Scene scene = new Scene(root, 500, 300);
+                stage.setScene(scene);
+                scene.getStylesheets().add(getClass().getResource("/ResultStyle.css").toExternalForm());
+                stage.show();
+
+                resultC = fxmlLoader.getController();
+                resultC.setModel(model);
+                resultC.displayResult(model);
+            } catch (Exception e) {
+            }
+        }
+    }
+
 
     private void showAlert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
