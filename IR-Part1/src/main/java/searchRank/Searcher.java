@@ -62,7 +62,7 @@ public class Searcher {
         int size = Math.min(results.size(),50);
         for(int i = 0; i<size;i++){
             DocMD md = results.get(i);
-            ans = ans + (i+1) + ". DocNumber: "+md.docno +". Rank: " + md.getRank()+". \n";
+            ans = ans + (i+1) + ". DocNumber: "+md.docno +". Rank: " + ((int)md.getRank())+". \n";
         }
         return ans;
     }
