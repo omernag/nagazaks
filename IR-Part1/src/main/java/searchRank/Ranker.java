@@ -100,7 +100,7 @@ public class Ranker {
 
                 }
         }
-        Bm25Rank( 1.2,0.75);
+        Bm25Rank( 0.01,0.1);
     }
 
     public void Bm25Rank(double k,double b){
@@ -111,13 +111,15 @@ public class Ranker {
                 if (term.termDocs.containsKey(doc.docno)) {
                     TermInDoc tid = term.termDocs.get(doc.docno);
                     int termfq = tid.termfq;
-                    double docTermRank = idf.get(term.getName())*((termfq*(k+1))/(termfq+k*(1-b+(b*(doc.docSize/this.avgLength)))));
+                    double docTermRank = (idf.get(term.getName())+1)*((termfq*(k+1))/(termfq+k*(1-b+(b*(doc.docSize)))));
+                    /*
                     if(tid.isHeader()){
                         docTermRank=docTermRank*3;
                     }
                     if(tid.isEntity()){
                         docTermRank=docTermRank*2;
                     }
+                    */
                     docRank+= docTermRank;
                 }
             }

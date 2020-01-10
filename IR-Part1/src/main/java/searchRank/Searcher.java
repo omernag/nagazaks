@@ -32,7 +32,7 @@ public class Searcher {
         queryWords = new HashSet<>((parser.parse(query,false)).keySet());
     }
 
-    public void getRankedDocs(Ranker ranker){
+    public void rank(Ranker ranker){
         ranker.handleQuery();
         orderedDocs = ranker.okapiRank;
         resultsStr = queryStringResults();
@@ -84,5 +84,7 @@ public class Searcher {
         return entitiesStr;
     }
 
-
+    public PriorityQueue<DocMD> getOrderedDocs() {
+        return orderedDocs;
+    }
 }

@@ -3,11 +3,9 @@ package EngineUserInterface;
 import Indexer.IndexDictionary;
 import Indexer.SegmentProcesses;
 import Parser.DocMD;
-import Parser.DocText;
 import Parser.Master;
 import javafx.scene.control.Alert;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,7 +16,6 @@ import searchRank.Searcher;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -33,6 +30,7 @@ public class MyModel {
     private Searcher searcher;
     private Ranker ranker;
     List<Map.Entry<String,String>> queries;
+    String trecEvalStr="";
 
     public MyModel() {
         //dictionary=new IndexDictionary("",false);
@@ -72,7 +70,7 @@ public class MyModel {
         //add semanticTreat to searcher contractor
         searcher = new Searcher(currentQuery,isStemmer,findEntities);
         ranker = new Ranker(dictionary,postingPa,isStemmer,docMD,semanticTreat,searcher.queryWords);
-        searcher.getRankedDocs(ranker);
+        searcher.rank(ranker);
         if(findEntities) {
             return searcher.getResultsStr() + "\n" + searcher.getEntitiesStr();
         }
@@ -117,7 +115,7 @@ public class MyModel {
             res+=handleSingleQuery(ip.getKey().toString(),findEntities,semanticTreat);
             res+="******************************************************************************************\n";
             if (trecEval){
-                trecEval();
+                trecEval(ip);
             }
         }
         return res;
@@ -196,7 +194,9 @@ public class MyModel {
         alert.show();
     }
 
-    private void trecEval(){
-
+    private void trecEval(Map.Entry ip){
+        for(DocMD md : searcher.getOrderedDocs()) {
+            this.trecEvalStr += ip.getKey().toString() + " 0 " + md.docno + " 1 42.38 mt\n";
+        }
     }
 }
