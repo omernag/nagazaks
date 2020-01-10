@@ -45,9 +45,9 @@
                 <CheckBox fx:id="cbx_stemming" mnemonicParsing="false" onAction="#pressStemming" prefHeight="27.0" prefWidth="170.0" text="Stemming" GridPane.columnSpan="2" GridPane.rowIndex="6" />
                 <Button fx:id="btn_clear" layoutX="10.0" layoutY="10.0" onAction="#pressClear" prefHeight="40.0" prefWidth="263.0" text="Clear The Posting" GridPane.columnSpan="2" GridPane.rowIndex="5" />
                 <Label fx:id="lbl_status" prefHeight="27.0" prefWidth="351.0" text="Dictionary Status:" GridPane.columnSpan="4" GridPane.rowIndex="7" />
-                <Label fx:id="tf_status" text="Waiting" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                <Label fx:id="tf_status" prefHeight="27.0" prefWidth="240.0" text="Waiting" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
                 <Button fx:id="btn_Set" layoutX="10.0" layoutY="48.0" onAction="#pressSet" prefHeight="0.0" prefWidth="178.0" text="Set Path" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                <Button fx:id="btn_search" minHeight="-Infinity" mnemonicParsing="false" onAction="#openSearchWindow" prefHeight="152.0" prefWidth="152.0" text="Search" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3" />
+                <Button fx:id="btn_search" minHeight="-Infinity" mnemonicParsing="false" onAction="#openSearchWindow" prefHeight="152.0" prefWidth="152.0" text="Search" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="3" />
             </GridPane>
         </VBox>
     </left>
