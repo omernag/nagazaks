@@ -17,6 +17,8 @@ public class Searcher {
     String entitiesStr;
 
 
+
+
     public Searcher(String query, boolean stem,boolean showEntities){
         this.query=query;
         this.stem=stem;
@@ -44,12 +46,20 @@ public class Searcher {
         int size = Math.min(results.size(),50);
         for(int i = 0; i<size;i++){
             DocMD md = results.get(i);
+            int countEntities = md.countEntities;
             ans = ans + (i+1) + ". DocNumber: "+md.docno +".\n";
             List<TermInDoc> entities = new LinkedList<TermInDoc>(md.entities);
             int entitiesCount = Math.min(entities.size(),5);
             for(int j = 0; j<entitiesCount;j++){
                 TermInDoc entity = entities.get(j);
-                ans=ans+"\t"+(j+1)+". "+entity.getTerm()+". appeared "+entity.getTermfq()+" times.\n";
+                int fq = entity.getTermfq();
+                int rank = (entity.getTermfq()/countEntities)*1000;
+                if(fq!=1) {
+                    ans = ans + "\t" + (j + 1) + ". " + entity.getTerm() + ". appeared " + fq + " times. Entity rank: "+rank+".\n";
+                }
+                else{
+                    ans = ans + "\t" + (j + 1) + ". " + entity.getTerm() + ". appeared once.\n";
+                }
             }
             ans=ans+"\n";
         }
@@ -66,5 +76,13 @@ public class Searcher {
         }
         return ans;
     }
+    public String getResultsStr() {
+        return resultsStr;
+    }
+
+    public String getEntitiesStr() {
+        return entitiesStr;
+    }
+
 
 }

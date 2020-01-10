@@ -68,24 +68,28 @@ public class MyModel {
 
     }
 
-    public void handleSingleQuery(String currentQuery, boolean findEntities, boolean semanticTreat) {
+    public String handleSingleQuery(String currentQuery, boolean findEntities, boolean semanticTreat) {
         //add semanticTreat to searcher contractor
         searcher = new Searcher(currentQuery,isStemmer,findEntities);
         ranker = new Ranker(dictionary,postingPa,isStemmer,docMD,semanticTreat,searcher.queryWords);
         searcher.getRankedDocs(ranker);
+        if(findEntities) {
+            return searcher.getResultsStr() + "\n" + searcher.getEntitiesStr();
+        }
         //resultLog = searcher
         //missing the full searcher
-
+        return searcher.getResultsStr();
     }
 
 
-    public List<Map.Entry<String,String>> handleQueryFile(String queryFilePath, boolean findEntities, boolean semanticTreat) {
+    public String handleQueryFile(String queryFilePath, boolean findEntities, boolean semanticTreat,boolean trecEval) {
         //missing the full searcher - get result and stuff
         //do some for loop here
         //but first load the file
         List<String> results = new ArrayList<>();
         this.queries = new ArrayList<>();
         Document docsFile;
+        String res ="";
         try {
             docsFile = Jsoup.parse(new File(queryFilePath), "US-ASCII");
         }
@@ -106,8 +110,17 @@ public class MyModel {
                 this.queries.add(new ImmutablePair<>(queryID, query));
             }
         }
-        return this.queries;
-
+        for(Map.Entry ip : this.queries){
+            res+="******************************************************************************************\n";
+            res+="Query number: "+ip.getKey()+"\n";
+            res+="Query: "+ip.getValue()+"\n";
+            res+=handleSingleQuery(ip.getKey().toString(),findEntities,semanticTreat);
+            res+="******************************************************************************************\n";
+            if (trecEval){
+                trecEval();
+            }
+        }
+        return res;
     }
 
     public void saveResult(String path) {

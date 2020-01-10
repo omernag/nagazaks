@@ -78,7 +78,7 @@ public class SearchController {
                 return;
             }
         }
-        model.handleQueryFile(queryFilePath,findEntities,semanticTreat);
+        model.handleQueryFile(queryFilePath,findEntities,semanticTreat,true);
     }
 
     public void closeWindow(ActionEvent event) {
