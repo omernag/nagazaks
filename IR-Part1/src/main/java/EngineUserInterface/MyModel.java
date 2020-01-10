@@ -6,6 +6,7 @@ import Parser.DocMD;
 import Parser.DocText;
 import Parser.Master;
 import javafx.scene.control.Alert;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,10 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class MyModel {
     private IndexDictionary dictionary;
@@ -34,6 +32,7 @@ public class MyModel {
     private String resultLog;
     private Searcher searcher;
     private Ranker ranker;
+    List<Map.Entry<String,String>> queries;
 
     public MyModel() {
         //dictionary=new IndexDictionary("",false);
@@ -74,19 +73,18 @@ public class MyModel {
         searcher = new Searcher(currentQuery,isStemmer,findEntities);
         ranker = new Ranker(dictionary,postingPa,isStemmer,docMD,semanticTreat,searcher.queryWords);
         searcher.getRankedDocs(ranker);
-        System.out.println("");
         //resultLog = searcher
         //missing the full searcher
 
     }
 
 
-    public List<String> handleQueryFile(String queryFilePath, boolean findEntities, boolean semanticTreat) {
+    public List<Map.Entry<String,String>> handleQueryFile(String queryFilePath, boolean findEntities, boolean semanticTreat) {
         //missing the full searcher - get result and stuff
         //do some for loop here
         //but first load the file
         List<String> results = new ArrayList<>();
-        List<String> queries = new ArrayList<>();
+        this.queries = new ArrayList<>();
         Document docsFile;
         try {
             docsFile = Jsoup.parse(new File(queryFilePath), "US-ASCII");
@@ -94,15 +92,21 @@ public class MyModel {
         catch (IOException e){throw new RuntimeException("file opening error");} ;
         Elements queriesAsElements = docsFile.getElementsByTag("top");
         for(Element queryAsElement : queriesAsElements){
+            String queryID="";
             String query ="";
             for(Element innerElement : queryAsElement.getAllElements()){
                 if(innerElement.tagName().equals("title")){
                     query = innerElement.text();
-                    queries.add(query);
+                }
+                else if(innerElement.tagName().equals("num")){
+                    queryID = ((innerElement.text()).split(" "))[1];
                 }
             }
+            if(!query.equals("") && !queryID.equals("")){
+                this.queries.add(new ImmutablePair<>(queryID, query));
+            }
         }
-        return queries;
+        return this.queries;
 
     }
 
@@ -177,5 +181,9 @@ public class MyModel {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(alertMessage);
         alert.show();
+    }
+
+    private void trecEval(){
+
     }
 }
