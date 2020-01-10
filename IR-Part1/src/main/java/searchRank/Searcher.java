@@ -1,13 +1,9 @@
 package searchRank;
-import Indexer.IndexDictionary;
 import Indexer.TermInDoc;
 import Parser.Parser;
 import Parser.DocMD;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.PriorityQueue;
+import java.util.*;
 
 
 public class Searcher {
@@ -16,8 +12,9 @@ public class Searcher {
     public HashSet<String> queryWords;
     private PriorityQueue<DocMD> orderedDocs;
     boolean showEntities;
-    HashMap<DocMD,HashMap<String,Double>> DocEntities;
     boolean stem;
+    String resultsStr;
+    String entitiesStr;
 
 
     public Searcher(String query, boolean stem,boolean showEntities){
@@ -27,30 +24,47 @@ public class Searcher {
         this.showEntities =showEntities;
         parseQuery();
 
-
     }
 
     private void parseQuery(){
         queryWords = new HashSet<>((parser.parse(query,false)).keySet());
     }
 
-    private void getRankedDocs(Ranker ranker){
-        //call Ranker function
+    public void getRankedDocs(Ranker ranker){
+        ranker.handleQuery();
+        orderedDocs = ranker.okapiRank;
+        resultsStr = queryStringResults();
+        if(showEntities){entitiesStr=this.stringEntities();}
 
     }
 
-    private void calcEntities() {
-        DocEntities=new HashMap<DocMD, HashMap<String, Double>>();
-        for (DocMD dmd:orderedDocs) {
-            HashMap<String,Double> entities =  new HashMap<>();
-            int x = dmd.countEntities;
-            if(x>0){
-                for(TermInDoc entity : dmd.entities){
-                    entities.put(entity.getTerm(),new Double(entity.getTermfq()/x));
-                }
+    private String stringEntities() {
+        List<DocMD> results = new LinkedList<DocMD>(orderedDocs);
+        String ans ="Each document most relevant entities are:\n \n";
+        int size = Math.min(results.size(),50);
+        for(int i = 0; i<size;i++){
+            DocMD md = results.get(i);
+            ans = ans + (i+1) + ". DocNumber: "+md.docno +".\n";
+            List<TermInDoc> entities = new LinkedList<TermInDoc>(md.entities);
+            int entitiesCount = Math.min(entities.size(),5);
+            for(int j = 0; j<entitiesCount;j++){
+                TermInDoc entity = entities.get(j);
+                ans=ans+"\t"+(j+1)+". "+entity.getTerm()+". appeared "+entity.getTermfq()+" times.\n";
             }
-            DocEntities.put(dmd,entities);
+            ans=ans+"\n";
         }
+        return ans;
+    }
+
+    private String queryStringResults() {
+        List<DocMD> results = new LinkedList<DocMD>(orderedDocs);
+        String ans ="The most relevant Docs are:\n";
+        int size = Math.min(results.size(),50);
+        for(int i = 0; i<size;i++){
+            DocMD md = results.get(i);
+            ans = ans + (i+1) + ". DocNumber: "+md.docno +". Rank: " + md.getRank()+". \n";
+        }
+        return ans;
     }
 
 }

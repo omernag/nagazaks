@@ -10,6 +10,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -17,6 +18,9 @@ import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+
+import com.medallia.word2vec.Word2VecModel;
+import com.medallia.word2vec.Searcher;
 
 public class Ranker {
     IndexDictionary dictionary;
@@ -26,7 +30,7 @@ public class Ranker {
     HashMap<String, Term> terms;
     HashMap<String, DocMD> docMDs;
     HashMap<String,Double> idf;
-    HashMap<String,Double> okapiRank;
+    public PriorityQueue<DocMD> okapiRank;
     Double avgLength;
     //////
     boolean semanticTreatment ;
@@ -34,21 +38,20 @@ public class Ranker {
     //////
 
     public Ranker(IndexDictionary dictionary, String postingPath, boolean stem, HashMap<String, DocMD> docMDs, boolean semanticTreatment, HashSet<String> queryWords) {
-        this.queryWords=queryWords;
-        this.semanticTreatment = semanticTreatment;
+        Comparator<DocMD> comp = (o1, o2) -> (int) (o2.getRank() - o1.getRank());
+
         this.dictionary = dictionary;
         this.postingPath = postingPath;
         this.stem = stem;
-        relevantDocs = new HashMap<>();
-        this.docMDs = docMDs;
-        idf = new HashMap<>();
-        this.postingPath=postingPath;
-        this.stem=stem;
         this.relevantDocs = new HashMap<>();
+
         this.docMDs=docMDs;
         this.idf = new HashMap<>();
+        this.okapiRank = new PriorityQueue<>(comp);
         this.avgLength = calcAvgLength();
-        this.okapiRank = new HashMap<>();
+        this.semanticTreatment = semanticTreatment;
+        this.queryWords=queryWords;
+
     }
 
     private double calcAvgLength() {
@@ -59,7 +62,7 @@ public class Ranker {
         return (ans/docMDs.size());
     }
 
-    public double handleQuery() {
+    public void handleQuery() {
         relevantDocs = new HashMap<>();
         terms = new HashMap<>();
         if(semanticTreatment){semanticTreat();}
@@ -98,14 +101,12 @@ public class Ranker {
                 }
         }
         Bm25Rank( 1.2,0.75);
-        return 0;
     }
 
     public void Bm25Rank(double k,double b){
         for(DocMD doc :relevantDocs.values()){
             double docRank = 0;
             for(Term term : terms.values()){
-
 
                 if (term.termDocs.containsKey(doc.docno)) {
                     TermInDoc tid = term.termDocs.get(doc.docno);
@@ -121,7 +122,7 @@ public class Ranker {
                 }
             }
             doc.rank=docRank;
-            okapiRank.put(doc.docno,docRank);
+            okapiRank.add(doc);
         }
     }
 
@@ -130,7 +131,7 @@ public class Ranker {
         List<String> commonW = new LinkedList<>();
         for (String word : queryWords
         ) {
-            List<String> curr =fetchFromWeb((String) word);
+            List<String> curr =fetchFromWord2Vec(word);
             if (curr != null) {
                 commonW.addAll(curr);
             }
@@ -166,6 +167,28 @@ public class Ranker {
             return null;
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<String> fetchFromWord2Vec(String word){
+        try {
+            List<String> returnList = new LinkedList<>();
+            Word2VecModel word2vec = Word2VecModel.fromTextFile(new File(getClass().getResource("/word2vec.txt").getPath()));
+            Searcher  word2vecSearcher = word2vec.forSearch();
+
+            List<Searcher.Match> commons = word2vecSearcher.getMatches(word,5);
+
+            for (Searcher.Match commonWord: commons
+            ) {
+                if(!commonWord.match().equals(word) && commonWord.distance()>0.8) {
+                    returnList.add(commonWord.match());
+                }
+            }
+            return returnList;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Searcher.UnknownWordException e) {
         }
         return null;
     }

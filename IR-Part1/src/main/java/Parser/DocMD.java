@@ -14,6 +14,11 @@ public class DocMD {
     int uniqueCount;
     public Map<String, TermInDoc> words;
     public String maxFreqTerm;
+
+    public double getRank() {
+        return rank;
+    }
+
     public double rank;
     public int countEntities;
     public int docSize;

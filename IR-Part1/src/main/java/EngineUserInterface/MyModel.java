@@ -3,9 +3,14 @@ package EngineUserInterface;
 import Indexer.IndexDictionary;
 import Indexer.SegmentProcesses;
 import Parser.DocMD;
+import Parser.DocText;
 import Parser.Master;
 import javafx.scene.control.Alert;
 import org.json.simple.parser.ParseException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import searchRank.Ranker;
 import searchRank.Searcher;
 
@@ -14,7 +19,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class MyModel {
     private IndexDictionary dictionary;
@@ -25,7 +33,7 @@ public class MyModel {
     private HashMap<String, DocMD> docMD;
     private String resultLog;
     private Searcher searcher;
-
+    private Ranker ranker;
 
     public MyModel() {
         //dictionary=new IndexDictionary("",false);
@@ -64,14 +72,38 @@ public class MyModel {
     public void handleSingleQuery(String currentQuery, boolean findEntities, boolean semanticTreat) {
         //add semanticTreat to searcher contractor
         searcher = new Searcher(currentQuery,isStemmer,findEntities);
+        ranker = new Ranker(dictionary,postingPa,isStemmer,docMD,semanticTreat,searcher.queryWords);
+        searcher.getRankedDocs(ranker);
+        System.out.println("");
         //resultLog = searcher
         //missing the full searcher
+
     }
 
-    public void handleQueryFile(String queryFilePath, boolean findEntities, boolean semanticTreat) {
+
+    public List<String> handleQueryFile(String queryFilePath, boolean findEntities, boolean semanticTreat) {
         //missing the full searcher - get result and stuff
         //do some for loop here
         //but first load the file
+        List<String> results = new ArrayList<>();
+        List<String> queries = new ArrayList<>();
+        Document docsFile;
+        try {
+            docsFile = Jsoup.parse(new File(queryFilePath), "US-ASCII");
+        }
+        catch (IOException e){throw new RuntimeException("file opening error");} ;
+        Elements queriesAsElements = docsFile.getElementsByTag("top");
+        for(Element queryAsElement : queriesAsElements){
+            String query ="";
+            for(Element innerElement : queryAsElement.getAllElements()){
+                if(innerElement.tagName().equals("title")){
+                    query = innerElement.text();
+                    queries.add(query);
+                }
+            }
+        }
+        return queries;
+
     }
 
     public void saveResult(String path) {
