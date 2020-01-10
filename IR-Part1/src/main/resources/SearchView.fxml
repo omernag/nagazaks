@@ -30,7 +30,7 @@
         </padding>
     </TextField>
     <Button fx:id="btn_goBig" layoutX="379.0" layoutY="189.0" mnemonicParsing="false" onAction="#pressGoBig" prefHeight="39.0" prefWidth="106.0" text="Run all" />
-    <Button fx:id="btn_go" layoutX="379.0" layoutY="43.0" mnemonicParsing="false" onAction="#singleQuery" text="Run query" />
+    <Button fx:id="btn_go" layoutX="379.0" layoutY="43.0" mnemonicParsing="false" onAction="#singleQuery" prefHeight="39.0" prefWidth="106.0" text="Run query" />
     <Button fx:id="btn_browseQueries" layoutX="379.0" layoutY="141.0" mnemonicParsing="false" onAction="#browseQueries" prefHeight="39.0" prefWidth="106.0" text="Browse" />
    <CheckBox fx:id="cbox_findentities" layoutX="27.0" layoutY="228.0" mnemonicParsing="false" onAction="#checkBoxEntities" text="Find Entities" />
    <CheckBox fx:id="cbox_semantic" layoutX="27.0" layoutY="268.0" mnemonicParsing="false" onAction="#checkBoxSemantic" text="Treat Semanticly" />

@@ -29,22 +29,27 @@ public class MyModel {
     private String resultLog;
     private Searcher searcher;
     private Ranker ranker;
+
     List<Map.Entry<String,String>> queries;
-    String trecEvalStr="";
+    private String trecEvalStr="";
 
     private boolean postingPathSet;
     private boolean corpusPathSet;
+    private boolean isFileHandling;
+    private int counter;
+    private String queryFileName;
 
     public MyModel() {
         //dictionary=new IndexDictionary("",false);
         isStemmer=false;
         postingPathSet=false;
         corpusPathSet=false;
+        isFileHandling=false;
+        counter=0;
     }
 
     public void connectToCorpus(String corpusPath, String postingPath) {
         try {
-
             corpusPa = corpusPath;
             postingPa = postingPath;
             long startTimeIndex = System.nanoTime();
@@ -92,7 +97,9 @@ public class MyModel {
         //do some for loop here
         //but first load the file
         List<String> results = new ArrayList<>();
+        queryFileName=new File(queryFilePath).getName();
         this.queries = new ArrayList<>();
+        isFileHandling=true;
         Document docsFile;
         String res ="";
         try {
@@ -130,12 +137,40 @@ public class MyModel {
 
     public void saveResult(String path) {
         try {
-            File file = new File("path");
-            Files.write(Paths.get(file.getPath()),resultLog.getBytes());
+            File file;
+            if(isFileHandling){
+                if(isStemmer){
+                    file = new File(path+"/"+queryFileName.substring(0,queryFileName.length()-4)+"_s");
+                }
+                else{
+                    file = new File(path+"/"+queryFileName.substring(0,queryFileName.length()-4));
+                }
+            }
+            else{
+                if(isStemmer){
+                    file = new File(path+"/query_"+counter+"_s");
+                }
+                else{
+                    file = new File(path+"/query_"+counter);
+                }
+            }
+            counter++;
+
+            if(!trecEvalStr.equals("")) {
+                Files.write(Paths.get(file.getPath()+"_TREC.txt"), trecEvalStr.getBytes());
+            }
+            else{
+                Files.write(Paths.get(file.getPath()+".txt"), resultLog.getBytes());
+            }
+            showAlert("Successful save to \n"+file.getPath(), Alert.AlertType.INFORMATION);
         } catch (IOException e) {
-            showAlert("Something went terribly wrong, Cant save the file");
+            showAlert("Something went terribly wrong, Cant save the file", Alert.AlertType.ERROR);
         }
 
+    }
+
+    public String getTrecEvalStr() {
+        return trecEvalStr;
     }
 
     public String getResultTOPrint() {
@@ -195,8 +230,8 @@ public class MyModel {
         return resultLog;
     }
 
-    private void showAlert(String alertMessage) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    private void showAlert(String alertMessage, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
         alert.setContentText(alertMessage);
         alert.show();
     }
