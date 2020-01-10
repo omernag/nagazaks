@@ -4,11 +4,9 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EngineUserInterface.ResultController">
+<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EngineUserInterface.ResultController">
    <children>
-      <ScrollPane fx:id="sp_scroll" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="600.0" />
-      <Button fx:id="btn_save" layoutX="121.0" layoutY="347.0" mnemonicParsing="false" onAction="#saveResult" prefHeight="39.0" prefWidth="116.0" text="Save Result" />
-      <Button fx:id="btn_close" layoutX="382.0" layoutY="347.0" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
+      <ScrollPane fx:id="sp_scroll" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="600.0" />
+      <Button fx:id="btn_save" layoutX="242.0" layoutY="539.0" mnemonicParsing="false" onAction="#saveResult" prefHeight="39.0" prefWidth="116.0" text="Save Result" />
    </children>
 </AnchorPane>

@@ -32,9 +32,14 @@ public class MyModel {
     List<Map.Entry<String,String>> queries;
     String trecEvalStr="";
 
+    private boolean postingPathSet;
+    private boolean corpusPathSet;
+
     public MyModel() {
         //dictionary=new IndexDictionary("",false);
         isStemmer=false;
+        postingPathSet=false;
+        corpusPathSet=false;
     }
 
     public void connectToCorpus(String corpusPath, String postingPath) {
@@ -72,15 +77,17 @@ public class MyModel {
         ranker = new Ranker(dictionary,postingPa,isStemmer,docMD,semanticTreat,searcher.queryWords);
         searcher.rank(ranker);
         if(findEntities) {
+            resultLog=searcher.getResultsStr() + "\n" + searcher.getEntitiesStr();
             return searcher.getResultsStr() + "\n" + searcher.getEntitiesStr();
         }
         //resultLog = searcher
         //missing the full searcher
+        resultLog=searcher.getResultsStr();
         return searcher.getResultsStr();
     }
 
 
-    public String handleQueryFile(String queryFilePath, boolean findEntities, boolean semanticTreat,boolean trecEval) {
+    public void handleQueryFile(String queryFilePath, boolean findEntities, boolean semanticTreat,boolean trecEval) {
         //missing the full searcher - get result and stuff
         //do some for loop here
         //but first load the file
@@ -118,7 +125,7 @@ public class MyModel {
                 trecEval(ip);
             }
         }
-        return res;
+        resultLog = res;
     }
 
     public void saveResult(String path) {
@@ -132,7 +139,7 @@ public class MyModel {
     }
 
     public String getResultTOPrint() {
-        return resultLog;//maybe change
+        return resultLog;
     }
 
     public void changeStemmerMode() {
@@ -198,5 +205,21 @@ public class MyModel {
         for(DocMD md : searcher.getOrderedDocs()) {
             this.trecEvalStr += ip.getKey().toString() + " 0 " + md.docno + " 1 42.38 mt\n";
         }
+    }
+
+    public void setPostingPathSet(boolean postingPathSet) {
+        this.postingPathSet = postingPathSet;
+    }
+
+    public void setCorpusPathSet(boolean corpusPathSet) {
+        this.corpusPathSet = corpusPathSet;
+    }
+
+    public boolean isPostingPathSet() {
+        return postingPathSet;
+    }
+
+    public boolean isCorpusPathSet() {
+        return corpusPathSet;
     }
 }

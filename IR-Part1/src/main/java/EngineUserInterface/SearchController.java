@@ -1,7 +1,10 @@
 package EngineUserInterface;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -21,12 +24,15 @@ public class SearchController {
     public Button btn_browseQueries;
     public CheckBox cbox_findentities;
     public CheckBox cbox_semantic;
+    public CheckBox cbox_trecEval;
 
     private String currentQuery;
     private MyModel model;
     private String queryFilePath;
     private boolean semanticTreat;
     private boolean findEntities;
+    private boolean trecEval;
+    private ResultController resultC;
 
     public void enterQuery(){
         currentQuery = tf_query.textProperty().get();
@@ -41,7 +47,7 @@ public class SearchController {
             }
             else{
                 model.handleSingleQuery(currentQuery,findEntities,semanticTreat);
-                closeWindow(event);
+                openResultWindow();
             }
         }
         else {
@@ -78,7 +84,29 @@ public class SearchController {
                 return;
             }
         }
-        model.handleQueryFile(queryFilePath,findEntities,semanticTreat,true);
+        model.handleQueryFile(queryFilePath,findEntities,semanticTreat,trecEval);
+        openResultWindow();
+    }
+
+    private void openResultWindow() {
+        if(model.getResult()!=null) {
+            Parent root;
+            try {
+                Stage stage = new Stage();
+                stage.setTitle("Result Log");
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                root = fxmlLoader.load(getClass().getResource("/ResultView.fxml").openStream());
+                Scene scene = new Scene(root, 500, 600);
+                stage.setScene(scene);
+                scene.getStylesheets().add(getClass().getResource("/ResultStyle.css").toExternalForm());
+                stage.show();
+
+                resultC = fxmlLoader.getController();
+                resultC.setModel(model);
+                resultC.displayResult(model);
+            } catch (Exception e) {
+            }
+        }
     }
 
     public void closeWindow(ActionEvent event) {
@@ -93,6 +121,7 @@ public class SearchController {
         this.model = model;
         findEntities=false;
         semanticTreat=false;
+        trecEval=false;
     }
 
     private void showAlert(String alertMessage) {
@@ -108,4 +137,6 @@ public class SearchController {
     public void checkBoxSemantic(ActionEvent event) {
         semanticTreat=!semanticTreat;
     }
+
+    public void checkBoxTrec(ActionEvent event) { trecEval=!trecEval; }
 }

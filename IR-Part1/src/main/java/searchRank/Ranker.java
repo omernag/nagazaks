@@ -22,6 +22,8 @@ import java.util.*;
 import com.medallia.word2vec.Word2VecModel;
 import com.medallia.word2vec.Searcher;
 
+import static com.sun.javafx.scene.control.skin.Utils.getResource;
+
 public class Ranker {
     IndexDictionary dictionary;
     String postingPath;
@@ -176,7 +178,7 @@ public class Ranker {
     public List<String> fetchFromWord2Vec(String word){
         try {
             List<String> returnList = new LinkedList<>();
-            Word2VecModel word2vec = Word2VecModel.fromTextFile(new File(getClass().getResource("/word2vec.txt").getPath()));
+            Word2VecModel word2vec = Word2VecModel.fromTextFile(new File((System.getProperty("user.dir")+("/target/classes/word2vec.txt"))));
             Searcher  word2vecSearcher = word2vec.forSearch();
 
             List<Searcher.Match> commons = word2vecSearcher.getMatches(word,5);

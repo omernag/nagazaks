@@ -25,6 +25,7 @@ public class ConnectController {
     public Button btn_browseCorpus;
     public Button btn_browsePosting;
     public AnchorPane pane;
+    public Button btn_accept;
 
     private String corpusPath;
     private String postingPath;
@@ -44,7 +45,9 @@ public class ConnectController {
             corpusPath = tf_pathCorpus.textProperty().get();
             corpusPathSet = true;
             model.setCorpusPa(corpusPath);
+            model.setCorpusPathSet(true);
         }
+        btn_accept.setDisable(false);
     }
 
     public void typeCorpusPath(ActionEvent event) {
@@ -52,6 +55,8 @@ public class ConnectController {
         corpusPath = tf_pathCorpus.textProperty().get();
         corpusPathSet = true;
         model.setCorpusPa(corpusPath);
+        model.setCorpusPathSet(true);
+        btn_accept.setDisable(false);
     }
 
     public void browsePosting(ActionEvent event) {
@@ -66,13 +71,17 @@ public class ConnectController {
             postingPath = tf_pathPosting.textProperty().get();
             postingPathSet = true;
             model.setPostingPa(postingPath);
+            model.setPostingPathSet(true);
         }
+        btn_accept.setDisable(false);
     }
     public void typePostingPath(ActionEvent event) {
         postingPathSet=false;
         postingPath = tf_pathPosting.textProperty().get();
         postingPathSet = true;
         model.setPostingPa(postingPath);
+        model.setPostingPathSet(true);
+        btn_accept.setDisable(false);
     }
 
     public MyModel getModel() {
@@ -87,5 +96,7 @@ public class ConnectController {
         this.model = model;
         corpusPathSet=false;
         postingPathSet=false;
+        btn_accept.setDisable(true);
     }
+
 }

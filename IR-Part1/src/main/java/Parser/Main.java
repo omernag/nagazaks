@@ -16,11 +16,10 @@ import searchRank.Searcher;
 import java.io.IOException;
 import java.util.HashMap;
 
-/*
-public class Main {
+/*public class Main {
     public static void main(String[] args) throws IOException {
         //small main for my big friend
-        String projPath = "C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1";
+        *//*String projPath = "C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1";
         Boolean stem = false;
         Boolean semanticTreatment = true;
         Master m = new Master(stem);
@@ -28,7 +27,7 @@ public class Main {
         SegmentProcesses sp = new SegmentProcesses(stem,projPath);
         m.updateEntities(sp.getTheDictionary().indexer);
         m.saveDocMD(projPath);
-        sp.getTheDictionary().saveToDisk();
+        sp.getTheDictionary().saveToDisk();*//*
         //change the posting path to yours
         //HashMap<String, DocMD> docsMDs = m.LoadDocMD(projPath);
         //  IndexDictionary dictionary = new IndexDictionary(projPath,stem);
@@ -41,11 +40,11 @@ public class Main {
         //now you have dictionary and docsMDs
         //enjoy lov ya
         //System.out.println(WS4J.runWUP("milk","cheese"));
-        // Ranker r = new Ranker(null,"",false,null);
-        //  r.fetchFromWeb("bank");
+        Ranker r = new Ranker(null,"",false,null,false,null);
+        //System.out.println(r.fetchFromWeb("bank").toString());
+        System.out.println(r.fetchFromWord2Vec("cpr").toString());
     }
-}
-*/
+}*/
 
 
 //public class main.java.Parser.Main {
@@ -83,10 +82,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         model = new MyModel();
         //--------------
-        primaryStage.setTitle("Enter a proper title");
+        primaryStage.setTitle("Omer's & Asi's Search Engine");
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("/MyView.fxml").openStream());
-        Scene scene = new Scene(root, 400, 400);
+        Scene scene = new Scene(root, 450, 400);
         scene.getStylesheets().add(getClass().getResource("/MyViewStyle.css").toExternalForm());
         primaryStage.setScene(scene);
         //--------------

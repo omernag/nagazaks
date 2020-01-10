@@ -2,6 +2,7 @@ package EngineUserInterface;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -31,7 +32,6 @@ public class Controller {
     public MyModel model;
     public ConnectController connectC;
     public DisplayController dispC;
-    private ResultController resultC;
     private SearchController searchC;
 
     public boolean isStemmer;
@@ -56,6 +56,15 @@ public class Controller {
             connectC = fxmlLoader.getController();
             connectC.setModel(model);
             tf_status.textProperty().setValue("Connected");
+
+            //if(model.isPostingPathSet()){
+                btn_loadDict.setDisable(false);
+                btn_clear.setDisable(false);
+            //}
+            //if(model.isCorpusPathSet()) {
+                btn_ConnectToEn.setDisable(false);
+            //}
+            cbx_stemming.setDisable(false);
         } catch (Exception e) {
         }
     }
@@ -67,6 +76,9 @@ public class Controller {
             alert.setContentText(model.getInfoOnRun());
             alert.show();
             postingErased=false;
+            btn_search.setDisable(false);
+            btn_displayDict.setDisable(false);
+            btn_clear.setDisable(false);
         }
         else{
             showAlert("Please Insert Address",Alert.AlertType.ERROR);
@@ -80,8 +92,11 @@ public class Controller {
                 model.initializeDictionary();
             }
             model.bringUpDictionary();
-            if (model.getDictionary() != null)
+            if (model.getDictionary() != null) {
                 tf_status.textProperty().setValue("Ready");
+            }
+            btn_search.setDisable(false);
+            btn_displayDict.setDisable(false);
         } catch (Exception e) {
             showAlert("Cant find posting in this path",Alert.AlertType.ERROR);
             tf_status.textProperty().setValue("Failed to load");
@@ -155,39 +170,16 @@ public class Controller {
             stage.setTitle("Search the Corpus");
             FXMLLoader fxmlLoader = new FXMLLoader();
             root = fxmlLoader.load(getClass().getResource("/SearchView.fxml").openStream());
-            Scene scene = new Scene(root, 500, 300);
+            Scene scene = new Scene(root, 500, 400);
             stage.setScene(scene);
             scene.getStylesheets().add(getClass().getResource("/SearchStyle.css").toExternalForm());
             stage.show();
             searchC = fxmlLoader.getController();
             searchC.setModel(model);
             //tf_status.textProperty().setValue("Connected");
-            openResultWindow();
         } catch (Exception e) {
         }
     }
-
-    private void openResultWindow() {
-        if(model.getResult()!=null) {
-            Parent root;
-            try {
-                Stage stage = new Stage();
-                stage.setTitle("Result Log");
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                root = fxmlLoader.load(getClass().getResource("/ResultView.fxml").openStream());
-                Scene scene = new Scene(root, 500, 300);
-                stage.setScene(scene);
-                scene.getStylesheets().add(getClass().getResource("/ResultStyle.css").toExternalForm());
-                stage.show();
-
-                resultC = fxmlLoader.getController();
-                resultC.setModel(model);
-                resultC.displayResult(model);
-            } catch (Exception e) {
-            }
-        }
-    }
-
 
     private void showAlert(String alertMessage, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -198,5 +190,11 @@ public class Controller {
     public void setModel(MyModel model) {
         this.model = model;
         postingErased=false;
+        btn_ConnectToEn.setDisable(true);
+        btn_clear.setDisable(true);
+        btn_displayDict.setDisable(true);
+        btn_search.setDisable(true);
+        btn_loadDict.setDisable(true);
+        cbx_stemming.setDisable(true);
     }
 }
