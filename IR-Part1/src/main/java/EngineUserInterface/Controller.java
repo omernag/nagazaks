@@ -37,6 +37,7 @@ public class Controller {
     public boolean isStemmer;
     private boolean corpusPathSet;
     private boolean postingPathSet;
+    private boolean postingErased;
     public String corpusPath;
     public String postingPath;
 
@@ -65,9 +66,10 @@ public class Controller {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText(model.getInfoOnRun());
             alert.show();
+            postingErased=false;
         }
         else{
-            showAlert("Please Insert Address");
+            showAlert("Please Insert Address",Alert.AlertType.ERROR);
         }
     }
 
@@ -81,7 +83,7 @@ public class Controller {
             if (model.getDictionary() != null)
                 tf_status.textProperty().setValue("Ready");
         } catch (Exception e) {
-            showAlert("Cant find posting in this path");
+            showAlert("Cant find posting in this path",Alert.AlertType.ERROR);
             tf_status.textProperty().setValue("Failed to load");
         }
     }
@@ -105,7 +107,7 @@ public class Controller {
             }
         }
         else{
-            showAlert("Please Load a Dictionary first");
+            showAlert("Please Load a Dictionary first",Alert.AlertType.ERROR);
         }
 
     }
@@ -136,8 +138,14 @@ public class Controller {
             //Files.delete(Paths.get(file.getPath()));
             tf_status.textProperty().setValue("Connected. Posting and dictionary erased");
             model.forgetDictionary();
+            model.setPostingPa(null);
+            postingErased=true;
+            showAlert("Posting and dictionary erased ",Alert.AlertType.INFORMATION);
         }
-        else showAlert("Please insert the path to the Posting files");
+        else if(postingErased){
+            showAlert("Posting has already been erased", Alert.AlertType.ERROR);
+        }
+        else showAlert("Please insert the path to the Posting files",Alert.AlertType.ERROR);
     }
     
     public void openSearchWindow(ActionEvent event){
@@ -181,13 +189,14 @@ public class Controller {
     }
 
 
-    private void showAlert(String alertMessage) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    private void showAlert(String alertMessage, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
         alert.setContentText(alertMessage);
         alert.show();
     }
 
     public void setModel(MyModel model) {
         this.model = model;
+        postingErased=false;
     }
 }
