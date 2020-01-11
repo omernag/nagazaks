@@ -5,7 +5,7 @@ import Indexer.SegmentProcesses;
 import Parser.DocMD;
 import Parser.Master;
 import javafx.scene.control.Alert;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+//import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -119,14 +119,14 @@ public class MyModel {
                 }
             }
             if(!query.equals("") && !queryID.equals("")){
-                this.queries.add(new ImmutablePair<>(queryID, query));
+                this.queries.add(new AbstractMap.SimpleEntry<>(queryID, query));
             }
         }
         for(Map.Entry ip : this.queries){
             res+="******************************************************************************************\n";
             res+="Query number: "+ip.getKey()+"\n";
             res+="Query: "+ip.getValue()+"\n";
-            res+=handleSingleQuery(ip.getKey().toString(),findEntities,semanticTreat);
+            res+=handleSingleQuery(ip.getValue().toString(),findEntities,semanticTreat);
             res+="******************************************************************************************\n";
             if (trecEval){
                 trecEval(ip);

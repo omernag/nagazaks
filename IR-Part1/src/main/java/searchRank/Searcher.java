@@ -35,9 +35,21 @@ public class Searcher {
     public void rank(Ranker ranker){
         ranker.handleQuery();
         orderedDocs = ranker.okapiRank;
+        shrinkOrderedDocs();
         resultsStr = queryStringResults();
         if(showEntities){entitiesStr=this.stringEntities();}
 
+    }
+
+    private void shrinkOrderedDocs() {
+        if(orderedDocs.size()>50){
+            Comparator<DocMD> comp = (o1, o2) -> (int) (o2.getRank() - o1.getRank());
+            PriorityQueue<DocMD> newOrderedDocs = new PriorityQueue<DocMD>(comp);
+            for(int i =0;i<50;i++){
+                newOrderedDocs.add(orderedDocs.poll());
+            }
+            this.orderedDocs=newOrderedDocs;
+        }
     }
 
     private String stringEntities() {

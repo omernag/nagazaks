@@ -76,7 +76,7 @@ public class Ranker {
                 List<String> termList;
                 int numDocs = Integer.parseInt(termData[0]);
                 int termLine = Integer.parseInt(termLocation[1]);
-                idf.put(name, new Double((docMDs.size() - numDocs + 0.5) / (numDocs + 0.5)));
+                idf.put(name,( Math.log((docMDs.size() - numDocs + 0.5) / (numDocs + 0.5))/Math.log(2)));
                 try {
                     if (stem) {
                         termList = Files.readAllLines(Paths.get(postingPath + "/Posting_s/" + termLocation[0] + ".txt"));
@@ -113,7 +113,7 @@ public class Ranker {
                 if (term.termDocs.containsKey(doc.docno)) {
                     TermInDoc tid = term.termDocs.get(doc.docno);
                     int termfq = tid.termfq;
-                    double docTermRank = (idf.get(term.getName())+1)*((termfq*(k+1))/(termfq+k*(1-b+(b*(doc.docSize)))));
+                    double docTermRank = (idf.get(term.getName())+1)*((termfq*(k+1))/termfq+k*(1-b+(b*doc.docSize/avgLength)));
                     /*
                     if(tid.isHeader()){
                         docTermRank=docTermRank*3;
