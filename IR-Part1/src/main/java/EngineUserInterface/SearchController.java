@@ -11,6 +11,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.AbstractMap;
 
 public class SearchController {
 
@@ -46,7 +47,7 @@ public class SearchController {
                 return;
             }
             else{
-                model.handleSingleQuery(currentQuery,findEntities,semanticTreat);
+                model.handleSingleQuery(new AbstractMap.SimpleEntry<>((""+111),currentQuery),findEntities,semanticTreat,trecEval);
                 openResultWindow();
             }
         }

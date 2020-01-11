@@ -76,11 +76,14 @@ public class MyModel {
 
     }
 
-    public String handleSingleQuery(String currentQuery, boolean findEntities, boolean semanticTreat) {
+    public String handleSingleQuery(AbstractMap.SimpleEntry<String,String> ip, boolean findEntities, boolean semanticTreat,boolean trecEval) {
         //add semanticTreat to searcher contractor
-        searcher = new Searcher(currentQuery,isStemmer,findEntities);
+        searcher = new Searcher(ip.getValue(),isStemmer,findEntities);
         ranker = new Ranker(dictionary,postingPa,isStemmer,docMD,semanticTreat,searcher.queryWords);
         searcher.rank(ranker);
+        if (trecEval){
+            trecEval(ip);
+        }
         if(findEntities) {
             resultLog=searcher.getResultsStr() + "\n" + searcher.getEntitiesStr();
             return searcher.getResultsStr() + "\n" + searcher.getEntitiesStr();
@@ -89,6 +92,7 @@ public class MyModel {
         //missing the full searcher
         resultLog=searcher.getResultsStr();
         return searcher.getResultsStr();
+
     }
 
 
@@ -131,11 +135,9 @@ public class MyModel {
             res+="******************************************************************************************\n";
             res+="Query number: "+ip.getKey()+"\n";
             res+="Query: "+ip.getValue()+"\n";
-            res+=handleSingleQuery(ip.getValue().toString(),findEntities,semanticTreat);
+            res+=handleSingleQuery((AbstractMap.SimpleEntry<String, String>)ip,findEntities,semanticTreat,trecEval);
             res+="******************************************************************************************\n";
-            if (trecEval){
-                trecEval(ip);
-            }
+
         }
         resultLog = res;
     }
