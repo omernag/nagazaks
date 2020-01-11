@@ -16,18 +16,20 @@ import searchRank.Searcher;
 import java.io.IOException;
 import java.util.HashMap;
 
-/*public class Main {
+public class Main {
     public static void main(String[] args) throws IOException {
         //small main for my big friend
-        *//*String projPath = "C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1";
-        Boolean stem = false;
-        Boolean semanticTreatment = true;
-        Master m = new Master(stem);
-        m.run(stem,projPath);
-        SegmentProcesses sp = new SegmentProcesses(stem,projPath);
-        m.updateEntities(sp.getTheDictionary().indexer);
-        m.saveDocMD(projPath);
-        sp.getTheDictionary().saveToDisk();*//*
+        Master m = new Master(false);
+        IndexDictionary dic = new IndexDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",false);
+        dic.loadDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",false);
+        m.updateEntities(dic.indexer);
+        MyModel model = new MyModel();
+        model.setDictionary(dic);
+        model.setPostingPa("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1");
+        model.setDocMD(m.LoadDocMD("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1"));
+        model.handleQueryFile(System.getProperty("user.dir")+"/queires.txt",false,false,true);
+        model.saveResult("C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval");
+        Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval && treceval qrels.txt queires_TREC.txt\"");
         //change the posting path to yours
         //HashMap<String, DocMD> docsMDs = m.LoadDocMD(projPath);
         //  IndexDictionary dictionary = new IndexDictionary(projPath,stem);
@@ -40,11 +42,9 @@ import java.util.HashMap;
         //now you have dictionary and docsMDs
         //enjoy lov ya
         //System.out.println(WS4J.runWUP("milk","cheese"));
-        Ranker r = new Ranker(null,"",false,null,false,null);
-        //System.out.println(r.fetchFromWeb("bank").toString());
-        System.out.println(r.fetchFromWord2Vec("cpr").toString());
+
     }
-}*/
+}
 
 
 //public class main.java.Parser.Main {
@@ -75,7 +75,7 @@ import java.util.HashMap;
     }
 }*/
 
-public class Main extends Application {
+/*public class Main extends Application {
     MyModel model;
 
     @Override
@@ -99,7 +99,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}
+}*/
 
 
 

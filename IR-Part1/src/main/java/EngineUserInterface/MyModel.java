@@ -109,7 +109,7 @@ public class MyModel {
         try {
             docsFile = Jsoup.parse(new File(queryFilePath), "US-ASCII");
         }
-        catch (IOException e){throw new RuntimeException("file opening error");} ;
+        catch (IOException e){throw new RuntimeException("file opening error");}
         Elements queriesAsElements = docsFile.getElementsByTag("top");
         for(Element queryAsElement : queriesAsElements){
             String queryID="";
@@ -169,7 +169,7 @@ public class MyModel {
             else{
                 Files.write(Paths.get(file.getPath()+".txt"), resultLog.getBytes());
             }
-            showAlert("Successful save to \n"+file.getPath(), Alert.AlertType.INFORMATION);
+            //showAlert("Successful save to \n"+file.getPath(), Alert.AlertType.INFORMATION);/////////////////////////////////////////////////////////////////////////////////////////////
         } catch (IOException e) {
             showAlert("Something went terribly wrong, Cant save the file", Alert.AlertType.ERROR);
         }
@@ -263,5 +263,13 @@ public class MyModel {
 
     public boolean isCorpusPathSet() {
         return corpusPathSet;
+    }
+
+    public void setDictionary(IndexDictionary dictionary) {
+        this.dictionary = dictionary;
+    }
+
+    public void setDocMD(HashMap<String, DocMD> docMD) {
+        this.docMD = docMD;
     }
 }
