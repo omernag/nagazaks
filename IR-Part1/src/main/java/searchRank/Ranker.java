@@ -56,6 +56,15 @@ public class Ranker {
 
     }
 
+    private void updatequerywords() {
+        HashSet<String> updatedWords = new HashSet<>(queryWords);
+        for(String word:queryWords){
+            updatedWords.add(word.toLowerCase());
+           // updatedWords.add(word.toUpperCase());
+        }
+        queryWords=updatedWords;
+    }
+
     private double calcAvgLength() {
         double ans = 0;
         for (DocMD doc : docMDs.values()) {
@@ -68,6 +77,7 @@ public class Ranker {
         relevantDocs = new HashMap<>();
         terms = new HashMap<>();
         if(semanticTreatment){semanticTreat();}
+        updatequerywords();
         for(String name : queryWords){
             if (dictionary.indexer.containsKey(name)) {
                 Term term = new Term(name);
@@ -102,7 +112,7 @@ public class Ranker {
 
                 }
         }
-        Bm25Rank( 0.01,0.1);
+        Bm25Rank( 0.9,0.75);
     }
 
     public void Bm25Rank(double k,double b){
@@ -113,7 +123,7 @@ public class Ranker {
                 if (term.termDocs.containsKey(doc.docno)) {
                     TermInDoc tid = term.termDocs.get(doc.docno);
                     int termfq = tid.termfq;
-                    double docTermRank = (idf.get(term.getName())+1)*((termfq*(k+1))/termfq+k*(1-b+(b*doc.docSize/avgLength)));
+                    double docTermRank = (idf.get(term.getName())+1)*((termfq*(k+1))/(termfq+(k*(1-b+(b*(doc.docSize/avgLength))))));
                     /*
                     if(tid.isHeader()){
                         docTermRank=docTermRank*3;

@@ -33,6 +33,7 @@ public class Searcher {
     }
 
     public void rank(Ranker ranker){
+        Comparator<DocMD> comp = (o1, o2) -> (int) (o2.getRank() - o1.getRank());
         ranker.handleQuery();
         orderedDocs = ranker.okapiRank;
         shrinkOrderedDocs();
@@ -60,17 +61,17 @@ public class Searcher {
             DocMD md = results.get(i);
             int countEntities = md.countEntities;
             ans = ans + (i+1) + ". DocNumber: "+md.docno +".\n";
-            List<TermInDoc> entities = new LinkedList<TermInDoc>(md.entities);
+            List<TermInDoc> entities = new LinkedList<>(md.entities);
             int entitiesCount = Math.min(entities.size(),5);
             for(int j = 0; j<entitiesCount;j++){
                 TermInDoc entity = entities.get(j);
                 int fq = entity.getTermfq();
-                int rank = (entity.getTermfq()/countEntities)*1000;
+                double rank = Math.log((entity.getTermfq()*100)/countEntities);
                 if(fq!=1) {
-                    ans = ans + "\t" + (j + 1) + ". " + entity.getTerm() + ". appeared " + fq + " times. Entity rank: "+rank+".\n";
+                    ans = ans + "\t" + (j + 1) + ". " + entity.getTerm() + ". appeared " + fq + " times. Entity rank: "+(int)rank+".\n";
                 }
                 else{
-                    ans = ans + "\t" + (j + 1) + ". " + entity.getTerm() + ". appeared once.\n";
+                    ans = ans + "\t" + (j + 1) + ". " + entity.getTerm() + ". appeared once. Entity rank: "+(int)rank+".\n";
                 }
             }
             ans=ans+"\n";
@@ -79,12 +80,11 @@ public class Searcher {
     }
 
     private String queryStringResults() {
-        List<DocMD> results = new LinkedList<DocMD>(orderedDocs);
         String ans ="The most relevant Docs are:\n";
-        int size = Math.min(results.size(),50);
-        for(int i = 0; i<size;i++){
-            DocMD md = results.get(i);
-            ans = ans + (i+1) + ". DocNumber: "+md.docno +". Rank: " + ((int)md.getRank())+". \n";
+        int i=1;
+        for(DocMD md : orderedDocs){
+            ans = ans + i + ". DocNumber: "+md.docno +". Rank: " + ((int)md.getRank())+". \n";
+            i++;
         }
         return ans;
     }
