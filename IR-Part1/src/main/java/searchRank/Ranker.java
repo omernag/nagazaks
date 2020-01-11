@@ -33,11 +33,11 @@ public class Ranker {
     HashMap<String, DocMD> docMDs;
     HashMap<String,Double> idf;
     public PriorityQueue<DocMD> okapiRank;
+    public PriorityQueue<DocMD> cosineSimilarityRank;
     Double avgLength;
-    //////
     boolean semanticTreatment ;
     HashSet<String> queryWords;
-    //////
+
 
     public Ranker(IndexDictionary dictionary, String postingPath, boolean stem, HashMap<String, DocMD> docMDs, boolean semanticTreatment, HashSet<String> queryWords) {
         Comparator<DocMD> comp = (o1, o2) -> (int) (o2.getRank() - o1.getRank());
@@ -50,6 +50,7 @@ public class Ranker {
         this.docMDs=docMDs;
         this.idf = new HashMap<>();
         this.okapiRank = new PriorityQueue<>(comp);
+        this.cosineSimilarityRank = new PriorityQueue<>(comp);
         this.avgLength = calcAvgLength();
         this.semanticTreatment = semanticTreatment;
         this.queryWords=queryWords;
@@ -86,7 +87,9 @@ public class Ranker {
                 List<String> termList;
                 int numDocs = Integer.parseInt(termData[0]);
                 int termLine = Integer.parseInt(termLocation[1]);
-                idf.put(name,( Math.log((docMDs.size() - numDocs + 0.5) / (numDocs + 0.5))/Math.log(2)));
+                double idfcalc=Math.log((docMDs.size() - numDocs + 0.5) / (numDocs + 0.5))/Math.log(2);
+                if(idfcalc<0){idfcalc=0;}
+                idf.put(name,idfcalc);
                 try {
                     if (stem) {
                         termList = Files.readAllLines(Paths.get(postingPath + "/Posting_s/" + termLocation[0] + ".txt"));
@@ -112,32 +115,90 @@ public class Ranker {
 
                 }
         }
-        Bm25Rank( 0.9,0.75);
+        Bm25Rank( 0.9,0.7);
+        //saveRelevantDocs();
     }
+
+
 
     public void Bm25Rank(double k,double b){
         for(DocMD doc :relevantDocs.values()){
             double docRank = 0;
+            int numOfMatchedTerm = 0;
             for(Term term : terms.values()){
 
                 if (term.termDocs.containsKey(doc.docno)) {
                     TermInDoc tid = term.termDocs.get(doc.docno);
                     int termfq = tid.termfq;
-                    double docTermRank = (idf.get(term.getName())+1)*((termfq*(k+1))/(termfq+(k*(1-b+(b*(doc.docSize/avgLength))))));
-                    /*
+                    double docTermRank = (idf.get(term.getName()))*((termfq*(k+1))/(termfq+(k*(1-b+(b*(doc.docSize/avgLength))))));
+
                     if(tid.isHeader()){
-                        docTermRank=docTermRank*3;
+                        docTermRank=docTermRank*1.5;
                     }
                     if(tid.isEntity()){
-                        docTermRank=docTermRank*2;
+                        docTermRank=docTermRank*1.5;
                     }
-                    */
+
                     docRank+= docTermRank;
+                    numOfMatchedTerm++;
                 }
             }
-            doc.rank=docRank;
+
+            doc.rank=docRank*numOfMatchedTerm;
             okapiRank.add(doc);
         }
+    }
+
+    /*public double cosineSimilarity() {
+        for(DocMD doc :relevantDocs.values()){
+            double docRank = 0;
+            int numOfMatchedTerm = 0;
+            *//*for (:
+                 ) {
+
+            }*//*
+            for(Term term : terms.values()){
+                if (term.termDocs.containsKey(doc.docno)) {
+                    TermInDoc tid = term.termDocs.get(doc.docno);
+                    int termfq = tid.termfq;
+                    double docTermRank = 0;
+
+                    if(tid.isHeader()){
+                        docTermRank=docTermRank*1.5;
+                    }
+                    if(tid.isEntity()){
+                        docTermRank=docTermRank*1.5;
+                    }
+
+                    docRank+= docTermRank;
+                    numOfMatchedTerm++;
+                }
+            }
+
+            doc.rank=docRank*numOfMatchedTerm;
+            okapiRank.add(doc);
+        }
+
+        double[] docVector;
+        double[] qVector = new double[queryWords.size()];
+        int i = 0 ;
+        for (Term term:terms.values()
+             ) {
+            //qVector[i]=term.;
+            i++;
+        }
+    }*/
+
+    public double cosineSimilarityWork(double[] vectorA, double[] vectorB) {
+        double dotProduct = 0.0;
+        double normA = 0.0;
+        double normB = 0.0;
+        for (int i = 0; i < vectorA.length; i++) {
+            dotProduct += vectorA[i] * vectorB[i];
+            normA += Math.pow(vectorA[i], 2);
+            normB += Math.pow(vectorB[i], 2);
+        }
+        return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
     }
 
     /////
@@ -207,4 +268,18 @@ public class Ranker {
         return null;
     }
     /////
+
+    public void saveRelevantDocs(){
+        try {
+            StringBuilder sb = new StringBuilder();
+            for (String st: relevantDocs.keySet()
+                 ) {
+                sb.append(st+"\n");
+            }
+            Files.write(Paths.get("C:/Users/Asi Zaks/Desktop/08 Trec_eval/releventdocs.txt"),sb.toString().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

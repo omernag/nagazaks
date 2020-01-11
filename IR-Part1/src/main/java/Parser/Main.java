@@ -14,22 +14,30 @@ import searchRank.Ranker;
 import searchRank.Searcher;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
         //small main for my big friend
-        Master m = new Master(false);
-        IndexDictionary dic = new IndexDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",false);
-        dic.loadDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",false);
+
+        Master m = new Master(true);
+        IndexDictionary dic = new IndexDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",true);
+        dic.loadDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",true);
         m.updateEntities(dic.indexer);
         MyModel model = new MyModel();
+        model.setStemmer(true);
         model.setDictionary(dic);
         model.setPostingPa("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1");
         model.setDocMD(m.LoadDocMD("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1"));
-        model.handleQueryFile(System.getProperty("user.dir")+"/queires.txt",false,false,true);
+        model.handleQueryFile("C:/Users/Asi Zaks/Desktop/08 Trec_eval/queires.txt",false,false,true);
         model.saveResult("C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval");
-        Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval && treceval qrels.txt queires_TREC.txt\"");
+        Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval && treceval qrels.txt queires_s_TREC.txt\"");
+        //checkInclude();
+
         //change the posting path to yours
         //HashMap<String, DocMD> docsMDs = m.LoadDocMD(projPath);
         //  IndexDictionary dictionary = new IndexDictionary(projPath,stem);
@@ -43,7 +51,29 @@ public class Main {
         //enjoy lov ya
         //System.out.println(WS4J.runWUP("milk","cheese"));
 
+
     }
+
+    public static void checkInclude(){
+        try {
+            List<String> relevantList =Files.readAllLines(Paths.get("C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval\\releventdocs.txt"));
+            List<String> qrelsList =Files.readAllLines(Paths.get("C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval\\qrels1.txt"));
+            int counter = 0 ;
+            for (String s:qrelsList
+                 ) {
+                String[] part = s.split(" ");
+                if(relevantList.contains(part[0])){
+                    counter++;
+                }
+            }
+            System.out.println(counter);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
 
 

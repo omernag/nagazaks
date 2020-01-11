@@ -66,4 +66,8 @@ public class DocMD {
             }
         }
     }
+
+    public int getMaxTf() {
+        return maxTf;
+    }
 }

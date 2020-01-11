@@ -121,8 +121,7 @@ public class MyModel {
                 else if(innerElement.tagName().equals("num")){
                     queryID = ((innerElement.text()).split(" "))[1];
                 }
-                /*
-                else if(innerElement.tagName().equals("desc")){
+                /*else if(innerElement.tagName().equals("desc")){
                     query += innerElement.text().substring(12) +" ";
 
                 }*/
@@ -271,5 +270,9 @@ public class MyModel {
 
     public void setDocMD(HashMap<String, DocMD> docMD) {
         this.docMD = docMD;
+    }
+
+    public void setStemmer(boolean stemmer) {
+        isStemmer = stemmer;
     }
 }
