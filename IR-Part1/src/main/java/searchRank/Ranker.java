@@ -30,6 +30,8 @@ public class Ranker {
     boolean stem;
     HashMap<String, DocMD> relevantDocs;
     HashMap<String, Term> terms;
+    //HashMap<String, Double> termsFromSemantic;
+    ArrayList<String> termsFromSemantic;
     HashMap<String, DocMD> docMDs;
     HashMap<String,Double> idf;
     public PriorityQueue<DocMD> okapiRank;
@@ -37,16 +39,17 @@ public class Ranker {
     Double avgLength;
     boolean semanticTreatment ;
     HashSet<String> queryWords;
+    HashSet<String> descWords;
 
 
-    public Ranker(IndexDictionary dictionary, String postingPath, boolean stem, HashMap<String, DocMD> docMDs, boolean semanticTreatment, HashSet<String> queryWords) {
+    public Ranker(IndexDictionary dictionary, String postingPath, boolean stem, HashMap<String, DocMD> docMDs, boolean semanticTreatment, HashSet<String> queryWords, HashSet<String> descWords) {
         Comparator<DocMD> comp = (o1, o2) -> (int) (o2.getRank() - o1.getRank());
 
         this.dictionary = dictionary;
         this.postingPath = postingPath;
         this.stem = stem;
         this.relevantDocs = new HashMap<>();
-
+        this.termsFromSemantic=new ArrayList<>();
         this.docMDs=docMDs;
         this.idf = new HashMap<>();
         this.okapiRank = new PriorityQueue<>(comp);
@@ -54,11 +57,13 @@ public class Ranker {
         this.avgLength = calcAvgLength();
         this.semanticTreatment = semanticTreatment;
         this.queryWords=queryWords;
+        this.descWords=descWords;
 
     }
 
     private void updatequerywords() {
         HashSet<String> updatedWords = new HashSet<>(queryWords);
+        updatedWords.addAll(termsFromSemantic);
         for(String word:queryWords){
             updatedWords.add(word.toLowerCase());
            // updatedWords.add(word.toUpperCase());
@@ -131,14 +136,18 @@ public class Ranker {
                     TermInDoc tid = term.termDocs.get(doc.docno);
                     int termfq = tid.termfq;
                     double docTermRank = (idf.get(term.getName()))*((termfq*(k+1))/(termfq+(k*(1-b+(b*(doc.docSize/avgLength))))));
-
                     if(tid.isHeader()){
                         docTermRank=docTermRank*1.5;
                     }
                     if(tid.isEntity()){
                         docTermRank=docTermRank*1.5;
                     }
-
+                    if(termsFromSemantic.contains(term.getName())){
+                        docTermRank=docTermRank*0.01;
+                    }
+                    if(descWords.contains(term.getName())){
+                        docTermRank=docTermRank*0.5;
+                    }
                     docRank+= docTermRank;
                     numOfMatchedTerm++;
                 }
@@ -149,59 +158,7 @@ public class Ranker {
         }
     }
 
-    /*public double cosineSimilarity() {
-        for(DocMD doc :relevantDocs.values()){
-            double docRank = 0;
-            int numOfMatchedTerm = 0;
-            *//*for (:
-                 ) {
 
-            }*//*
-            for(Term term : terms.values()){
-                if (term.termDocs.containsKey(doc.docno)) {
-                    TermInDoc tid = term.termDocs.get(doc.docno);
-                    int termfq = tid.termfq;
-                    double docTermRank = 0;
-
-                    if(tid.isHeader()){
-                        docTermRank=docTermRank*1.5;
-                    }
-                    if(tid.isEntity()){
-                        docTermRank=docTermRank*1.5;
-                    }
-
-                    docRank+= docTermRank;
-                    numOfMatchedTerm++;
-                }
-            }
-
-            doc.rank=docRank*numOfMatchedTerm;
-            okapiRank.add(doc);
-        }
-
-        double[] docVector;
-        double[] qVector = new double[queryWords.size()];
-        int i = 0 ;
-        for (Term term:terms.values()
-             ) {
-            //qVector[i]=term.;
-            i++;
-        }
-    }*/
-
-    public double cosineSimilarityWork(double[] vectorA, double[] vectorB) {
-        double dotProduct = 0.0;
-        double normA = 0.0;
-        double normB = 0.0;
-        for (int i = 0; i < vectorA.length; i++) {
-            dotProduct += vectorA[i] * vectorB[i];
-            normA += Math.pow(vectorA[i], 2);
-            normB += Math.pow(vectorB[i], 2);
-        }
-        return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
-    }
-
-    /////
     private void semanticTreat() {
         List<String> commonW = new LinkedList<>();
         for (String word : queryWords
@@ -211,7 +168,7 @@ public class Ranker {
                 commonW.addAll(curr);
             }
         }
-        queryWords.addAll(commonW);
+        termsFromSemantic.addAll(commonW);
     }
 
     public List<String> fetchFromWeb(String word) {
@@ -252,7 +209,7 @@ public class Ranker {
             Word2VecModel word2vec = Word2VecModel.fromTextFile(new File((System.getProperty("user.dir")+("/target/classes/word2vec.txt"))));
             Searcher  word2vecSearcher = word2vec.forSearch();
 
-            List<Searcher.Match> commons = word2vecSearcher.getMatches(word,5);
+            List<Searcher.Match> commons = word2vecSearcher.getMatches(word,3);
 
             for (Searcher.Match commonWord: commons
             ) {

@@ -38,6 +38,7 @@ public class MyModel {
     private boolean isFileHandling;
     private int counter;
     private String queryFileName;
+    private HashSet<String> descWords;
 
     public MyModel() {
         //dictionary=new IndexDictionary("",false);
@@ -46,6 +47,7 @@ public class MyModel {
         corpusPathSet=false;
         isFileHandling=false;
         counter=0;
+        descWords = new HashSet<>();
     }
 
     public void connectToCorpus(String corpusPath, String postingPath) {
@@ -79,7 +81,7 @@ public class MyModel {
     public String handleSingleQuery(AbstractMap.SimpleEntry<String,String> ip, boolean findEntities, boolean semanticTreat,boolean trecEval) {
         //add semanticTreat to searcher contractor
         searcher = new Searcher(ip.getValue(),isStemmer,findEntities);
-        ranker = new Ranker(dictionary,postingPa,isStemmer,docMD,semanticTreat,searcher.queryWords);
+        ranker = new Ranker(dictionary,postingPa,isStemmer,docMD,semanticTreat,searcher.queryWords,descWords);
         searcher.rank(ranker);
         if (trecEval){
             trecEval(ip);
@@ -123,7 +125,8 @@ public class MyModel {
                 }
                 /*else if(innerElement.tagName().equals("desc")){
                     query += innerElement.text().substring(12) +" ";
-
+                    descWords.clear();
+                    descWords.addAll(Arrays.asList(innerElement.text().substring(12).split(" ")));
                 }*/
             }
             if(!query.equals("") && !queryID.equals("")){

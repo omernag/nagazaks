@@ -33,7 +33,7 @@ public class Main {
         model.setDictionary(dic);
         model.setPostingPa("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1");
         model.setDocMD(m.LoadDocMD("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1"));
-        model.handleQueryFile("C:/Users/Asi Zaks/Desktop/08 Trec_eval/queires.txt",false,false,true);
+        model.handleQueryFile("C:/Users/Asi Zaks/Desktop/08 Trec_eval/queires.txt",false,true,true);
         model.saveResult("C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval");
         Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval && treceval qrels.txt queires_s_TREC.txt\"");
         //checkInclude();
