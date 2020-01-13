@@ -18,8 +18,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
-
+    /*
 public class Main {
+
     public static void main(String[] args) throws IOException {
 
         //small main for my big friend
@@ -75,7 +76,7 @@ public class Main {
     }
 
 }
-
+*/
 
 //public class main.java.Parser.Main {
 //    public static void main(String[] args) {
@@ -105,14 +106,14 @@ public class Main {
     }
 }*/
 
-/*public class Main extends Application {
+public class Main extends Application {
     MyModel model;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         model = new MyModel();
         //--------------
-        primaryStage.setTitle("Omer's & Asi's Search Engine");
+        primaryStage.setTitle("Omer & Asi's Search Engine");
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("/MyView.fxml").openStream());
         Scene scene = new Scene(root, 450, 400);
@@ -129,7 +130,7 @@ public class Main {
     public static void main(String[] args) {
         launch(args);
     }
-}*/
+}
 
 
 

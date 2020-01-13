@@ -124,8 +124,6 @@ public class Ranker {
         //saveRelevantDocs();
     }
 
-
-
     public void Bm25Rank(double k,double b){
         for(DocMD doc :relevantDocs.values()){
             double docRank = 0;
@@ -158,7 +156,6 @@ public class Ranker {
         }
     }
 
-
     private void semanticTreat() {
         List<String> commonW = new LinkedList<>();
         for (String word : queryWords
@@ -171,7 +168,7 @@ public class Ranker {
         termsFromSemantic.addAll(commonW);
     }
 
-    public List<String> fetchFromWeb(String word) {
+    private List<String> fetchFromWeb(String word) {
         LinkedList<String> list = new LinkedList<>();
         URL datamuse = null;
         try {
