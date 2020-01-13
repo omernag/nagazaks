@@ -118,16 +118,19 @@ public class MyModel {
             String query ="";
             for(Element innerElement : queryAsElement.getAllElements()){
                 if(innerElement.tagName().equals("title")){
-                    query += innerElement.text() ;//+" ";
+                    query += innerElement.text() +" ";
                 }
                 else if(innerElement.tagName().equals("num")){
                     queryID = ((innerElement.text()).split(" "))[1];
                 }
-                /*else if(innerElement.tagName().equals("desc")){
-                    query += innerElement.text().substring(12) +" ";
+
+                else if(innerElement.tagName().equals("desc")){
+                    query += innerElement.childNodes().get(0).toString().substring(12) +" ";
                     descWords.clear();
                     descWords.addAll(Arrays.asList(innerElement.text().substring(12).split(" ")));
-                }*/
+                }
+
+
             }
             if(!query.equals("") && !queryID.equals("")){
                 this.queries.add(new AbstractMap.SimpleEntry<>(queryID, query));

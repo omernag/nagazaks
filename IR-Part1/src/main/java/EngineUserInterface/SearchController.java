@@ -47,7 +47,7 @@ public class SearchController {
                 return;
             }
             else{
-                model.handleSingleQuery(new AbstractMap.SimpleEntry<>((""+111),currentQuery),findEntities,semanticTreat,trecEval);
+                model.handleSingleQuery(new AbstractMap.SimpleEntry<>((""+352),currentQuery),findEntities,semanticTreat,trecEval);
                 openResultWindow();
             }
         }

@@ -130,7 +130,7 @@ public class Ranker {
             int numOfMatchedTerm = 0;
             for(Term term : terms.values()){
 
-                if (term.termDocs.containsKey(doc.docno)) {
+                if (term.getName().length()>2 &&term.termDocs.containsKey(doc.docno)) {
                     TermInDoc tid = term.termDocs.get(doc.docno);
                     int termfq = tid.termfq;
                     double docTermRank = (idf.get(term.getName()))*((termfq*(k+1))/(termfq+(k*(1-b+(b*(doc.docSize/avgLength))))));

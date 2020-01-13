@@ -18,20 +18,19 @@ public class Parser {
     static  HashSet<String> stopwords;
     HashMap<String, String> months;
     HashMap<String, TermInDoc> words;
-    static Pattern containDigitPat = Pattern.compile("(-)?\\d+");
+    static Pattern containDigitPat = Pattern.compile("-?\\d+");
     static Pattern isNumericPat = Pattern.compile("([+]|[-])?(\\d{1,3}[,])*\\d(\\d+)?([.]\\d+)?");
-    static Pattern startsWithDollar = Pattern.compile("\\A\\$");
-    static Pattern endsWithBn = Pattern.compile("bn\\b");
-    static Pattern endsWithM = Pattern.compile("m\\b");
-    static Pattern twodots = Pattern.compile("\\w\\.\\w\\.(\\w\\.)?");
+    static Pattern startsWithDollar = Pattern.compile("^\\$.+");
+    static Pattern endsWithBn = Pattern.compile(".+bn$");
+    static Pattern endsWithM = Pattern.compile(".+m$");
+    static Pattern twodots = Pattern.compile("\\w\\.\\w\\.\\w\\.|\\w\\.\\w\\.");
     static Pattern garbage = Pattern.compile("[\\/\\,\\|\\%\\$\\?\\.\\<\\>\\^\\&\\*\\#\\+\\=\\_\\@\\\\]");
     static Pattern garbage2 = Pattern.compile("[\\/\\,\\|\\?\\.\\<\\>\\^\\&\\*\\#\\+\\=\\_\\@\\\\]");
     static Pattern isNotAscii = Pattern.compile("[^\\p{ASCII}]");
     static Pattern legalForNames = Pattern.compile("(\\w+(\\-)?)+");
     static Pattern lineSplit = Pattern.compile("([.][/n])|([!][ ])|([?][ ])");
     static Pattern lineJunk = Pattern.compile("[\";~!|:#^&*(){}\\[\\]\\s]");
-    static Pattern twosep = Pattern.compile("--");
-    static Pattern spaces = Pattern.compile("[  ]|[   ]");
+    static Pattern twosep = Pattern.compile("\\-\\-");
     static Pattern othercheck = Pattern.compile("[$+,;.'?`!/<>\\-]");
     static Pattern geresh = Pattern.compile("['`]");
 
@@ -492,6 +491,7 @@ public class Parser {
                             String partOfName = lineAsWords[wordInd+i];
                             if(partOfName.length()<21 && legalForNames.matcher(partOfName).matches()&&Character.isUpperCase(partOfName.charAt(0))) {
                                 word = word + " " + partOfName;
+                                finalEdit(partOfName);
                                 i++;
                                 continue;
                             }
@@ -505,8 +505,22 @@ public class Parser {
                             added = true;
                             wordInd = wordInd + i -1;
                             continue;
+                        }else{
+                            currIsEntity=true;
+                            finalEdit(word);
+                            added = true;
+
+                            continue;
                         }
                     }
+                    else if(Character.isUpperCase(word.charAt(0))&&lastWord) {
+                        currIsEntity=true;
+                        finalEdit(word);
+                        added = true;
+                        continue;
+
+                    }
+
                     if (!added) {
                         finalEdit(word);
                         added = true;
@@ -540,7 +554,7 @@ public class Parser {
 
         //while (word.length() > 1 && (word.charAt(word.length() - 1) == ',' || word.charAt(word.length() - 1) == ';' || word.charAt(word.length() - 1) == '.' || word.charAt(word.length() - 1) == '\'' || word.charAt(word.length() - 1) == '?' || word.charAt(word.length() - 1) == '`' || word.charAt(word.length() - 1) == '!' || word.charAt(word.length() - 1) == '/')) {
 
-       word = returnClean(word);
+        word = returnClean(word);
         if (word.length() > 1 && !stopwords.contains(word.toLowerCase()) && ! isNotAscii.matcher(word).find()) {
 
             if(geresh.matcher(word).find()) {
@@ -549,7 +563,7 @@ public class Parser {
 
 
             if(word.length()>1){
-                if(stem){
+                if(stem&&!currIsEntity){
                     stemmer=new Stemmer();
                     char[] wordToStem = word.toCharArray();
                     stemmer.add(wordToStem,wordToStem.length);
