@@ -22,7 +22,6 @@ import java.util.*;
 import com.medallia.word2vec.Word2VecModel;
 import com.medallia.word2vec.Searcher;
 
-import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 public class Ranker {
     IndexDictionary dictionary;
@@ -140,6 +139,7 @@ public class Ranker {
                     if(tid.isEntity()){
                         docTermRank=docTermRank*1.5;
                     }
+
                     if(termsFromSemantic.contains(term.getName())){
                         docTermRank=docTermRank*0.01;
                     }
@@ -147,6 +147,7 @@ public class Ranker {
                         docTermRank=docTermRank*0.5;
                     }
                     docRank+= docTermRank;
+
                     numOfMatchedTerm++;
                 }
             }
@@ -160,9 +161,11 @@ public class Ranker {
         List<String> commonW = new LinkedList<>();
         for (String word : queryWords
         ) {
-            List<String> curr =fetchFromWord2Vec(word);
-            if (curr != null) {
-                commonW.addAll(curr);
+            if(!descWords.contains(word)) {
+                List<String> curr = fetchFromWord2Vec(word);
+                if (curr != null) {
+                    commonW.addAll(curr);
+                }
             }
         }
         termsFromSemantic.addAll(commonW);
@@ -222,7 +225,7 @@ public class Ranker {
         return null;
     }
     /////
-
+/*
     public void saveRelevantDocs(){
         try {
             StringBuilder sb = new StringBuilder();
@@ -235,5 +238,5 @@ public class Ranker {
             e.printStackTrace();
         }
     }
-
+*/
 }

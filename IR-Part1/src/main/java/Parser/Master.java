@@ -13,7 +13,7 @@ import java.util.*;
 public class Master {
 
 
-    private HashMap<String, DocMD> docsMDs;
+    public HashMap<String, DocMD> docsMDs;
     private TermsInDocList[] wordsToWrite;
     private ArrayList<DocText> fileTexts;
     private ReadFile rf;

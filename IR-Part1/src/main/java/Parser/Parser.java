@@ -490,6 +490,10 @@ public class Parser {
                         while(wordInd+i<=lineAsWords.length-1){
                             String partOfName = lineAsWords[wordInd+i];
                             if(partOfName.length()<21 && legalForNames.matcher(partOfName).matches()&&Character.isUpperCase(partOfName.charAt(0))) {
+                                if(!added){
+                                    finalEdit(word);
+                                    added=true;
+                                }
                                 word = word + " " + partOfName;
                                 finalEdit(partOfName);
                                 i++;
@@ -504,12 +508,6 @@ public class Parser {
                             finalEdit(word);
                             added = true;
                             wordInd = wordInd + i -1;
-                            continue;
-                        }else{
-                            currIsEntity=true;
-                            finalEdit(word);
-                            added = true;
-
                             continue;
                         }
                     }

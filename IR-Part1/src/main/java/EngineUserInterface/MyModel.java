@@ -60,6 +60,7 @@ public class MyModel {
             SegmentProcesses sgm = new SegmentProcesses(isStemmer, postingPath);
             m.updateEntities(sgm.getTheDictionary().indexer);
             m.saveDocMD(postingPath);
+            this.docMD=m.docsMDs;
             long finishTimeIndex = System.nanoTime();
             dictionary = sgm.getTheDictionary();
             infoOnRun = "RunTime Information:\n" + "Number of indexed docs: " + m.getDocAmount() + "\n" +
@@ -93,6 +94,7 @@ public class MyModel {
         //resultLog = searcher
         //missing the full searcher
         resultLog=searcher.getResultsStr();
+
         return searcher.getResultsStr();
 
     }
@@ -102,6 +104,7 @@ public class MyModel {
         //missing the full searcher - get result and stuff
         //do some for loop here
         //but first load the file
+        trecEvalStr="";
         List<String> results = new ArrayList<>();
         queryFileName=new File(queryFilePath).getName();
         this.queries = new ArrayList<>();
@@ -123,13 +126,13 @@ public class MyModel {
                 else if(innerElement.tagName().equals("num")){
                     queryID = ((innerElement.text()).split(" "))[1];
                 }
-
+/*
                 else if(innerElement.tagName().equals("desc")){
                     query += innerElement.childNodes().get(0).toString().substring(12) +" ";
                     descWords.clear();
                     descWords.addAll(Arrays.asList(innerElement.text().substring(12).split(" ")));
                 }
-
+*/
 
             }
             if(!query.equals("") && !queryID.equals("")){
