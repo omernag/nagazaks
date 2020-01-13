@@ -501,13 +501,13 @@ public class Parser {
                         if(i>1){
                             //Entity
                             currIsEntity=true;
-                            finalEdit(word);
+                            finalEdit(word.toUpperCase());
                             added = true;
                             wordInd = wordInd + i -1;
                             continue;
                         }else{
                             currIsEntity=true;
-                            finalEdit(word);
+                            finalEdit(word.toUpperCase());
                             added = true;
 
                             continue;
@@ -515,7 +515,7 @@ public class Parser {
                     }
                     else if(Character.isUpperCase(word.charAt(0))&&lastWord) {
                         currIsEntity=true;
-                        finalEdit(word);
+                        finalEdit(word.toUpperCase());
                         added = true;
                         continue;
 
