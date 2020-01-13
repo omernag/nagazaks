@@ -66,7 +66,7 @@ public class Ranker {
         updatedWords.addAll(termsFromSemantic);
         for(String word:queryWords){
             updatedWords.add(word.toLowerCase());
-           // updatedWords.add(word.toUpperCase());
+            // updatedWords.add(word.toUpperCase());
         }
         queryWords=updatedWords;
     }
@@ -118,8 +118,9 @@ public class Ranker {
                     e.printStackTrace();
                 }
 
-                }
+            }
         }
+
         Bm25Rank( 0.9,0.7);
         //saveRelevantDocs();
     }
@@ -146,7 +147,7 @@ public class Ranker {
                         docTermRank=docTermRank*0.01;
                     }
                     if(descWords.contains(term.getName())){
-                        docTermRank=docTermRank*0.5;
+                        docTermRank=docTermRank*1.05;
                     }
                     docRank+= docTermRank;
                     numOfMatchedTerm++;
@@ -230,7 +231,7 @@ public class Ranker {
         try {
             StringBuilder sb = new StringBuilder();
             for (String st: relevantDocs.keySet()
-                 ) {
+            ) {
                 sb.append(st+"\n");
             }
             Files.write(Paths.get("C:/Users/Asi Zaks/Desktop/08 Trec_eval/releventdocs.txt"),sb.toString().getBytes());

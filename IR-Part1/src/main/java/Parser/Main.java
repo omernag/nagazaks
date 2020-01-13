@@ -25,19 +25,19 @@ public class Main {
         //small main for my big friend
 
         Master m = new Master(true);
-        IndexDictionary dic = new IndexDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",true);
-        dic.loadDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",true);
+        IndexDictionary dic = new IndexDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",false);
+        dic.loadDictionary("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1",false);
         m.updateEntities(dic.indexer);
         MyModel model = new MyModel();
-        model.setStemmer(true);
+        model.setStemmer(false);
         model.setDictionary(dic);
         model.setPostingPa("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1");
         model.setDocMD(m.LoadDocMD("C:\\Users\\Asi Zaks\\Documents\\GitHub\\nagazaks\\IR-Part1"));
-        model.handleQueryFile("C:/Users/Asi Zaks/Desktop/08 Trec_eval/queires.txt",false,true,true);
+        model.handleQueryFile("C:/Users/Asi Zaks/Desktop/08 Trec_eval/queires.txt",true,true,true);
         model.saveResult("C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval");
-        Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval && treceval qrels.txt queires_s_TREC.txt\"");
+        //Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd C:\\Users\\Asi Zaks\\Desktop\\08 Trec_eval && treceval qrels.txt queires_s_TREC.txt\"");
         //checkInclude();
-
+        System.out.println("done");
         //change the posting path to yours
         //HashMap<String, DocMD> docsMDs = m.LoadDocMD(projPath);
         //  IndexDictionary dictionary = new IndexDictionary(projPath,stem);

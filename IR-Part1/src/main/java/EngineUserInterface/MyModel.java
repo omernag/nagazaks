@@ -123,11 +123,11 @@ public class MyModel {
                 else if(innerElement.tagName().equals("num")){
                     queryID = ((innerElement.text()).split(" "))[1];
                 }
-                /*else if(innerElement.tagName().equals("desc")){
+                else if(innerElement.tagName().equals("desc")){
                     query += innerElement.text().substring(12) +" ";
-                    descWords.clear();
-                    descWords.addAll(Arrays.asList(innerElement.text().substring(12).split(" ")));
-                }*/
+                    //descWords.clear();
+                    //descWords.addAll(Arrays.asList(innerElement.text().substring(12).split(" ")));
+                }
             }
             if(!query.equals("") && !queryID.equals("")){
                 this.queries.add(new AbstractMap.SimpleEntry<>(queryID, query));
