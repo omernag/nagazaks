@@ -78,7 +78,7 @@ public class Ranker {
         updatedWords.addAll(termsFromSemantic);
         for(String word:queryWords){
             updatedWords.add(word.toLowerCase());
-           // updatedWords.add(word.toUpperCase());
+            // updatedWords.add(word.toUpperCase());
         }
         queryWords=updatedWords;
     }
@@ -137,7 +137,7 @@ public class Ranker {
                     e.printStackTrace();
                 }
 
-                }
+            }
         }
         Bm25Rank( 0.9,0.7);
         //saveRelevantDocs();
@@ -262,10 +262,10 @@ public class Ranker {
             initialStream.close();
             outStream.close();
 
-          //  System.out.println(Ranker.class.getResource("/word2vec.txt").toURI().getPath());
+            //  System.out.println(Ranker.class.getResource("/word2vec.txt").toURI().getPath());
             Word2VecModel word2vec = Word2VecModel.fromTextFile(targetFile);
             Searcher  word2vecSearcher = word2vec.forSearch();
-
+          //  targetFile.delete();
             List<Searcher.Match> commons = word2vecSearcher.getMatches(word,3);
 
             for (Searcher.Match commonWord: commons
