@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.AbstractMap;
 
+/**
+ * This class is the controller of the Search mechanizem
+ */
 public class SearchController {
 
     public AnchorPane pane;
@@ -35,10 +38,17 @@ public class SearchController {
     private boolean trecEval;
     private ResultController resultC;
 
+    /**
+     * Enter the query manually
+     */
     public void enterQuery(){
         currentQuery = tf_query.textProperty().get();
     }
 
+    /**
+     * Get the input query and sends it to the model
+     * @param event
+     */
     public void singleQuery(ActionEvent event){
         enterQuery();
         if(currentQuery!=null){
@@ -57,10 +67,17 @@ public class SearchController {
 
     }
 
+    /**
+     * Enter the query file path manually
+     */
     public void typeQueryPath(){
         queryFilePath = tf_pathQueries.textProperty().get();
     }
 
+    /**
+     * Browse for the query file path
+     * @param event
+     */
     public void browseQueries(ActionEvent event){
         Stage browse = new Stage();
         browse.setTitle("Queries File");
@@ -77,6 +94,10 @@ public class SearchController {
         }
     }
 
+    /**
+     * Get the input query file and sends it to the model
+     * @param event
+     */
     public void pressGoBig(ActionEvent event) {
         if(queryFilePath==null || queryFilePath.length()==0){
             typeQueryPath();
@@ -89,6 +110,9 @@ public class SearchController {
         openResultWindow();
     }
 
+    /**
+     * Open the result display window
+     */
     private void openResultWindow() {
         if(model.getResult()!=null) {
             Parent root;
@@ -110,14 +134,16 @@ public class SearchController {
         }
     }
 
-    public void closeWindow(ActionEvent event) {
-        ((Stage) ((Node) (event.getSource())).getScene().getWindow()).close();
-    }
-
+    /**
+     * @return model
+     */
     public MyModel getModel() {
         return model;
     }
 
+    /**
+     * @param model
+     */
     public void setModel(MyModel model) {
         this.model = model;
         findEntities=false;
@@ -125,19 +151,34 @@ public class SearchController {
         trecEval=false;
     }
 
+    /**
+     * @param alertMessage
+     */
     private void showAlert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(alertMessage);
         alert.show();
     }
 
+    /**
+     * flips the boolean after check click
+     * @param event
+     */
     public void checkBoxEntities(ActionEvent event) {
         findEntities=!findEntities;
     }
 
+    /**
+     * flips the boolean after check click
+     * @param event
+     */
     public void checkBoxSemantic(ActionEvent event) {
         semanticTreat=!semanticTreat;
     }
 
+    /**
+     * flips the boolean after check click
+     * @param event
+     */
     public void checkBoxTrec(ActionEvent event) { trecEval=!trecEval; }
 }

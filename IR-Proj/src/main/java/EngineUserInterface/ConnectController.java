@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class is the controller of the Connect procedure
+ */
 public class ConnectController {
 
     @FXML
@@ -33,6 +36,10 @@ public class ConnectController {
     private boolean corpusPathSet;
     private boolean postingPathSet;
 
+    /**
+     * Browse path to corpus directory
+     * @param event
+     */
     public void browseCorpus(ActionEvent event) {
         corpusPathSet=false;
         Stage saveStage = new Stage();
@@ -50,6 +57,10 @@ public class ConnectController {
         btn_accept.setDisable(false);
     }
 
+    /**
+     * Enter Corpus directory manually
+     * @param event
+     */
     public void typeCorpusPath(ActionEvent event) {
         corpusPathSet=false;
         corpusPath = tf_pathCorpus.textProperty().get();
@@ -59,6 +70,10 @@ public class ConnectController {
         btn_accept.setDisable(false);
     }
 
+    /**
+     * Browse path to Posting directory
+     * @param event
+     */
     public void browsePosting(ActionEvent event) {
         postingPathSet=false;
         Stage saveStage = new Stage();
@@ -75,6 +90,11 @@ public class ConnectController {
         }
         btn_accept.setDisable(false);
     }
+
+    /**
+     * Enter Posting directory manually
+     * @param event
+     */
     public void typePostingPath(ActionEvent event) {
         postingPathSet=false;
         postingPath = tf_pathPosting.textProperty().get();
@@ -84,14 +104,25 @@ public class ConnectController {
         btn_accept.setDisable(false);
     }
 
+    /**
+     * @return model object
+     */
     public MyModel getModel() {
         return model;
     }
 
+    /**
+     * Closes the current window
+     * @param event
+     */
     public void pressAccept(ActionEvent event) {
         ((Stage) ((Node) (event.getSource())).getScene().getWindow()).close();
     }
 
+    /**
+     * Initializes the model
+     * @param model
+     */
     public void setModel(MyModel model) {
         this.model = model;
         corpusPathSet=false;

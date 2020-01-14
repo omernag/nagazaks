@@ -13,6 +13,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class parsers the files for terms
+ * Also parse the queries for terms
+ */
 public class Parser {
     String docno;
     static  HashSet<String> stopwords;
@@ -40,7 +44,9 @@ public class Parser {
     boolean currIsHeader;
 
 
-
+    /**
+     * @param stem
+     */
     public Parser(boolean stem) {
         this.months = new HashMap<>();
         setMonths();
@@ -48,6 +54,9 @@ public class Parser {
         if(stopwords==null){stopwords = new HashSet<>();}
     }
 
+    /**
+     * Sets month data
+     */
     private void setMonths() {
         months.put("jan", "01");
         months.put("january", "01");
@@ -74,6 +83,12 @@ public class Parser {
         months.put("december", "12");
     }
 
+    /**
+     * Parsing of a list of document
+     *
+     * @param dt
+     * @return
+     */
     public DocMD handleDoc (DocText dt){
         DocMD doc = new DocMD(dt.getDocno());
         this.docno=dt.getDocno();
@@ -87,6 +102,11 @@ public class Parser {
         return doc;
     }
 
+    /**
+     * calculate the size of the doc
+     * @param words
+     * @return
+     */
     private int calcDocSize(Map<String, TermInDoc> words) {
         int counter = 0;
         for(TermInDoc tid : words.values()){
@@ -96,6 +116,11 @@ public class Parser {
     }
 
 
+    /**
+     * Calculate the maximum frequency of all terms
+     * @param words
+     * @return
+     */
     private int calcMaxTF(Map<String,TermInDoc> words){
         int ans = Integer.MIN_VALUE;
         for (TermInDoc tid : words.values() ){
@@ -104,6 +129,12 @@ public class Parser {
         return ans;
     }
 
+    /**
+     * return the term with the max frequency
+     * @param words
+     * @param maxTf
+     * @return
+     */
     private String maxFreqTerm(Map<String,TermInDoc> words,int maxTf){
         String ans = "";
         for (TermInDoc tid : words.values() ){
@@ -115,6 +146,12 @@ public class Parser {
         return ans;
     }
 
+    /**
+     * Parsing a single doc
+     * @param text
+     * @param isHeader
+     * @return
+     */
     public Map<String, TermInDoc> parse(String text,boolean isHeader) {
 
         currIsHeader=isHeader;
@@ -533,6 +570,11 @@ public class Parser {
     }
 
 
+    /**
+     * turns string to its double representation
+     * @param s
+     * @return
+     */
     private double wordToNum(String s) {
         if(s.charAt(0)=='+'){
             s=s.substring(1);
@@ -548,6 +590,10 @@ public class Parser {
     }
 
 
+    /**
+     * This method activates the Porter Stemmer
+     * @param word
+     */
     public void finalEdit(String word) {
 
         //while (word.length() > 1 && (word.charAt(word.length() - 1) == ',' || word.charAt(word.length() - 1) == ';' || word.charAt(word.length() - 1) == '.' || word.charAt(word.length() - 1) == '\'' || word.charAt(word.length() - 1) == '?' || word.charAt(word.length() - 1) == '`' || word.charAt(word.length() - 1) == '!' || word.charAt(word.length() - 1) == '/')) {
@@ -585,6 +631,10 @@ public class Parser {
 
     }
 
+    /**
+     * This method changes the word to lower case and adding it to the terms list
+     * @param word
+     */
     public void addToWords(String word){
         TermInDoc tid;
         if(Character.isLetter(word.charAt(0))) {
@@ -627,6 +677,10 @@ public class Parser {
 
     }
 
+    /**
+     * @param word
+     * @return the term without weird characters
+     */
     public String returnClean(String word){
         while (word.length() > 1 && othercheck.matcher(word.charAt(word.length()-1)+"").find()){
             if ((twodots.matcher(word)).matches()) {
@@ -643,6 +697,10 @@ public class Parser {
         return word;
     }
 
+    /**
+     * Addes an occurrence to a term
+     * @param word
+     */
     public void addRuleWord(String word) {
         if (words.containsKey(word)) {
             words.get(word).termfq++;
@@ -653,6 +711,10 @@ public class Parser {
         }
     }
 
+    /**
+     * @param num
+     * @return String represntation of a double
+     */
     public String numToString(double num) {
         String numS = num + "";
         if (numS.indexOf('.') != -1) {
@@ -666,6 +728,10 @@ public class Parser {
 
     }
 
+    /**
+     * @param num
+     * @return the number in the correct format B/M/K
+     */
     public boolean handleNumber(double num){
         String word="";
         if (num >= 1000000000 || num <= -1000000000) {

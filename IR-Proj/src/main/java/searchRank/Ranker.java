@@ -9,10 +9,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
@@ -23,6 +21,9 @@ import com.medallia.word2vec.Word2VecModel;
 import com.medallia.word2vec.Searcher;
 
 
+/**
+ * This class does the actual ranking of the queries
+ */
 public class Ranker {
     IndexDictionary dictionary;
     String postingPath;
@@ -41,6 +42,15 @@ public class Ranker {
     HashSet<String> descWords;
 
 
+    /**
+     * @param dictionary
+     * @param postingPath
+     * @param stem
+     * @param docMDs
+     * @param semanticTreatment
+     * @param queryWords
+     * @param descWords
+     */
     public Ranker(IndexDictionary dictionary, String postingPath, boolean stem, HashMap<String, DocMD> docMDs, boolean semanticTreatment, HashSet<String> queryWords, HashSet<String> descWords) {
         Comparator<DocMD> comp = (o1, o2) -> (int) (o2.getRank() - o1.getRank());
 
@@ -60,6 +70,9 @@ public class Ranker {
 
     }
 
+    /**
+     * Addes the words from the semantic treat to the query
+     */
     private void updatequerywords() {
         HashSet<String> updatedWords = new HashSet<>(queryWords);
         updatedWords.addAll(termsFromSemantic);
@@ -70,6 +83,9 @@ public class Ranker {
         queryWords=updatedWords;
     }
 
+    /**
+     * @return calcs the avg length of a doc in the corpus
+     */
     private double calcAvgLength() {
         double ans = 0;
         for (DocMD doc : docMDs.values()) {
@@ -78,6 +94,10 @@ public class Ranker {
         return (ans/docMDs.size());
     }
 
+    /**
+     * Working function for a single query
+     * Saving the relevant docs to a Map
+     */
     public void handleQuery() {
         relevantDocs = new HashMap<>();
         terms = new HashMap<>();
@@ -123,6 +143,11 @@ public class Ranker {
         //saveRelevantDocs();
     }
 
+    /**
+     * The ranking algorithm
+     * @param k
+     * @param b
+     */
     public void Bm25Rank(double k,double b){
         for(DocMD doc :relevantDocs.values()){
             double docRank = 0;
@@ -157,6 +182,10 @@ public class Ranker {
         }
     }
 
+    /**
+     * Does the semantic treat to all the words in the query
+     * based on word2vec or web
+     */
     private void semanticTreat() {
         List<String> commonW = new LinkedList<>();
         for (String word : queryWords
@@ -171,6 +200,11 @@ public class Ranker {
         termsFromSemantic.addAll(commonW);
     }
 
+    /**
+     * web semantic treat
+     * @param word
+     * @return
+     */
     private List<String> fetchFromWeb(String word) {
         LinkedList<String> list = new LinkedList<>();
         URL datamuse = null;
@@ -203,10 +237,33 @@ public class Ranker {
         return null;
     }
 
+    /**
+     * Word2Vec semantic treat
+     * @param word
+     * @return
+     */
     public List<String> fetchFromWord2Vec(String word){
         try {
             List<String> returnList = new LinkedList<>();
-            Word2VecModel word2vec = Word2VecModel.fromTextFile(new File((System.getProperty("user.dir")+("/target/classes/word2vec.txt"))));
+
+            InputStream initialStream = getClass().getResourceAsStream("/word2vec.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(initialStream));
+            String line ="";
+            File targetFile = new File(System.getProperty("user.dir")+"/word2vec2.txt");
+            OutputStream outStream = new FileOutputStream(targetFile);
+            if(targetFile.exists()){
+                targetFile.delete();
+            }
+
+            while((line =reader.readLine())!=null) {
+
+                outStream.write((line+'\n').getBytes());
+            }
+            initialStream.close();
+            outStream.close();
+
+          //  System.out.println(Ranker.class.getResource("/word2vec.txt").toURI().getPath());
+            Word2VecModel word2vec = Word2VecModel.fromTextFile(targetFile);
             Searcher  word2vecSearcher = word2vec.forSearch();
 
             List<Searcher.Match> commons = word2vecSearcher.getMatches(word,3);

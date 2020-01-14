@@ -14,16 +14,27 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * This class represent a list of terms in the corpus
+ */
 @SuppressWarnings("ALL")
 public class TermsInDocList {
 
     private LinkedList<TermInDoc> list;
     public static int[] insideCounter = new int[20];
 
+    /**
+     * initilaze
+     */
     public TermsInDocList() {
         this.list = new LinkedList<>();
     }
 
+    /**
+     * Saves a terms list to the destination segment file
+     * @param i
+     * @throws IOException
+     */
     public void tidToJson(int i) throws IOException {
         JSONObject tid = new JSONObject();
         for (TermInDoc term : list) {
@@ -33,6 +44,12 @@ public class TermsInDocList {
         Files.write(Paths.get("./Segment/tTj-" + i + ".txt"), (tid.toJSONString() + "\n").getBytes(), Files.exists(Paths.get("./Segment/tTj-" + i + ".txt")) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
     }
 
+    /**
+     * Loading a segment file to terms list
+     * @param location
+     * @return
+     * @throws IOException
+     */
     public LinkedList<TermInDoc> JsonToTid(String location) throws IOException {
         JSONParser parser = new JSONParser();
         LinkedList<TermInDoc> termList = new LinkedList<>();
@@ -53,10 +70,16 @@ public class TermsInDocList {
 
     }
 
+    /**
+     * @return list of terms
+     */
     public LinkedList<TermInDoc> getList() {
         return list;
     }
 
+    /**
+     * @param list
+     */
     public void setList(LinkedList<TermInDoc> list) {
         this.list = list;
     }

@@ -10,6 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+/**
+ * This class controls and activates the ReadFile and Parser
+ */
 public class Master {
 
 
@@ -20,6 +23,9 @@ public class Master {
     private Parser parser;
     private boolean stemmer;
 
+    /**
+     * @param stem
+     */
     public Master(boolean stem) {
         docsMDs = new HashMap<>();
         fileTexts = new ArrayList<>();
@@ -30,6 +36,12 @@ public class Master {
         stemmer=stem;
     }
 
+    /**
+     * The main method in this class, reads and parse the corpus
+     * @param stem
+     * @param path
+     * @throws IOException
+     */
     public void run(boolean stem,String path) throws IOException {
         int counter = 0;
         rf = new ReadFile(path);
@@ -79,11 +91,19 @@ public class Master {
         }
     }
 
+    /**
+     * @return num of docs in corpus
+     */
     public int getDocAmount(){
         return docsMDs.size();
     }
 
 
+    /**
+     * Saves all the metadata of the documents to the memory
+     * @param postingPath
+     * @throws IOException
+     */
     public void saveDocMD(String postingPath) throws IOException {
         FileWriter writer;
         if(stemmer){
@@ -99,6 +119,12 @@ public class Master {
         writer.close();
     }
 
+    /**
+     * Load the Docs metadata from the memory to ram
+     * @param postingPath
+     * @return
+     * @throws IOException
+     */
     public HashMap LoadDocMD(String postingPath) throws IOException {/// find who call
         List<String> termList;
         if(stemmer){
@@ -117,6 +143,10 @@ public class Master {
         return docsMDs;
     }
 
+    /**
+     * This method update the priority queue of each docs and its entities prioritized by their frequency
+     * @param index
+     */
     public void updateEntities(TreeMap<String, String> index) {
         for(DocMD dmd:docsMDs.values()) {
             int entitiesCount = 0;

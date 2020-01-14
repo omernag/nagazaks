@@ -14,22 +14,34 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * This class reads the files that holds the docs in the corpus
+ */
 public class ReadFile {
 
     private String path;
     private String StopWordsPath;
     public List<String> filesPaths;
 
+    /**
+     * @return Stop words doc path
+     */
     public String getStopWordsPath() {
         return StopWordsPath;
     }
 
+    /**
+     * @param path
+     */
     public ReadFile(String path){
         this.path=path;
          filesPaths = new ArrayList<>();
         this.getAllPaths();
     }
 
+    /**
+     * Reading all the files in the corpus folder, and adding the paths of each file
+     */
     public void getAllPaths(){
         File dir = new File(path);
 
@@ -44,6 +56,10 @@ public class ReadFile {
         }
     }
 
+    /**
+     * Acting function for the above one
+     * @param corpus
+     */
     private void readCorpus(File corpus){
         if(corpus.isDirectory()) {
             for (File innerFolder : corpus.listFiles()) {
@@ -59,6 +75,11 @@ public class ReadFile {
         }
     }
 
+    /**
+     * Reades the stop words from the stop words file
+     * @param swFile
+     * @return
+     */
     public HashSet<String> readStopWords(File swFile){
         HashSet<String> stopwords = new HashSet<>();
         try{ BufferedReader br = new BufferedReader(new FileReader(swFile.getPath()));
@@ -73,6 +94,11 @@ public class ReadFile {
         return stopwords;
     }
 
+    /**
+     * Reads a single file and put it to a list
+     * @param path
+     * @return
+     */
     public ArrayList<DocText> handleFile(String path){
         ArrayList<DocText> docsTexts = new ArrayList<>();
         Document docsFile;

@@ -3,6 +3,9 @@ package Indexer;
 
 import java.util.*;
 
+/**
+ * This class represent a single term in the indexed Dictioanry
+ */
 public class Term {
 
     private String term;
@@ -14,6 +17,9 @@ public class Term {
     public HashMap<String,TermInDoc> termDocs;
 
 
+    /**
+     * @param term
+     */
     public Term(String term) {
         this.term = term;
         this.docFq = 0;
@@ -22,6 +28,9 @@ public class Term {
         this.termDocs = new HashMap<>();
     }
 
+    /**
+     * @param termIn term in doc
+     */
     public Term(TermInDoc termIn) {
         this.term = termIn.getTerm();
         this.docFq = 0;
@@ -32,6 +41,13 @@ public class Term {
         addOccurrence(termIn.getDocNo(), termIn.getTermfq(), termIn.isHeader(),termIn.isEntity());
     }
 
+    /**
+     * add an observed occurrence to the term list
+     * @param docNum
+     * @param termfq
+     * @param isHeader
+     * @param isEntity
+     */
     public void addOccurrence(String docNum, int termfq, boolean isHeader, boolean isEntity) {
         totalFq+=termfq;
         this.occurrence.add(docNum+","+termfq +","+isHeader+","+isEntity+"\n");
@@ -43,16 +59,25 @@ public class Term {
         }
     }
 
+    /**
+     * Calculate the total doc frequency of this term
+     */
     public void updateDocFq(){
-
         docFq=docsNames.size();
         docsNames=null;
         /*addToTopBottom(this);*/
     }
+
+    /**
+     * @return boolean isEntity
+     */
     public boolean isEntity(){
         return isEntity;
     }
 
+    /**
+     * @return turns the term to all caps
+     */
     public boolean updateToUpperCase() {
         if(Character.isUpperCase(term.charAt(0))){
             term = term.toUpperCase();
@@ -61,22 +86,37 @@ public class Term {
         return false;
     }
 
+    /**
+     * @return all occurrence
+     */
     public LinkedList<String> getOccurrence() {
         return occurrence;
     }
 
+    /**
+     * @return doc frequency
+     */
     public int getDocFq() {
         return docFq;
     }
 
+    /**
+     * @return Total corpus frequency
+     */
     public int getTotalFq() {
         return totalFq;
     }
 
+    /**
+     * @return name
+     */
     public String getName() {
         return term;
     }
 
+    /**
+     * @return string rep
+     */
     @Override
     public String toString() {
         return

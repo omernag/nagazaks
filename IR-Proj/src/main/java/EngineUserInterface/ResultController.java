@@ -10,15 +10,25 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+/**
+ * This class is the controller of the result display
+ */
 public class ResultController {
 
     public ScrollPane sp_scroll;
     private MyModel model;
 
+    /**
+     * Sets the Result print on displaying board
+     * @param model
+     */
     public void displayResult(MyModel model){
         sp_scroll.setContent(new Text(model.getResultTOPrint()));
     }
 
+    /** Saves the result to memory
+     * @param event
+     */
     public void saveResult(ActionEvent event) {
         Stage saveStage = new Stage();
         saveStage.setTitle("Save folder");
@@ -30,16 +40,18 @@ public class ResultController {
         else showAlert("Bad path, please try again");
     }
 
-    public void closeWindow(ActionEvent event) {
-        ((Stage) ((Node) (event.getSource())).getScene().getWindow()).close();
-    }
-
+    /**
+     * @param alertMessage
+     */
     private void showAlert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(alertMessage);
         alert.show();
     }
 
+    /**
+     * @param model
+     */
     public void setModel(MyModel model) {
         this.model=model;
     }

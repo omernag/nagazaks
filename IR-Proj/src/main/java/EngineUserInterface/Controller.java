@@ -15,6 +15,9 @@ import java.io.File;
 import java.io.IOException;
 
 
+/**
+ * This is the main controller of the system
+ */
 public class Controller {
 
     @FXML
@@ -42,6 +45,10 @@ public class Controller {
     public String postingPath;
 
 
+    /**
+     * Open the Set window, and get path from the user
+     * @param event
+     */
     public void pressSet(ActionEvent event) {
         Parent root;
         try {
@@ -69,6 +76,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Sends the paths to the model, and activating the Courpus indexing
+     * @param event
+     * @throws IOException
+     */
     public void pressConnect(ActionEvent event) throws IOException {
         if(model.getPostingPa()!=null&&model.getCorpusPa()!=null) {
             model.connectToCorpus(model.getCorpusPa(), model.getPostingPa());
@@ -85,6 +97,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Loading Dictionary and Doc Metadata from memory
+     * @param event
+     */
     public void pressLoad(ActionEvent event) {
         try {
             model=connectC.getModel();
@@ -103,6 +119,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Opens the Dictionary display window
+     * @param event
+     */
     public void pressDisplay(ActionEvent event) {
         if(model.getDictionary()!=null) {
             Parent root;
@@ -127,10 +147,19 @@ public class Controller {
 
     }
 
+    /**
+     * Switching the boolean after check click
+     * @param event
+     */
     public void pressStemming(ActionEvent event) {
         model.changeStemmerMode();
     }
 
+    /**
+     * Clears all the posting and dictionary files
+     * @param event
+     * @throws IOException
+     */
     public void pressClear(ActionEvent event) throws IOException {
         if(model.getPostingPa()!=null) {
             model=connectC.getModel();
@@ -162,7 +191,11 @@ public class Controller {
         }
         else showAlert("Please insert the path to the Posting files",Alert.AlertType.ERROR);
     }
-    
+
+    /**
+     * Opens the Search window
+     * @param event
+     */
     public void openSearchWindow(ActionEvent event){
         Parent root;
         try {
@@ -181,12 +214,19 @@ public class Controller {
         }
     }
 
+    /**
+     * @param alertMessage
+     * @param alertType
+     */
     private void showAlert(String alertMessage, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setContentText(alertMessage);
         alert.show();
     }
 
+    /**
+     * @param model
+     */
     public void setModel(MyModel model) {
         this.model = model;
         postingErased=false;

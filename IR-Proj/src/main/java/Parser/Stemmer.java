@@ -359,12 +359,14 @@ class Stemmer
         i_end = k+1; i = 0;
     }
 
+
     /** Test program for demonstrating the Stemmer.  It reads text from a
      * a list of files, stems each word, and writes the result to standard
      * output. Note that the word stemmed is expected to be in lower case:
      * forcing lower case must be done outside the Stemmer class.
      * Usage: Stemmer file-name file-name ...
      */
+   /*
     public static void main(String[] args)
     {
         char[] w = new char[501];
@@ -388,20 +390,20 @@ class Stemmer
                             ch = in.read();
                             if (!Character.isLetter((char) ch))
                             {
-                                /* to test add(char ch) */
+                                *//* to test add(char ch) *//*
                                 for (int c = 0; c < j; c++) s.add(w[c]);
 
-                                /* or, to test add(char[] w, int j) */
-                                /* s.add(w, j); */
+                                *//* or, to test add(char[] w, int j) *//*
+                                *//* s.add(w, j); *//*
 
                                 s.stem();
                                 {  String u;
 
-                                    /* and now, to test toString() : */
+                                    *//* and now, to test toString() : *//*
                                     u = s.toString();
 
-                                    /* to test getResultBuffer(), getResultLength() : */
-                                    /* u = new String(s.getResultBuffer(), 0, s.getResultLength()); */
+                                    *//* to test getResultBuffer(), getResultLength() : *//*
+                                    *//* u = new String(s.getResultBuffer(), 0, s.getResultLength()); *//*
 
                                     System.out.print(u);
                                 }
@@ -422,5 +424,6 @@ class Stemmer
             {  System.out.println("file " + args[i] + " not found");
                 break;
             }
-    }
+    }*/
+
 }

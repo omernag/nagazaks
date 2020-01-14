@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+/**
+ * This class represent a single document metadata, and holds all the docs metadata
+ */
 public class DocMD {
 
     public String docno;
@@ -15,15 +18,15 @@ public class DocMD {
     public Map<String, TermInDoc> words;
     public String maxFreqTerm;
 
-    public double getRank() {
-        return rank;
-    }
-
     public double rank;
     public int countEntities;
     public int docSize;
     public PriorityQueue<TermInDoc> entities;
 
+
+    /**
+     * @param docno
+     */
     public DocMD(String docno) {
         Comparator<TermInDoc> comp = (o1, o2) -> (int) (o2.getTermfq() - o1.getTermfq());
         entities = new PriorityQueue<>(comp);
@@ -31,6 +34,9 @@ public class DocMD {
 
     }
 
+    /**
+     * @param parts
+     */
     public DocMD(String[] parts) {
         Comparator<TermInDoc> comp = (o1, o2) -> (int) (o2.getTermfq() - o1.getTermfq());
         entities = new PriorityQueue<>(comp);
@@ -48,6 +54,9 @@ public class DocMD {
         rank = 0;
     }
 
+    /**
+     * @return String rep of the document
+     */
     @Override
     public String toString() {
         String toSave= maxTf + "@" + uniqueCount + "@" + maxFreqTerm + "@" + docSize + "@" + countEntities+"@";
@@ -58,6 +67,9 @@ public class DocMD {
         return toSave;
     }
 
+    /**
+     * Update the Entities count of a single document
+     */
     public void setEntities() {
         for (TermInDoc tid : words.values()) {
             if (tid.isEntity()) {
@@ -67,7 +79,11 @@ public class DocMD {
         }
     }
 
-    public int getMaxTf() {
-        return maxTf;
+
+    /**
+     * @return rank of a single doc
+     */
+    public double getRank() {
+        return rank;
     }
 }

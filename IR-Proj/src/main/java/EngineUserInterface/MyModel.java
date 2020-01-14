@@ -19,6 +19,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+/**
+ * This class is the model in the MVC, the back-end of the program
+ */
 public class MyModel {
     private IndexDictionary dictionary;
     private String corpusPa;
@@ -29,7 +32,6 @@ public class MyModel {
     private String resultLog;
     private Searcher searcher;
     private Ranker ranker;
-
     List<Map.Entry<String,String>> queries;
     private String trecEvalStr="";
 
@@ -40,6 +42,9 @@ public class MyModel {
     private String queryFileName;
     private HashSet<String> descWords;
 
+    /**
+     * Constactor for MyModel
+     */
     public MyModel() {
         //dictionary=new IndexDictionary("",false);
         isStemmer=false;
@@ -50,6 +55,11 @@ public class MyModel {
         descWords = new HashSet<>();
     }
 
+    /**
+     * Creates Postings from the Courpus
+     * @param corpusPath
+     * @param postingPath
+     */
     public void connectToCorpus(String corpusPath, String postingPath) {
         try {
             corpusPa = corpusPath;
@@ -72,6 +82,10 @@ public class MyModel {
         }
     }
 
+    /**
+     * Load Dictionary from memory
+     * @throws IOException
+     */
     public void bringUpDictionary() throws IOException {
         dictionary.loadDictionary(postingPa,isStemmer);
         Master m = new Master(isStemmer);
@@ -79,6 +93,14 @@ public class MyModel {
 
     }
 
+    /**
+     * Return the output result of documents retrieval from a single query
+     * @param ip
+     * @param findEntities
+     * @param semanticTreat
+     * @param trecEval
+     * @return
+     */
     public String handleSingleQuery(AbstractMap.SimpleEntry<String,String> ip, boolean findEntities, boolean semanticTreat,boolean trecEval) {
         //add semanticTreat to searcher contractor
         searcher = new Searcher(ip.getValue(),isStemmer,findEntities);
@@ -100,6 +122,13 @@ public class MyModel {
     }
 
 
+    /**
+     * Return the output result of documents retrieval from query file
+     * @param queryFilePath
+     * @param findEntities
+     * @param semanticTreat
+     * @param trecEval
+     */
     public void handleQueryFile(String queryFilePath, boolean findEntities, boolean semanticTreat,boolean trecEval) {
         //missing the full searcher - get result and stuff
         //do some for loop here
@@ -150,6 +179,10 @@ public class MyModel {
         resultLog = res;
     }
 
+    /**
+     * Save the output to a file in memory
+     * @param path
+     */
     public void saveResult(String path) {
         try {
             File file;
@@ -184,14 +217,17 @@ public class MyModel {
 
     }
 
-    public String getTrecEvalStr() {
-        return trecEvalStr;
-    }
-
+    /**
+     * getter for the result
+     * @return
+     */
     public String getResultTOPrint() {
         return resultLog;
     }
 
+    /**
+     * isStremmer changer for check box
+     */
     public void changeStemmerMode() {
         if(!isStemmer){
             isStemmer=true;
@@ -201,86 +237,129 @@ public class MyModel {
         }
     }
 
+    /**
+     * Resets the Dictionary
+     */
     public void forgetDictionary() {
         dictionary=null;
     }
 
+    /**
+     * getter for posting path
+     * @return postingPa
+     */
     public String getPostingPa() {
         return postingPa;
     }
 
+    /**
+     * @return the string representation of a dictionary
+     */
     public String getDictionaryToPrint() {
         return dictionary.getIndexerPrint();
     }
 
+    /**
+     * @return corpus saved path
+     */
     public String getCorpusPa() {
         return corpusPa;
     }
 
+    /**
+     * @param corpusPa
+     */
     public void setCorpusPa(String corpusPa) {
         this.corpusPa = corpusPa;
     }
 
+    /**
+     * @return boolean status
+     */
     public boolean isStemmer() {
         return isStemmer;
     }
 
+    /**
+     * @return IndexDictionary
+     */
     public IndexDictionary getDictionary() {
         return dictionary;
     }
 
+    /**
+     * @return valuable information on the system run
+     */
     public String getInfoOnRun() {
         return infoOnRun;
     }
 
+    /**
+     * @param postingPa
+     */
     public void setPostingPa(String postingPa) {
         this.postingPa = postingPa;
     }
 
+    /**
+     * InitializeDictionary
+     */
     public void initializeDictionary() {
         dictionary=new IndexDictionary(postingPa,isStemmer);
     }
 
+    /**
+     * @return the result of the retrivieval
+     */
     public String getResult() {
         return resultLog;
     }
 
+    /**
+     * @param alertMessage
+     * @param alertType
+     */
     private void showAlert(String alertMessage, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setContentText(alertMessage);
         alert.show();
     }
 
+    /**
+     * Creates trev eval proper input from result
+     * @param ip
+     */
     private void trecEval(Map.Entry ip){
         for(DocMD md : searcher.getOrderedDocs()) {
             this.trecEvalStr += ip.getKey().toString() + " 0 " + md.docno + " 1 42.38 mt\n";
         }
     }
 
+    /**
+     * @param postingPathSet
+     */
     public void setPostingPathSet(boolean postingPathSet) {
         this.postingPathSet = postingPathSet;
     }
 
+    /**
+     * @param corpusPathSet
+     */
     public void setCorpusPathSet(boolean corpusPathSet) {
         this.corpusPathSet = corpusPathSet;
     }
 
-    public boolean isPostingPathSet() {
-        return postingPathSet;
-    }
 
-    public boolean isCorpusPathSet() {
-        return corpusPathSet;
-    }
-
+    /**
+     * @param dictionary
+     */
     public void setDictionary(IndexDictionary dictionary) {
         this.dictionary = dictionary;
     }
 
-    public void setDocMD(HashMap<String, DocMD> docMD) {
-        this.docMD = docMD;
-    }
-
+    /**
+     * @param stemmer
+     */
     public void setStemmer(boolean stemmer) {
         isStemmer = stemmer;
     }

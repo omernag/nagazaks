@@ -6,6 +6,9 @@ import Parser.DocMD;
 import java.util.*;
 
 
+/**
+ * This class represent the logic of the dictionary searching
+ */
 public class Searcher {
     String query;
     Parser parser;
@@ -17,8 +20,11 @@ public class Searcher {
     String entitiesStr;
 
 
-
-
+    /**
+     * @param query
+     * @param stem
+     * @param showEntities
+     */
     public Searcher(String query, boolean stem,boolean showEntities){
         this.query=query;
         this.stem=stem;
@@ -28,10 +34,17 @@ public class Searcher {
 
     }
 
+    /**
+     * Parsing a single query
+     */
     private void parseQuery(){
         queryWords = new HashSet<>((parser.parse(query,false)).keySet());
     }
 
+    /**
+     * Ranking the query based on BM25 ranking
+     * @param ranker
+     */
     public void rank(Ranker ranker){
        // Comparator<DocMD> comp = (o1, o2) -> (int) (o2.getRank() - o1.getRank());
         ranker.handleQuery();
@@ -42,6 +55,9 @@ public class Searcher {
 
     }
 
+    /**
+     * Lowering the num of returned docs to 50
+     */
     private void shrinkOrderedDocs() {
         if(orderedDocs.size()>50){
             Comparator<DocMD> comp = (o1, o2) -> (int) (o2.getRank() - o1.getRank());
@@ -53,6 +69,9 @@ public class Searcher {
         }
     }
 
+    /**
+     * @return String rep of the 5 main entities of all docs
+     */
     private String stringEntities() {
         List<DocMD> results = new LinkedList<DocMD>(orderedDocs);
         String ans ="Each document most relevant entities are:\n \n";
@@ -79,6 +98,9 @@ public class Searcher {
         return ans;
     }
 
+    /**
+     * @return String rep of results
+     */
     private String queryStringResults() {
         String ans ="The most relevant Docs are:\n";
         int i=1;
@@ -88,14 +110,24 @@ public class Searcher {
         }
         return ans;
     }
+
+    /**
+     * @return result string
+     */
     public String getResultsStr() {
         return resultsStr;
     }
 
+    /**
+     * @return entities string
+     */
     public String getEntitiesStr() {
         return entitiesStr;
     }
 
+    /**
+     * @return relevent docs order
+     */
     public PriorityQueue<DocMD> getOrderedDocs() {
         return orderedDocs;
     }

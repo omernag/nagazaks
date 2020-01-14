@@ -8,6 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+/**
+ * This class take segments of terms from the corpus and iteratively indexing them
+ */
 public class SegmentProcesses {
 
     private HashMap<String, Term> termL;
@@ -15,6 +18,11 @@ public class SegmentProcesses {
     private String postingPath;
     private boolean stemmer;
 
+    /**
+     * @param stemmed
+     * @param postingPath
+     * @throws IOException
+     */
     public SegmentProcesses(boolean stemmed,String postingPath) throws IOException {
         this.termL = new HashMap<>();
         this.postingPath=postingPath;
@@ -22,6 +30,11 @@ public class SegmentProcesses {
         processCorpus();
     }
 
+    /**
+     * The main function of this class
+     * Indexing each segment
+     * @throws IOException
+     */
     public void processCorpus() throws IOException {
 
         TermsInDocList fromJson = new TermsInDocList();
@@ -58,6 +71,10 @@ public class SegmentProcesses {
 
     }
 
+    /**
+     * Index a single Segment file
+     * @param termsList
+     */
     private void processSegment(TermsInDocList termsList) {
         for (TermInDoc termIn : termsList.getList()) {
             if (termIn.getTerm().length() > 1 && termIn.getDocNo() != null) {
@@ -84,6 +101,9 @@ public class SegmentProcesses {
         updateEntities();
     }
 
+    /**
+     * Check that a entity occurs more than once in the corpus
+     */
     private void updateEntities() {
         Set<String> keys = new HashSet<>(termL.keySet());
         for (String key : keys) {
@@ -93,18 +113,33 @@ public class SegmentProcesses {
         }
     }
 
+    /**
+     * add an observed occurrence to the term list
+     * @param name
+     * @param docNum
+     * @param termfq
+     * @param header
+     * @param entity
+     */
     private void addOccurrenceToTerm(String name, String docNum, int termfq, boolean header, boolean entity) {
         if (termL.containsKey(name)) {
             termL.get(name).addOccurrence(docNum, termfq, header, entity);
         }
     }
 
+    /**
+     * Calculate the total doc frequency of all terms
+     */
     private void updateDocFreq() {
         for (Term trm : termL.values()) {
             trm.updateDocFq();
         }
     }
 
+    /**
+     * Check if a term always show up with a capital first letter,
+     * and if so turns it to all caps
+     */
     private void updateCaseToUpper() {
         Set<String> keys = new HashSet<>(termL.keySet());
         for (String key : keys) {
@@ -115,6 +150,9 @@ public class SegmentProcesses {
         }
     }
 
+    /**
+     * @return Dictionary
+     */
     public IndexDictionary getTheDictionary() {
         return theDictionary;
     }
