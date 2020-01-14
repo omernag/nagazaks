@@ -47,6 +47,7 @@ public class Controller {
 
     /**
      * Open the Set window, and get path from the user
+     *
      * @param event
      */
     public void pressSet(ActionEvent event) {
@@ -65,11 +66,11 @@ public class Controller {
             tf_status.textProperty().setValue("Connected");
 
             //if(model.isPostingPathSet()){
-                btn_loadDict.setDisable(false);
-                btn_clear.setDisable(false);
+            btn_loadDict.setDisable(false);
+            btn_clear.setDisable(false);
             //}
             //if(model.isCorpusPathSet()) {
-                btn_ConnectToEn.setDisable(false);
+            btn_ConnectToEn.setDisable(false);
             //}
             cbx_stemming.setDisable(false);
         } catch (Exception e) {
@@ -78,33 +79,39 @@ public class Controller {
 
     /**
      * Sends the paths to the model, and activating the Courpus indexing
+     *
      * @param event
      * @throws IOException
      */
     public void pressConnect(ActionEvent event) throws IOException {
-        if(model.getPostingPa()!=null&&model.getCorpusPa()!=null) {
-            model.connectToCorpus(model.getCorpusPa(), model.getPostingPa());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText(model.getInfoOnRun());
-            alert.show();
-            postingErased=false;
-            btn_search.setDisable(false);
-            btn_displayDict.setDisable(false);
-            btn_clear.setDisable(false);
-        }
-        else{
-            showAlert("Please Insert Address",Alert.AlertType.ERROR);
+        try {
+            if (model.getPostingPa() != null && model.getCorpusPa() != null) {
+                model.connectToCorpus(model.getCorpusPa(), model.getPostingPa());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText(model.getInfoOnRun());
+                alert.show();
+                postingErased = false;
+                btn_search.setDisable(false);
+                btn_displayDict.setDisable(false);
+                btn_clear.setDisable(false);
+            } else {
+                showAlert("Please Insert Address", Alert.AlertType.ERROR);
+            }
+        } catch (Exception e) {
+            showAlert("Something went wrong. check files are in the folder and that corpus.zip isn't.", Alert.AlertType.ERROR);
+
         }
     }
 
     /**
      * Loading Dictionary and Doc Metadata from memory
+     *
      * @param event
      */
     public void pressLoad(ActionEvent event) {
         try {
-            model=connectC.getModel();
-            if(model.getDictionary()==null){
+            model = connectC.getModel();
+            if (model.getDictionary() == null) {
                 model.initializeDictionary();
             }
             model.bringUpDictionary();
@@ -114,17 +121,18 @@ public class Controller {
             btn_search.setDisable(false);
             btn_displayDict.setDisable(false);
         } catch (Exception e) {
-            showAlert("Cant find posting in this path",Alert.AlertType.ERROR);
+            showAlert("Cant find posting in this path", Alert.AlertType.ERROR);
             tf_status.textProperty().setValue("Failed to load");
         }
     }
 
     /**
      * Opens the Dictionary display window
+     *
      * @param event
      */
     public void pressDisplay(ActionEvent event) {
-        if(model.getDictionary()!=null) {
+        if (model.getDictionary() != null) {
             Parent root;
             try {
                 Stage stage = new Stage();
@@ -140,15 +148,15 @@ public class Controller {
                 dispC.displayDictionary(model);
             } catch (Exception e) {
             }
-        }
-        else{
-            showAlert("Please Load a Dictionary first",Alert.AlertType.ERROR);
+        } else {
+            showAlert("Please Load a Dictionary first", Alert.AlertType.ERROR);
         }
 
     }
 
     /**
      * Switching the boolean after check click
+     *
      * @param event
      */
     public void pressStemming(ActionEvent event) {
@@ -157,24 +165,24 @@ public class Controller {
 
     /**
      * Clears all the posting and dictionary files
+     *
      * @param event
      * @throws IOException
      */
     public void pressClear(ActionEvent event) throws IOException {
-        if(model.getPostingPa()!=null) {
-            model=connectC.getModel();
+        if (model.getPostingPa() != null) {
+            model = connectC.getModel();
             File file;
-            if(model.isStemmer) {
-                 file = new File(model.getPostingPa()+"/Posting_s/");
-            }
-            else{
-                 file = new File(model.getPostingPa()+"/Posting/");
+            if (model.isStemmer) {
+                file = new File(model.getPostingPa() + "/Posting_s/");
+            } else {
+                file = new File(model.getPostingPa() + "/Posting/");
             }
             if (file.isDirectory()) {
                 File[] entries = file.listFiles();
                 if (entries != null) {
                     for (File entry : entries) {
-                       entry.delete();
+                        entry.delete();
                     }
                 }
             }
@@ -183,20 +191,19 @@ public class Controller {
             tf_status.textProperty().setValue("Connected. Posting and dictionary erased");
             model.forgetDictionary();
             model.setPostingPa(null);
-            postingErased=true;
-            showAlert("Posting and dictionary erased ",Alert.AlertType.INFORMATION);
-        }
-        else if(postingErased){
+            postingErased = true;
+            showAlert("Posting and dictionary erased ", Alert.AlertType.INFORMATION);
+        } else if (postingErased) {
             showAlert("Posting has already been erased", Alert.AlertType.ERROR);
-        }
-        else showAlert("Please insert the path to the Posting files",Alert.AlertType.ERROR);
+        } else showAlert("Please insert the path to the Posting files", Alert.AlertType.ERROR);
     }
 
     /**
      * Opens the Search window
+     *
      * @param event
      */
-    public void openSearchWindow(ActionEvent event){
+    public void openSearchWindow(ActionEvent event) {
         Parent root;
         try {
             Stage stage = new Stage();
@@ -229,7 +236,7 @@ public class Controller {
      */
     public void setModel(MyModel model) {
         this.model = model;
-        postingErased=false;
+        postingErased = false;
         btn_ConnectToEn.setDisable(true);
         btn_clear.setDisable(true);
         btn_displayDict.setDisable(true);

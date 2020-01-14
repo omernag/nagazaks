@@ -124,7 +124,7 @@ public class Ranker {
                         String docTermDic = termList.get(i + termLine);
                         String[] arr = docTermDic.split(",");
                         String docno = arr[0];
-                        term.addOccurrence(docno, Integer.parseInt(arr[1]), Boolean.parseBoolean(arr[2]), Boolean.parseBoolean(arr[3]));
+                        term.addOccurrence(docno, Integer.parseInt(arr[1]), (arr[2]).charAt(0) == 't', (arr[3]).charAt(0) == 't');
                         DocMD dmd = docMDs.get(docno);
                         if (!relevantDocs.containsKey(docno)) {
                             relevantDocs.put(docno, dmd);

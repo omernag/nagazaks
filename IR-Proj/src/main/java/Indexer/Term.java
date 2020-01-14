@@ -50,7 +50,7 @@ public class Term {
      */
     public void addOccurrence(String docNum, int termfq, boolean isHeader, boolean isEntity) {
         totalFq+=termfq;
-        this.occurrence.add(docNum+","+termfq +","+isHeader+","+isEntity+"\n");
+        this.occurrence.add(docNum+","+termfq +","+(isHeader?"t":"f")+","+(isEntity?"t":"f")+"\n");
         if(termDocs!=null) {
             this.termDocs.put(docNum, new TermInDoc(term, docNum, termfq, isHeader, isEntity));
         }
