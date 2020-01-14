@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="369.0" prefWidth="581.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EngineUserInterface.SearchController">
+    <Label fx:id="lbl_query" layoutX="14.0" layoutY="14.0" prefHeight="29.0" prefWidth="365.0" text="Please insert your query:">
+        <font>
+            <Font name="Levenim MT" size="18.0" />
+        </font>
+    </Label>
+    <Label fx:id="lbl_pathQueryFile" layoutX="14.0" layoutY="100.0" prefHeight="29.0" prefWidth="349.0" text="Or enter the path for the queries file:">
+        <font>
+            <Font name="Levenim MT" size="18.0" />
+        </font>
+    </Label>
+    <TextField fx:id="tf_query" layoutX="14.0" layoutY="43.0" prefHeight="39.0" prefWidth="349.0">
+        <padding>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+        </padding>
+    </TextField>
+    <TextField fx:id="tf_pathQueries" layoutX="14.0" layoutY="141.0" onAction="#typeQueryPath" prefHeight="39.0" prefWidth="349.0">
+        <padding>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+        </padding>
+    </TextField>
+    <Button fx:id="btn_goBig" layoutX="379.0" layoutY="189.0" mnemonicParsing="false" onAction="#pressGoBig" prefHeight="39.0" prefWidth="106.0" text="Run all" />
+    <Button fx:id="btn_go" layoutX="379.0" layoutY="43.0" mnemonicParsing="false" onAction="#singleQuery" prefHeight="39.0" prefWidth="106.0" text="Run query" />
+    <Button fx:id="btn_browseQueries" layoutX="379.0" layoutY="141.0" mnemonicParsing="false" onAction="#browseQueries" prefHeight="39.0" prefWidth="106.0" text="Browse" />
+   <CheckBox fx:id="cbox_findentities" layoutX="27.0" layoutY="228.0" mnemonicParsing="false" onAction="#checkBoxEntities" text="Find Entities" />
+   <CheckBox fx:id="cbox_semantic" layoutX="27.0" layoutY="268.0" mnemonicParsing="false" onAction="#checkBoxSemantic" text="Treat Semanticly" />
+   <CheckBox fx:id="cbox_trecEval" layoutX="27.0" layoutY="308.0" mnemonicParsing="false" onAction="#checkBoxTrec" text="TREC_EVAL" />
+</AnchorPane>
