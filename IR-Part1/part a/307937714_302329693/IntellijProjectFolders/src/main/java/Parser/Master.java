@@ -13,7 +13,7 @@ import java.util.*;
 public class Master {
 
 
-    public HashMap<String, DocMD> docsMDs;
+    private HashMap<String, DocMD> docsMDs;
     private TermsInDocList[] wordsToWrite;
     private ArrayList<DocText> fileTexts;
     private ReadFile rf;
@@ -94,12 +94,11 @@ public class Master {
         }
         for (Map.Entry doc: docsMDs.entrySet()
         ) {
-            writer.write(doc.getKey()+":"+doc.getValue().toString()+"\n");
+            writer.write(doc.getKey()+":"+doc.getValue().toString());
         }
-        writer.close();
     }
 
-    public HashMap LoadDocMD(String postingPath) throws IOException {/// find who call
+    public HashMap LoadDocMD(String postingPath) throws IOException {
         List<String> termList;
         if(stemmer){
             termList= Files.readAllLines(Paths.get(postingPath + "/Posting_s/docMD.txt"));
@@ -115,21 +114,5 @@ public class Master {
             docsMDs.put(parts[0],new DocMD(parts));
         }
         return docsMDs;
-    }
-
-    public void updateEntities(TreeMap<String, String> index) {
-        for(DocMD dmd:docsMDs.values()) {
-            int entitiesCount = 0;
-            Comparator<TermInDoc> comp = (o1, o2) -> (int) (o2.getTermfq() - o1.getTermfq());
-            PriorityQueue<TermInDoc> newEntities = new PriorityQueue<>(comp);
-            for (TermInDoc tid : dmd.entities) {
-                if (index.containsKey(tid.getTerm())) {
-                    entitiesCount += tid.termfq;
-                    newEntities.add(tid);
-                }
-            }
-            dmd.entities = newEntities;
-            dmd.countEntities = entitiesCount;
-        }
     }
 }

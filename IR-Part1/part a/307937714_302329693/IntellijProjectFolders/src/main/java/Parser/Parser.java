@@ -1,7 +1,6 @@
 package Parser;
 
 
-import Indexer.Term;
 import Indexer.TermInDoc;
 
 import javax.print.Doc;
@@ -18,19 +17,20 @@ public class Parser {
     static  HashSet<String> stopwords;
     HashMap<String, String> months;
     HashMap<String, TermInDoc> words;
-    static Pattern containDigitPat = Pattern.compile("-?\\d+");
+    static Pattern containDigitPat = Pattern.compile("(-)?\\d+");
     static Pattern isNumericPat = Pattern.compile("([+]|[-])?(\\d{1,3}[,])*\\d(\\d+)?([.]\\d+)?");
-    static Pattern startsWithDollar = Pattern.compile("^\\$.+");
-    static Pattern endsWithBn = Pattern.compile(".+bn$");
-    static Pattern endsWithM = Pattern.compile(".+m$");
-    static Pattern twodots = Pattern.compile("\\w\\.\\w\\.\\w\\.|\\w\\.\\w\\.");
+    static Pattern startsWithDollar = Pattern.compile("\\A\\$");
+    static Pattern endsWithBn = Pattern.compile("bn\\b");
+    static Pattern endsWithM = Pattern.compile("m\\b");
+    static Pattern twodots = Pattern.compile("\\w\\.\\w\\.(\\w\\.)?");
     static Pattern garbage = Pattern.compile("[\\/\\,\\|\\%\\$\\?\\.\\<\\>\\^\\&\\*\\#\\+\\=\\_\\@\\\\]");
     static Pattern garbage2 = Pattern.compile("[\\/\\,\\|\\?\\.\\<\\>\\^\\&\\*\\#\\+\\=\\_\\@\\\\]");
     static Pattern isNotAscii = Pattern.compile("[^\\p{ASCII}]");
     static Pattern legalForNames = Pattern.compile("(\\w+(\\-)?)+");
     static Pattern lineSplit = Pattern.compile("([.][/n])|([!][ ])|([?][ ])");
     static Pattern lineJunk = Pattern.compile("[\";~!|:#^&*(){}\\[\\]\\s]");
-    static Pattern twosep = Pattern.compile("\\-\\-");
+    static Pattern twosep = Pattern.compile("--");
+    static Pattern spaces = Pattern.compile("[  ]|[   ]");
     static Pattern othercheck = Pattern.compile("[$+,;.'?`!/<>\\-]");
     static Pattern geresh = Pattern.compile("['`]");
 
@@ -80,21 +80,10 @@ public class Parser {
         doc.words = parse(dt.getInnerText(),false);
         doc.words.putAll(parse(dt.getHeader(),true));
         doc.maxTf = calcMaxTF(doc.words);
-        doc.maxFreqTerm = maxFreqTerm(doc.words,doc.maxTf);
+        doc.maxFreqTerm = maxFreqTerm(words,doc.maxTf);
         doc.uniqueCount = doc.words.size();
-        doc.docSize = calcDocSize(doc.words);
-        doc.setEntities();
         return doc;
     }
-
-    private int calcDocSize(Map<String, TermInDoc> words) {
-        int counter = 0;
-        for(TermInDoc tid : words.values()){
-            counter+=tid.getTermfq();
-        }
-        return counter;
-    }
-
 
     private int calcMaxTF(Map<String,TermInDoc> words){
         int ans = Integer.MIN_VALUE;
@@ -490,12 +479,7 @@ public class Parser {
                         while(wordInd+i<=lineAsWords.length-1){
                             String partOfName = lineAsWords[wordInd+i];
                             if(partOfName.length()<21 && legalForNames.matcher(partOfName).matches()&&Character.isUpperCase(partOfName.charAt(0))) {
-                                if(!added){
-                                    finalEdit(word);
-                                    added=true;
-                                }
                                 word = word + " " + partOfName;
-                                finalEdit(partOfName);
                                 i++;
                                 continue;
                             }
@@ -511,14 +495,6 @@ public class Parser {
                             continue;
                         }
                     }
-                    else if(Character.isUpperCase(word.charAt(0))&&lastWord) {
-                        currIsEntity=true;
-                        finalEdit(word);
-                        added = true;
-                        continue;
-
-                    }
-
                     if (!added) {
                         finalEdit(word);
                         added = true;
@@ -552,7 +528,7 @@ public class Parser {
 
         //while (word.length() > 1 && (word.charAt(word.length() - 1) == ',' || word.charAt(word.length() - 1) == ';' || word.charAt(word.length() - 1) == '.' || word.charAt(word.length() - 1) == '\'' || word.charAt(word.length() - 1) == '?' || word.charAt(word.length() - 1) == '`' || word.charAt(word.length() - 1) == '!' || word.charAt(word.length() - 1) == '/')) {
 
-        word = returnClean(word);
+       word = returnClean(word);
         if (word.length() > 1 && !stopwords.contains(word.toLowerCase()) && ! isNotAscii.matcher(word).find()) {
 
             if(geresh.matcher(word).find()) {
@@ -561,7 +537,7 @@ public class Parser {
 
 
             if(word.length()>1){
-                if(stem&&!currIsEntity){
+                if(stem){
                     stemmer=new Stemmer();
                     char[] wordToStem = word.toCharArray();
                     stemmer.add(wordToStem,wordToStem.length);
@@ -610,17 +586,17 @@ public class Parser {
             //new word
             else if (Character.isUpperCase(word.charAt(0))) {
                 //add upper
-                tid = new TermInDoc(upper,docno,1,currIsHeader,currIsEntity);
+                tid = new TermInDoc(upper,docno,1,false,currIsEntity);
                 words.put(upper,tid);
             } else {
                 //add lower
-                tid = new TermInDoc(lower,docno,1,currIsHeader,currIsEntity);
+                tid = new TermInDoc(lower,docno,1,false,currIsEntity);
                 words.put(lower,tid);
             }
         }
         else{
             //add original
-            tid = new TermInDoc(word,docno,1,currIsHeader,currIsEntity);
+            tid = new TermInDoc(word,docno,1,false,currIsEntity);
             words.put(word,tid);
         }
 
@@ -648,7 +624,7 @@ public class Parser {
             words.get(word).termfq++;
         }
         else{
-            TermInDoc tid = new TermInDoc(word,docno,1,currIsHeader,currIsEntity);
+            TermInDoc tid = new TermInDoc(word,docno,1,false,currIsEntity);
             words.put(word,tid);
         }
     }

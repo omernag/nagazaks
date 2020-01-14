@@ -33,7 +33,7 @@ public class Searcher {
     }
 
     public void rank(Ranker ranker){
-        Comparator<DocMD> comp = (o1, o2) -> (int) (o2.getRank() - o1.getRank());
+       // Comparator<DocMD> comp = (o1, o2) -> (int) (o2.getRank() - o1.getRank());
         ranker.handleQuery();
         orderedDocs = ranker.okapiRank;
         shrinkOrderedDocs();
@@ -66,7 +66,7 @@ public class Searcher {
             for(int j = 0; j<entitiesCount;j++){
                 TermInDoc entity = entities.get(j);
                 int fq = entity.getTermfq();
-                double rank = Math.log((entity.getTermfq()*100)/countEntities);
+                double rank = Math.log(((entity.getTermfq())*100/countEntities)+1)/Math.log(2);
                 if(fq!=1) {
                     ans = ans + "\t" + (j + 1) + ". " + entity.getTerm() + ". appeared " + fq + " times. Entity rank: "+(int)rank+".\n";
                 }

@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
 public class DocMD {
 
     public String docno;
-    int maxTf;
+    public int maxTf;
     int uniqueCount;
     public Map<String, TermInDoc> words;
     public String maxFreqTerm;

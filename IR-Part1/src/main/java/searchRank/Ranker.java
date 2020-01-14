@@ -22,7 +22,6 @@ import java.util.*;
 import com.medallia.word2vec.Word2VecModel;
 import com.medallia.word2vec.Searcher;
 
-import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 public class Ranker {
     IndexDictionary dictionary;
@@ -66,7 +65,7 @@ public class Ranker {
         updatedWords.addAll(termsFromSemantic);
         for(String word:queryWords){
             updatedWords.add(word.toLowerCase());
-            // updatedWords.add(word.toUpperCase());
+           // updatedWords.add(word.toUpperCase());
         }
         queryWords=updatedWords;
     }
@@ -118,14 +117,11 @@ public class Ranker {
                     e.printStackTrace();
                 }
 
-            }
+                }
         }
-
         Bm25Rank( 0.9,0.7);
         //saveRelevantDocs();
     }
-
-
 
     public void Bm25Rank(double k,double b){
         for(DocMD doc :relevantDocs.values()){
@@ -133,7 +129,7 @@ public class Ranker {
             int numOfMatchedTerm = 0;
             for(Term term : terms.values()){
 
-                if (term.termDocs.containsKey(doc.docno)) {
+                if (term.getName().length()>2 &&term.termDocs.containsKey(doc.docno)) {
                     TermInDoc tid = term.termDocs.get(doc.docno);
                     int termfq = tid.termfq;
                     double docTermRank = (idf.get(term.getName()))*((termfq*(k+1))/(termfq+(k*(1-b+(b*(doc.docSize/avgLength))))));
@@ -143,13 +139,15 @@ public class Ranker {
                     if(tid.isEntity()){
                         docTermRank=docTermRank*1.5;
                     }
+
                     if(termsFromSemantic.contains(term.getName())){
                         docTermRank=docTermRank*0.01;
                     }
                     if(descWords.contains(term.getName())){
-                        docTermRank=docTermRank*1.05;
+                        docTermRank=docTermRank*0.5;
                     }
                     docRank+= docTermRank;
+
                     numOfMatchedTerm++;
                 }
             }
@@ -159,20 +157,21 @@ public class Ranker {
         }
     }
 
-
     private void semanticTreat() {
         List<String> commonW = new LinkedList<>();
         for (String word : queryWords
         ) {
-            List<String> curr =fetchFromWord2Vec(word);
-            if (curr != null) {
-                commonW.addAll(curr);
+            if(!descWords.contains(word)) {
+                List<String> curr = fetchFromWord2Vec(word);
+                if (curr != null) {
+                    commonW.addAll(curr);
+                }
             }
         }
         termsFromSemantic.addAll(commonW);
     }
 
-    public List<String> fetchFromWeb(String word) {
+    private List<String> fetchFromWeb(String word) {
         LinkedList<String> list = new LinkedList<>();
         URL datamuse = null;
         try {
@@ -226,12 +225,12 @@ public class Ranker {
         return null;
     }
     /////
-
+/*
     public void saveRelevantDocs(){
         try {
             StringBuilder sb = new StringBuilder();
             for (String st: relevantDocs.keySet()
-            ) {
+                 ) {
                 sb.append(st+"\n");
             }
             Files.write(Paths.get("C:/Users/Asi Zaks/Desktop/08 Trec_eval/releventdocs.txt"),sb.toString().getBytes());
@@ -239,5 +238,5 @@ public class Ranker {
             e.printStackTrace();
         }
     }
-
+*/
 }
