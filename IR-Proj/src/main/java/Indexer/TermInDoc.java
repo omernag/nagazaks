@@ -94,6 +94,6 @@ public class TermInDoc {
      */
     @Override
     public String toString() {
-        return "" + term + "&" + docNo + "&" + termfq + "&" + isHeader + "&" + isEntity;
+        return "" + term + "&" + docNo + "&" + termfq + "&" + (isHeader?"t":"f") + "&" + (isEntity?"t":"f");
     }
 }
